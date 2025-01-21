@@ -4,5 +4,6 @@
 extern const TileSet tileset_Font;
 extern const Palette palette_Font;
 extern const Image tileset1;
+extern const Image tileset2;
 
 #endif // _RES_RESOURCES_H_

@@ -44,9 +44,9 @@ int main()
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL0,palette_Font.data, DMA);
 
-    VDP_loadTileSet(tileset1.tileset, 1, DMA);
-    PAL_setPalette(PAL1, tileset1.palette->data, DMA);
-    VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 26), 1, 1);
+    VDP_loadTileSet(tileset2.tileset, 1, DMA);
+    PAL_setPalette(PAL1, tileset2.palette->data, DMA);
+    VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), 1, 1);
     
 	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
 	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
@@ -177,7 +177,14 @@ void showMenu() {
 void initMap() {
     for (u16 i = 0; i < MAP_WIDTH; i++) {
         for (u16 j = 0; j < MAP_HEIGHT; j++) {
-            map[i][j] = ' ';
+
+            u16 random_number = random() % 100;
+            if (random_number > 75) {
+                map[i][j] = '#';
+            }
+            else {
+                map[i][j] = ' ';
+            }
         }
     }
 }   
@@ -186,7 +193,10 @@ void drawMap() {
     for (u16 i = 0; i < MAP_WIDTH; i++) {
         for (u16 j = 0; j < MAP_HEIGHT; j++) {
             if (map [i][j] == ' ') {
-                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 26), i, j);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 1), i, j);
+            }
+            else if (map[i][j] == '#') {
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), i, j);
             }
         
         }
