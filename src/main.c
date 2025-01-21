@@ -41,6 +41,9 @@ u16 floorCount = 0;
 int main()
 {
 
+    VDP_loadFontData(tileset_Font.tiles, 96, CPU);
+    PAL_setPalette(PAL0,palette_Font.data, DMA);
+
     VDP_loadTileSet(tileset1.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset1.palette->data, DMA);
     VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 26), 1, 1);
