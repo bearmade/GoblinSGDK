@@ -6,5 +6,8 @@
 u16 ind;
 bool is_start_pressed;
 u16 random_number;
+bool bPlayerCanMove;
+bool bBattleStarted;
+bool bBattleOngoing;
 
 #endif

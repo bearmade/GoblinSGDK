@@ -9,7 +9,7 @@ void displayTitle(){
 
     while (1) {
         //u16 value = JOY_readJoypad(JOY_1);
-        PAL_setPalette(PAL0, fg1.palette->data, DMA);
+        PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	    //VDP_drawImageEx(BG_B, &fg1, TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
         //VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	    PAL_setPalette(PAL3,palette_Font.data, DMA);

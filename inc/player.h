@@ -6,6 +6,11 @@
 void displayPlayer();
 void joyEvent(u16 joy, u16 changed, u16 state);
 void handleInput();
+void initBattle();
+void randomEncounter();
+void displayBattle();
+void nameGenerator();
+void updateSelection();
 
 Sprite* player;
 u16 playerDir;
@@ -18,6 +23,11 @@ bool player_move_up;
 bool player_move_down;
 int attack_timer;
 int attack_duration;
+int randChance;
+bool bIsMoving;
+char Name[19];
+bool selection;
+char pointer[1];
 
 
 #define PLAYER_WIDTH 16

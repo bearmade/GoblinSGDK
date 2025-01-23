@@ -15,7 +15,7 @@
 void delayVBlank(u16 vblanks);
 void vblankCallback();
 void inputHandler(u16 joy, u16 changed, u16 state);
-void nameGenerator();
+
 //void initMap();
 void showMenu();
 void drawMap();
@@ -34,7 +34,7 @@ char tempMapB = ';';
 char tempMapC = ';';
 u16 delayCounter;
 
-char Name[19];
+
 char noS = 'n';
 u16 sCount = 0;
 u16 total_sCount = 0;
@@ -42,6 +42,7 @@ u16 floorCount = 0;
 
 int main()
 {
+    bPlayerCanMove = TRUE;
 
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL0,palette_Font.data, DMA);
@@ -76,31 +77,41 @@ int main()
       	if (attack_timer == 0) handleInput();
 		else if (attack_timer > 0 && attack_timer < attack_duration) attack_timer += 1;
 		else if (attack_timer == attack_duration) attack_timer = 0;
+
+      
+
+
         collision();
 		camera();
 
-		char numberString[3];
-		sprintf(numberString, "%u", currentWorldX);
-		VDP_drawText(numberString, 24, 8);
-		sprintf(numberString, "%u", currentWorldY);
-		VDP_drawText(numberString, 26, 8);
-		sprintf(numberString, "%u", WORLD_LAYOUT[currentWorldY][currentWorldX]);
-		VDP_drawText(numberString, 28, 8);
 
-        if(random_number > 75 && is_start_pressed)
-        {
-            VDP_drawText(Name, 10, 20);
+
+		// char numberString[3];
+		// sprintf(numberString, "%u", currentWorldX);
+		// VDP_drawText(numberString, 24, 8);
+		// sprintf(numberString, "%u", currentWorldY);
+		// VDP_drawText(numberString, 26, 8);
+		// sprintf(numberString, "%u", WORLD_LAYOUT[currentWorldY][currentWorldX]);
+		// VDP_drawText(numberString, 28, 8);
+
+      
+
+        if(bIsMoving == TRUE){
+            randomEncounter();
         }
-        else 
-        {
-            nameGenerator();
-            VDP_clearTextArea(10, 20, 21, 1);
+        if(bBattleStarted == TRUE){
+            displayBattle();
+        }
+        else if(bBattleStarted == FALSE){
+            if (bBattleOngoing == FALSE){
+            		SPR_update();
+                    SYS_doVBlankProcess();
+            }
         }
 
 
 
-		SPR_update();
-        SYS_doVBlankProcess();
+
     }
     return (0);
 }
@@ -124,44 +135,7 @@ void inputHandler(u16 joy, u16 changed, u16 state){
 
 
 
-void nameGenerator(){
 
-    char firstName1[5][2] = {"Sn", "Sk", "Kr", "Br", "Gr"};
-    char firstName2[5][2] = {"ar", "um", "ay", "ee", "oo"};
-    char firstName3[5][3] = {"po ", "py ", "bs ", "ble", "gle"};
-    char middleName[5][3] = {"Tum", "Bum", "Rub", "Hum", "Gru"};
-    char lastName1[5][4] = {"thum", "bopo", "arum", "atum", "abum"};
-    char lastName2[5][4] = {"lo  ", "bles", "gles", "po  ", "py  "};
-    u16 rand = random() % 5;
-    u16 rand2 = random() % 5;
-    u16 rand3 = random() % 5;
-    u16 rand4 = random() % 5;
-    u16 rand5 = random() % 5;
-    u16 rand6 = random() % 5;
-    u16 rand7 = random() % 5;
-    u16 rand8 = random() % 5;
-    Name[0] = firstName1[rand][0];
-    Name[1] = firstName1[rand][1];
-    Name[2] = firstName2[rand2][0];
-    Name[3] = firstName2[rand2][1];
-    Name[4] = firstName3[rand3][0];
-    Name[5] = firstName3[rand3][1];
-    Name[6] = firstName3[rand3][2];
-    Name[7] = ' ';
-    Name[8] = middleName[rand4][0];
-    Name[9] = middleName[rand4][1];
-    Name[10] = middleName[rand4][2];
-    Name[11] = lastName1[rand5][0];
-    Name[12] = lastName1[rand5][1];
-    Name[13] = lastName1[rand5][2];
-    Name[14] = lastName1[rand5][3];
-    Name[15] = lastName2[rand6][0];
-    Name[16] = lastName2[rand6][1];
-    Name[17] = lastName2[rand6][2];
-    Name[18] = lastName2[rand6][3];
-    sprintf(Name, "%s", Name);
-
- }
 
 
 void delayVBlank(u16 vblanks) {

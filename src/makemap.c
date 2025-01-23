@@ -264,9 +264,9 @@ void makeExit(u16 yy, u16 xx, u16 mapheight, u16 mapwidth){
                 LEVEL_TILES[yy-1][xx] = 12;
                 LEVEL_TILES[yy-1][xx+1] = 12;
 
-                LEVEL_TILES[yy][xx - 1] = 2;
+                LEVEL_TILES[yy][xx - 1] = 12;
                 LEVEL_TILES[yy][xx] = 9;
-                LEVEL_TILES[yy][xx + 1] = 2;
+                LEVEL_TILES[yy][xx + 1] = 12;
 
                 LEVEL_TILES[yy+1][xx-1] = 2;
                 LEVEL_TILES[yy+1][xx] = 10;
@@ -671,10 +671,10 @@ void displayRoom(){
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 79), xx - 1, yy - 1);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 78), xx - 2, yy - 1);
 
-                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 12), xx - 2, yy);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 112), xx - 2, yy);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 84), xx - 1, yy);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 89), xx - 1, yy + 1);
-                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 12), xx - 2, yy + 1);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 115), xx - 2, yy + 1);
 
                 //middle
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 63), xx, yy - 4);
