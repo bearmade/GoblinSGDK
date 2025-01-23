@@ -4,5 +4,8 @@
     "\\res",
     "res",
     "inc"
-]
+],
+"files.associations": {
+    "gamemanager.h": "c"
+}
 }

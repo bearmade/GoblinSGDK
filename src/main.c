@@ -1,27 +1,30 @@
 
 #include <genesis.h>
 #include <resources.h>
+#include "../inc/level.h"
+#include "../inc/debuginfo.h"
+#include "../inc/player.h"
+#include "../inc/camera.h"
+#include "../inc/collision.h"
+#include "../inc/globals.h"
+#include "../inc/titlescreen.h"
+#include "../inc/makemap.h"
+#include "../inc/gamemanager.h"
 
 
 void delayVBlank(u16 vblanks);
 void vblankCallback();
 void inputHandler(u16 joy, u16 changed, u16 state);
 void nameGenerator();
-void initMap();
+//void initMap();
 void showMenu();
 void drawMap();
 
 
 #define MAP_WIDTH 32
 #define MAP_HEIGHT 20
-#define TEXT_COLOR 5
-#define WALL_COLOR 13
-#define FLOOR_COLOR 0
-#define PLAYER_COLOR 1
-#define ATTACK_COLOR 7
-#define SNAKE_COLOR 7
 
-u16 ind = TILE_USER_INDEX;
+//u16 ind = TILE_USER_INDEX;
 char map[MAP_WIDTH][MAP_HEIGHT];
 u16 playerX, playerY;
 u16 displayX, displayY;
@@ -30,8 +33,7 @@ char tempMapA = ';';
 char tempMapB = ';';
 char tempMapC = ';';
 u16 delayCounter;
-bool is_start_pressed = 0;
-u16 random_number;
+
 char Name[19];
 char noS = 'n';
 u16 sCount = 0;
@@ -46,37 +48,45 @@ int main()
 
     VDP_loadTileSet(tileset2.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset2.palette->data, DMA);
-    VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), 1, 1);
+    //VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), 1, 1);
     
 	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
 	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
     JOY_init();
-    JOY_setEventHandler(inputHandler);
+    //JOY_setEventHandler(inputHandler);
+    JOY_setEventHandler(joyEvent);
+	displayTitle();
+    
     showMenu();
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
     char numString[2];
-    initMap();
-    drawMap();
+    //initMap();
+    //drawMap();
+    makeMap();
+	bigMapCA();
+	SPR_init();
+	displayPlayer();
+
+
 
     while(1)
     {
-        
-        if(is_start_pressed)
-        {
-            sprintf(numString, "%u", random_number);
-            VDP_drawText(numString, 10, 13);
-            VDP_drawText("Start Pressed", 8,23);
-        }
-        else
-        {
-            VDP_clearTextArea(10, 13, 21, 1);
-            VDP_clearTextArea(8, 23, 21, 1);
-        }
-        char numberString[3];
-		sprintf(numberString, "%u", is_start_pressed);
-        VDP_drawText(numberString, 24, 8);
-        
+        //handleInput();
+      	if (attack_timer == 0) handleInput();
+		else if (attack_timer > 0 && attack_timer < attack_duration) attack_timer += 1;
+		else if (attack_timer == attack_duration) attack_timer = 0;
+        collision();
+		camera();
+
+		char numberString[3];
+		sprintf(numberString, "%u", currentWorldX);
+		VDP_drawText(numberString, 24, 8);
+		sprintf(numberString, "%u", currentWorldY);
+		VDP_drawText(numberString, 26, 8);
+		sprintf(numberString, "%u", WORLD_LAYOUT[currentWorldY][currentWorldX]);
+		VDP_drawText(numberString, 28, 8);
+
         if(random_number > 75 && is_start_pressed)
         {
             VDP_drawText(Name, 10, 20);
@@ -87,7 +97,9 @@ int main()
             VDP_clearTextArea(10, 20, 21, 1);
         }
 
-        VDP_waitVSync();
+
+
+		SPR_update();
         SYS_doVBlankProcess();
     }
     return (0);
@@ -107,6 +119,11 @@ void inputHandler(u16 joy, u16 changed, u16 state){
             }
 		}
 }
+
+
+
+
+
 void nameGenerator(){
 
     char firstName1[5][2] = {"Sn", "Sk", "Kr", "Br", "Gr"};
@@ -160,7 +177,7 @@ void vblankCallback() {
 }
 void showMenu() {
     
-    VDP_drawText("Press START to generate map", displayX, displayY + 3);
+    VDP_drawText("Press STARTTTT to generate map", displayX, displayY + 3);
     
     while (1) {
         u16 value = JOY_readJoypad(JOY_1);
@@ -174,20 +191,20 @@ void showMenu() {
     }
 }
 
-void initMap() {
-    for (u16 i = 0; i < MAP_WIDTH; i++) {
-        for (u16 j = 0; j < MAP_HEIGHT; j++) {
+// void initMap() {
+//     for (u16 i = 0; i < MAP_WIDTH; i++) {
+//         for (u16 j = 0; j < MAP_HEIGHT; j++) {
 
-            u16 random_number = random() % 100;
-            if (random_number > 75) {
-                map[i][j] = '#';
-            }
-            else {
-                map[i][j] = ' ';
-            }
-        }
-    }
-}   
+//             u16 random_number = random() % 100;
+//             if (random_number > 75) {
+//                 map[i][j] = '#';
+//             }
+//             else {
+//                 map[i][j] = ' ';
+//             }
+//         }
+//     }
+// }   
 
 void drawMap() {
     for (u16 i = 0; i < MAP_WIDTH; i++) {
