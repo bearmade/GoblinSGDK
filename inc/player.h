@@ -11,6 +11,7 @@ void randomEncounter();
 void displayBattle();
 void nameGenerator();
 void updateSelection();
+void endBattle();
 
 Sprite* player;
 u16 playerDir;

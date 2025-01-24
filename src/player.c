@@ -64,6 +64,10 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 	}
 	if((changed & state & BUTTON_START)){
 		showTitleScreen = FALSE;
+		if(selection == 0){
+			bBattleOngoing = FALSE;
+			endBattle();
+		}
 		
 	}
 	if((changed & state & BUTTON_DOWN)){
@@ -205,7 +209,9 @@ void displayBattle(){
 		//get player selection
 		VDP_drawTextBG( BG_B, " ", 5, ((selection == 0 ? 1 : 0)*2 + 8)); // Clear old cursor
 		VDP_drawTextBG( BG_B, "~", 5, ((selection*2) + 8)); // Draw new cursor
-		SYS_doVBlankProcess();	}
+		SYS_doVBlankProcess();
+		
+			}
 	
 	
 
@@ -256,3 +262,16 @@ void nameGenerator(){
 
 
  }
+ void endBattle() {
+    bBattleOngoing = FALSE;
+    bPlayerCanMove = TRUE;
+    VDP_clearPlane(BG_B, TRUE);
+	VDP_clearPlane(BG_A, TRUE);
+	VDP_loadTileSet(tileset1.tileset, 1, DMA);
+    PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+	PAL_setPalette(PAL0, fg2.palette->data, DMA);
+	PAL_setPalette(PAL3,palette_Font.data, DMA);
+	displayRoom();
+    
+}
+
