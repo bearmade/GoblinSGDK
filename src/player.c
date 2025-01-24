@@ -21,6 +21,33 @@ int attack_timer = 0;
 int attack_duration = 24;
 int randChance = 0;
 
+char attack_message[8][20] = {
+	"throw your shoe at  ",
+	"clumsily trip into  ",
+	"toss pocket lint at ",
+	"yell very loudly at ",
+	"perform nose boop on",
+	"throw a rock towards",
+	"attempt to kick     ",
+	"do a barrel roll at " 
+};
+
+//player stats
+int player_hp = 100;
+int player_attack = 5;
+int player_defense = 5;
+int player_gold = 0;
+int player_level = 1;
+int player_exp = 0;
+int player_exp_needed = 10;
+
+//goblin stats
+int goblin_hp = 0;
+int goblin_attack = 0;
+int goblin_defense = 0;
+
+
+
 #define SFX_SWOOSH 64
 
 
@@ -64,9 +91,15 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 	}
 	if((changed & state & BUTTON_START)){
 		showTitleScreen = FALSE;
-		if(selection == 0){
-			bBattleOngoing = FALSE;
-			endBattle();
+		if(bBattleOngoing){
+		
+			if(selection == 1){
+				bBattleOngoing = FALSE;
+				endBattle();
+			}
+			else{
+				attack();
+			}
 		}
 		
 	}
@@ -182,22 +215,23 @@ void displayBattle(){
 	//VDP_clearTileMap(BG_B, ind, 0, TRUE);
 	
 	if (bBattleStarted == TRUE){
+	
 	VDP_clearTileMap(BG_A, ind, 0, TRUE);
 	bBattleOngoing = TRUE;
 	//load font tiles
 	VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	//set font palette
 	PAL_setPalette(PAL0, palette_Font.data, DMA);
-	VDP_drawTextBG( BG_B, "Goblin Encounter!", 4, 2);
+	VDP_drawTextBG( BG_B, "Goblin Encounter!", 4, 0);
 	//draw text on window plane
 	nameGenerator();
-	VDP_drawText(Name, 4, 4);
+	VDP_drawText(Name, 10, 4);
 
 	bBattleStarted = FALSE;
 	//show battle menu
 	
-	VDP_drawTextBG( BG_B, ".Attack.", 6, 8);
-	VDP_drawTextBG( BG_B, ".Run.", 6, 10);
+	VDP_drawTextBG( BG_B, ".Attack.", 22, 24);
+	VDP_drawTextBG( BG_B, ".Run.", 22, 26);
 	//sprintf(pointer, "%c", selection);
 	
 	
@@ -205,11 +239,21 @@ void displayBattle(){
 
 	}
 	while(bBattleOngoing){
+
+		//show player stats
+		VDP_drawTextBG( BG_B, "Player", 2, 24);
+		VDP_drawTextBG( BG_B, "HP: ", 2, 26);
+	    //show goblin stats
+		
+		VDP_drawTextBG( BG_B, "HP: ", 10, 6);
+
 		
 		//get player selection
-		VDP_drawTextBG( BG_B, " ", 5, ((selection == 0 ? 1 : 0)*2 + 8)); // Clear old cursor
-		VDP_drawTextBG( BG_B, "~", 5, ((selection*2) + 8)); // Draw new cursor
+		VDP_drawTextBG( BG_B, " ", 21, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
+		VDP_drawTextBG( BG_B, "~", 21, ((selection*2) + 24)); // Draw new cursor
 		SYS_doVBlankProcess();
+
+
 		
 			}
 	
@@ -275,3 +319,17 @@ void nameGenerator(){
     
 }
 
+void attack(){
+	battleMessage();
+
+
+
+}
+
+void battleMessage(){
+		char message[40];
+		int randIndex = random() % 8; // We have 8 messages in the array
+		strncpy(message, attack_message[randIndex], 20);
+		VDP_drawTextBG(BG_B, message, 2, 2);
+
+}

@@ -12,6 +12,8 @@ void displayBattle();
 void nameGenerator();
 void updateSelection();
 void endBattle();
+void attack();
+void battleMessage();
 
 Sprite* player;
 u16 playerDir;
@@ -29,6 +31,24 @@ bool bIsMoving;
 char Name[19];
 bool selection;
 char pointer[1];
+char attack_message[8][20];
+
+//player stats
+int player_hp;
+int player_attack;
+int player_defense;
+int player_gold;
+int player_level;
+int player_exp;
+int player_exp_needed;
+
+
+//goblin stats
+int goblin_hp;
+int goblin_attack;
+int goblin_defense;
+
+
 
 
 #define PLAYER_WIDTH 16
