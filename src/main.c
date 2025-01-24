@@ -23,6 +23,7 @@ void drawMap();
 
 #define MAP_WIDTH 32
 #define MAP_HEIGHT 20
+#define SFX_SWOOSH 64
 
 //u16 ind = TILE_USER_INDEX;
 char map[MAP_WIDTH][MAP_HEIGHT];
@@ -43,6 +44,9 @@ u16 floorCount = 0;
 int main()
 {
     bPlayerCanMove = TRUE;
+
+    XGM_setPCM(SFX_SWOOSH, sfx_swoosh, sizeof(sfx_swoosh));
+
 
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL0,palette_Font.data, DMA);

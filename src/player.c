@@ -35,7 +35,7 @@ char attack_message[8][20] = {
 char damageMessage[8];
 
 //player stats
-s16 player_hp = 10;
+s16 player_hp = 100;
 u16 player_attack = 5;
 u16 player_defense = 5;
 u16 player_gold = 0;
@@ -354,6 +354,10 @@ void nameGenerator(){
 }
 
 void attack(){
+	
+	XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+
+	
 	battleMessage();
 	VDP_drawTextBG(BG_B, "        ", 10, 8);
 	VDP_drawTextBG(BG_B, "       ", 10, 16);
