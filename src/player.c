@@ -20,6 +20,7 @@ bool bIsMoving = FALSE;
 int attack_timer = 0;
 int attack_duration = 24;
 int randChance = 0;
+bool turn = FALSE;
 
 char attack_message[8][20] = {
 	"throw your shoe at  ",
@@ -31,21 +32,26 @@ char attack_message[8][20] = {
 	"attempt to kick     ",
 	"do a barrel roll at " 
 };
+char damageMessage[8];
 
 //player stats
-int player_hp = 100;
-int player_attack = 5;
-int player_defense = 5;
-int player_gold = 0;
-int player_level = 1;
-int player_exp = 0;
-int player_exp_needed = 10;
+s16 player_hp = 10;
+u16 player_attack = 5;
+u16 player_defense = 5;
+u16 player_gold = 0;
+u16 player_level = 1;
+u16 player_exp = 0;
+u16 player_exp_needed = 10;
 
 //goblin stats
-int goblin_hp = 0;
-int goblin_attack = 0;
-int goblin_defense = 0;
+s16 goblin_hp = 0;
+u16 goblin_attack = 0;
+u16 goblin_defense = 0;
 
+char pHP[5];
+char pATK[5];
+char gHP[5];
+char gATK[5];
 
 
 #define SFX_SWOOSH 64
@@ -98,7 +104,13 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 				endBattle();
 			}
 			else{
-				attack();
+				if(turn){
+					attack();
+				}
+				else{
+					goblinAttack();
+				}
+				
 			}
 		}
 		
@@ -196,6 +208,7 @@ void initBattle(){
     player_move_up = FALSE;
     player_move_down = FALSE;
     bIsMoving = FALSE;
+	goblin_hp = (player_level * 5)+ random() % 25;
 
 
 
@@ -205,11 +218,12 @@ void randomEncounter(){
 	randChance = random() % 1000;
 	if(randChance <= 5){
 		initBattle();
+		turn = TRUE;
 	}
 }
 
 void displayBattle(){
-
+	
 	//clear  screen
 	
 	//VDP_clearTileMap(BG_B, ind, 0, TRUE);
@@ -239,18 +253,29 @@ void displayBattle(){
 
 	}
 	while(bBattleOngoing){
+	
 
+		VDP_drawTextBG( BG_B, "                 ", 4, 0);
 		//show player stats
 		VDP_drawTextBG( BG_B, "Player", 2, 24);
 		VDP_drawTextBG( BG_B, "HP: ", 2, 26);
+		sprintf(pHP, "%d", player_hp);
+		VDP_drawTextBG( BG_B, pHP, 8, 26);
+
+
 	    //show goblin stats
 		
 		VDP_drawTextBG( BG_B, "HP: ", 10, 6);
-
+		sprintf(gHP, "%d", goblin_hp);
+		VDP_drawTextBG( BG_B, gHP, 14, 6);
 		
 		//get player selection
 		VDP_drawTextBG( BG_B, " ", 21, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
 		VDP_drawTextBG( BG_B, "~", 21, ((selection*2) + 24)); // Draw new cursor
+			if(goblin_hp <= 0){
+			bBattleOngoing = FALSE;
+			endBattle();
+		}
 		SYS_doVBlankProcess();
 
 
@@ -315,12 +340,33 @@ void nameGenerator(){
     PAL_setPalette(PAL1, tileset1.palette->data, DMA);
 	PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	PAL_setPalette(PAL3,palette_Font.data, DMA);
+	// clear all battle messages
+	VDP_drawTextBG( BG_B, "                 ", 3, 10);
+	VDP_drawTextBG( BG_B, "                 ", 3, 2);
+	VDP_drawTextBG( BG_B, "                 ", 7, 2);
+	VDP_drawTextBG( BG_B, "                 ", 14, 6);
+	VDP_drawTextBG( BG_B, "                 ", 2, 24);
+	VDP_drawTextBG( BG_B, "                 ", 2, 26);
+	SYS_doVBlankProcess();
+
 	displayRoom();
     
 }
 
 void attack(){
 	battleMessage();
+	VDP_drawTextBG(BG_B, "        ", 10, 8);
+	VDP_drawTextBG(BG_B, "       ", 10, 16);
+	VDP_drawTextBG(BG_B, "       ", 10, 14);
+	//deal damage to goblin
+	u16 damage = random() % 10;
+	goblin_hp -= damage;
+	VDP_drawTextBG( BG_B, "    ", 14, 6);
+
+	sprintf(damageMessage, "%d", damage);
+	VDP_drawTextBG(BG_B, damageMessage, 3, 10);
+	turn = !turn;
+
 
 
 
@@ -330,6 +376,21 @@ void battleMessage(){
 		char message[40];
 		int randIndex = random() % 8; // We have 8 messages in the array
 		strncpy(message, attack_message[randIndex], 20);
-		VDP_drawTextBG(BG_B, message, 2, 2);
+		VDP_drawTextBG(BG_B, "You ", 3, 2);
+		VDP_drawTextBG(BG_B, message, 7, 2);
+	
+}
+void goblinAttack(){
+	u16 damage = random() % 10;
+	player_hp -= damage;
+	VDP_drawTextBG(BG_B, "                        ", 3, 2);
+	VDP_drawTextBG(BG_B, "         ", 3, 10);
+	VDP_drawTextBG(BG_B, "attacks!", 10, 8);
+	VDP_drawTextBG( BG_B, "    ", 8, 26);
+
+	sprintf(damageMessage, "%d", damage);
+	VDP_drawTextBG(BG_B, damageMessage, 10, 14);
+	VDP_drawTextBG(BG_B, "damage!", 10, 16);
+	turn = !turn;
 
 }

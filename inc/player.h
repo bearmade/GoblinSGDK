@@ -14,6 +14,7 @@ void updateSelection();
 void endBattle();
 void attack();
 void battleMessage();
+void goblinAttack();
 
 Sprite* player;
 u16 playerDir;
@@ -32,21 +33,28 @@ char Name[19];
 bool selection;
 char pointer[1];
 char attack_message[8][20];
+bool turn;
+char damageMessage[8];
+
+char gHP[5];
+char gATK[5];
+char pHP[5];
+char pATK[5];
 
 //player stats
-int player_hp;
-int player_attack;
-int player_defense;
-int player_gold;
-int player_level;
-int player_exp;
-int player_exp_needed;
+s16 player_hp;
+u16 player_attack;
+u16 player_defense;
+u16 player_gold;
+u16 player_level;
+u16 player_exp;
+u16 player_exp_needed;
 
 
 //goblin stats
-int goblin_hp;
-int goblin_attack;
-int goblin_defense;
+s16 goblin_hp;
+u16 goblin_attack;
+u16 goblin_defense;
 
 
 
