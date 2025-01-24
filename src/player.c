@@ -203,14 +203,9 @@ void displayBattle(){
 	while(bBattleOngoing){
 		
 		//get player selection
-		VDP_drawTextBG( BG_B, "~", 5, ((selection*2 )+ 8));
-		//delayVBlank(5);
-		//VDP_drawTextBG( BG_B, " ", 5, ((selection*2 )+ 8));
-		//clear part of screen
-		 SYS_doVBlankProcess();
-
-	
-	}
+		VDP_drawTextBG( BG_B, " ", 5, ((selection == 0 ? 1 : 0)*2 + 8)); // Clear old cursor
+		VDP_drawTextBG( BG_B, "~", 5, ((selection*2) + 8)); // Draw new cursor
+		SYS_doVBlankProcess();	}
 	
 	
 
