@@ -12,7 +12,7 @@
 #include "../inc/gamemanager.h"
 
 
-void delayVBlank(u16 vblanks);
+
 void vblankCallback();
 void inputHandler(u16 joy, u16 changed, u16 state);
 
@@ -33,7 +33,7 @@ u16 playerDir;
 char tempMapA = ';';
 char tempMapB = ';';
 char tempMapC = ';';
-u16 delayCounter;
+
 
 
 char noS = 'n';
@@ -78,11 +78,11 @@ int main()
     while(1)
     {
         //handleInput();
-      	if (attack_timer == 0) handleInput();
-		else if (attack_timer > 0 && attack_timer < attack_duration) attack_timer += 1;
-		else if (attack_timer == attack_duration) attack_timer = 0;
+      	//if (attack_timer == 0) handleInput();
+		//else if (attack_timer > 0 && attack_timer < attack_duration) attack_timer += 1;
+		//else if (attack_timer == attack_duration) attack_timer = 0;
 
-      
+      handleInput();
 
 
         collision();
@@ -105,6 +105,7 @@ int main()
         }
         if(bBattleStarted == TRUE){
             displayBattle();
+            SYS_doVBlankProcess();
         }
         else if(bBattleStarted == FALSE){
             if (bBattleOngoing == FALSE){
@@ -142,12 +143,7 @@ void inputHandler(u16 joy, u16 changed, u16 state){
 
 
 
-void delayVBlank(u16 vblanks) {
-    delayCounter = vblanks;
-    while (delayCounter > 0) {
-        SYS_doVBlankProcess();
-    }
-}
+
 void vblankCallback() {
     if (delayCounter > 0) {
         delayCounter--;
