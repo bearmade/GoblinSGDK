@@ -11,6 +11,8 @@
 ###  2D Video Game for Sega Genesis 
 
 ----
+#### - [TODO/Progress](TODO.md)
+----
 
 
 #### - Summary
@@ -20,9 +22,6 @@ Goblin will be a 2D rogue-like game for the Sega Genesis created with SGDK,
 Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
-----
-#### - [TODO/Progress](TODO.md)
-----
 
 
 #### - Objectives
