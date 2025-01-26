@@ -21,7 +21,7 @@ Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
 ----
-#### - [TODO/Progress](todo.md)
+#### - [TODO/Progress](TODO.md)
 ----
 
 
