@@ -15,6 +15,7 @@ void endBattle();
 void attack();
 void battleMessage();
 void goblinAttack();
+void showStats();
 
 Sprite* player;
 u16 playerDir;
@@ -40,22 +41,34 @@ char gHP[5];
 char gATK[5];
 char pHP[5];
 char pATK[5];
+char  gDEF[5];
+char pLevel[5];
+char pGold[5];
+char pExp[5];
+char pDefense[5];
+char pAttack[5];
+char expChar[5];
 
 //player stats
 s16 player_hp;
-u16 player_attack;
-u16 player_defense;
+s16 player_attack;
+s16 player_defense;
 u16 player_gold;
-u16 player_level;
+s16 player_level;
 u16 player_exp;
 u16 player_exp_needed;
+u16 goblinsKilled;
 
 
 //goblin stats
 s16 goblin_hp;
-u16 goblin_attack;
-u16 goblin_defense;
+s16 goblin_attack;
+s16 goblin_defense;
+u16 goldDrop;
+u16 experience_gained;
 
+fix32 tempPlayerPosX;
+fix32 tempPlayerPosY;
 
 
 

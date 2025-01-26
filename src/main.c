@@ -44,7 +44,7 @@ u16 floorCount = 0;
 int main()
 {
     bPlayerCanMove = TRUE;
-
+    bShowMenu = FALSE;
     XGM_setPCM(SFX_SWOOSH, sfx_swoosh, sizeof(sfx_swoosh));
 
 
@@ -72,7 +72,7 @@ int main()
 	bigMapCA();
 	SPR_init();
 	displayPlayer();
-
+    bShowMenu = FALSE;
 
 
     while(1)
@@ -112,6 +112,7 @@ int main()
             		SPR_update();
                     SYS_doVBlankProcess();
             }
+         
         }
 
     //SYS_doVBlankProcess();

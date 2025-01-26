@@ -9,6 +9,7 @@ bool bBattleStarted = FALSE;
 bool bBattleOngoing = FALSE;
 u16 turnDelayFrames = 0;
 const u16 TURN_DELAY = 30;
+bool bShowMenu = FALSE;
 
 
 void delayVBlank(u16 vblanks) {
