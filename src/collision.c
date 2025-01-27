@@ -52,10 +52,12 @@ void collision(){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
-			playerPosX = FIX32(100);
-			playerPosY = FIX32(100);
-			makeMap();
-			roomCount++;
+			 SPR_setVisibility(player, HIDDEN);
+			 
+			//playerPosX = FIX32(100);
+			//playerPosY = FIX32(100);
+			//makeMap();
+			//roomCount++;
 
 		}
 	}
@@ -82,11 +84,7 @@ void collision(){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
-			playerPosX = FIX32(100);
-			playerPosY = FIX32(100);
-			makeMap();
-			roomCount++;
-
+			 SPR_setVisibility(player, HIDDEN);
 		}
 
 	}
@@ -117,10 +115,7 @@ void collision(){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
-			playerPosX = FIX32(100);
-			playerPosY = FIX32(100);
-			makeMap();
-			roomCount++;
+			 SPR_setVisibility(player, HIDDEN);
 
 		}
 
@@ -154,10 +149,7 @@ void collision(){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
-			playerPosX = FIX32(100);
-			playerPosY = FIX32(100);
-			makeMap();
-			roomCount++;
+				 SPR_setVisibility(player, HIDDEN);
 
 		}
 	}

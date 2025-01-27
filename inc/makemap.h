@@ -32,7 +32,8 @@ void create32by16TileIndexed(bool horFlip, bool topPrio, bool bottomPrio, bool t
 void makeWorldMap();
 void bigMapCA();
 void makeRocksBigMap(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type);
-
+void makeDoorway(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side);
+void makeDoorways2(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);
 void makeMap();
 extern u8 LEVEL_TILES[14][16];
 extern u8 WORLD_TILES[8][8][14][16];

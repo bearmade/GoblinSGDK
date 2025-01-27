@@ -339,6 +339,7 @@ void makeDoorways(){
         }    
     }       
 }
+// function to check for edge blocks
 void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 
     initMap(yy, xx, mapheight, mapwidth);
@@ -347,6 +348,9 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
     makeRocks(yy, xx, mapheight, mapwidth, 8); 
     makeGrass(yy, xx, mapheight, mapwidth);
     randWalk(7, 8, mapheight, mapwidth, 32);
+
+
+
 
     switch(type) {
         case 1:
@@ -387,7 +391,54 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
            
             break;
     }
-
+    // Add doorways based on adjacent rooms
+    makeDoorway(yy, xx, mapheight, mapwidth, 0); // Check left
+    makeDoorway(yy, xx, mapheight, mapwidth, 1); // Check top
+    makeDoorway(yy, xx, mapheight, mapwidth, 2); // Check right
+    makeDoorway(yy, xx, mapheight, mapwidth, 3); // Check bottom
+}
+void makeDoorway(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side) {
+    // Check if there's a room in the direction we're making the door
+    bool hasAdjacentRoom = FALSE;
+    
+    switch(side) {
+        case 0: // Left
+            if(currentWorldX > 0 && WORLD_LAYOUT[currentWorldY][currentWorldX-1] == 1) {
+                hasAdjacentRoom = TRUE;
+                // Create left doorway
+                LEVEL_TILES[mapheight/2-1][0] = 2;
+                LEVEL_TILES[mapheight/2][0] = 2;
+                LEVEL_TILES[mapheight/2+1][0] = 2;
+            }
+            break;
+        case 1: // Top
+            if(currentWorldY > 0 && WORLD_LAYOUT[currentWorldY-1][currentWorldX] == 1) {
+                hasAdjacentRoom = TRUE;
+                // Create top doorway
+                LEVEL_TILES[0][mapwidth/2-1] = 2;
+                LEVEL_TILES[0][mapwidth/2] = 2;
+                LEVEL_TILES[0][mapwidth/2+1] = 2;
+            }
+            break;
+        case 2: // Right 
+            if(currentWorldX < 7 && WORLD_LAYOUT[currentWorldY][currentWorldX+1] == 1) {
+                hasAdjacentRoom = TRUE;
+                // Create right doorway
+                LEVEL_TILES[mapheight/2-1][mapwidth-1] = 2;
+                LEVEL_TILES[mapheight/2][mapwidth-1] = 2;
+                LEVEL_TILES[mapheight/2+1][mapwidth-1] = 2;
+            }
+            break;
+        case 3: // Bottom
+            if(currentWorldY < 7 && WORLD_LAYOUT[currentWorldY+1][currentWorldX] == 1) {
+                hasAdjacentRoom = TRUE;
+                // Create bottom doorway
+                LEVEL_TILES[mapheight-1][mapwidth/2-1] = 2;
+                LEVEL_TILES[mapheight-1][mapwidth/2] = 2;
+                LEVEL_TILES[mapheight-1][mapwidth/2+1] = 2;
+            }
+            break;
+    }
 }
 void ruleTileWORLD(){
     for(u8 y = 0; y < 8; y++){

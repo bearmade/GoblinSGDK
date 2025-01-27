@@ -18,7 +18,7 @@
 - Battle system
     - [x] gold drop
     - [ ] item drop
-    - [ ] game over
+    - [x] game over
     - [ ] run mechanic based on chance and gold drop
     - [ ] experience and level up
     - [x] goblins killed

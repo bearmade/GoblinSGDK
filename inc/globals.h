@@ -15,6 +15,7 @@ bool bBattleOngoing;
 u16 delayCounter;
 u16 turnDelayFrames;
 bool bShowMenu;
+bool bInsideHouse;
 const u16 TURN_DELAY;
 
 #endif

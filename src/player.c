@@ -36,8 +36,9 @@ char damageMessage[8];
 
 //player stats
 s16 player_hp = 100;
-s16 player_attack = 5;
-s16 player_defense = 5;
+s16 player_hp_max = 100;
+s16 player_attack = 7;
+s16 player_defense = 8;
 u16 player_gold = 0;
 s16 player_level = 1;
 u16 player_exp = 0;
@@ -51,6 +52,7 @@ s16 goblin_defense = 0;
 u16 goldDrop = 0;
 u16 experience_gained;
 char pHP[5];
+char pHPMax[5];
 char pATK[5];
 char gHP[5];
 char gATK[5];
@@ -62,6 +64,7 @@ char pExp[5];
 char pDefense[5];
 char pAttack[5];
 char expChar[5];
+char goblinsKilledChar[5];
 
 fix32 tempPlayerPosX;
 fix32 tempPlayerPosY;
@@ -158,7 +161,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 void handleInput(){
 	u16 value = JOY_readJoypad( JOY_1);
 
-if(bPlayerCanMove && !bShowMenu){
+if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 
 
 	if(!(value & BUTTON_DOWN) && !(value & BUTTON_UP) && !(value & BUTTON_LEFT) && !(value & BUTTON_RIGHT) && (playerDir == 0)) SPR_setAnim(player, ANIM_IDLE_DOWN);
@@ -269,7 +272,7 @@ void displayBattle(){
 	VDP_drawTextBG( BG_B, "                 ", 8, 0);
 	//draw text on window plane
 	nameGenerator();
-	VDP_drawText(Name, 10, 4);
+	VDP_drawText(Name, 5, 4);
 
 	bBattleStarted = FALSE;
 	//show battle menu
@@ -282,6 +285,7 @@ void displayBattle(){
 VDP_loadTileSet(goblin.tileset, 1, DMA);
     PAL_setPalette(PAL1, goblin.palette->data, DMA);
 
+
 	}
 	while(bBattleOngoing){
 	
@@ -292,6 +296,15 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 		VDP_drawTextBG( BG_B, "HP: ", 2, 26);
 		sprintf(pHP, "%d", player_hp);
 		VDP_drawTextBG( BG_B, pHP, 8, 26);
+		VDP_drawTextBG( BG_B, "/", 12, 26);
+		sprintf(pHPMax, "%d", player_hp_max);
+		VDP_drawTextBG( BG_B, pHPMax, 14, 26);
+			VDP_drawTextBG( BG_B, "ATK: ", 10, 8);
+			sprintf(gATK, "%d", goblin_attack);
+			VDP_drawTextBG( BG_B, gATK, 14, 8);
+			VDP_drawTextBG( BG_B, "DEF: ", 10, 10);
+			sprintf(gDEF, "%d", goblin_defense);
+			VDP_drawTextBG( BG_B, gDEF, 14, 10);
 
 
 	    //show goblin stats
@@ -331,14 +344,10 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 			VDP_drawTextBG( BG_B, "HP: ", 10, 6);
 			sprintf(gHP, "%d", goblin_hp);
 			VDP_drawTextBG( BG_B, gHP, 14, 6);
-			VDP_drawTextBG( BG_B, "ATK: ", 10, 8);
-			sprintf(gATK, "%d", goblin_attack);
-			VDP_drawTextBG( BG_B, gATK, 14, 8);
-			VDP_drawTextBG( BG_B, "DEF: ", 10, 10);
-			sprintf(gDEF, "%d", goblin_defense);
-			VDP_drawTextBG( BG_B, gDEF, 14, 10);
+
 		}
 		else{
+			experience_gained = (player_level + random() % 2);
 			VDP_clearTileMap(BG_B, ind, 1, TRUE);
 			VDP_drawTextBG(BG_B, "        ", 19, 8);
 			VDP_drawTextBG( BG_B, "        ", 19, 12);
@@ -362,9 +371,14 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 		if(goblin_hp <= 0){
 			goblinsKilled++;
 			player_gold += goldDrop;
-			experience_gained = (player_level + random() % 2);
+			
 			player_exp += experience_gained;
 			VDP_clearTileMap(BG_B, ind, 1, TRUE);
+			if (player_exp >= player_exp_needed){
+				levelUp();
+				delayFrames(120);
+			}
+
 			delayFrames(120);
 			bBattleOngoing = FALSE;
 			endBattle();
@@ -438,6 +452,7 @@ void nameGenerator(){
 	PAL_setPalette(PAL3,palette_Font.data, DMA);
 	// clear all battle messages
 	VDP_drawTextBG( BG_B, "                 ", 3, 10);
+	VDP_drawTextBG( BG_B, "                 ", 5, 4);
 	VDP_drawTextBG( BG_B, "                 ", 3, 2);
 	VDP_drawTextBG( BG_B, "                 ", 7, 2);
 	VDP_drawTextBG( BG_B, "                 ", 14, 6);
@@ -504,7 +519,9 @@ XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 	if(damage < 0){
 		damage = 0;
 	}
+
 	player_hp -= damage;
+
 	VDP_drawTextBG(BG_B, "                        ", 3, 2);
 	VDP_drawTextBG(BG_B, "         ", 19, 12);
 	VDP_drawTextBG(BG_B, "attacks!", 20, 6);
@@ -513,6 +530,17 @@ XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 	sprintf(damageMessage, "%d", damage);
 	VDP_drawTextBG(BG_B, damageMessage, 2, 22);
 	VDP_drawTextBG(BG_B, "damage!", 5, 22);
+	if(player_hp <= 0){
+		player_hp = 0;
+		VDP_drawTextBG(BG_B, "You died!", 2, 24);
+		VDP_drawTextBG(BG_B, "Game Over", 2, 26);
+		delayFrames(300);
+		
+		SYS_hardReset();
+
+		
+	}
+	
 	//delayFrames(120);
 	turn = !turn;
 
@@ -540,6 +568,9 @@ void showStats(){
 	VDP_drawTextBG(BG_B, "HP: ", 4, 4);
 	sprintf(pHP, "%d", player_hp);
 	VDP_drawTextBG(BG_B, pHP, 8, 4);
+	VDP_drawTextBG(BG_B, "/", 12, 4);
+	sprintf(pHPMax, "%d", player_hp_max);
+	VDP_drawTextBG(BG_B, pHPMax, 14, 4);
 	VDP_drawTextBG(BG_B, "Level: ", 4, 6);
 	sprintf(pLevel, "%d", player_level);
 	VDP_drawTextBG(BG_B, pLevel, 12, 6);
@@ -555,6 +586,10 @@ void showStats(){
 	VDP_drawTextBG(BG_B, "Gold: ", 4, 14);
 	sprintf(pGold, "%d", player_gold);
 	VDP_drawTextBG(BG_B, pGold, 10, 14);
+	VDP_drawTextBG(BG_B, "Goblins Killed: ", 4, 16);
+	sprintf(goblinsKilledChar, "%d", goblinsKilled);
+	VDP_drawTextBG(BG_B, goblinsKilledChar, 20, 16);
+
 	}
 	else{
 		   // Show the player sprite
@@ -591,4 +626,28 @@ VDP_clearPlane(BG_B, TRUE);
 
 	}
 
+}
+
+void levelUp(){
+
+
+	player_level++;
+	player_hp_max += (player_level * 10);
+	player_hp = player_hp_max;
+	player_attack += 2;
+	player_defense += 2;
+	player_exp_needed = player_exp_needed * 2;
+	//display level up message
+	VDP_drawTextBG(BG_B, "You leveled up!", 2, 24);
+	delayFrames(120);
+
+}
+
+void sramSave(){
+	
+
+
+}
+
+void sramLoad(){
 }

@@ -16,6 +16,9 @@ void attack();
 void battleMessage();
 void goblinAttack();
 void showStats();
+void levelUp();
+void sramSave();
+void sramLoad();
 
 Sprite* player;
 u16 playerDir;
@@ -40,6 +43,7 @@ char damageMessage[8];
 char gHP[5];
 char gATK[5];
 char pHP[5];
+char pHPMax[5];
 char pATK[5];
 char  gDEF[5];
 char pLevel[5];
@@ -48,9 +52,11 @@ char pExp[5];
 char pDefense[5];
 char pAttack[5];
 char expChar[5];
+char goblinsKilledChar[5];
 
 //player stats
 s16 player_hp;
+s16 player_hp_max;
 s16 player_attack;
 s16 player_defense;
 u16 player_gold;
