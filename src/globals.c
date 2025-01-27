@@ -11,6 +11,7 @@ u16 turnDelayFrames = 0;
 const u16 TURN_DELAY = 30;
 bool bShowMenu = FALSE;
 bool bInsideHouse = FALSE;
+u32 worldSeed;
 
 void delayVBlank(u16 vblanks) {
     delayCounter = vblanks;

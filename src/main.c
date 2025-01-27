@@ -43,7 +43,7 @@ u16 floorCount = 0;
 
 int main()
 {
-    sramLoad();
+    //sramLoad();
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
     XGM_setPCM(SFX_SWOOSH, sfx_swoosh, sizeof(sfx_swoosh));
@@ -63,7 +63,7 @@ int main()
     JOY_setEventHandler(joyEvent);
 	displayTitle();
     
-    showMenu();
+    //showMenu();
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
     char numString[2];

@@ -657,6 +657,7 @@ void sramSave(){
 	SRAM_writeWord(12, player_exp_needed);
 	SRAM_writeWord(14, player_gold);
 	SRAM_writeWord(16, goblinsKilled);
+	SRAM_writeLong(18, worldSeed);
 	//SRAM_writeWord(18, player_posX);
 	//SRAM_writeWord(20, player_posY);
 
@@ -677,6 +678,7 @@ void sramLoad(){
 	player_exp_needed = SRAM_readWord(12);
 	player_gold = SRAM_readWord(14);
 	goblinsKilled = SRAM_readWord(16);
+	worldSeed = SRAM_readLong(18);
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 
