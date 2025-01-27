@@ -13,7 +13,7 @@
     - [ ]  player inventory/stats screen
     - [ ]  merchant screen
     - [ ]  buy/sell mechanic
-    - [ ] 
+    
 
 - Battle system
     - [x] gold drop
