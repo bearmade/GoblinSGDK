@@ -53,6 +53,7 @@ void collision(){
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 			 SPR_setVisibility(player, HIDDEN);
+			 sramSave();
 			 
 			//playerPosX = FIX32(100);
 			//playerPosY = FIX32(100);
@@ -85,6 +86,7 @@ void collision(){
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 			 SPR_setVisibility(player, HIDDEN);
+			sramSave();
 		}
 
 	}
@@ -116,7 +118,7 @@ void collision(){
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 			 SPR_setVisibility(player, HIDDEN);
-
+			 sramSave();
 		}
 
 	}
@@ -150,7 +152,7 @@ void collision(){
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 				 SPR_setVisibility(player, HIDDEN);
-
+			 sramSave();
 		}
 	}
 

@@ -10,7 +10,8 @@
     - [ ]  Victory fanfare
     
 - Inventory system
-    - [ ]  player inventory/stats screen
+    - [ ]  player inventory
+    - [x]  stats screen
     - [ ]  merchant screen
     - [ ]  buy/sell mechanic
     
@@ -26,7 +27,7 @@
     
 - Player's house
     - [ ] rest
-    - [ ] sram save?
+    - [x] sram save?
     
 - Mini map
 

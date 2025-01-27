@@ -139,6 +139,9 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 
 			showStats();
 		}
+		if(changed & state & BUTTON_B){
+			sramLoad();
+		}
 		
 	}
 	if((changed & state & BUTTON_DOWN)){
@@ -644,10 +647,37 @@ void levelUp(){
 }
 
 void sramSave(){
+	//save player stats
+	SRAM_writeWord(0, player_hp);
+	SRAM_writeWord(2, player_hp_max);
+	SRAM_writeWord(4, player_level);
+	SRAM_writeWord(6, player_attack);
+	SRAM_writeWord(8, player_defense);
+	SRAM_writeWord(10, player_exp);
+	SRAM_writeWord(12, player_exp_needed);
+	SRAM_writeWord(14, player_gold);
+	SRAM_writeWord(16, goblinsKilled);
+	//SRAM_writeWord(18, player_posX);
+	//SRAM_writeWord(20, player_posY);
+
 	
 
 
 }
 
 void sramLoad(){
+
+	//load player stats
+	player_hp = SRAM_readWord(0);
+	player_hp_max = SRAM_readWord(2);
+	player_level = SRAM_readWord(4);
+	player_attack = SRAM_readWord(6);
+	player_defense = SRAM_readWord(8);
+	player_exp = SRAM_readWord(10);
+	player_exp_needed = SRAM_readWord(12);
+	player_gold = SRAM_readWord(14);
+	goblinsKilled = SRAM_readWord(16);
+	//player_posX = SRAM_readWord(18);
+	//player_posY = SRAM_readWord(20);
+
 }

@@ -43,6 +43,7 @@ u16 floorCount = 0;
 
 int main()
 {
+    sramLoad();
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
     XGM_setPCM(SFX_SWOOSH, sfx_swoosh, sizeof(sfx_swoosh));
