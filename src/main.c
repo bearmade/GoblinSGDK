@@ -43,7 +43,7 @@ u16 floorCount = 0;
 
 int main()
 {
-    sramLoad();
+    //sramLoad();
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
     XGM_setPCM(SFX_SWOOSH, sfx_swoosh, sizeof(sfx_swoosh));
@@ -54,6 +54,7 @@ int main()
 
     VDP_loadTileSet(tileset2.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset2.palette->data, DMA);
+    
     //VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), 1, 1);
     
 	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
@@ -63,13 +64,14 @@ int main()
     JOY_setEventHandler(joyEvent);
 	displayTitle();
     
-    showMenu();
+    //showMenu();
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
     char numString[2];
     //initMap();
     //drawMap();
     makeMap();
+    PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	bigMapCA();
 	SPR_init();
 	displayPlayer();

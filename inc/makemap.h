@@ -35,6 +35,9 @@ void makeRocksBigMap(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type);
 void makeDoorway(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side);
 void makeDoorways2(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);
 void makeMap();
+void showMerchant();
+void matchRoomEdges(u16 roomY, u16 roomX);
+void findMerchantPosition();
 extern u8 LEVEL_TILES[14][16];
 extern u8 WORLD_TILES[8][8][14][16];
 //extern u8 UNDERWORLD_TILES[8][8][14][16];
@@ -55,5 +58,9 @@ extern u16 xx, yy;
 extern u16 buildingPosX;
 extern u16 buildingPosY;
 bool enemyDisplayed;
-
+bool merchantChance;
+fix32 merchantPosX;
+fix32 merchantPosY;
+extern u16 merchWorldY;
+extern u16 merchWorldX;
 #endif

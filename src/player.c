@@ -8,6 +8,7 @@
 #include "../inc/gamemanager.h"
 
 Sprite* player;
+Sprite* merchant;
 u16 playerDir = 0;
 fix32 playerPosX = FIX32(100);
 fix32 playerPosY = FIX32(100);
@@ -51,6 +52,9 @@ s16 goblin_attack = 0;
 s16 goblin_defense = 0;
 u16 goldDrop = 0;
 u16 experience_gained;
+u16 goblinType = 0;
+u16 goblinOffset = 0;
+
 char pHP[5];
 char pHPMax[5];
 char pATK[5];
@@ -78,39 +82,43 @@ void displayPlayer(){
 
 	PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
 	player = SPR_addSprite(&our_sprite, fix32ToInt(playerPosX), fix32ToInt(playerPosY), TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
+//showMerchant();
+//showMerchant();
+//PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+//	merchant = SPR_addSprite(&merchantSprite,fix32ToInt(playerPosX), fix32ToInt(playerPosY), TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
 
 
 }
 void joyEvent(u16 joy, u16 changed, u16 state){
-	if((changed & state & BUTTON_A) && (attack_timer == 0)){
+	// if((changed & state & BUTTON_A) && (attack_timer == 0)){
 
-		player_move_down = FALSE;
-		player_move_up = FALSE;
-		player_move_left = FALSE;
-		player_move_right = FALSE;
+	// 	player_move_down = FALSE;
+	// 	player_move_up = FALSE;
+	// 	player_move_left = FALSE;
+	// 	player_move_right = FALSE;
 
-		if(playerDir == 0){
-			SPR_setAnim(player, ANIM_ATTACK_DOWN);
-			XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
-			attack_timer += 1;
-		}
-		if(playerDir == 1){
-			SPR_setAnim(player, ANIM_ATTACK_RIGHT);
-			XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
-			attack_timer += 1;
+	// 	if(playerDir == 0){
+	// 		SPR_setAnim(player, ANIM_ATTACK_DOWN);
+	// 		XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+	// 		attack_timer += 1;
+	// 	}
+	// 	if(playerDir == 1){
+	// 		SPR_setAnim(player, ANIM_ATTACK_RIGHT);
+	// 		XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+	// 		attack_timer += 1;
 
-		}
-		if(playerDir == 2){
-			SPR_setAnim(player, ANIM_ATTACK_LEFT);
-			XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
-			attack_timer += 1;
-		}
-		if(playerDir == 3){
-			SPR_setAnim(player, ANIM_ATTACK_UP);
-			XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
-			attack_timer += 1;
-		}
-	}
+	// 	}
+	// 	if(playerDir == 2){
+	// 		SPR_setAnim(player, ANIM_ATTACK_LEFT);
+	// 		XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+	// 		attack_timer += 1;
+	// 	}
+	// 	if(playerDir == 3){
+	// 		SPR_setAnim(player, ANIM_ATTACK_UP);
+	// 		XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+	// 		attack_timer += 1;
+	// 	}
+	// }
 	if((changed & state & BUTTON_START)){
 		showTitleScreen = FALSE;
 		if(bBattleOngoing){
@@ -139,11 +147,16 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 
 			showStats();
 		}
-		if(changed & state & BUTTON_B){
-			sramLoad();
-		}
+
 		
 	}
+			if(changed & state & BUTTON_B){
+			sramSave();
+			VDP_drawTextBG(BG_B, "Saved", 10, 10);
+			delayFrames(120);
+			VDP_drawTextBG(BG_B, "     ", 10, 10);
+			displayRoom();
+		}
 	if((changed & state & BUTTON_DOWN)){
 		selection = !selection;
 	}
@@ -191,6 +204,8 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 	}
 	else {
 		player_move_left = FALSE;
+		
+	
 		player_move_right = FALSE;
 		bIsMoving = FALSE;
 	}
@@ -241,7 +256,31 @@ void initBattle(){
 	goblin_attack = (player_level * 2)+ (random() % 10);
 	goblin_defense = (player_level * 2)+ random() % 10;
 	goldDrop = (goblin_attack + goblin_defense)+ random() % 15;
-	
+	goblinType = random() % 7;
+	switch (goblinType){
+		case 0:
+		goblinOffset = 0;
+		break;
+		case 1:
+		goblinOffset = 37;
+		break;
+		case 2:
+		goblinOffset = 37*2;
+		break;
+		case 3:
+		goblinOffset = 37*3;
+		break;
+		case 4:
+		goblinOffset = 37*4;
+		break;
+		case 5:
+		goblinOffset = 37*5;
+		break;
+		case 6:
+		goblinOffset = 37*6;
+		break;
+
+		}
 
 
 
@@ -249,7 +288,7 @@ void initBattle(){
 
 void randomEncounter(){
 	randChance = random() % 1000;
-	if(randChance <= 5){
+	if(randChance <= 1){
 		initBattle();
 		turn = TRUE;
 	}
@@ -312,33 +351,48 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 
 	    //show goblin stats
 		if (goblin_hp > 0){
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 1), 20, 14);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 2), 21, 14);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 3), 22, 14);
-			
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 5), 20, 15);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 6), 21, 15);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 7), 22, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 1 + goblinOffset), 20, 14);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 2+ goblinOffset), 21, 14);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 3+ goblinOffset), 22, 14);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 4+ goblinOffset), 23, 14);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 5+ goblinOffset), 24, 14);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 6+ goblinOffset), 25, 14);
 
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 8), 20, 16);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 9), 21, 16);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 10), 22, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 8+ goblinOffset), 20, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 9+ goblinOffset), 21, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 10+ goblinOffset), 22, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 11+ goblinOffset), 23, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 12+ goblinOffset), 24, 15);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 13+ goblinOffset), 25, 15);
 
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 11), 20, 17);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 12), 21, 17);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 13), 22, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 14+ goblinOffset), 20, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 15+ goblinOffset), 21, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 16+ goblinOffset), 22, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 17+ goblinOffset), 23, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 18+ goblinOffset), 24, 16);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 19+ goblinOffset), 25, 16);
 
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 14), 20, 18);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 15), 21, 18);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 16), 22, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 20+ goblinOffset), 20, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 21+ goblinOffset), 21, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 22+ goblinOffset), 22, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 23+ goblinOffset), 23, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 24+ goblinOffset), 24, 17);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 25+ goblinOffset), 25, 17);
 
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 17), 20, 19);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 18), 21, 19);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 19), 22, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 26+ goblinOffset), 20, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 27+ goblinOffset), 21, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 28+ goblinOffset), 22, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 29+ goblinOffset), 23, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 30+ goblinOffset), 24, 18);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 31+ goblinOffset), 25, 18);
 
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 20), 20, 20);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 21), 21, 20);
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 22), 22, 20);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 32+ goblinOffset), 20, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 33+ goblinOffset), 21, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 34+ goblinOffset), 22, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 35+ goblinOffset), 23, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 36+ goblinOffset), 24, 19);
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 37+ goblinOffset), 25, 19);
+
 
 
 
@@ -401,13 +455,13 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 }
 void nameGenerator(){
 
-    char firstName1[5][2] = {"Sn", "Sk", "Kr", "Br", "Gr"};
+    char firstName1[6][2] = {"Sn", "Sk", "Kr", "Br", "Gr","D'"};
     char firstName2[5][2] = {"ar", "um", "ay", "ee", "oo"};
     char firstName3[5][3] = {"po ", "py ", "bs ", "ble", "gle"};
     char middleName[5][3] = {"Tum", "Bum", "Rub", "Hum", "Gru"};
     char lastName1[5][4] = {"thum", "bopo", "arum", "atum", "abum"};
     char lastName2[5][4] = {"lo  ", "bles", "gles", "po  ", "py  "};
-    u16 rand = random() % 5;
+    u16 rand = random() % 6;
     u16 rand2 = random() % 5;
     u16 rand3 = random() % 5;
     u16 rand4 = random() % 5;
@@ -657,6 +711,7 @@ void sramSave(){
 	SRAM_writeWord(12, player_exp_needed);
 	SRAM_writeWord(14, player_gold);
 	SRAM_writeWord(16, goblinsKilled);
+	SRAM_writeLong(18, worldSeed);
 	//SRAM_writeWord(18, player_posX);
 	//SRAM_writeWord(20, player_posY);
 
@@ -677,6 +732,8 @@ void sramLoad(){
 	player_exp_needed = SRAM_readWord(12);
 	player_gold = SRAM_readWord(14);
 	goblinsKilled = SRAM_readWord(16);
+	worldSeed = SRAM_readLong(18);
+	
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 

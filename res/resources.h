@@ -15,5 +15,6 @@ extern const Image bg1;
 extern const Image fg1;
 extern const Image fg2;
 extern const SpriteDefinition our_sprite;
+extern const SpriteDefinition merchantSprite;
 
 #endif // _RES_RESOURCES_H_

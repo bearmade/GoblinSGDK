@@ -27,6 +27,12 @@ u16 xx, yy;
 u16 buildingPosX;
 u16 buildingPosY;
 bool enemyDisplayed = FALSE;
+bool merchantChance = 0;
+fix32 merchantPosX = FIX32(100);
+fix32 merchantPosY = FIX32(100);
+u16 merchWorldY = 0;
+u16 merchWorldX = 0;
+
 
 u16 countNeighbors(u16 type, u16 y, u16 x){
     u16 neighbors = 0;
@@ -348,7 +354,7 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
     makeRocks(yy, xx, mapheight, mapwidth, 8); 
     makeGrass(yy, xx, mapheight, mapwidth);
     randWalk(7, 8, mapheight, mapwidth, 32);
-
+     
 
 
 
@@ -385,7 +391,12 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
             makeWall(yy, xx, mapheight, mapwidth, 2);
             break;
         case 10:
-            
+            //merchantChance = 1; 
+            makeGrass(yy, xx, mapheight, mapwidth);
+            findMerchantPosition();
+                       
+            break;
+        case 11:
             break;
         default:
            
@@ -396,6 +407,25 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
     makeDoorway(yy, xx, mapheight, mapwidth, 1); // Check top
     makeDoorway(yy, xx, mapheight, mapwidth, 2); // Check right
     makeDoorway(yy, xx, mapheight, mapwidth, 3); // Check bottom
+
+
+
+}
+void findMerchantPosition() {
+    bool validPosition = FALSE;
+    
+    while (!validPosition) {
+        // Try random positions
+        u16 testY = (random() % (mapheight-2)) + 1; // Avoid edges
+        u16 testX = (random() % (mapwidth-2)) + 1;
+        
+        // Check if position is walkable (not wall or obstacle)
+        if (LEVEL_TILES[testY][testX] == 0 || LEVEL_TILES[testY][testX] == 2) {
+            merchantPosX = FIX32(testX << 4); // Convert to pixel coords (* 16)
+            merchantPosY = FIX32(testY << 4);
+            validPosition = TRUE;
+        }
+    }
 }
 void makeDoorway(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side) {
     // Check if there's a room in the direction we're making the door
@@ -449,7 +479,8 @@ void ruleTileWORLD(){
 void makeWorldMap(){
     
     randWorldWalk(7,7,10);
-    
+    u16 randRoomY = (random()%7)+1;
+    u16 randRoomX = (random()%7)+1;
     u16 index = 1;
     for(roomY = 0; roomY < 8; roomY++){
         for(roomX = 0; roomX < 8; roomX++){
@@ -483,16 +514,22 @@ void makeWorldMap(){
             else if(roomY == 3 && roomX == 3){
                 makeRoom(0, 0, 14, 16, 5);
             }
-            else{
+            else if (roomY == randRoomY && roomX == randRoomX){
                 makeRoom(0, 0, 14, 16, 10);
+                merchWorldY = randRoomY;
+                merchWorldX = randRoomX;
+
+            }
+            else{
+                makeRoom(0, 0, 14, 16, 11);
             }
 
             for (int j = 0; j < 14; j++) { 
                 for (int i = 0; i < 16; i++) { 
                     WORLD_TILES[roomY][roomX][j][i] = LEVEL_TILES[j][i]; 
                 
+            }
         }
-    }
         
     }
 
@@ -504,6 +541,7 @@ void updateCurrentRoom(){
                 LEVEL_TILES[j][i] = WORLD_TILES[currentWorldY][currentWorldX][j][i];
         }
     }
+
 
 }
 void convertMapArrays(){
@@ -629,6 +667,8 @@ void create32by16TileIndexed(bool horFlip, bool topPrio, bool bottomPrio, bool t
     
 }
 void displayRoom(){
+   
+
     for (xx = 0; xx < mw; xx += 2) {
         for (yy = 0; yy < mh; yy += 2) {
 
@@ -806,6 +846,7 @@ void displayRoom(){
 
         }
     }
+    
 
 }
 void makeMap(){
@@ -889,3 +930,50 @@ void makeRocksBigMap(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 
 
 }
+void showMerchant(){
+        findMerchantPosition();
+        PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+        merchant = SPR_addSprite(&merchantSprite, fix32ToInt(merchantPosX), fix32ToInt(merchantPosY), TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
+        SPR_setPosition(merchant, merchantPosX, merchantPosY);
+        //SPR_setVisibility(merchant, VISIBLE);
+       
+       if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
+
+		SPR_setVisibility(merchant, VISIBLE);
+	} else {
+
+		SPR_setVisibility(merchant, HIDDEN);
+	}
+        
+        //SPR_setVisibility(merchant, HIDDEN);
+
+}
+
+void matchRoomEdges(u16 roomY, u16 roomX) {
+    // Match left edge with right edge of previous room
+    if (roomX > 0) {
+        for (u16 y = 0; y < 14; y++) {
+            // Copy last column of previous room to first column of current room
+            WORLD_TILES[roomY][roomX][y][0] = WORLD_TILES[roomY][roomX-1][y][15];
+            // Ensure walkable path
+            if (WORLD_TILES[roomY][roomX][y][0] == 1) { // If wall
+                WORLD_TILES[roomY][roomX][y][0] = 0;    // Make walkable
+                WORLD_TILES[roomY][roomX-1][y][15] = 0; // Make previous tile walkable
+            }
+        }
+    }
+
+    // Match top edge with bottom edge of room above
+    if (roomY > 0) {
+        for (u16 x = 0; x < 16; x++) {
+            // Copy bottom row of room above to top row of current room
+            WORLD_TILES[roomY][roomX][0][x] = WORLD_TILES[roomY-1][roomX][13][x];
+            // Ensure walkable path
+            if (WORLD_TILES[roomY][roomX][0][x] == 1) { // If wall
+                WORLD_TILES[roomY][roomX][0][x] = 0;    // Make walkable
+                WORLD_TILES[roomY-1][roomX][13][x] = 0; // Make previous tile walkable
+            }
+        }
+    }
+}
+

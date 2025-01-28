@@ -50,9 +50,9 @@ void collision(){
 		}
 		if((tile_type_coll_topleft == EXIT_TILE)||(tile_type_coll_bottomleft == EXIT_TILE)){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
-			VDP_clearPlane(BG_A, TRUE);
-			VDP_clearPlane(BG_B, TRUE);
-			 SPR_setVisibility(player, HIDDEN);
+			// VDP_clearPlane(BG_A, TRUE);
+			// VDP_clearPlane(BG_B, TRUE);
+			//  SPR_setVisibility(player, HIDDEN);
 			 sramSave();
 			 
 			//playerPosX = FIX32(100);
@@ -83,9 +83,9 @@ void collision(){
 		}
 		if((tile_type_coll_topright == EXIT_TILE)||(tile_type_coll_bottomright == EXIT_TILE)){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
-			VDP_clearPlane(BG_A, TRUE);
-			VDP_clearPlane(BG_B, TRUE);
-			 SPR_setVisibility(player, HIDDEN);
+			// VDP_clearPlane(BG_A, TRUE);
+			// VDP_clearPlane(BG_B, TRUE);
+			//  SPR_setVisibility(player, HIDDEN);
 			sramSave();
 		}
 
@@ -115,9 +115,9 @@ void collision(){
 		}
 		if((tile_type_coll_topright == EXIT_TILE)||(tile_type_coll_topleft == EXIT_TILE)){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
-			VDP_clearPlane(BG_A, TRUE);
-			VDP_clearPlane(BG_B, TRUE);
-			 SPR_setVisibility(player, HIDDEN);
+			// VDP_clearPlane(BG_A, TRUE);
+			// VDP_clearPlane(BG_B, TRUE);
+			//  SPR_setVisibility(player, HIDDEN);
 			 sramSave();
 		}
 
@@ -149,9 +149,9 @@ void collision(){
 		}
 		if((tile_type_coll_bottomright == EXIT_TILE)||(tile_type_coll_bottomleft == EXIT_TILE)){
 			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
-			VDP_clearPlane(BG_A, TRUE);
-			VDP_clearPlane(BG_B, TRUE);
-				 SPR_setVisibility(player, HIDDEN);
+			// VDP_clearPlane(BG_A, TRUE);
+			// VDP_clearPlane(BG_B, TRUE);
+			// 	 SPR_setVisibility(player, HIDDEN);
 			 sramSave();
 		}
 	}

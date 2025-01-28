@@ -21,6 +21,8 @@ void sramSave();
 void sramLoad();
 
 Sprite* player;
+Sprite* merchant;
+
 u16 playerDir;
 fix32 playerPosX;
 fix32 playerPosY;
@@ -64,6 +66,8 @@ s16 player_level;
 u16 player_exp;
 u16 player_exp_needed;
 u16 goblinsKilled;
+u16 goblinType;
+u16 goblinOffset;
 
 
 //goblin stats

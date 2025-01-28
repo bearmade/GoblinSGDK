@@ -17,5 +17,6 @@ u16 turnDelayFrames;
 bool bShowMenu;
 bool bInsideHouse;
 const u16 TURN_DELAY;
+u32 worldSeed;
 
 #endif
