@@ -19,10 +19,11 @@ void showStats();
 void levelUp();
 void sramSave();
 void sramLoad();
+void showMerchMenu();
 
 Sprite* player;
 Sprite* merchant;
-
+bool bShowMerchMenu;
 u16 playerDir;
 fix32 playerPosX;
 fix32 playerPosY;

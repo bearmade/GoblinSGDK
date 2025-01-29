@@ -87,8 +87,9 @@ int main()
 
       handleInput();
 
-
+        //if((!bShowMerchMenu)){
         collision();
+        //}
 		camera();
         //debuginfo();
 

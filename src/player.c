@@ -144,6 +144,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 				
 			}
 		}
+
 		else{
 
 			showStats();
@@ -152,11 +153,27 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		
 	}
 			if(changed & state & BUTTON_B){
-			sramSave();
-			VDP_drawTextBG(BG_B, "Saved", 10, 10);
-			delayFrames(120);
-			VDP_drawTextBG(BG_B, "     ", 10, 10);
-			displayRoom();
+				if(bShowMerchMenu){
+					bShowMerchMenu = FALSE;
+					showMerchMenu();
+					bPlayerCanMove = TRUE;
+					SPR_setVisibility(merchant, VISIBLE);
+					displayRoom();
+				
+			}
+			// sramSave();
+			// VDP_drawTextBG(BG_B, "Saved", 10, 10);
+			// delayFrames(120);
+			// VDP_drawTextBG(BG_B, "     ", 10, 10);
+			// displayRoom();
+		}
+		if(changed & state & BUTTON_A){
+			if(bShowMerchMenu){
+				bPlayerCanMove = FALSE;
+				showMerchMenu();
+				//hide merchant
+				SPR_setVisibility(merchant, HIDDEN);
+			}
 		}
 	if((changed & state & BUTTON_DOWN)){
 		selection = !selection;
@@ -747,4 +764,40 @@ void sramLoad(){
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 
+}
+void showMerchMenu(){
+	//bShowMerchMenu = !bShowMerchMenu;
+	if(bShowMerchMenu){
+		//hide player sprite
+		
+		SPR_setVisibility(player, HIDDEN);
+		//clear screen
+		VDP_clearTileMap(BG_B, ind, 0, TRUE);
+		//load font tiles
+		VDP_loadFontData(tileset_Font.tiles, 96, CPU);
+		//set font palette
+		PAL_setPalette(PAL0, palette_Font.data, DMA);
+		//show merchant menu
+		VDP_drawTextBG(BG_B, "Merchant", 4, 2);
+		
+
+
+	}
+	else{
+		//show player sprite
+		SPR_setVisibility(player, VISIBLE);
+		//redraw screen
+		
+		VDP_loadTileSet(tileset1.tileset, 1, DMA);
+		PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+		PAL_setPalette(PAL0, fg2.palette->data, DMA);
+		//PAL_setPalette(PAL3,palette_Font.data, DMA);
+		//clear all battle messages
+		VDP_drawTextBG(BG_B, "      ", 4, 2);
+		VDP_drawTextBG(BG_B, "      ", 4, 4);
+		VDP_drawTextBG(BG_B, "      ", 8, 4);
+		VDP_drawTextBG(BG_B, "      ", 4, 6);
+		displayRoom();
+		//`VDP_drawTextBG(BG_B, "      ",
+	}
 }

@@ -64,9 +64,11 @@ void collision(){
 				}
 		
 				// Add merchant menu trigger here
-				// showMerchantMenu();
-				VDP_drawText("Merchant", 10, 10);
+				bShowMerchMenu = TRUE;
+				//showMerchMenu();
+				//VDP_drawText("Merchant", 10, 10);
 			} else {
+				bShowMerchMenu = FALSE;
 				merchantInteraction = FALSE;
 			}
 	if(player_move_left){
