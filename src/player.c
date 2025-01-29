@@ -733,7 +733,10 @@ void sramLoad(){
 	player_gold = SRAM_readWord(14);
 	goblinsKilled = SRAM_readWord(16);
 	worldSeed = SRAM_readLong(18);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> main
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 

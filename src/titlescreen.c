@@ -10,12 +10,21 @@ void displayTitle(){
     while (1) {
         
         u16 value = JOY_readJoypad( JOY_1);
+<<<<<<< HEAD
     	//  if((value & BUTTON_DOWN)){
 	    // 	    selection = !selection;
 	    //     }
 	    //     if((value & BUTTON_UP)){
 		//         selection = !selection;
 	    //     }
+=======
+    	 if((value & BUTTON_DOWN)){
+	    	    selection = !selection;
+	        }
+	        if((value & BUTTON_UP)){
+		        selection = !selection;
+	        }
+>>>>>>> main
         if(value & BUTTON_START){
             if(selection == 0){
                 worldSeed = random();
@@ -28,9 +37,12 @@ void displayTitle(){
             else{
                 sramLoad();
                 setRandomSeed(worldSeed);
+<<<<<<< HEAD
                  showTitleScreen = FALSE;
                 bPlayerCanMove = TRUE;
                 bShowMenu = FALSE;
+=======
+>>>>>>> main
                 //break;
             }
         }
@@ -38,7 +50,11 @@ void displayTitle(){
 		VDP_drawTextBG( BG_B, " ", 8, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
 		VDP_drawTextBG( BG_B, "~", 8, ((selection*2) + 24)); // Draw new cursor
 
+<<<<<<< HEAD
         //delayFrames(3);
+=======
+        delayFrames(3);
+>>>>>>> main
         SYS_doVBlankProcess();
            
         //u16 value = JOY_readJoypad(JOY_1);
