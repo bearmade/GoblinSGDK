@@ -17,4 +17,5 @@ out/src/debuginfo.o: src/debuginfo.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/z80_ctrl.h /home/bear/SGDK/inc/ym2612.h \
  /home/bear/SGDK/inc/psg.h /home/bear/SGDK/inc/joy.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
- /home/bear/SGDK/inc/task_cst.h src/../inc/level.h
+ /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/player.h \
+ src/../inc/makemap.h

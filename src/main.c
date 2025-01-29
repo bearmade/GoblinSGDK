@@ -90,17 +90,24 @@ int main()
 
         collision();
 		camera();
+        //debuginfo();
 
+        if(bShowMenu){
+		char numberString[3];
+		sprintf(numberString, "%u", currentWorldX);
+		VDP_drawText(numberString, 24, 8);
+		sprintf(numberString, "%u", currentWorldY);
+		VDP_drawText(numberString, 26, 8);
+		sprintf(numberString, "%u", WORLD_LAYOUT[currentWorldY][currentWorldX]);
+		VDP_drawText(numberString, 28, 8);
+        //print merchant coords
+        char numberString2[3];
+        sprintf(numberString2, "%u", merchWorldX);
+        VDP_drawText(numberString2, 24, 10);
+        sprintf(numberString2, "%u", merchWorldY);
+        VDP_drawText(numberString2, 26, 10);
 
-
-		// char numberString[3];
-		// sprintf(numberString, "%u", currentWorldX);
-		// VDP_drawText(numberString, 24, 8);
-		// sprintf(numberString, "%u", currentWorldY);
-		// VDP_drawText(numberString, 26, 8);
-		// sprintf(numberString, "%u", WORLD_LAYOUT[currentWorldY][currentWorldX]);
-		// VDP_drawText(numberString, 28, 8);
-
+        }
       
 
         if(bIsMoving == TRUE){

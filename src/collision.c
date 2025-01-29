@@ -31,6 +31,44 @@ void collision(){
 
 	s16 blocked_coord;
 
+	s16 playerX = fix32ToInt(playerPosX);
+	s16 playerY = fix32ToInt(playerPosY);
+	s16 merchantX = fix32ToInt(merchantPosX); // You'll need these position variables
+	s16 merchantY = fix32ToInt(merchantPosY); // for your merchant sprite
+	bool merchantInteraction ;
+			// Box collision detection
+    
+
+			if (playerX < merchantX + MERCHANT_WIDTH &&
+				playerX + PLAYER_WIDTH > merchantX &&
+				playerY < merchantY + MERCHANT_HEIGHT &&
+				playerY + PLAYER_HEIGHT > merchantY &&
+				currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
+		
+				// Set interaction flag
+				merchantInteraction = TRUE;
+		
+		
+				// Prevent walking through merchant by pushing player back
+				if(player_move_right && playerX < merchantX) {
+					playerPosX -= playerSpeed;
+				}
+				if(player_move_left && playerX > merchantX) {
+					playerPosX += playerSpeed;
+				}
+				if(player_move_down && playerY < merchantY) {
+					playerPosY -= playerSpeed;
+				}
+				if(player_move_up && playerY > merchantY) {
+					playerPosY += playerSpeed;
+				}
+		
+				// Add merchant menu trigger here
+				// showMerchantMenu();
+				VDP_drawText("Merchant", 10, 10);
+			} else {
+				merchantInteraction = FALSE;
+			}
 	if(player_move_left){
 		playerPosX -= playerSpeed;
 		player_coll_coord_left = fix32ToInt(playerPosX) + PLAYER_COL_LEFT;
@@ -157,3 +195,6 @@ void collision(){
 	}
 
 }
+
+
+

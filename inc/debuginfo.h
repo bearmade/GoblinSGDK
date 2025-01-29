@@ -5,6 +5,7 @@
 
 
 char info[10];
+char info2[10];
 void debuginfo();
 
 #endif

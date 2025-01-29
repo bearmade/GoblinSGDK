@@ -17,6 +17,6 @@ out/src/player.o: src/player.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/z80_ctrl.h /home/bear/SGDK/inc/ym2612.h \
  /home/bear/SGDK/inc/psg.h /home/bear/SGDK/inc/joy.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
- /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/player.h \
- src/../inc/globals.h res/resources.h src/../inc/titlescreen.h \
- src/../inc/makemap.h src/../inc/gamemanager.h
+ /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/camera.h \
+ src/../inc/player.h src/../inc/globals.h res/resources.h \
+ src/../inc/titlescreen.h src/../inc/makemap.h src/../inc/gamemanager.h

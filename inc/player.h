@@ -85,6 +85,9 @@ fix32 tempPlayerPosY;
 #define PLAYER_WIDTH 16
 #define PLAYER_HEIGHT 16
 
+#define MERCHANT_WIDTH 16
+#define MERCHANT_HEIGHT 16
+
 #define PLAYER_COL_LEFT 4
 #define PLAYER_COL_RIGHT 12
 #define PLAYER_COL_UP 8

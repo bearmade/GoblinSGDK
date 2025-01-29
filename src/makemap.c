@@ -393,7 +393,7 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
         case 10:
             //merchantChance = 1; 
             makeGrass(yy, xx, mapheight, mapwidth);
-            findMerchantPosition();
+           // findMerchantPosition();
                        
             break;
         case 11:
@@ -413,20 +413,37 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 }
 void findMerchantPosition() {
     bool validPosition = FALSE;
+    u16 attempts = 0;
+    const u16 MAX_ATTEMPTS = 100;
     
-    while (!validPosition) {
-        // Try random positions
-        u16 testY = (random() % (mapheight-2)) + 1; // Avoid edges
-        u16 testX = (random() % (mapwidth-2)) + 1;
+    while (!validPosition && attempts < MAX_ATTEMPTS) {
+        // Get random positions but keep merchant away from edges
+        u16 testY = 2 + (random() % (mapheight-4));
+        u16 testX = 2 + (random() % (mapwidth-4));
         
-        // Check if position is walkable (not wall or obstacle)
-        if (LEVEL_TILES[testY][testX] == 0 || LEVEL_TILES[testY][testX] == 2) {
-            merchantPosX = FIX32(testX << 4); // Convert to pixel coords (* 16)
+        // Check for valid floor tiles (0=floor, 2=grass)
+        // Also check surrounding tiles to ensure merchant isn't trapped
+        if ((LEVEL_TILES[testY][testX] == 0 || LEVEL_TILES[testY][testX] == 2) &&
+            (LEVEL_TILES[testY-1][testX] == 0 || LEVEL_TILES[testY-1][testX] == 2) &&
+            (LEVEL_TILES[testY+1][testX] == 0 || LEVEL_TILES[testY+1][testX] == 2) &&
+            (LEVEL_TILES[testY][testX-1] == 0 || LEVEL_TILES[testY][testX-1] == 2) &&
+            (LEVEL_TILES[testY][testX+1] == 0 || LEVEL_TILES[testY][testX+1] == 2)) {
+            
+            // Convert to pixel coordinates (multiply by 16 for tile size)
+            merchantPosX = FIX32(testX << 4);
             merchantPosY = FIX32(testY << 4);
             validPosition = TRUE;
         }
+        attempts++;
+    }
+    
+    // Fallback position if no valid spot found
+    if (!validPosition) {
+        merchantPosX = FIX32(128);
+        merchantPosY = FIX32(128);
     }
 }
+
 void makeDoorway(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side) {
     // Check if there's a room in the direction we're making the door
     bool hasAdjacentRoom = FALSE;
@@ -481,6 +498,8 @@ void makeWorldMap(){
     randWorldWalk(7,7,10);
     u16 randRoomY = (random()%7)+1;
     u16 randRoomX = (random()%7)+1;
+                    merchWorldY = randRoomY -1;
+                merchWorldX = randRoomX;
     u16 index = 1;
     for(roomY = 0; roomY < 8; roomY++){
         for(roomX = 0; roomX < 8; roomX++){
@@ -516,8 +535,9 @@ void makeWorldMap(){
             }
             else if (roomY == randRoomY && roomX == randRoomX){
                 makeRoom(0, 0, 14, 16, 10);
-                merchWorldY = randRoomY;
+                merchWorldY = randRoomY - 1; 
                 merchWorldX = randRoomX;
+                //findMerchantPosition();
 
             }
             else{
@@ -934,12 +954,13 @@ void showMerchant(){
         findMerchantPosition();
         PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
         merchant = SPR_addSprite(&merchantSprite, fix32ToInt(merchantPosX), fix32ToInt(merchantPosY), TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
-        SPR_setPosition(merchant, merchantPosX, merchantPosY);
+        SPR_setPosition(merchant, fix32ToInt(merchantPosX), fix32ToInt(merchantPosY));
         //SPR_setVisibility(merchant, VISIBLE);
        
        if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
 
 		SPR_setVisibility(merchant, VISIBLE);
+        
 	} else {
 
 		SPR_setVisibility(merchant, HIDDEN);

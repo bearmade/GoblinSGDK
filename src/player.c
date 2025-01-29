@@ -1,5 +1,6 @@
 #include "../inc/debuginfo.h"
 #include "../inc/level.h"
+#include "../inc/camera.h"
 #include "../inc/player.h"
 #include "../inc/globals.h"
 #include <resources.h>
@@ -288,7 +289,7 @@ void initBattle(){
 
 void randomEncounter(){
 	randChance = random() % 1000;
-	if(randChance <= 1){
+	if(randChance <= 1 && !isTransitioning){
 		initBattle();
 		turn = TRUE;
 	}
@@ -515,6 +516,7 @@ void nameGenerator(){
 	VDP_drawTextBG( BG_B, "                 ", 14, 6);
 	VDP_drawTextBG( BG_B, "                 ", 2, 24);
 	VDP_drawTextBG( BG_B, "                 ", 2, 26);
+	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
 	SYS_doVBlankProcess();
 
 	displayRoom();
@@ -608,7 +610,7 @@ void showStats(){
 	if(bShowMenu){
 // Hide the player sprite
         SPR_setVisibility(player, HIDDEN);
-
+	    SPR_setVisibility(merchant, HIDDEN);
 		// tempPlayerPosX = playerPosX;
 		// tempPlayerPosY = playerPosY;
 		// playerPosX = 100;
@@ -650,7 +652,15 @@ void showStats(){
 	}
 	else{
 		   // Show the player sprite
+		   
         SPR_setVisibility(player, VISIBLE);
+		       if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
+
+		SPR_setVisibility(merchant, VISIBLE);
+	} else {
+
+		SPR_setVisibility(merchant, HIDDEN);
+	}
 
 		//redraw screen
 	// 		playerPosX = tempPlayerPosX;
@@ -676,7 +686,7 @@ VDP_clearPlane(BG_B, TRUE);
 
 	SYS_doVBlankProcess();
 
-
+	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
 	displayRoom();
 	//hide player stats
 
@@ -733,10 +743,7 @@ void sramLoad(){
 	player_gold = SRAM_readWord(14);
 	goblinsKilled = SRAM_readWord(16);
 	worldSeed = SRAM_readLong(18);
-<<<<<<< HEAD
 	
-=======
->>>>>>> main
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 
