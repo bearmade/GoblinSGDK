@@ -1,6 +1,8 @@
 ### To do checklist
 
 - [ ]  Title screen
+    - [x]  functionality
+    - [ ]  graphics
 - [ ]  Game over screen
 
 - Music and SFX
@@ -12,7 +14,7 @@
 - Inventory system
     - [ ]  player inventory
     - [x]  stats screen
-    - [ ]  merchant screen
+    - [x]  merchant screen
     - [ ]  buy/sell mechanic
     
 
@@ -21,15 +23,16 @@
     - [ ] item drop
     - [x] game over
     - [ ] run mechanic based on chance and gold drop
-    - [ ] experience and level up
+    - [x] experience and level up
     - [x] goblins killed
     - [x] player and goblin attack formulas
     
 - Player's house
     - [ ] rest
-    - [x] sram save?
+    - [x] sram save/load
     
 - Mini map
+    - [x] basic functionality
 
 
 - Organize code

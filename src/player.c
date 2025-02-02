@@ -160,13 +160,14 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 					SPR_setVisibility(merchant, VISIBLE);
 					displayRoom();
 				
-			}
-			// sramSave();
-			// VDP_drawTextBG(BG_B, "Saved", 10, 10);
-			// delayFrames(120);
-			// VDP_drawTextBG(BG_B, "     ", 10, 10);
-			// displayRoom();
-		}
+			}else{
+				if(!bBattleOngoing){
+			 sramSave();
+			 VDP_drawTextBG(BG_B, "Saved", 10, 10);
+			 delayFrames(120);
+			 VDP_drawTextBG(BG_B, "     ", 10, 10);
+			 displayRoom();
+		}}}
 		if(changed & state & BUTTON_A){
 			if(bShowMerchMenu){
 				bPlayerCanMove = FALSE;
@@ -306,7 +307,7 @@ void initBattle(){
 
 void randomEncounter(){
 	randChance = random() % 1000;
-	if(randChance <= 1 && !isTransitioning){
+	if(randChance <= 5 && !isTransitioning){
 		initBattle();
 		turn = TRUE;
 	}
@@ -665,6 +666,7 @@ void showStats(){
 	VDP_drawTextBG(BG_B, "Goblins Killed: ", 4, 16);
 	sprintf(goblinsKilledChar, "%d", goblinsKilled);
 	VDP_drawTextBG(BG_B, goblinsKilledChar, 20, 16);
+	displayMiniMap();
 
 	}
 	else{
@@ -729,6 +731,7 @@ void levelUp(){
 
 void sramSave(){
 	//save player stats
+	SRAM_enable();
 	SRAM_writeWord(0, player_hp);
 	SRAM_writeWord(2, player_hp_max);
 	SRAM_writeWord(4, player_level);
@@ -739,6 +742,7 @@ void sramSave(){
 	SRAM_writeWord(14, player_gold);
 	SRAM_writeWord(16, goblinsKilled);
 	SRAM_writeLong(18, worldSeed);
+	SRAM_disable();
 	//SRAM_writeWord(18, player_posX);
 	//SRAM_writeWord(20, player_posY);
 
@@ -750,6 +754,7 @@ void sramSave(){
 void sramLoad(){
 
 	//load player stats
+	SRAM_enable();
 	player_hp = SRAM_readWord(0);
 	player_hp_max = SRAM_readWord(2);
 	player_level = SRAM_readWord(4);
@@ -760,7 +765,7 @@ void sramLoad(){
 	player_gold = SRAM_readWord(14);
 	goblinsKilled = SRAM_readWord(16);
 	worldSeed = SRAM_readLong(18);
-	
+	SRAM_disable();
 	//player_posX = SRAM_readWord(18);
 	//player_posY = SRAM_readWord(20);
 
@@ -800,4 +805,28 @@ void showMerchMenu(){
 		displayRoom();
 		//`VDP_drawTextBG(BG_B, "      ",
 	}
+}
+void displayMiniMap(){
+	//display mini map using font tiles
+	VDP_drawTextBG(BG_B, "Mini Map", 20, 20);
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			if (i  == currentWorldY && j == currentWorldX){
+				VDP_drawTextBG(BG_B, "X", 20 + j, 20 + i);
+			}
+			else if (i == merchWorldY && j == merchWorldX){
+				VDP_drawTextBG(BG_B, "M", 20 + j, 20 + i);
+			}
+			else{
+				VDP_drawTextBG(BG_B, ".", 20 + j, 20 + i);
+			}
+			// if(WORLD_LAYOUT[i][j] == 1){
+			// 	VDP_drawTextBG(BG_B, " ", 20 + j, 20 + i);
+			// }
+			// else{
+			// 	VDP_drawTextBG(BG_B, ".", 20 + j, 20 + i);
+			// }
+		}
+	}
+
 }

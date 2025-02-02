@@ -20,6 +20,7 @@ void levelUp();
 void sramSave();
 void sramLoad();
 void showMerchMenu();
+void displayMiniMap();
 
 Sprite* player;
 Sprite* merchant;
