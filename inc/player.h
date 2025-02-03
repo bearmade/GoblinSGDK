@@ -40,7 +40,7 @@ bool bIsMoving;
 char Name[19];
 bool selection;
 char pointer[1];
-char attack_message[8][20];
+char attack_message[13][20];
 bool turn;
 char damageMessage[8];
 

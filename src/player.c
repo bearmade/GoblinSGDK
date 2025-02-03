@@ -24,7 +24,7 @@ int attack_duration = 24;
 int randChance = 0;
 bool turn = FALSE;
 
-char attack_message[8][20] = {
+char attack_message[13][20] = {
 	"throw your shoe at  ",
 	"clumsily trip into  ",
 	"toss pocket lint at ",
@@ -32,7 +32,13 @@ char attack_message[8][20] = {
 	"perform nose boop on",
 	"throw a rock towards",
 	"attempt to kick     ",
-	"do a barrel roll at " 
+	"do a barrel roll at ",
+	"run up on and tickle",
+	"kick the shins of   ",
+	"bust a move on      ",
+	"act like a bear 	 ",
+	"offend the goblin   "
+
 };
 char damageMessage[8];
 
@@ -126,8 +132,28 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		//delayVBlank(120);
 		
 			if(selection == 1){
-				bBattleOngoing = FALSE;
-				endBattle();
+				int rand = random() % 100;
+				if(rand > 40){
+					VDP_drawTextBG(BG_B, "You run like a scared child", 2, 2);
+					delayFrames(120); 
+
+					bBattleOngoing = FALSE;
+					endBattle();
+				}
+				else{
+				    VDP_drawTextBG(BG_B, "You failed to Run", 3, 2);
+					delayFrames(120);
+					goblinAttack();
+					sprintf(pHP, "%d", player_hp);
+					VDP_drawTextBG(BG_B, "    ", 8, 26);  // Clear old HP
+					VDP_drawTextBG(BG_B, pHP, 8, 26);      // Draw new HP
+					delayFrames(120);
+					VDP_drawTextBG(BG_B, "        ", 20, 6);
+					VDP_drawTextBG(BG_B, "             ", 2, 22);
+					turn = !turn;
+				}
+
+
 			}
 			else{
 				
@@ -583,7 +609,7 @@ void attack(){
 void battleMessage(){
 	XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 		char message[40];
-		int randIndex = random() % 8; // We have 8 messages in the array
+		int randIndex = random() % 13; // We have 13 messages in the array
 		strncpy(message, attack_message[randIndex], 20);
 		VDP_drawTextBG(BG_B, "You ", 3, 2);
 		VDP_drawTextBG(BG_B, message, 7, 2);
@@ -603,6 +629,7 @@ XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 	VDP_drawTextBG(BG_B, "         ", 19, 12);
 	VDP_drawTextBG(BG_B, "attacks!", 20, 6);
 	VDP_drawTextBG( BG_B, "    ", 8, 26);
+	VDP_drawTextBG( BG_B, pHP, 8, 26);
 
 	sprintf(damageMessage, "%d", damage);
 	VDP_drawTextBG(BG_B, damageMessage, 2, 22);
@@ -641,36 +668,37 @@ void showStats(){
 		PAL_setPalette(PAL0, palette_Font.data, DMA);
 
 	//show player stats
-	VDP_drawTextBG(BG_B, "Player", 4, 2);
-	VDP_drawTextBG(BG_B, "HP: ", 4, 4);
+	VDP_drawTextBG(BG_B, "Player", 3, 2);
+	VDP_drawTextBG(BG_B, "HP: ", 3, 4);
 	sprintf(pHP, "%d", player_hp);
 	VDP_drawTextBG(BG_B, pHP, 8, 4);
 	VDP_drawTextBG(BG_B, "/", 12, 4);
 	sprintf(pHPMax, "%d", player_hp_max);
 	VDP_drawTextBG(BG_B, pHPMax, 14, 4);
-	VDP_drawTextBG(BG_B, "Level: ", 4, 6);
+	VDP_drawTextBG(BG_B, "LVL: ", 3, 6);
 	sprintf(pLevel, "%d", player_level);
-	VDP_drawTextBG(BG_B, pLevel, 12, 6);
-	VDP_drawTextBG(BG_B, "Attack: ", 4, 8);
+	VDP_drawTextBG(BG_B, pLevel, 16, 6);
+	VDP_drawTextBG(BG_B, "ATK: ", 3, 8);
 	sprintf(pAttack, "%d", player_attack);
-	VDP_drawTextBG(BG_B, pAttack, 12, 8);
-	VDP_drawTextBG(BG_B, "Defense: ", 4, 10);
+	VDP_drawTextBG(BG_B, pAttack, 16, 8);
+	VDP_drawTextBG(BG_B, "DEF: ", 3, 10);
 	sprintf(pDefense, "%d", player_defense);
-	VDP_drawTextBG(BG_B, pDefense, 12, 10);
-	VDP_drawTextBG(BG_B, "Exp: ", 4, 12);
+	VDP_drawTextBG(BG_B, pDefense, 16, 10);
+	VDP_drawTextBG(BG_B, "EXP: ", 3, 12);
 	sprintf(pExp, "%d", player_exp);
-	VDP_drawTextBG(BG_B, pExp, 8, 12);
-	VDP_drawTextBG(BG_B, "Gold: ", 4, 14);
+	VDP_drawTextBG(BG_B, pExp, 16, 12);
+	VDP_drawTextBG(BG_B, "Gold: ", 3, 14);
 	sprintf(pGold, "%d", player_gold);
-	VDP_drawTextBG(BG_B, pGold, 10, 14);
-	VDP_drawTextBG(BG_B, "Goblins Killed: ", 4, 16);
+	VDP_drawTextBG(BG_B, pGold, 16, 14);
+	VDP_drawTextBG(BG_B, "Goblin Kills: ", 3, 16);
 	sprintf(goblinsKilledChar, "%d", goblinsKilled);
-	VDP_drawTextBG(BG_B, goblinsKilledChar, 20, 16);
+	VDP_drawTextBG(BG_B, goblinsKilledChar, 16, 16);
 	displayMiniMap();
 
 	}
 	else{
 		   // Show the player sprite
+		   
 		   
         SPR_setVisibility(player, VISIBLE);
 		       if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
@@ -808,17 +836,17 @@ void showMerchMenu(){
 }
 void displayMiniMap(){
 	//display mini map using font tiles
-	VDP_drawTextBG(BG_B, "Mini Map", 20, 20);
+	
 	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
 			if (i  == currentWorldY && j == currentWorldX){
-				VDP_drawTextBG(BG_B, "X", 20 + j, 20 + i);
+				VDP_drawTextBG(BG_B, "%", 22 + j, 6 + i);
 			}
 			else if (i == merchWorldY && j == merchWorldX){
-				VDP_drawTextBG(BG_B, "M", 20 + j, 20 + i);
+				VDP_drawTextBG(BG_B, "&", 22 + j, 6 + i);
 			}
 			else{
-				VDP_drawTextBG(BG_B, ".", 20 + j, 20 + i);
+				VDP_drawTextBG(BG_B, "#", 22 + j, 6 + i);
 			}
 			// if(WORLD_LAYOUT[i][j] == 1){
 			// 	VDP_drawTextBG(BG_B, " ", 20 + j, 20 + i);
@@ -830,3 +858,4 @@ void displayMiniMap(){
 	}
 
 }
+

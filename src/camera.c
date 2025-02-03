@@ -176,10 +176,12 @@ void startTransition(int direction) {
 void finishTransition() {
 	SPR_setVisibility(player, VISIBLE);
 	//SPR_setVisibility(merchant, VISIBLE);
+	
     isTransitioning = FALSE;
     transitionOffset = FIX32(0);
     VDP_setHorizontalScroll(BG_A, 0);
     VDP_setHorizontalScroll(BG_B, 0);
     VDP_setVerticalScroll(BG_A, 0);
     VDP_setVerticalScroll(BG_B, 0);
+	showMerchant();
 }

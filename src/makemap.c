@@ -957,7 +957,8 @@ void showMerchant(){
         SPR_setPosition(merchant, fix32ToInt(merchantPosX), fix32ToInt(merchantPosY));
         //SPR_setVisibility(merchant, VISIBLE);
        
-       if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
+       if (currentWorldX == merchWorldX && currentWorldY == merchWorldY ) {
+
 
 		SPR_setVisibility(merchant, VISIBLE);
         
