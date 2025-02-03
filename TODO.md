@@ -22,7 +22,7 @@
     - [x] gold drop
     - [ ] item drop
     - [x] game over
-    - [ ] run mechanic based on chance and gold drop
+    - [x] run mechanic based on chance and gold drop
     - [x] experience and level up
     - [x] goblins killed
     - [x] player and goblin attack formulas
@@ -33,6 +33,7 @@
     
 - Mini map
     - [x] basic functionality
+    - [x] graphics
 
 
 - Organize code
