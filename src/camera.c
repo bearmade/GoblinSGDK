@@ -163,7 +163,7 @@ void startTransition(int direction) {
     //VDP_clearPlane(BG_B, TRUE);
 	
     updateCurrentRoom();
-	showMerchant();
+	//showMerchant();
     convertMapArrays();
     displayRoom();
 	
