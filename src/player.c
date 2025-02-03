@@ -640,7 +640,7 @@ XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 	VDP_drawTextBG(BG_B, "                        ", 3, 2);
 	VDP_drawTextBG(BG_B, "         ", 19, 12);
 	VDP_drawTextBG(BG_B, "attacks!", 20, 6);
-	VDP_drawTextBG( BG_B, "    ", 8, 26);
+	VDP_drawTextBG( BG_B, "     ", 8, 26);
 	VDP_drawTextBG( BG_B, pHP, 8, 26);
 
 	sprintf(damageMessage, "%d", damage);
@@ -860,12 +860,7 @@ void displayMiniMap(){
 			else{
 				VDP_drawTextBG(BG_B, "#", 22 + j, 6 + i);
 			}
-			// if(WORLD_LAYOUT[i][j] == 1){
-			// 	VDP_drawTextBG(BG_B, " ", 20 + j, 20 + i);
-			// }
-			// else{
-			// 	VDP_drawTextBG(BG_B, ".", 20 + j, 20 + i);
-			// }
+
 		}
 	}
 
