@@ -12,6 +12,7 @@
     - [ ]  Victory fanfare
     
 - Inventory system
+    - [ ]  create seperate header and c / organize relevant code
     - [ ]  player inventory
     - [x]  stats screen
     - [x]  merchant screen
@@ -19,6 +20,7 @@
     
 
 - Battle system
+    - [x]  create seperate header and c / organize relevant code
     - [x] gold drop
     - [ ] item drop
     - [x] game over

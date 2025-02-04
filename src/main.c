@@ -10,6 +10,7 @@
 #include "../inc/titlescreen.h"
 #include "../inc/makemap.h"
 #include "../inc/gamemanager.h"
+#include "../inc/battle.h"
 
 
 

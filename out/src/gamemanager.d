@@ -20,4 +20,4 @@ out/src/gamemanager.o: src/gamemanager.c src/../inc/level.h \
  /home/bear/SGDK/inc/task_cst.h src/../inc/debuginfo.h \
  src/../inc/player.h src/../inc/camera.h src/../inc/collision.h \
  src/../inc/globals.h src/../inc/titlescreen.h src/../inc/makemap.h \
- res/resources.h src/../inc/gamemanager.h
+ res/resources.h src/../inc/gamemanager.h src/../inc/battle.h

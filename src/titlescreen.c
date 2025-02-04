@@ -2,6 +2,7 @@
 #include "../inc/globals.h"
 #include <resources.h>
 #include "../inc/player.h"
+#include "../inc/battle.h"
 
 bool showTitleScreen = TRUE;
 

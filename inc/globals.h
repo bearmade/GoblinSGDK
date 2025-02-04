@@ -3,6 +3,7 @@
 
 #include <genesis.h>
 
+
 void delayVBlank(u16 vblanks);
 void delayFrames(u16 frames) ;
 void delayMilliseconds(u16 milliseconds);

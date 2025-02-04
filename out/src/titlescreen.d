@@ -18,4 +18,4 @@ out/src/titlescreen.o: src/titlescreen.c src/../inc/titlescreen.h \
  /home/bear/SGDK/inc/psg.h /home/bear/SGDK/inc/joy.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
  /home/bear/SGDK/inc/task_cst.h src/../inc/globals.h res/resources.h \
- src/../inc/player.h
+ src/../inc/player.h src/../inc/battle.h

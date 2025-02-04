@@ -3,6 +3,9 @@
 
 #include <genesis.h>
 
+void sramSave();
+void sramLoad();
+
 u16 roomCount;
 bool MapHasBeenMade;
 
