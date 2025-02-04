@@ -8,6 +8,7 @@ bool showTitleScreen = TRUE;
 
 void displayTitle(){
 
+    XGM_startPlay(title_vgm);
     while (1) {
         
         u16 value = JOY_readJoypad( JOY_1);
@@ -59,6 +60,10 @@ void displayTitle(){
             
 			//VDP_drawText("Press START to generate map", 5, 5);
             VDP_clearTileMap(BG_B,ind,0, TRUE);
+            //XGM_stopPlay();
+                XGM_stopPlay();
+    XGM_startPlay(world_vgm);
+            
             break;  // Exit the menu loop when Start button is pressed
         }
 

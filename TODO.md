@@ -6,10 +6,10 @@
 - [ ]  Game over screen
 
 - Music and SFX
-    - [ ]  Title music
-    - [ ]  Main world music
-    - [ ]  Battle music
-    - [ ]  Victory fanfare
+    - [x]  Title music
+    - [x]  Main world music
+    - [x]  Battle music
+    - [x]  Victory fanfare
     
 - Inventory system
     - [ ]  create seperate header and c / organize relevant code

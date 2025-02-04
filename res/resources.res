@@ -14,5 +14,8 @@ SPRITE  our_sprite "heroSega.png" 2 2 FAST 10
 SPRITE  merchantSprite "merchant.png" 2 2 FAST 10
 
 
-XGM test_vgm "ikag.vgm"
+XGM title_vgm "ikag.vgm"
+XGM world_vgm "iKilledAGoblinWorld.vgm"
+XGM battle_vgm "iKilledAGoblinBattle.vgm"
+XGM victory_vgm "fanfare.vgm"
 WAV sfx_swoosh "swoosh.wav" XGM

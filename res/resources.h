@@ -2,7 +2,10 @@
 #define _RES_RESOURCES_H_
 
 extern const u8 sfx_swoosh[3584];
-extern const u8 test_vgm[27648];
+extern const u8 title_vgm[27648];
+extern const u8 world_vgm[13056];
+extern const u8 battle_vgm[11520];
+extern const u8 victory_vgm[1792];
 extern const TileSet tileset_Font;
 extern const Palette palette_Font;
 extern const Image tileset1;

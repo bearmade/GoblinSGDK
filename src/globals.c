@@ -17,12 +17,21 @@ void delayVBlank(u16 vblanks) {
     delayCounter = vblanks;
     while (delayCounter > 0) {
         SYS_doVBlankProcess();
+        delayCounter--;
     }
 }
 
 void delayFrames(u16 frames) {
     for (u16 i = 0; i < frames; i++) {
-        VDP_waitVSync();
+        SYS_doVBlankProcess();
+        //VDP_waitVSync();
+    }
+}
+void delayFramesWithSound(u16 frames) {
+    for (u16 i = 0; i < frames; i++) {
+        XGM_nextFrame();
+        //VDP_waitVSync();
+        waitMs(10);
     }
 }
 
@@ -31,6 +40,9 @@ void delayMilliseconds(u16 milliseconds) {
     u16 start = getTick();
 
     while ((getTick() - start) < ticks) {
-        // Wait
+        // Wait for the specified number of milliseconds
+        waitMs(10);
+        XGM_nextFrame();
+
     }
 }

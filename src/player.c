@@ -78,7 +78,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 			else{
 				
 				if(turn){
-					XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+					//XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 					attack();
 					
 				}

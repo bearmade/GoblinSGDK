@@ -68,6 +68,7 @@ char goblinsKilledChar[5];
 //#define SFX_SWOOSH 64
 
 void initBattle(){
+
 	bPlayerCanMove = FALSE;
 	bBattleStarted = TRUE;
  // Reset all movement states
@@ -113,6 +114,8 @@ void initBattle(){
 void randomEncounter(){
 	randChance = random() % 1000;
 	if(randChance <= 5 && !isTransitioning){
+		XGM_stopPlay();
+        XGM_startPlay(battle_vgm);
 		initBattle();
 		turn = TRUE;
 	}
@@ -133,8 +136,9 @@ void displayBattle(){
 	VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	//set font palette
 	PAL_setPalette(PAL0, palette_Font.data, DMA);
+
 	VDP_drawTextBG( BG_B, "Goblin Encounter!", 8, 0);
-	delayFrames(120);
+	delayFrames(360);
 	VDP_drawTextBG( BG_B, "                 ", 8, 0);
 	//draw text on window plane
 	nameGenerator();
@@ -252,15 +256,16 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 		if(goblin_hp <= 0){
 			goblinsKilled++;
 			player_gold += goldDrop;
+			XGM_startPlay(victory_vgm);
 			
 			player_exp += experience_gained;
 			VDP_clearTileMap(BG_B, ind, 1, TRUE);
 			if (player_exp >= player_exp_needed){
 				levelUp();
-				delayFrames(120);
+				delayFrames(180);
 			}
 
-			delayFrames(120);
+			delayFrames(180);
 			bBattleOngoing = FALSE;
 			endBattle();
 		}
@@ -341,6 +346,8 @@ void nameGenerator(){
 	VDP_drawTextBG( BG_B, "                 ", 2, 26);
 	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
 	SYS_doVBlankProcess();
+	XGM_stopPlay();
+	XGM_startPlay(world_vgm);
 
 	displayRoom();
     
@@ -348,8 +355,8 @@ void nameGenerator(){
 
 void attack(){
 	
-	XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 
+	
 	
 	battleMessage();
 	VDP_drawTextBG(BG_B, "        ", 20, 6);
@@ -369,33 +376,41 @@ void attack(){
 	VDP_drawTextBG( BG_B, "-" , 19, 12);
 	VDP_drawTextBG(BG_B, damageMessage, 20, 12);
 	sprintf(gHP, "%d", goblin_hp);
+	for (int i = 0; i < 6; i++){
+	delayFrames(5);
+	}
 	if(goblin_hp > 0){
-	VDP_drawTextBG( BG_B, gHP, 14, 6);}
-	XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
-	delayFrames(120);
-	//turn = !turn;
-	if(goblin_hp > 0){
-	goblinAttack();
-	turn = !turn;
+	VDP_drawTextBG( BG_B, gHP, 14, 6);
+	
 	}
 	
 	
+	
+	
+	if(goblin_hp > 0){
+	goblinAttack();
+	turn = !turn;
 
+	}
+	
+	
+	
 
 
 }
 
 void battleMessage(){
-	XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+
 		char message[40];
 		int randIndex = random() % 13; // We have 13 messages in the array
 		strncpy(message, attack_message[randIndex], 20);
 		VDP_drawTextBG(BG_B, "You ", 3, 2);
 		VDP_drawTextBG(BG_B, message, 7, 2);
 	
+	
 }
 void goblinAttack(){
-XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+
 	s16 damage = ((random() % 10)*player_level) + goblin_attack;
 	damage  = (damage - (player_defense));
 	if(damage < 0){
@@ -404,6 +419,7 @@ XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
 
 	player_hp -= damage;
 
+	
 	VDP_drawTextBG(BG_B, "                        ", 3, 2);
 	VDP_drawTextBG(BG_B, "         ", 19, 12);
 	VDP_drawTextBG(BG_B, "attacks!", 20, 6);
@@ -445,3 +461,5 @@ void levelUp(){
 	delayFrames(120);
 
 }
+
+
