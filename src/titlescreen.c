@@ -9,8 +9,13 @@ bool showTitleScreen = TRUE;
 void displayTitle(){
 
     XGM_startPlay(title_vgm);
+    //VDP_clearPlane(BG_A, TRUE);
+            PAL_setPalette(PAL1, title.palette->data, DMA);
+	    VDP_drawImageEx(BG_B, &title, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+       SYS_doVBlankProcess();
+
     while (1) {
-        
+
         u16 value = JOY_readJoypad( JOY_1);
     	//  if((value & BUTTON_DOWN)){
 	    // 	    selection = !selection;
@@ -37,23 +42,22 @@ void displayTitle(){
             }
         }
         		//get player selection
-		VDP_drawTextBG( BG_B, " ", 8, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
-		VDP_drawTextBG( BG_B, "~", 8, ((selection*2) + 24)); // Draw new cursor
+		VDP_drawTextBG( BG_A, " ", 11, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
+		VDP_drawTextBG( BG_A, "~", 11, ((selection*2) + 24)); // Draw new cursor
 
         //delayFrames(3);
         SYS_doVBlankProcess();
            
         //u16 value = JOY_readJoypad(JOY_1);
-        
-	    //VDP_drawImageEx(BG_B, &fg1, TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+
         //VDP_loadFontData(tileset_Font.tiles, 96, CPU);
-	    PAL_setPalette(PAL3,palette_Font.data, DMA);
+	    PAL_setPalette(PAL2,palette_Font.data, DMA);
         VDP_drawTextBG( BG_A, "Bear Made Games", 10, 20);
-        VDP_drawTextBG( BG_A, "      2025     ", 10, 22);
-        VDP_drawTextBG( BG_A, "   ", 10, 24);
+        VDP_drawTextBG( BG_A, "     2025     ", 10, 22);
+        VDP_drawTextBG( BG_A, "   ", 12, 24);
         //show load game or new game options
-        VDP_drawTextBG( BG_A, "New Game", 10, 24);
-        VDP_drawTextBG( BG_A, "Load Game", 10, 26);
+        VDP_drawTextBG( BG_A, " New Game", 12, 24);
+        VDP_drawTextBG( BG_A, " Load Game", 12, 26);
 
 
         if (showTitleScreen == FALSE) {

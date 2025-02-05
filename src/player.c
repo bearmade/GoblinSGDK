@@ -39,7 +39,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		showTitleScreen = FALSE;
 		if(bBattleOngoing){
 		//delayVBlank(120);
-		
+		if(bBattleMessageDone){
 			if(selection == 1){
 				int rand = random() % 100;
 				char droppedGold[5];
@@ -89,8 +89,8 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 				
 			}
 		}
-
-		else{
+		}
+		else if(!bBattleOngoing && !bBattleMessageDone){
 
 			showStats();
 		}		
@@ -282,6 +282,10 @@ void showStats(){
 }
 
 void showMerchMenu(){
+	u16 randomItemForSale = random() % 8;
+	u16 randomItemPrice = random() % 10;
+	u16 itemPrice = 0;
+	char itemPriceString[4];
 
 	if(bShowMerchMenu){
 		//hide player sprite		
@@ -294,6 +298,25 @@ void showMerchMenu(){
 		PAL_setPalette(PAL0, palette_Font.data, DMA);
 		//show merchant menu
 		VDP_drawTextBG(BG_B, "Merchant", 4, 2);
+		randomItemForSale = 0;
+		switch (randomItemForSale) {
+			case 0:
+				VDP_drawTextBG(BG_B, "Skull", 4, 6);
+				itemPrice = skull_base + (random() % skull_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold", 15, 6);
+				break;
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+	
+				break;
+		}
 
 	}
 	else{
@@ -318,7 +341,9 @@ void showMerchMenu(){
 		VDP_drawTextBG(BG_B, "      ", 4, 6);
 		displayRoom();
 	}
-}void displayMiniMap(){
+}
+
+void displayMiniMap(){
 	//display mini map using font tiles
 	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){

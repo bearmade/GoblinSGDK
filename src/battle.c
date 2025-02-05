@@ -130,7 +130,7 @@ void displayBattle(){
 
 	
 	if (bBattleStarted == TRUE){
-	
+	bBattleMessageDone = FALSE;
 	VDP_clearTileMap(BG_A, ind, 0, TRUE);
 	bBattleOngoing = TRUE;
 	//load font tiles
@@ -140,6 +140,8 @@ void displayBattle(){
 
 	VDP_drawTextBG( BG_B, "Goblin Encounter!", 8, 0);
 	delayFrames(360);
+	bBattleMessageDone = TRUE;
+
 	VDP_drawTextBG( BG_B, "                 ", 8, 0);
 	//draw text on window plane
 	nameGenerator();
@@ -269,6 +271,7 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 
 			delayFrames(180);
 			bBattleOngoing = FALSE;
+			bBattleMessageDone = FALSE;
 			endBattle();
 		}
 

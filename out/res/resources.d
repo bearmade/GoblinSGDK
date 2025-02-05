@@ -1,6 +1,7 @@
 out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/tiles2.png \
 /home/bear/GoblinSGDK/res/merchant.png \
+/home/bear/GoblinSGDK/res/goglinTitle2.png \
 /home/bear/GoblinSGDK/res/swoosh.wav \
 /home/bear/GoblinSGDK/res/heroSega.png \
 /home/bear/GoblinSGDK/res/ikag.vgm \

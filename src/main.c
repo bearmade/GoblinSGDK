@@ -44,18 +44,21 @@ int main()
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
 
-
-
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
-    PAL_setPalette(PAL0,palette_Font.data, DMA);
+    PAL_setPalette(PAL1,palette_Font.data, DMA);
+
+	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
+	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
+    JOY_setEventHandler(joyEvent);
+    
+	displayTitle();
+
+
 
     VDP_loadTileSet(tileset2.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset2.palette->data, DMA);
     
-	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
-	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
-    JOY_setEventHandler(joyEvent);
-	displayTitle();
+
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
     char numString[2];
