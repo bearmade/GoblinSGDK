@@ -8,6 +8,7 @@
 #include "../inc/makemap.h"
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
+#include "../inc/inventory.h"
 
 Sprite* player;
 Sprite* merchant;
@@ -219,6 +220,33 @@ void showStats(){
 		sprintf(goblinsKilledChar, "%d", goblinsKilled);
 		VDP_drawTextBG(BG_B, goblinsKilledChar, 16, 16);
 		displayMiniMap();
+		VDP_drawTextBG(BG_B, "Skulls", 3, 18);
+		sprintf(skullAmount, "%d", skulls);
+		VDP_drawTextBG(BG_B, skullAmount, 16, 18);
+		VDP_drawTextBG(BG_B, "Meat: ", 3, 20);
+		sprintf(meatAmount, "%d", meat);
+		VDP_drawTextBG(BG_B, meatAmount, 16, 20);
+		VDP_drawTextBG(BG_B, "Bones: ", 3, 22);
+		sprintf(bonesAmount, "%d", bones);
+		VDP_drawTextBG(BG_B, bonesAmount, 16, 22);
+		VDP_drawTextBG(BG_B, "Skin: ", 3, 24);
+		sprintf(skinAmount, "%d", skin);
+		VDP_drawTextBG(BG_B, skinAmount, 16, 24);
+		VDP_drawTextBG(BG_B, "Eyes: ", 19, 18);
+		sprintf(eyesAmount, "%d", eyes);
+		VDP_drawTextBG(BG_B, eyesAmount, 29, 18);
+		VDP_drawTextBG(BG_B, "Fangs: ", 19, 20);
+		sprintf(fangAmount, "%d", fang);
+		VDP_drawTextBG(BG_B, fangAmount, 29, 20);
+		VDP_drawTextBG(BG_B, "Horns: ", 19, 22);
+		sprintf(hornAmount, "%d", horn);
+		VDP_drawTextBG(BG_B, hornAmount, 29, 22);
+		VDP_drawTextBG(BG_B, "Tails: ", 19, 24);
+		sprintf(tailAmount, "%d", tail);
+		VDP_drawTextBG(BG_B, tailAmount, 29, 24);
+
+
+
 	}
 	else{
 		// Show the player sprite	   

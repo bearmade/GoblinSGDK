@@ -1,4 +1,4 @@
-out/src/player.o: src/player.c src/../inc/debuginfo.h \
+out/src/inventory.o: src/inventory.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/genesis.h /home/bear/SGDK/inc/types.h \
  /home/bear/SGDK/inc/config.h /home/bear/SGDK/inc/asm.h \
  /home/bear/SGDK/inc/sys.h /home/bear/SGDK/inc/sram.h \

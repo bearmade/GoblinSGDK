@@ -20,4 +20,4 @@ out/src/battle.o: src/battle.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/camera.h \
  src/../inc/player.h src/../inc/globals.h res/resources.h \
  src/../inc/titlescreen.h src/../inc/makemap.h src/../inc/gamemanager.h \
- src/../inc/battle.h
+ src/../inc/battle.h src/../inc/inventory.h

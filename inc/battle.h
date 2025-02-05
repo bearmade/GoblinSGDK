@@ -13,6 +13,7 @@ void attack();
 void battleMessage();
 void goblinAttack();
 void levelUp();
+void itemDrop();
 
 char Name[19];
 bool selection;

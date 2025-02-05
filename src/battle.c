@@ -8,6 +8,7 @@
 #include "../inc/makemap.h"
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
+#include "../inc/inventory.h"
 
 int randChance = 0;
 bool turn = FALSE;
@@ -247,6 +248,7 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 			VDP_drawTextBG( BG_B, "Exp!", 10, 18);
 			sprintf(expChar, "%d", experience_gained);
 			VDP_drawTextBG( BG_B, expChar, 16, 18);
+			itemDrop();
 
 		}
 		//get player selection
@@ -462,4 +464,40 @@ void levelUp(){
 
 }
 
+void itemDrop(){
+	u16 rand = random() % 100;
+	if(rand < 25){
+		rand = random() % 8;
+		addItem(rand, 1);
+		VDP_drawTextBG(BG_B, "You found ", 10, 20);
+		switch (rand){
+			case 0:
+				VDP_drawTextBG(BG_B, "a skull", 10, 22);
+				break;
+			case 1:
+				VDP_drawTextBG(BG_B, "some meat", 10, 22);
+				break;
+			case 2:
+				VDP_drawTextBG(BG_B, "bones", 10, 22);
+				break;
+			case 3:
+				VDP_drawTextBG(BG_B, "skin", 10, 22);
+				break;
+			case 4:
+				VDP_drawTextBG(BG_B, "eyes", 10, 22);
+				break;
+			case 5:
+				VDP_drawTextBG(BG_B, "fangs", 10, 22);
+				break;
+			case 6:
+				VDP_drawTextBG(BG_B, "horn", 10, 22);
+				break;
+			case 7:
+				VDP_drawTextBG(BG_B, "a tail", 10, 22);
+				break;
+		//delayFrames(120);
+	}
+
+}
+}
 
