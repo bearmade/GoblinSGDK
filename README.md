@@ -15,6 +15,11 @@
 ----
 
 ###  2D Video Game for Sega Genesis 
+----
+
+#### [- Asset Catalog](AssetCatalogue.md)
+
+
 
 ----
 #### - [TODO/Progress](TODO.md)
@@ -94,11 +99,14 @@ remains.
 
 ----
 
-#### [- Asset Catalog](AssetCatalogue.md)
 
+#### - Tools and Software
 ----
+- SGDK, the Sega Genesis Development Kit, will be used to develop the game using C programming language.
+- Aseprite will be used to create and edit the sprites and tilesets.
+- Furnace tracker will be used to create the music and sound effects.
 
-
+----    
 
 
 
