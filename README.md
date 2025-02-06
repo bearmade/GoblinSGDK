@@ -29,7 +29,7 @@
 #### - Summary
 ----
 
-Goblin will be a 2D rogue-like game for the Sega Genesis created with SGDK, 
+Goblin will be a 2D rogue-like turn-based RPG game for the Sega Genesis created with SGDK, 
 Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
@@ -109,7 +109,7 @@ remains.
 ----    
 
 
-
+#### - [Screenshots](screenshots.md)
 
 ##### - Credits
 
