@@ -1,3 +1,6 @@
+# This script will take a PNG image and replace each pixel with the closest Sega Genesis color, 
+# then save the result as a new PNG image with only 16 colors.
+
 import numpy as np
 from PIL import Image
 from scipy.spatial import cKDTree
