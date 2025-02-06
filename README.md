@@ -8,7 +8,9 @@
 
 ----
 
-![Alt text](https://github.com/bearmade/GoblinSGDK/raw/main/screenshots/goblintitle.png)
+![Alt text](https://github.com/bearmade/GoblinSGDK/screenshots/goblintitle.png)
+
+----
 
 ###  2D Video Game for Sega Genesis 
 
