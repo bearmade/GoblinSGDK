@@ -28,16 +28,26 @@
 #### [- Screenshots](screenshots.md)
 ----
 
+<h3 align = center>
 
-#### - Summary
+ -- Summary --
+
+</h3>
+
 ----
 
 Goblin will be a 2D rogue-like turn-based RPG game for the Sega Genesis created with SGDK, 
 Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
-#### - Main Character 
+----
+<h3 align = center>
 
+-- Main Character -- 
+
+</h3>
+
+-----
 <h1 align = center>
 
  ![alt](./chara_gifs/row_0.gif) ![alt](./chara_gifs/row_1.gif) ![alt](./chara_gifs/row_2.gif) ![alt](./chara_gifs/row_3.gif)
@@ -46,8 +56,13 @@ and fans of the classic RPGs of the early 90s.
 
 </h1>
 
+----
+<h3 align = center> 
 
-#### - Objectives
+-- Objectives --
+
+</h3>
+
 ----
 
 The game will be a procedurally generated top-down exploration game with turn-based combat. 
@@ -56,7 +71,14 @@ battles with goblins, and collecting their remains to sell for gold to merchants
 The Player will then be able to upgrade their character with the gold they collect.
 
 ----
-#### - Goblins 
+
+<h3 align = center>
+
+-- Goblins -- 
+
+</h3>
+
+----
 
 <h1 align = center>
 
@@ -66,13 +88,19 @@ The Player will then be able to upgrade their character with the gold they colle
 
 </h1>
 
+
+
 https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 
 ----
 
 
+<h3 align = center>
 
-#### - Mechanics
+ -- Mechanics --
+ 
+ </h3>
+
 ----
 
 The game will feature streamlined mechanics including simple 
@@ -81,7 +109,12 @@ top-down movement and menu-driven turn-based combat.
 
 ----
 
-#### - Controls 
+<h3 align = center>
+
+ -- Controls --
+
+ </h3>
+
 ----
 D-pad to move, A B C to select options in battle, start to open menu.
 
@@ -91,8 +124,10 @@ A standard 3 button Sega Genesis controller will be used.
 
 
 
+<h3 align = center>
+ -- Key Elements --
+</h3>
 
-#### - Key Elements
 ----
 
 Key elements include procedural generation of the map as well as humorous 
@@ -103,7 +138,10 @@ remains.
 ----
 
 
-#### - Tools and Software
+<h3 align = center>
+-- Tools and Software --
+</h3>
+
 ----
 - SGDK, the Sega Genesis Development Kit, will be used to develop the game using C programming language.
 - Aseprite will be used to create and edit the sprites and tilesets.
