@@ -17,7 +17,7 @@
   2D Video Game for Sega Genesis<br>
  </h2>
  <h4 align = center>
-  ✨ 16 Bits of Ultra Blast-Processing Mega-Power!! ✨
+  ✨ 16 Bit Ultra Blast-Processing Mega-Power!! ✨
 </h4>
 
 ----
