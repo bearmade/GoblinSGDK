@@ -33,6 +33,7 @@ and fans of the classic RPGs of the early 90s.
 <h1 align = center>
 
  ![alt](./chara_gifs/row_0.gif) ![alt](./chara_gifs/row_1.gif) ![alt](./chara_gifs/row_2.gif) ![alt](./chara_gifs/row_3.gif)
+ <br>
   ![alt](./chara_gifs/row_4.gif) ![alt](./chara_gifs/row_5.gif) ![alt](./chara_gifs/row_6.gif) ![alt](./chara_gifs/row_7.gif)
 
 </h1>
@@ -52,6 +53,7 @@ The Player will then be able to upgrade their character with the gold they colle
 <h1 align = center>
 
 ![alt](./goblins/row_0.gif)   ![alt](./goblins/row_1.gif)  ![alt](./goblins/row_2.gif) ![alt](./goblins/row_3.gif) 
+<br>
 ![alt](./goblins/row_4.gif)  ![alt](./goblins/row_5.gif)  ![alt](./goblins/row_6.gif) 
 
 </h1>
