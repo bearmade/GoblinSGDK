@@ -28,6 +28,14 @@ Goblin will be a 2D rogue-like game for the Sega Genesis created with SGDK,
 Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
+#### - Main Character 
+
+<h1 align = center>
+
+ ![alt](./chara_gifs/row_0.gif) ![alt](./chara_gifs/row_1.gif) ![alt](./chara_gifs/row_2.gif) ![alt](./chara_gifs/row_3.gif)
+  ![alt](./chara_gifs/row_4.gif) ![alt](./chara_gifs/row_5.gif) ![alt](./chara_gifs/row_6.gif) ![alt](./chara_gifs/row_7.gif)
+
+</h1>
 
 
 #### - Objectives
@@ -39,6 +47,20 @@ battles with goblins, and collecting their remains to sell for gold to merchants
 The Player will then be able to upgrade their character with the gold they collect.
 
 ----
+#### - Goblins 
+
+<h1 align = center>
+
+![alt](./goblins/row_0.gif)   ![alt](./goblins/row_1.gif)  ![alt](./goblins/row_2.gif) ![alt](./goblins/row_3.gif) 
+![alt](./goblins/row_4.gif)  ![alt](./goblins/row_5.gif)  ![alt](./goblins/row_6.gif) 
+
+</h1>
+
+https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
+
+----
+
+
 
 #### - Mechanics
 ----
@@ -48,6 +70,17 @@ top-down movement and menu-driven turn-based combat.
 
 
 ----
+
+#### - Controls 
+----
+D-pad to move, A B C to select options in battle, start to open menu.
+
+A standard 3 button Sega Genesis controller will be used. 
+
+----
+
+
+
 
 #### - Key Elements
 ----
@@ -59,16 +92,14 @@ remains.
 
 ----
 
-#### - Asset Catalog
-----
-
-Sprite animation for player, goblin, and merchants.
-Tileset for the map.
-Music and sound effects for the game.
-Tileset to display goblins during batle.
-
+#### [- Asset Catalog](AssetCatalogue.md)
 
 ----
+
+
+
+
+
 
 ##### - Credits
 
