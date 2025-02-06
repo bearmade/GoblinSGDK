@@ -1,7 +1,7 @@
 
 <h1 align = center>
 
- -- Goblin --
+ ✨ Goblin ✨
 
 </h1>
 
@@ -17,7 +17,7 @@
   2D Video Game for Sega Genesis<br>
  </h2>
  <h4 align = center>
-  16 Bits of Ultra Blast Processing Power
+  ✨ 16 Bits of Ultra Blast-Processing Mega-Power!! ✨
 </h4>
 
 ----
@@ -157,7 +157,7 @@ remains.
 
 
 
-##### - Credits
+##### ✨ Credits ✨
 
 ###### Made By: Hunter Singleton
 
