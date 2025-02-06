@@ -22,7 +22,10 @@
 
 
 ----
-#### - [TODO/Progress](TODO.md)
+#### [- TODO/Progress](TODO.md)
+
+----
+#### [- Screenshots](screenshots.md)
 ----
 
 
@@ -109,7 +112,7 @@ remains.
 ----    
 
 
-#### - [Screenshots](screenshots.md)
+
 
 ##### - Credits
 
