@@ -28,3 +28,14 @@
 | Battle Theme | VGM | Hunter Singleton |  |
 | World Theme | VGM | Hunter Singleton |  |
 | Victory Fanfare | VGM | Hunter Singleton |  |
+
+
+<br>
+
+https://bkx1.itch.io/combat-rpg-1500k-characters
+
+<br>
+
+https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
+
+
