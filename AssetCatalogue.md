@@ -32,9 +32,11 @@
 
 <br>
 
+bkx1
 https://bkx1.itch.io/combat-rpg-1500k-characters
 
 <br>
+Stephen Challener (Redshrike)
 
 https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 
