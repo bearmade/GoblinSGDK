@@ -8,7 +8,6 @@
 
 ----
 
-![goblintitle](https://github.com/user-attachments/assets/1dcadf15-4857-45bf-b026-0514f8bc68f5)
 
 ![alt](./screenshots/goblintitle.png)
 
