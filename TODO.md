@@ -1,8 +1,8 @@
 ### To do checklist
 
-- [ ]  Title screen
+- [x]  Title screen
     - [x]  functionality
-    - [ ]  graphics
+    - [x]  graphics
 - [ ]  Game over screen
 
 - Music and SFX
@@ -38,5 +38,13 @@
     - [x] graphics
 
 
+<br><br>
+
 - Organize code
-    
+- Squash bugs
+- Polish
+ <br> 
+
+- Known bugs/Issues
+    - [ ] map transitions
+    - [ ] battle music stops playing when player attacks
