@@ -8,7 +8,7 @@
 
 ----
 
-![Alt text](https://github.com/bearmade/GoblinSGDK/screenshots/goblintitle.png)
+![Alt text](github.com/bearmade/GoblinSGDK/screenshots/goblintitle.png)
 
 ----
 
