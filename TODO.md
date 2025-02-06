@@ -28,6 +28,9 @@
     - [x] experience and level up
     - [x] goblins killed
     - [x] player and goblin attack formulas
+    - [ ] add battle backgrounds
+    - [x] battle messages
+    
     
 - Player's house
     - [ ] rest
