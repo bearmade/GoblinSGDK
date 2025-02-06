@@ -235,6 +235,7 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 
 		}
 		else{
+			bBattleMessageDone = FALSE;
 			experience_gained = (player_level + random() % 2);
 			VDP_clearTileMap(BG_B, ind, 1, TRUE);
 			VDP_drawTextBG(BG_B, "        ", 19, 8);
@@ -258,6 +259,7 @@ VDP_loadTileSet(goblin.tileset, 1, DMA);
 		VDP_drawTextBG( BG_B, "~", 21, ((selection*2) + 24)); // Draw new cursor
 		
 		if(goblin_hp <= 0){
+			bBattleMessageDone = FALSE;
 			goblinsKilled++;
 			player_gold += goldDrop;
 			XGM_startPlay(victory_vgm);

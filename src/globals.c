@@ -47,3 +47,8 @@ void delayMilliseconds(u16 milliseconds) {
 
     }
 }
+void vblankCallback() {
+    if (delayCounter > 0) {
+        delayCounter--;
+    }
+}

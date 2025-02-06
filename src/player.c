@@ -90,8 +90,9 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 			}
 		}
 		}
-		else if(!bBattleOngoing && !bBattleMessageDone){
-
+		else if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving){
+			//bIsMoving = FALSE;
+			bPlayerCanMove = FALSE;
 			showStats();
 		}		
 	}
@@ -183,6 +184,8 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 
 void showStats(){
 	bShowMenu = !bShowMenu;
+	//bIsMoving = FALSE;
+	bPlayerCanMove = FALSE;
 	if(bShowMenu){
 		// Hide the player sprite
 		SPR_setVisibility(player, HIDDEN);
@@ -277,12 +280,13 @@ void showStats(){
 	VDP_drawTextBG(BG_B, "      ", 8, 12);
 	SYS_doVBlankProcess();
 	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+	bPlayerCanMove = TRUE;
 	displayRoom();
 	}
 }
 
 void showMerchMenu(){
-	u16 randomItemForSale = random() % 8;
+	u16 randomItemForSale = random() % 10;
 	u16 randomItemPrice = random() % 10;
 	u16 itemPrice = 0;
 	char itemPriceString[4];
@@ -298,24 +302,80 @@ void showMerchMenu(){
 		PAL_setPalette(PAL0, palette_Font.data, DMA);
 		//show merchant menu
 		VDP_drawTextBG(BG_B, "Merchant", 4, 2);
-		randomItemForSale = 0;
+		VDP_drawTextBG(BG_B, "Purchase", 4, 4);
+		//randomItemForSale = 0;
 		switch (randomItemForSale) {
 			case 0:
 				VDP_drawTextBG(BG_B, "Skull", 4, 6);
 				itemPrice = skull_base + (random() % skull_base);
 				sprintf(itemPriceString, "%d", itemPrice);
 				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold", 15, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
 			case 1:
-
+				VDP_drawTextBG(BG_B, "Meat", 4, 6);
+				itemPrice = meat_base + (random() % meat_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
 			case 2:
-
+				VDP_drawTextBG(BG_B, "Bones", 4, 6);
+				itemPrice = bones_base + (random() % bones_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
 			case 3:
-	
+				VDP_drawTextBG(BG_B, "Skin", 4, 6);
+				itemPrice = skin_base + (random() % skin_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);	
 				break;
+			case 4:
+				VDP_drawTextBG(BG_B, "Eyes", 4, 6);
+				itemPrice = eyes_base + (random() % eyes_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+				break;
+			case 5:
+				VDP_drawTextBG(BG_B, "Fangs", 4, 6);
+				itemPrice = fang_base + (random() % fang_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+				break;
+			case 6:
+				VDP_drawTextBG(BG_B, "Horn", 4, 6);
+				itemPrice = horn_base + (random() % horn_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+				break;
+			case  7:
+				VDP_drawTextBG(BG_B, "Tail", 4, 6);
+				itemPrice = tail_base + (random() % tail_base);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+				break;
+			case 8:
+				VDP_drawTextBG(BG_B, "ATK UP", 4, 6);
+				itemPrice = player_attack * (50 + random() % 50);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+				break;
+			case 9:
+				VDP_drawTextBG(BG_B, "DEF UP", 4, 6);
+				itemPrice = player_defense * (50 + random() % 50);
+				sprintf(itemPriceString, "%d", itemPrice);
+				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
+				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
+			break;
+
 		}
 
 	}
@@ -347,7 +407,10 @@ void displayMiniMap(){
 	//display mini map using font tiles
 	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
-			if (i  == currentWorldY && j == currentWorldX){
+			if ( i == 3 && j == 3){
+				VDP_drawTextBG(BG_B, "$", 22 + j, 6 + i);
+			}
+			else if (i  == currentWorldY && j == currentWorldX){
 				VDP_drawTextBG(BG_B, "%", 22 + j, 6 + i);
 			}
 			else if (i == merchWorldY && j == merchWorldX){

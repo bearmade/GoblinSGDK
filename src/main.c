@@ -13,31 +13,6 @@
 #include "../inc/battle.h"
 
 
-
-void vblankCallback();
-
-
-
-#define MAP_WIDTH 32
-#define MAP_HEIGHT 20
-#define SFX_SWOOSH 64
-
-//u16 ind = TILE_USER_INDEX;
-char map[MAP_WIDTH][MAP_HEIGHT];
-u16 playerX, playerY;
-u16 displayX, displayY;
-u16 playerDir;
-char tempMapA = ';';
-char tempMapB = ';';
-char tempMapC = ';';
-
-
-
-char noS = 'n';
-u16 sCount = 0;
-u16 total_sCount = 0;
-u16 floorCount = 0;
-
 int main()
 {
 
@@ -103,10 +78,6 @@ int main()
 }
 
 
-void vblankCallback() {
-    if (delayCounter > 0) {
-        delayCounter--;
-    }
-}
+
 
 
