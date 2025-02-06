@@ -13,6 +13,7 @@
 | Asset Name | Type | Credit | Image |
 |-----------|------|--------|-------|
 | Player | Sprite | Hunter Singleton |<h1 align = center> ![alt](./chara_gifs/row_0.gif) ![alt](./chara_gifs/row_1.gif) ![alt](./chara_gifs/row_2.gif) ![alt](./chara_gifs/row_3.gif) ![alt](./chara_gifs/row_4.gif) ![alt](./chara_gifs/row_5.gif) ![alt](./chara_gifs/row_6.gif) ![alt](./chara_gifs/row_7.gif) </h1> |
+| Merchant | Sprite | Hunter Singleton |<h1 align = center> ![alt](./merchant_gifs/row_0.gif) ![alt](./merchant_gifs/row_1.gif) ![alt](./merchant_gifs/row_2.gif) ![alt](./merchant_gifs/row_3.gif) </h1>|
 | Goblin 1 | Sprite| Stephen Challener (Redshrike) |  ![alt](./goblins/row_0.gif) |
 | Goblin 2 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_1.gif) |
 | Goblin 3 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_2.gif) |
