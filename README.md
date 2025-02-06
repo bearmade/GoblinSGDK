@@ -33,11 +33,11 @@
 #### [- Screenshots](screenshots.md)
 ----
 
-<h3 align = center>
+<h5 align = center>
 
  -- Summary --
 
-</h3>
+</h5>
 
 ----
 
@@ -46,11 +46,11 @@ Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
 and fans of the classic RPGs of the early 90s.
 
 ----
-<h3 align = center>
+<h5 align = center>
 
 -- Main Character -- 
 
-</h3>
+</h5>
 
 -----
 <h1 align = center>
@@ -62,11 +62,11 @@ and fans of the classic RPGs of the early 90s.
 </h1>
 
 ----
-<h3 align = center> 
+<h5 align = center> 
 
 -- Objectives --
 
-</h3>
+</h5>
 
 ----
 
@@ -77,11 +77,11 @@ The Player will then be able to upgrade their character with the gold they colle
 
 ----
 
-<h3 align = center>
+<h5 align = center>
 
 -- Goblins -- 
 
-</h3>
+</h5>
 
 ----
 
@@ -100,11 +100,11 @@ https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 ----
 
 
-<h3 align = center>
+<h5 align = center>
 
  -- Mechanics --
  
- </h3>
+ </h5>
 
 ----
 
@@ -114,11 +114,11 @@ top-down movement and menu-driven turn-based combat.
 
 ----
 
-<h3 align = center>
+<h5 align = center>
 
  -- Controls --
 
- </h3>
+ </h5>
 
 ----
 D-pad to move, A B C to select options in battle, start to open menu.
@@ -129,9 +129,9 @@ A standard 3 button Sega Genesis controller will be used.
 
 
 
-<h3 align = center>
+<h5 align = center>
  -- Key Elements --
-</h3>
+</h5>
 
 ----
 
@@ -143,9 +143,9 @@ remains.
 ----
 
 
-<h3 align = center>
+<h5 align = center>
 -- Tools and Software --
-</h3>
+</h5>
 
 ----
 - SGDK, the Sega Genesis Development Kit, will be used to develop the game using C programming language.
