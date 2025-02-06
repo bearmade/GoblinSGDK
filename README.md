@@ -13,8 +13,13 @@
 
 
 ----
+<h2 align = center>
+  2D Video Game for Sega Genesis<br>
+ </h2>
+ <h4 align = center>
+  16 Bits of Ultra Blast Processing Power
+</h4>
 
-###  2D Video Game for Sega Genesis 
 ----
 
 #### [- Asset Catalog](AssetCatalogue.md)
