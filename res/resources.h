@@ -19,9 +19,12 @@ extern const Image fg1;
 extern const Image fg2;
 extern const Image title;
 extern const Image titleBase;
+extern const Image battleBack;
+extern const Image battleBack2;
 extern const Image titleLetters;
 extern const Palette mytitle;
 extern const SpriteDefinition our_sprite;
 extern const SpriteDefinition merchantSprite;
+extern const SpriteDefinition goblinSprite;
 
 #endif // _RES_RESOURCES_H_

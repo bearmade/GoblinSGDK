@@ -12,10 +12,13 @@ IMAGE fg1 "croakusTitleSEGA.png" BEST ALL
 IMAGE fg2 "croakusTitleSEGA.png" BEST ALL
 IMAGE title "goglinTitle2.png" NONE ALL
 IMAGE titleBase "goblinTitleBase.png" NONE ALL 
+IMAGE battleBack "backdrop1.png" NONE ALL 
+IMAGE battleBack2 "backdrop2.png" NONE ALL 
 IMAGE titleLetters "goblinTitleLetters.png" BEST ALL
 PALETTE  mytitle "goglinTitle2.png"
 SPRITE  our_sprite "heroSega.png" 2 2 FAST 10
 SPRITE  merchantSprite "merchant.png" 2 2 FAST 10
+SPRITE  goblinSprite "goblins.png" 6 6 NONE 0
 
 
 XGM title_vgm "ikag.vgm"

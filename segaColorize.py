@@ -16,7 +16,7 @@ sega_colors = [
 tree = cKDTree(sega_colors)
 
 # Load and convert the input image to RGB mode
-image_path = "./res/goblinTitleLetters.png"
+image_path = "./res/backdrop2.png"
 image = Image.open(image_path).convert("RGB")
 
 # Iterate through each pixel of the image and replace it with the closest Sega Genesis color
@@ -36,6 +36,6 @@ output_image = Image.fromarray(pixel_array)
 output_image = output_image.quantize(colors=16)
 
 # Save the modified image
-output_path = "./res/goblinTitleLetters.png"
+output_path = "./res/backdrop2.png"
 
 output_image.save(output_path)

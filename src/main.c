@@ -72,7 +72,13 @@ int main()
             }
          
         }
-
+      
+    }
+    if (bBattleOngoing == TRUE){
+        SPR_setVisibility(player, HIDDEN);
+    }
+    else{
+        SPR_setVisibility(player, VISIBLE);
     }
     return (0);
 }

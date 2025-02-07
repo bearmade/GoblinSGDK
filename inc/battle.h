@@ -15,6 +15,7 @@ void goblinAttack();
 void levelUp();
 void itemDrop();
 
+Sprite* goblin_sprite;
 char Name[19];
 bool selection;
 char pointer[1];
@@ -59,6 +60,13 @@ u16 experience_gained;
 int randChance;
 
 #define SFX_SWOOSH 64
+#define goblin_sprite1 0
+#define goblin_sprite2 1
+#define goblin_sprite3 2
+#define goblin_sprite4 3
+#define goblin_sprite5 4
+#define goblin_sprite6 5
+#define goblin_sprite7 6
 
 
 #endif
