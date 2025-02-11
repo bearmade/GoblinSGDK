@@ -23,19 +23,17 @@
 | Goblin 6 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_5.gif) |
 | Goblin 7 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_6.gif) |
 | World Tileset | Tileset | Hunter Singleton | ![alt](./res/tilesSEGA2.png) |
-| Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters.png) |
-| Goblin Title Bckground | Tileset | bkx1 | ![alt](./res/goblinTitleBase.png) |
+| Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters2.png) |
+| Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase3.png) |
+| Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop1.png) |
+| Battle Back 2 | Tileset | Stable Diffusion | ![alt](./res/backdrop2.png) |
 | Title Theme | VGM | Hunter Singleton |  |
 | Battle Theme | VGM | Hunter Singleton |  |
 | World Theme | VGM | Hunter Singleton |  |
 | Victory Fanfare | VGM | Hunter Singleton |  |
 
 
-<br>
 
-bkx1
-
-https://bkx1.itch.io/combat-rpg-1500k-characters
 
 <br>
 Stephen Challener (Redshrike)
