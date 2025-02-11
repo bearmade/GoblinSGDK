@@ -1,4 +1,4 @@
-<img  src="screenshots/titleLetters.png" width=150% height=150%>
+
 
 ![screenshot1](./screenshots/goblinTitle.png)
 
