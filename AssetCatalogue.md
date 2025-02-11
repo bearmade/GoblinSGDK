@@ -32,6 +32,7 @@
 | Battle Theme | VGM | Hunter Singleton |  |
 | World Theme | VGM | Hunter Singleton |  |
 | Victory Fanfare | VGM | Hunter Singleton |  |
+| Title Font | Font | Juan Pablo Reyes Altamirano |  |
 
 
 
@@ -41,4 +42,8 @@ Stephen Challener (Redshrike)
 
 https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 
+<br>
+FF Font
+
+https://www.dafont.com/final-fantasy.font
 
