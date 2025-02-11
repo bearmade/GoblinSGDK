@@ -496,39 +496,39 @@ void ruleTileWORLD(){
 }
 void makeWorldMap(){
     
-    randWorldWalk(7,7,10);
-    u16 randRoomY = (random()%7)+1;
-    u16 randRoomX = (random()%7)+1;
+    randWorldWalk(8,8,10);
+    u16 randRoomY = (random()%8)+1;
+    u16 randRoomX = (random()%8)+1;
                     merchWorldY = randRoomY -1;
                 merchWorldX = randRoomX;
     u16 index = 1;
-    for(roomY = 0; roomY < 8; roomY++){
-        for(roomX = 0; roomX < 8; roomX++){
+    for(roomY = 0; roomY < 9; roomY++){
+        for(roomX = 0; roomX < 9; roomX++){
             ///
             if(roomY == 0 && roomX == 0){
                 makeRoom(0, 0, 14, 16, 1);
             }            
-            else if(roomY == 0 && roomX == 7){
+            else if(roomY == 0 && roomX == 8){
                 makeRoom(0, 0, 14, 16, 3);
             }
             else if(roomY == 0){
                 makeRoom(0, 0, 14, 16, 2);
             }
             ///
-            else if(roomY == 7 && roomX == 0){
+            else if(roomY == 8 && roomX == 0){
                 makeRoom(0, 0, 14, 16, 7);
             }
-            else if(roomY == 7 && roomX == 7){
+            else if(roomY == 8 && roomX == 8){
                 makeRoom(0, 0, 14, 16, 9);
             }
-            else if(roomY == 7){
+            else if(roomY == 8){
                 makeRoom(0, 0, 14, 16, 8);
             }
-            else if(roomX == 7){
+            else if(roomX == 8){
                 makeRoom(0, 0, 14, 16, 6);
             }
 
-            else if((roomX == 0)&&!(roomY == 7)){
+            else if((roomX == 0)&&!(roomY == 8)){
                 makeRoom(0, 0, 14, 16, 4);
             }
             else if(roomY == 3 && roomX == 3){
@@ -706,7 +706,7 @@ void displayRoom(){
             }
 
             if (LEVEL_COL2[mapIndex] == 0) {
-				create16by16TileRand(TRUE, 10,10,12,12);
+				create16by16TileRand(FALSE, 10,10,12,12);
             }
 
             if (LEVEL_COL2[mapIndex] == 1) {

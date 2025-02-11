@@ -61,6 +61,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 					}
 
 					bBattleOngoing = FALSE;
+					bBattleMessageDone = FALSE;
 					endBattle();
 				}
 				else{

@@ -34,7 +34,7 @@ int main()
 	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
 	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
     JOY_setEventHandler(joyEvent);
-    
+    bShowMenu = FALSE;
 	displayTitle();
 
 
