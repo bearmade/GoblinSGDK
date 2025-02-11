@@ -148,12 +148,12 @@ void displayBattle(){
 	VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	//set font palette
 	PAL_setPalette(PAL0, palette_Font.data, DMA);
-
-	VDP_drawTextBG( BG_A, "Goblin Encounter!", 8, 0);
+	drawBox(5, 0, 24, 3);
+	VDP_drawTextBG( BG_A, "A Wild Goblin Appears!", 6, 1);
 	delayFrames(360);
 	bBattleMessageDone = TRUE;
 
-	VDP_drawTextBG( BG_A, "                 ", 8, 0);
+	VDP_drawTextBG( BG_A, "                      ", 6, 1);
 	//draw text on window plane
 	nameGenerator();
 	VDP_drawTextBG(BG_A, Name, 5, 4);
@@ -201,7 +201,7 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 		VDP_drawTextBG( BG_A, "                 ", 4, 0);
 		drawBox(1, 23, 30, 5);
 		drawBox(2, 1, 26, 6);
-		drawBox(8, 7, 10, 7);
+		drawBox(9, 7, 10, 7);
 		//show player stats
 		VDP_drawTextBG( BG_A, "Player", 2, 24);
 		VDP_drawTextBG( BG_A, "HP:", 2, 26);
@@ -210,15 +210,17 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 	VDP_drawTextBG( BG_A, "/", 12, 26);
 	sprintf(pHPMax, "%d", player_hp_max);
 	VDP_drawTextBG( BG_A, pHPMax, 14, 26);
-	VDP_drawTextBG( BG_A, "HP: ", 10, 8);
+	VDP_drawTextBG( BG_A, "HP: ", 11, 8);
+	VDP_drawTextBG( BG_A, "    ", 15, 8);  
 	sprintf(gHP, "%d", goblin_hp);
-	VDP_drawTextBG( BG_A, gHP, 14, 8);
-	VDP_drawTextBG( BG_A, "ATK: ", 10, 10);
+	
+	VDP_drawTextBG( BG_A, gHP, 15, 8);
+	VDP_drawTextBG( BG_A, "ATK: ", 11, 10);
 	sprintf(gATK, "%d", goblin_attack);
-	VDP_drawTextBG( BG_A, gATK, 14, 10);
-	VDP_drawTextBG( BG_A, "DEF: ", 10, 12);
+	VDP_drawTextBG( BG_A, gATK, 15, 10);
+	VDP_drawTextBG( BG_A, "DEF: ", 11, 12);
 	sprintf(gDEF, "%d", goblin_defense);
-	VDP_drawTextBG( BG_A, gDEF, 14, 12);
+	VDP_drawTextBG( BG_A, gDEF, 15, 12);
 
 		//show goblin stats
 		if (goblin_hp > 0){
@@ -239,9 +241,14 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 			VDP_clearTileMap(BG_A, ind, 1, TRUE);
 			VDP_drawTextBG(BG_A, "        ", 19, 8);
 			VDP_drawTextBG( BG_A, "        ", 19, 12);
-			VDP_drawTextBG( BG_A, "is DEAD", 10, 6);
+			//VDP_drawTextBG( BG_A, "is DEAD", 10, 6);
 			VDP_drawTextBG( BG_A, "        ", 10, 8);
 			VDP_drawTextBG( BG_A, "        ", 10, 10);
+			VDP_drawTextBG( BG_A, "        ", 10, 12);
+			drawBox(9, 11, 10, 9);
+			VDP_drawTextBG(BG_A, "         ", 23, 20);
+			SPR_setVisibility(goblin_sprite, HIDDEN);
+			SPR_update();
 			VDP_drawTextBG( BG_A, "Found", 10, 12);
 			sprintf(gold, "%d", goldDrop);
 			VDP_drawTextBG( BG_A, gold, 16, 12);
@@ -364,8 +371,9 @@ void attack(){
 	//VDP_clearTileMapRect(BG_B, 1, 21, 15, 2);
 	
 	battleMessage();
-	VDP_drawTextBG(BG_A, "        ", 20, 6);
+	VDP_drawTextBG(BG_A, "        ", 19, 5);
 	VDP_drawTextBG(BG_A, "             ", 2, 22);
+	VDP_drawTextBG(BG_A, "             ", 4, 21);
 	//VDP_drawTextBG(BG_B, "       ", 3, 22);
 	//deal damage to goblin
 	s16 damage = ((random() % 10)*player_level)+player_attack;
@@ -378,13 +386,28 @@ void attack(){
 	VDP_drawTextBG( BG_A, "    ", 14, 6);
 
 	sprintf(damageMessage, "%d", damage);
-	VDP_drawTextBG( BG_A, "-" , 19, 12);
-	VDP_drawTextBG(BG_A, damageMessage, 20, 12);
+	VDP_drawTextBG( BG_A, "-" , 23, 19);
+	VDP_drawTextBG(BG_A, damageMessage, 24, 19);
+	waitMs(100);
+	VDP_drawTextBG(BG_A, "         ", 23, 19);
+	VDP_drawTextBG( BG_A, "-" , 23, 18);
+	VDP_drawTextBG(BG_A, damageMessage, 24, 18);
+	waitMs(100);
+	VDP_drawTextBG(BG_A, "         ", 23, 18);
+	VDP_drawTextBG( BG_A, "-" , 23, 19);
+	VDP_drawTextBG(BG_A, damageMessage, 24, 19);
+	waitMs(100);
+	VDP_drawTextBG(BG_A, "         ", 23, 19);
+	VDP_drawTextBG( BG_A, "-" , 23, 20);
+	VDP_drawTextBG(BG_A, damageMessage, 24, 20);
+	waitMs(2000);
+	
 	sprintf(gHP, "%d", goblin_hp);
 
-	for(int i = 0; i < 120; i++){
-		SYS_doVBlankProcess();
-	}
+	// for(int i = 0; i < 120; i++){
+	// 	SYS_doVBlankProcess();
+	// }
+	//delayFrames(120);
 
 	if(goblin_hp > 0){
 	VDP_drawTextBG( BG_A, gHP, 14, 8);
@@ -429,7 +452,8 @@ void goblinAttack(){
 	
 	VDP_drawTextBG(BG_A, "                        ", 3, 2);
 	VDP_drawTextBG(BG_A, "         ", 19, 12);
-	VDP_drawTextBG(BG_A, "attacks!", 20, 6);
+	VDP_drawTextBG(BG_A, "         ", 23, 20);
+	VDP_drawTextBG(BG_A, "attacks!", 19, 5);
 
 
 	sprintf(damageMessage, "%d", damage);
@@ -465,6 +489,7 @@ void levelUp(){
 	player_defense += 2;
 	player_exp_needed = player_exp_needed * 2;
 	//display level up message
+	drawBox(1,24, 17, 3);
 	VDP_drawTextBG(BG_A, "You leveled up!", 2, 24);
 	delayFrames(120);
 
@@ -475,6 +500,8 @@ void itemDrop(){
 	if(rand < 25){
 		rand = random() % 6;
 		addItem(rand, 1);
+		VDP_clearTextLine(21);
+		drawBox(9, 19, 11, 5);
 		VDP_drawTextBG(BG_A, "You found ", 10, 20);
 		switch (rand){
 			case 0:

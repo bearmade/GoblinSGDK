@@ -44,17 +44,19 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 				int rand = random() % 100;
 				char droppedGold[5];
 				if(rand > 40){
-					VDP_drawTextBG(BG_B, "You run like a scared child", 2, 2);
+					drawBox(1, 1, 29, 3);
+					VDP_drawTextBG(BG_A, "You run like a scared child", 2, 2);
 					delayFrames(120); 
 					if (player_gold >= 10){
 						rand = random() % 10;
 						player_gold -= rand;
-						VDP_drawTextBG(BG_B, "You dropped ", 2, 16);
+						drawBox(1, 15, 23, 3);
+						VDP_drawTextBG(BG_A, "You dropped ", 2, 16);
 						sprintf(droppedGold, "%d", rand);
-						VDP_drawTextBG(BG_B, droppedGold, 15, 16);
-						VDP_drawTextBG(BG_B, " gold", 17, 16);
+						VDP_drawTextBG(BG_A, droppedGold, 15, 16);
+						VDP_drawTextBG(BG_A, " gold", 17, 16);
 						delayFrames(120);
-						VDP_drawTextBG(BG_B, "                    ", 2, 16);
+						VDP_drawTextBG(BG_A, "                    ", 2, 16);
 
 					}
 
@@ -62,15 +64,15 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 					endBattle();
 				}
 				else{
-				    VDP_drawTextBG(BG_B, "You failed to Run", 3, 2);
+				    VDP_drawTextBG(BG_A, "You failed to Run", 3, 2);
 					delayFrames(120);
 					goblinAttack();
 					sprintf(pHP, "%d", player_hp);
-					VDP_drawTextBG(BG_B, "    ", 8, 26);  // Clear old HP
-					VDP_drawTextBG(BG_B, pHP, 8, 26);      // Draw new HP
+					VDP_drawTextBG(BG_A, "    ", 8, 26);  // Clear old HP
+					VDP_drawTextBG(BG_A, pHP, 8, 26);      // Draw new HP
 					delayFrames(120);
-					VDP_drawTextBG(BG_B, "        ", 20, 6);
-					VDP_drawTextBG(BG_B, "             ", 2, 22);
+					VDP_drawTextBG(BG_A, "        ", 20, 6);
+					VDP_drawTextBG(BG_A, "             ", 2, 22);
 					turn = !turn;
 				}
 

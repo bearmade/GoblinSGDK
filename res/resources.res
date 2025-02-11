@@ -23,8 +23,8 @@ SPRITE  merchantSprite "merchant.png" 2 2 FAST 10
 SPRITE  goblinSprite "goblins.png" 6 6 NONE 0
 
 
-XGM title_vgm "ikag.vgm"
-XGM world_vgm "iKilledAGoblinWorld.vgm"
+XGM world_vgm "ikag.vgm"
+XGM title_vgm "ikagTitle.vgm"
 XGM battle_vgm "iKilledAGoblinBattle.vgm"
 XGM victory_vgm "fanfare.vgm"
 WAV sfx_swoosh "swoosh.wav" XGM
