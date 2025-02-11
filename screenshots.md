@@ -1,4 +1,4 @@
-![screenshot1](./screenshots/goblintitle.png)
+![screenshot1](./screenshots/goblinTitle.png)
 
 <br>
 
