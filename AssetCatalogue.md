@@ -1,6 +1,6 @@
 <h1 align = center>
 
-<img  src="res/goblinTitleLetters.png" width=150% height=150%>
+<img  src="res/goblinTitleLetters2.png" width=150% height=150%>
 
 
  -- Asset Catalogue --
