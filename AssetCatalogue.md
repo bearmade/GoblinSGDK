@@ -9,6 +9,7 @@
 
 </h1>
 
+<div align = center>
 
 ----
 
@@ -36,7 +37,7 @@
 | Title Font | Font | Juan Pablo Reyes Altamirano |  |
 
 
-
+</div>
 
 <br>
 Stephen Challener (Redshrike)
