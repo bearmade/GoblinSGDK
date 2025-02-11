@@ -1,6 +1,6 @@
 <h1 align = center>
 
-<img  src="screenshots/titleLetters.png" width=150% height=150%>
+<img  src="screenshots/title.png" width=150% height=150%>
 
 
 
