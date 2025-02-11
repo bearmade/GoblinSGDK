@@ -16,6 +16,7 @@ IMAGE titleBase "goblinTitleBase3.png" NONE ALL
 IMAGE battleBack "backdrop1.png" NONE ALL 
 IMAGE battleBack2 "backdrop2.png" NONE ALL 
 IMAGE titleLetters "goblinTitleLetters2.png" BEST ALL
+IMAGE face "face.png" NONE ALL
 PALETTE  mytitle "goglinTitle2.png"
 SPRITE  our_sprite "heroSega.png" 2 2 FAST 10
 SPRITE  merchantSprite "merchant.png" 2 2 FAST 10

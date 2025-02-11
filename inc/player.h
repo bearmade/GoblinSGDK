@@ -8,7 +8,7 @@ void joyEvent(u16 joy, u16 changed, u16 state);
 void handleInput();
 void showStats();
 void showMerchMenu();
-void displayMiniMap();
+void displayMiniMap(int x, int y);
 
 Sprite* player;
 Sprite* merchant;

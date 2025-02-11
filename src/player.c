@@ -193,61 +193,66 @@ void showStats(){
 		VDP_clearTileMap(BG_B, ind, 0, TRUE);
 		//load font tiles
 		VDP_loadFontData(tileset_Font.tiles, 96, CPU);
+		drawBox(0, 0, 11, 11);
 		//set font palette
 		PAL_setPalette(PAL0, palette_Font.data, DMA);
-
-		//show player stats
-		VDP_drawTextBG(BG_B, "Player", 3, 2);
-		VDP_drawTextBG(BG_B, "HP: ", 3, 4);
+		PAL_setPalette(PAL2, face.palette->data, DMA);
+		VDP_drawImageEx(BG_B, &face, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 1, 1, FALSE, TRUE);
+		drawBox(0, 11, 11, 11);
+		displayMiniMap(1, 12);
+drawBox(11, 0, 21, 15);
+		VDP_drawTextBG(BG_A, "HP: ", 12, 1);
 		sprintf(pHP, "%d", player_hp);
-		VDP_drawTextBG(BG_B, pHP, 8, 4);
-		VDP_drawTextBG(BG_B, "/", 12, 4);
+		VDP_drawTextBG(BG_A, pHP, 17, 1);
+		VDP_drawTextBG(BG_A, "/", 22, 1);
 		sprintf(pHPMax, "%d", player_hp_max);
-		VDP_drawTextBG(BG_B, pHPMax, 14, 4);
-		VDP_drawTextBG(BG_B, "LVL: ", 3, 6);
+		VDP_drawTextBG(BG_A, pHPMax, 25, 1);
+		VDP_drawTextBG(BG_A, "LVL: ", 12, 3);
 		sprintf(pLevel, "%d", player_level);
-		VDP_drawTextBG(BG_B, pLevel, 16, 6);
-		VDP_drawTextBG(BG_B, "ATK: ", 3, 8);
+		VDP_drawTextBG(BG_A, pLevel, 28, 3);
+		VDP_drawTextBG(BG_A, "ATK: ", 12, 5);
 		sprintf(pAttack, "%d", player_attack);
-		VDP_drawTextBG(BG_B, pAttack, 16, 8);
-		VDP_drawTextBG(BG_B, "DEF: ", 3, 10);
+		VDP_drawTextBG(BG_A, pAttack, 28, 5);
+		VDP_drawTextBG(BG_A, "DEF: ", 12, 7);
 		sprintf(pDefense, "%d", player_defense);
-		VDP_drawTextBG(BG_B, pDefense, 16, 10);
-		VDP_drawTextBG(BG_B, "EXP: ", 3, 12);
+		VDP_drawTextBG(BG_A, pDefense, 28, 7);
+		VDP_drawTextBG(BG_A, "EXP: ", 12, 9);
 		sprintf(pExp, "%d", player_exp);
-		VDP_drawTextBG(BG_B, pExp, 16, 12);
-		VDP_drawTextBG(BG_B, "Gold: ", 3, 14);
+		VDP_drawTextBG(BG_A, pExp, 28, 9);
+		VDP_drawTextBG(BG_A, "Gold: ", 12, 11);
 		sprintf(pGold, "%d", player_gold);
-		VDP_drawTextBG(BG_B, pGold, 16, 14);
-		VDP_drawTextBG(BG_B, "Kills: ", 3, 16);
+		VDP_drawTextBG(BG_A, pGold, 28, 11);
+		VDP_drawTextBG(BG_A, "Kills: ", 12, 13);
 		sprintf(goblinsKilledChar, "%d", goblinsKilled);
-		VDP_drawTextBG(BG_B, goblinsKilledChar, 16, 16);
-		displayMiniMap();
-		VDP_drawTextBG(BG_B, "Skulls", 3, 18);
-		sprintf(skullAmount, "%d", skulls);
-		VDP_drawTextBG(BG_B, skullAmount, 16, 18);
-		VDP_drawTextBG(BG_B, "Meat: ", 3, 20);
-		sprintf(meatAmount, "%d", meat);
-		VDP_drawTextBG(BG_B, meatAmount, 16, 20);
-		VDP_drawTextBG(BG_B, "Bones: ", 3, 22);
-		sprintf(bonesAmount, "%d", bones);
-		VDP_drawTextBG(BG_B, bonesAmount, 16, 22);
-		VDP_drawTextBG(BG_B, "Skin: ", 3, 24);
-		sprintf(skinAmount, "%d", skin);
-		VDP_drawTextBG(BG_B, skinAmount, 16, 24);
-		VDP_drawTextBG(BG_B, "Eyes: ", 19, 18);
-		sprintf(eyesAmount, "%d", eyes);
-		VDP_drawTextBG(BG_B, eyesAmount, 29, 18);
-		VDP_drawTextBG(BG_B, "Fangs: ", 19, 20);
-		sprintf(fangAmount, "%d", fang);
-		VDP_drawTextBG(BG_B, fangAmount, 29, 20);
-		VDP_drawTextBG(BG_B, "Horns: ", 19, 22);
-		sprintf(hornAmount, "%d", horn);
-		VDP_drawTextBG(BG_B, hornAmount, 29, 22);
-		VDP_drawTextBG(BG_B, "Tails: ", 19, 24);
-		sprintf(tailAmount, "%d", tail);
-		VDP_drawTextBG(BG_B, tailAmount, 29, 24);
+		VDP_drawTextBG(BG_A, goblinsKilledChar, 28, 13);
+		
+		drawBox(11, 15, 21, 7);
 
+		VDP_drawTextBG(BG_A, "Skull:", 12, 16);
+		sprintf(skullAmount, "%d", skulls);
+		VDP_drawTextBG(BG_A, skullAmount, 19, 16);
+		VDP_drawTextBG(BG_A, "Meat:", 12, 18);
+		sprintf(meatAmount, "%d", meat);
+		VDP_drawTextBG(BG_A, meatAmount, 19, 18);
+		VDP_drawTextBG(BG_A, "Bone:", 12, 20);
+		sprintf(bonesAmount, "%d", bones);
+		VDP_drawTextBG(BG_A, bonesAmount, 19, 20);
+		// VDP_drawTextBG(BG_B, "Skin:", 12, 22);
+		// sprintf(skinAmount, "%d", skin);
+		// VDP_drawTextBG(BG_B, skinAmount, 20, 22);
+		VDP_drawTextBG(BG_A, "Eye:", 23, 16);
+		sprintf(eyesAmount, "%d", eyes);
+		VDP_drawTextBG(BG_A, eyesAmount, 28, 16);
+		VDP_drawTextBG(BG_A, "Fang:", 23, 18);
+		sprintf(fangAmount, "%d", fang);
+		VDP_drawTextBG(BG_A, fangAmount, 28, 18);
+		VDP_drawTextBG(BG_A, "Horn:", 23, 20);
+		sprintf(hornAmount, "%d", horn);
+		VDP_drawTextBG(BG_A, hornAmount, 28, 20);
+		// VDP_drawTextBG(BG_B, "Tails:", 23, 22);
+		// sprintf(tailAmount, "%d", tail);
+		// VDP_drawTextBG(BG_B, tailAmount, 29, 22);
+		drawBox(0, 22, 32, 6);
 
 
 	}
@@ -266,6 +271,7 @@ void showStats(){
     PAL_setPalette(PAL1, tileset1.palette->data, DMA);
 	PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	PAL_setPalette(PAL3,palette_Font.data, DMA);
+	PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
 	// clear all battle messages
 	VDP_drawTextBG(BG_B, "      ", 4, 2);
 	VDP_drawTextBG(BG_B, "      ", 4, 4);
@@ -286,8 +292,8 @@ void showStats(){
 }
 
 void showMerchMenu(){
-	u16 randomItemForSale = random() % 10;
-	u16 randomItemPrice = random() % 10;
+	u16 randomItemForSale = random() % 8;
+	u16 randomItemPrice = random() % 8;
 	u16 itemPrice = 0;
 	char itemPriceString[4];
 
@@ -327,8 +333,8 @@ void showMerchMenu(){
 				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
 			case 3:
-				VDP_drawTextBG(BG_B, "Skin", 4, 6);
-				itemPrice = skin_base + (random() % skin_base);
+				VDP_drawTextBG(BG_B, "DEF UP", 4, 6);
+				itemPrice = player_defense * (50 + random() % 50);
 				sprintf(itemPriceString, "%d", itemPrice);
 				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
 				VDP_drawTextBG(BG_B, " Gold?", 15, 6);	
@@ -355,26 +361,13 @@ void showMerchMenu(){
 				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
 			case  7:
-				VDP_drawTextBG(BG_B, "Tail", 4, 6);
-				itemPrice = tail_base + (random() % tail_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 8:
 				VDP_drawTextBG(BG_B, "ATK UP", 4, 6);
 				itemPrice = player_attack * (50 + random() % 50);
 				sprintf(itemPriceString, "%d", itemPrice);
 				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
 				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
 				break;
-			case 9:
-				VDP_drawTextBG(BG_B, "DEF UP", 4, 6);
-				itemPrice = player_defense * (50 + random() % 50);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-			break;
+
 
 		}
 
@@ -403,21 +396,21 @@ void showMerchMenu(){
 	}
 }
 
-void displayMiniMap(){
+void displayMiniMap( int x, int y){
 	//display mini map using font tiles
-	for(int i = 0; i < 8; i++){
-		for(int j = 0; j < 8; j++){
+	for(int i = 0; i < 9; i++){
+		for(int j = 0; j < 9; j++){
 			if ( i == 3 && j == 3){
-				VDP_drawTextBG(BG_B, "$", 22 + j, 6 + i);
+				VDP_drawTextBG(BG_B, "$", x + j, y + i);
 			}
 			else if (i  == currentWorldY && j == currentWorldX){
-				VDP_drawTextBG(BG_B, "%", 22 + j, 6 + i);
+				VDP_drawTextBG(BG_B, "%", x + j, y + i);
 			}
 			else if (i == merchWorldY && j == merchWorldX){
-				VDP_drawTextBG(BG_B, "&", 22 + j, 6 + i);
+				VDP_drawTextBG(BG_B, "&", x + j, y + i);
 			}
 			else{
-				VDP_drawTextBG(BG_B, "#", 22 + j, 6 + i);
+				VDP_drawTextBG(BG_B, "#", x + j, y + i);
 			}
 		}
 	}

@@ -23,6 +23,7 @@ extern const Image titleBase;
 extern const Image battleBack;
 extern const Image battleBack2;
 extern const Image titleLetters;
+extern const Image face;
 extern const Palette mytitle;
 extern const SpriteDefinition our_sprite;
 extern const SpriteDefinition merchantSprite;

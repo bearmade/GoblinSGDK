@@ -473,7 +473,7 @@ void levelUp(){
 void itemDrop(){
 	u16 rand = random() % 100;
 	if(rand < 25){
-		rand = random() % 8;
+		rand = random() % 6;
 		addItem(rand, 1);
 		VDP_drawTextBG(BG_A, "You found ", 10, 20);
 		switch (rand){
@@ -487,7 +487,7 @@ void itemDrop(){
 				VDP_drawTextBG(BG_A, "bones", 10, 22);
 				break;
 			case 3:
-				VDP_drawTextBG(BG_A, "skin", 10, 22);
+				VDP_drawTextBG(BG_A, "horn", 10, 22);
 				break;
 			case 4:
 				VDP_drawTextBG(BG_A, "eyes", 10, 22);
@@ -495,12 +495,9 @@ void itemDrop(){
 			case 5:
 				VDP_drawTextBG(BG_A, "fangs", 10, 22);
 				break;
-			case 6:
-				VDP_drawTextBG(BG_A, "horn", 10, 22);
-				break;
-			case 7:
-				VDP_drawTextBG(BG_A, "a tail", 10, 22);
-				break;
+
+
+
 		//delayFrames(120);
 	}
 
