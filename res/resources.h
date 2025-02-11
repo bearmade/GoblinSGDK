@@ -11,6 +11,7 @@ extern const Palette palette_Font;
 extern const Image tileset1;
 extern const Image tileset2;
 extern const Image goblin;
+extern const Image boxTiles;
 extern const TileSet our_tileset;
 extern const MapDefinition our_level_map;
 extern const Palette our_palette;

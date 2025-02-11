@@ -11,6 +11,7 @@
 
 u8 LEVEL_TILES[14][16] = {{0}};
 u8 WORLD_TILES[8][8][14][16] = {{{{0}}}};
+//u8 WORLD_TILES2[8][8][14][16] = {{{{0}}}};
 u8 WORLD_LAYOUT[8][8] = {{0}};
 u8 WORLD_LAYOUT_CA[112][128] = {{0}};
 u16 roomY = 0;

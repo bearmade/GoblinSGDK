@@ -149,20 +149,20 @@ void displayBattle(){
 	//set font palette
 	PAL_setPalette(PAL0, palette_Font.data, DMA);
 
-	VDP_drawTextBG( BG_B, "Goblin Encounter!", 8, 0);
+	VDP_drawTextBG( BG_A, "Goblin Encounter!", 8, 0);
 	delayFrames(360);
 	bBattleMessageDone = TRUE;
 
-	VDP_drawTextBG( BG_B, "                 ", 8, 0);
+	VDP_drawTextBG( BG_A, "                 ", 8, 0);
 	//draw text on window plane
 	nameGenerator();
-	VDP_drawTextBG(BG_B, Name, 5, 4);
+	VDP_drawTextBG(BG_A, Name, 5, 4);
 
 	bBattleStarted = FALSE;
 	//show battle menu
 	
-	VDP_drawTextBG( BG_B, ".Attack.", 22, 24);
-	VDP_drawTextBG( BG_B, ".Run.", 22, 26);
+	VDP_drawTextBG( BG_A, ".Attack.", 22, 24);
+	VDP_drawTextBG( BG_A, ".Run.", 22, 26);
 	//sprintf(pointer, "%c", selection);
 	
 	
@@ -173,12 +173,12 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 		case 0:
 		
 		PAL_setPalette(PAL2, battleBack.palette->data, DMA);
-		VDP_drawImageEx(BG_A, &battleBack, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+		VDP_drawImageEx(BG_B, &battleBack, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
 		break;
 		case 1:
 		
 		PAL_setPalette(PAL2, battleBack2.palette->data, DMA);
-		VDP_drawImageEx(BG_A, &battleBack2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+		VDP_drawImageEx(BG_B, &battleBack2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
 		break;
 	}
 	// PAL_setPalette(PAL2, battleBack.palette->data, DMA);
@@ -189,127 +189,79 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 
 	}
 	while(bBattleOngoing){
+		SPR_update();
 	
-	SPR_update();
-		VDP_drawTextBG( BG_B, "                 ", 4, 0);
+		VDP_drawText(".Attack.", 22, 24);
+		VDP_drawTextBG(BG_A, ".Run.", 22, 26);
+
+		VDP_drawTextBG(BG_A, " ", 21, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
+		//VDP_clearText(BG_A, 21,((selection == 0 ? 1 : 0)*2 + 24));
+		VDP_drawTextBG(BG_A, "~", 21, ((selection*2) + 24));     // Draw new cursor
+
+		VDP_drawTextBG( BG_A, "                 ", 4, 0);
+		drawBox(1, 23, 30, 5);
+		drawBox(2, 1, 26, 6);
+		drawBox(8, 7, 10, 7);
 		//show player stats
-		VDP_drawTextBG( BG_B, "Player", 2, 24);
-		VDP_drawTextBG( BG_B, "HP: ", 2, 26);
+		VDP_drawTextBG( BG_A, "Player", 2, 24);
+		VDP_drawTextBG( BG_A, "HP:", 2, 26);
 		sprintf(pHP, "%d", player_hp);
-		VDP_drawTextBG( BG_B, pHP, 8, 26);
-		VDP_drawTextBG( BG_B, "/", 12, 26);
-		sprintf(pHPMax, "%d", player_hp_max);
-		VDP_drawTextBG( BG_B, pHPMax, 14, 26);
-			VDP_drawTextBG( BG_B, "ATK: ", 10, 8);
-			sprintf(gATK, "%d", goblin_attack);
-			VDP_drawTextBG( BG_B, gATK, 14, 8);
-			VDP_drawTextBG( BG_B, "DEF: ", 10, 10);
-			sprintf(gDEF, "%d", goblin_defense);
-			VDP_drawTextBG( BG_B, gDEF, 14, 10);
+		VDP_drawTextBG( BG_A, pHP, 8, 26);
+	VDP_drawTextBG( BG_A, "/", 12, 26);
+	sprintf(pHPMax, "%d", player_hp_max);
+	VDP_drawTextBG( BG_A, pHPMax, 14, 26);
+	VDP_drawTextBG( BG_A, "HP: ", 10, 8);
+	sprintf(gHP, "%d", goblin_hp);
+	VDP_drawTextBG( BG_A, gHP, 14, 8);
+	VDP_drawTextBG( BG_A, "ATK: ", 10, 10);
+	sprintf(gATK, "%d", goblin_attack);
+	VDP_drawTextBG( BG_A, gATK, 14, 10);
+	VDP_drawTextBG( BG_A, "DEF: ", 10, 12);
+	sprintf(gDEF, "%d", goblin_defense);
+	VDP_drawTextBG( BG_A, gDEF, 14, 12);
 
-
-	    //show goblin stats
+		//show goblin stats
 		if (goblin_hp > 0){
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 1 + goblinOffset +1025), 20, 14);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 2+ goblinOffset+1025), 21, 14);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 3+ goblinOffset+1025), 22, 14);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 4+ goblinOffset+1025), 23, 14);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 5+ goblinOffset+1025), 24, 14);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 6+ goblinOffset+1025), 25, 14);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 8+ goblinOffset+1025), 20, 15);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 9+ goblinOffset+1025), 21, 15);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 10+ goblinOffset+1025), 22, 15);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 11+ goblinOffset+1025), 23, 15);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 12+ goblinOffset+1025), 24, 15);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 13+ goblinOffset+1025), 25, 15);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 14+ goblinOffset+1025), 20, 16);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 15+ goblinOffset+1025), 21, 16);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 16+ goblinOffset+1025), 22, 16);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 17+ goblinOffset+1025), 23, 16);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 18+ goblinOffset+1025), 24, 16);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 19+ goblinOffset+1025), 25, 16);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 20+ goblinOffset+1025), 20, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 21+ goblinOffset+1025), 21, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 23+ goblinOffset+1025), 23, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 24+ goblinOffset+1025), 24, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 25+ goblinOffset+1025), 25, 17);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 26+ goblinOffset+1025), 20, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 27+ goblinOffset+1025), 21, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 28+ goblinOffset+1025), 22, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 29+ goblinOffset+1025), 23, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 30+ goblinOffset+1025), 24, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 31+ goblinOffset+1025), 25, 18);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 32+ goblinOffset+1025), 20, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 33+ goblinOffset+1025), 21, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 34+ goblinOffset+1025), 22, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 35+ goblinOffset+1025), 23, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 36+ goblinOffset+1025), 24, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 37+ goblinOffset+1025), 25, 19);ALSE, 22+ goblinOffset+1025), 22, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 23+ goblinOffset+1025), 23, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 24+ goblinOffset+1025), 24, 17);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 25+ goblinOffset+1025), 25, 17);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 26+ goblinOffset+1025), 20, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 27+ goblinOffset+1025), 21, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 28+ goblinOffset+1025), 22, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 29+ goblinOffset+1025), 23, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 30+ goblinOffset+1025), 24, 18);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 31+ goblinOffset+1025), 25, 18);
-
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 32+ goblinOffset+1025), 20, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 33+ goblinOffset+1025), 21, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 34+ goblinOffset+1025), 22, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 35+ goblinOffset+1025), 23, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 36+ goblinOffset+1025), 24, 19);
-			// VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 37+ goblinOffset+1025), 25, 19);
 
 
 
 
 
 
-			VDP_drawTextBG( BG_B, "HP: ", 10, 6);
-			sprintf(gHP, "%d", goblin_hp);
-			VDP_drawTextBG( BG_B, gHP, 14, 6);
+			// VDP_drawTextBG( BG_A, "HP: ", 10, 6);
+			// sprintf(gHP, "%d", goblin_hp);
+			// VDP_drawTextBG( BG_A, gHP, 14, 6);
 
 		}
 		else{
 			bBattleMessageDone = FALSE;
 			experience_gained = (player_level + random() % 2);
-			VDP_clearTileMap(BG_B, ind, 1, TRUE);
-			VDP_drawTextBG(BG_B, "        ", 19, 8);
-			VDP_drawTextBG( BG_B, "        ", 19, 12);
-			VDP_drawTextBG( BG_B, "is DEAD", 10, 6);
-			VDP_drawTextBG( BG_B, "        ", 10, 8);
-			VDP_drawTextBG( BG_B, "        ", 10, 10);
-			VDP_drawTextBG( BG_B, "Found", 10, 12);
+			VDP_clearTileMap(BG_A, ind, 1, TRUE);
+			VDP_drawTextBG(BG_A, "        ", 19, 8);
+			VDP_drawTextBG( BG_A, "        ", 19, 12);
+			VDP_drawTextBG( BG_A, "is DEAD", 10, 6);
+			VDP_drawTextBG( BG_A, "        ", 10, 8);
+			VDP_drawTextBG( BG_A, "        ", 10, 10);
+			VDP_drawTextBG( BG_A, "Found", 10, 12);
 			sprintf(gold, "%d", goldDrop);
-			VDP_drawTextBG( BG_B, gold, 16, 12);
-			VDP_drawTextBG( BG_B, "Gold!", 10, 14);
-			VDP_drawTextBG( BG_B, "Gained", 10, 16);
-			VDP_drawTextBG( BG_B, "Exp!", 10, 18);
+			VDP_drawTextBG( BG_A, gold, 16, 12);
+			VDP_drawTextBG( BG_A, "Gold!", 10, 14);
+			VDP_drawTextBG( BG_A, "Gained", 10, 16);
+			VDP_drawTextBG( BG_A, "Exp!", 10, 18);
 			sprintf(expChar, "%d", experience_gained);
-			VDP_drawTextBG( BG_B, expChar, 16, 18);
+			VDP_drawTextBG( BG_A, expChar, 16, 18);
 			itemDrop();
 
 		}
-		//get player selection
-		VDP_drawTextBG( BG_B, " ", 21, ((selection == 0 ? 1 : 0)*2 + 24)); // Clear old cursor
-		VDP_drawTextBG( BG_B, "~", 21, ((selection*2) + 24)); // Draw new cursor
-		
+	
 		if(goblin_hp <= 0){
 			bBattleMessageDone = FALSE;
 			goblinsKilled++;
 			player_gold += goldDrop;
 			XGM_startPlay(victory_vgm);
-			
+		
 			player_exp += experience_gained;
-			VDP_clearTileMap(BG_B, ind, 1, TRUE);
+			VDP_clearTileMap(BG_A, ind, 1, TRUE);
 			if (player_exp >= player_exp_needed){
 				levelUp();
 				delayFrames(180);
@@ -321,14 +273,13 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 			endBattle();
 		}
 
-		
-		
+	
+	
 		SYS_doVBlankProcess();
 
 
-		
-			}
 	
+	}	
 	
 
 
@@ -390,13 +341,13 @@ void nameGenerator(){
 	PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	PAL_setPalette(PAL3,palette_Font.data, DMA);
 	// clear all battle messages
-	VDP_drawTextBG( BG_B, "                 ", 3, 10);
-	VDP_drawTextBG( BG_B, "                 ", 5, 4);
-	VDP_drawTextBG( BG_B, "                 ", 3, 2);
-	VDP_drawTextBG( BG_B, "                 ", 7, 2);
-	VDP_drawTextBG( BG_B, "                 ", 14, 6);
-	VDP_drawTextBG( BG_B, "                 ", 2, 24);
-	VDP_drawTextBG( BG_B, "                 ", 2, 26);
+	VDP_drawTextBG( BG_A, "                 ", 3, 10);
+	VDP_drawTextBG( BG_A, "                 ", 5, 4);
+	VDP_drawTextBG( BG_A, "                 ", 3, 2);
+	VDP_drawTextBG( BG_A, "                 ", 7, 2);
+	VDP_drawTextBG( BG_A, "                 ", 14, 6);
+	VDP_drawTextBG( BG_A, "                 ", 2, 24);
+	VDP_drawTextBG( BG_A, "                 ", 2, 26);
 	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
 	SYS_doVBlankProcess();
 	XGM_stopPlay();
@@ -410,11 +361,11 @@ PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
 void attack(){
 	
 
-	
+	//VDP_clearTileMapRect(BG_B, 1, 21, 15, 2);
 	
 	battleMessage();
-	VDP_drawTextBG(BG_B, "        ", 20, 6);
-	VDP_drawTextBG(BG_B, "             ", 2, 22);
+	VDP_drawTextBG(BG_A, "        ", 20, 6);
+	VDP_drawTextBG(BG_A, "             ", 2, 22);
 	//VDP_drawTextBG(BG_B, "       ", 3, 22);
 	//deal damage to goblin
 	s16 damage = ((random() % 10)*player_level)+player_attack;
@@ -424,17 +375,19 @@ void attack(){
 		damage = 0;
 	}
 	goblin_hp -= damage;
-	VDP_drawTextBG( BG_B, "    ", 14, 6);
+	VDP_drawTextBG( BG_A, "    ", 14, 6);
 
 	sprintf(damageMessage, "%d", damage);
-	VDP_drawTextBG( BG_B, "-" , 19, 12);
-	VDP_drawTextBG(BG_B, damageMessage, 20, 12);
+	VDP_drawTextBG( BG_A, "-" , 19, 12);
+	VDP_drawTextBG(BG_A, damageMessage, 20, 12);
 	sprintf(gHP, "%d", goblin_hp);
-	for (int i = 0; i < 6; i++){
-	delayFrames(5);
+
+	for(int i = 0; i < 120; i++){
+		SYS_doVBlankProcess();
 	}
+
 	if(goblin_hp > 0){
-	VDP_drawTextBG( BG_B, gHP, 14, 6);
+	VDP_drawTextBG( BG_A, gHP, 14, 8);
 	
 	}
 	
@@ -458,8 +411,8 @@ void battleMessage(){
 		char message[40];
 		int randIndex = random() % 13; // We have 13 messages in the array
 		strncpy(message, attack_message[randIndex], 20);
-		VDP_drawTextBG(BG_B, "You ", 3, 2);
-		VDP_drawTextBG(BG_B, message, 7, 2);
+		VDP_drawTextBG(BG_A, "You ", 3, 2);
+		VDP_drawTextBG(BG_A, message, 7, 2);
 	
 	
 }
@@ -474,21 +427,22 @@ void goblinAttack(){
 	player_hp -= damage;
 
 	
-	VDP_drawTextBG(BG_B, "                        ", 3, 2);
-	VDP_drawTextBG(BG_B, "         ", 19, 12);
-	VDP_drawTextBG(BG_B, "attacks!", 20, 6);
+	VDP_drawTextBG(BG_A, "                        ", 3, 2);
+	VDP_drawTextBG(BG_A, "         ", 19, 12);
+	VDP_drawTextBG(BG_A, "attacks!", 20, 6);
 
 
 	sprintf(damageMessage, "%d", damage);
-	VDP_drawTextBG(BG_B, damageMessage, 2, 22);
-	VDP_drawTextBG(BG_B, "damage!", 5, 22);
-		VDP_drawTextBG( BG_B, "        ", 8, 26);
+	drawBox(1, 20, 15, 3);
+	VDP_drawTextBG(BG_A, damageMessage, 4, 21);
+	VDP_drawTextBG(BG_A, "damage!", 7, 21);
+		VDP_drawTextBG( BG_A, "        ", 8, 26);
 		sprintf(pHP, "%d", player_hp);
-	VDP_drawTextBG( BG_B, pHP, 8, 26);
+	VDP_drawTextBG( BG_A, pHP, 8, 26);
 	if(player_hp <= 0){
 		player_hp = 0;
-		VDP_drawTextBG(BG_B, "You died!", 2, 24);
-		VDP_drawTextBG(BG_B, "Game Over", 2, 26);
+		VDP_drawTextBG(BG_A, "You died!", 2, 24);
+		VDP_drawTextBG(BG_A, "Game Over", 2, 26);
 		delayFrames(300);
 		
 		SYS_hardReset();
@@ -511,7 +465,7 @@ void levelUp(){
 	player_defense += 2;
 	player_exp_needed = player_exp_needed * 2;
 	//display level up message
-	VDP_drawTextBG(BG_B, "You leveled up!", 2, 24);
+	VDP_drawTextBG(BG_A, "You leveled up!", 2, 24);
 	delayFrames(120);
 
 }
@@ -521,31 +475,31 @@ void itemDrop(){
 	if(rand < 25){
 		rand = random() % 8;
 		addItem(rand, 1);
-		VDP_drawTextBG(BG_B, "You found ", 10, 20);
+		VDP_drawTextBG(BG_A, "You found ", 10, 20);
 		switch (rand){
 			case 0:
-				VDP_drawTextBG(BG_B, "a skull", 10, 22);
+				VDP_drawTextBG(BG_A, "a skull", 10, 22);
 				break;
 			case 1:
-				VDP_drawTextBG(BG_B, "some meat", 10, 22);
+				VDP_drawTextBG(BG_A, "some meat", 10, 22);
 				break;
 			case 2:
-				VDP_drawTextBG(BG_B, "bones", 10, 22);
+				VDP_drawTextBG(BG_A, "bones", 10, 22);
 				break;
 			case 3:
-				VDP_drawTextBG(BG_B, "skin", 10, 22);
+				VDP_drawTextBG(BG_A, "skin", 10, 22);
 				break;
 			case 4:
-				VDP_drawTextBG(BG_B, "eyes", 10, 22);
+				VDP_drawTextBG(BG_A, "eyes", 10, 22);
 				break;
 			case 5:
-				VDP_drawTextBG(BG_B, "fangs", 10, 22);
+				VDP_drawTextBG(BG_A, "fangs", 10, 22);
 				break;
 			case 6:
-				VDP_drawTextBG(BG_B, "horn", 10, 22);
+				VDP_drawTextBG(BG_A, "horn", 10, 22);
 				break;
 			case 7:
-				VDP_drawTextBG(BG_B, "a tail", 10, 22);
+				VDP_drawTextBG(BG_A, "a tail", 10, 22);
 				break;
 		//delayFrames(120);
 	}
@@ -553,3 +507,29 @@ void itemDrop(){
 }
 }
 
+void drawBox(u16 x, u16 y, u16 width, u16 height) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			// Fill center
+			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1470), x+i, y+j);
+			
+			// Top edge
+			if (j == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1468), x+i, y);
+			
+			// Bottom edge - vertically flipped
+			if (j == height-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1468), x+i, y+j);
+			
+			// Left edge
+			if (i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1469), x, y+j);
+			
+			// Right edge - horizontally flipped
+			if (i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1469), x+i, y+j);
+			
+			// Corners
+			if (j == 0 && i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1467), x, y);
+			if (j == 0 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1467), x+i, y);
+			if (j == height-1 && i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1467), x, y+j);
+			if (j == height-1 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 1, 1467), x+i, y+j);
+		}
+	}
+}

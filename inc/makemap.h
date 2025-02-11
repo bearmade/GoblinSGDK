@@ -40,6 +40,7 @@ void matchRoomEdges(u16 roomY, u16 roomX);
 void findMerchantPosition();
 extern u8 LEVEL_TILES[14][16];
 extern u8 WORLD_TILES[8][8][14][16];
+//extern u8 WORLD_TILES2[8][8][14][16];
 //extern u8 UNDERWORLD_TILES[8][8][14][16];
 extern u8 WORLD_LAYOUT[8][8]; 
 extern u8 WORLD_LAYOUT_CA[112][128];

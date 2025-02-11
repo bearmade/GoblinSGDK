@@ -18,6 +18,15 @@ int main()
 
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
+    char numString[10];
+    //display free ram 
+//     u32 freemem = MEM_getFree();
+//     VDP_drawTextBG(BG_B, "Free Mem: ", 10, 10);
+//    sprintf(numString, "%d", freemem);
+//    VDP_drawTextBG(BG_B, numString, 10, 12);
+//     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
+// waitMs(2000);
+    
 
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL1,palette_Font.data, DMA);
@@ -36,7 +45,7 @@ int main()
 
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
-    char numString[2];
+    //char numString[2];
     makeMap();
     PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	bigMapCA();
@@ -48,6 +57,11 @@ int main()
 
     while(1)
     {
+//         freemem = MEM_getFree();
+//         VDP_drawTextBG(BG_B, "Free Mem: ", 10, 10);
+//    sprintf(numString, "%d", freemem);
+//    VDP_drawTextBG(BG_B, numString, 10, 12);
+//     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
 
       handleInput();
         collision();

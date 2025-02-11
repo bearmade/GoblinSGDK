@@ -14,6 +14,7 @@ void battleMessage();
 void goblinAttack();
 void levelUp();
 void itemDrop();
+void drawBox(u16 x, u16 y, u16 width, u16 height);
 
 Sprite* goblin_sprite;
 char Name[19];

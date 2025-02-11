@@ -11,7 +11,7 @@ void displayTitle(){
     XGM_startPlay(title_vgm);
     //VDP_clearPlane(BG_A, TRUE);
             PAL_setPalette(PAL1, titleBase.palette->data, DMA);
-	    VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+	VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
                     PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
 	    VDP_drawImageEx(BG_A, &titleLetters, TILE_ATTR_FULL(PAL3, FALSE, FALSE, FALSE, 1024), 0, 0, FALSE, TRUE);
        SYS_doVBlankProcess();
@@ -53,10 +53,12 @@ void displayTitle(){
         //u16 value = JOY_readJoypad(JOY_1);
 
         //VDP_loadFontData(tileset_Font.tiles, 96, CPU);
-	    PAL_setPalette(PAL2,palette_Font.data, DMA);
-        VDP_drawTextBG( BG_A, "Bear Made Games", 9, 20);
-        VDP_drawTextBG( BG_A, "     2025     ", 9, 22);
-        VDP_drawTextBG( BG_A, "   ", 11, 24);
+	    PAL_setPalette(PAL0, palette_Font.data, DMA);
+        
+        drawBox( 8, 23, 17, 5);
+        //VDP_drawTextBG( BG_A, "Bear Made Games", 9, 20);
+        //VDP_drawTextBG( BG_A, "     2025     ", 9, 22);
+        //VDP_drawTextBG( BG_A, "   ", 11, 24);
         //show load game or new game options
         VDP_drawTextBG( BG_A, " New Game", 11, 24);
         VDP_drawTextBG( BG_A, " Load Game", 11, 26);
@@ -66,6 +68,7 @@ void displayTitle(){
             
 			//VDP_drawText("Press START to generate map", 5, 5);
             VDP_clearTileMap(BG_B,ind,0, TRUE);
+            VDP_clearTileMap(BG_A,ind,0, TRUE);
             //XGM_stopPlay();
                 XGM_stopPlay();
     XGM_startPlay(world_vgm);

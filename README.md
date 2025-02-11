@@ -9,7 +9,7 @@
 ----
 
 
-![alt](./screenshots/goblintitle.png)
+![alt](./screenshots/goblinTitle.png)
 
 
 ----
