@@ -6,7 +6,7 @@
 
 <br>
 
-![screenshot3](./screenshots/battle.png)
+![screenshot3](./screenshots/battle1.png)
 
 <br>
 
