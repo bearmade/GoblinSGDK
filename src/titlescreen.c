@@ -55,7 +55,7 @@ void displayTitle(){
         //VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	    PAL_setPalette(PAL0, palette_Font.data, DMA);
         
-        drawBox( 8, 23, 17, 5);
+        drawBox( 9, 23, 14, 5);
         //VDP_drawTextBG( BG_A, "Bear Made Games", 9, 20);
         //VDP_drawTextBG( BG_A, "     2025     ", 9, 22);
         //VDP_drawTextBG( BG_A, "   ", 11, 24);
