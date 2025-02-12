@@ -139,6 +139,7 @@ void displayBattle(){
 	//VDP_clearTileMap(BG_B, ind, 0, TRUE);
 
 	SPR_setVisibility(player, HIDDEN);
+	SPR_setVisibility(merchant, HIDDEN);
 	SPR_setVisibility(goblin_sprite, VISIBLE);
 	if (bBattleStarted == TRUE){
 	bBattleMessageDone = FALSE;
@@ -270,6 +271,7 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 			player_exp += experience_gained;
 			VDP_clearTileMap(BG_A, ind, 1, TRUE);
 			if (player_exp >= player_exp_needed){
+				XGM_stopPlay();
 				levelUp();
 				delayFrames(180);
 			}
@@ -489,8 +491,12 @@ void levelUp(){
 	player_defense += 2;
 	player_exp_needed = player_exp_needed * 2;
 	//display level up message
-	drawBox(1,24, 17, 3);
-	VDP_drawTextBG(BG_A, "You leveled up!", 2, 24);
+	drawBox(3,24, 17, 3);
+	VDP_drawTextBG(BG_A, "                 ", 1, 23);
+	VDP_drawTextBG(BG_A, "                 ", 1, 24);
+	VDP_drawTextBG(BG_A, "                 ", 1, 25);
+	VDP_drawTextBG(BG_A, "                 ", 1, 26);
+	VDP_drawTextBG(BG_A, "You leveled up!", 4, 25);
 	delayFrames(120);
 
 }
