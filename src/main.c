@@ -11,6 +11,7 @@
 #include "../inc/makemap.h"
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
+#include "../inc/inventory.h"
 
 
 int main()
@@ -67,6 +68,10 @@ int main()
         collision();
 
 		camera();
+        if(bShowMerchMenu){
+            bIsMoving = FALSE;
+            handleMerchantMenuInput();
+        }
 
 
         if(bIsMoving == TRUE){

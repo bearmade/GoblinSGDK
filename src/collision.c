@@ -5,6 +5,11 @@
 #include "../inc/collision.h"
 #include "../inc/makemap.h"
 #include "../inc/gamemanager.h"
+#include "../inc/inventory.h"
+#include "../inc/battle.h"
+#include "../inc/globals.h"
+
+
 
 
 void collision(){
@@ -63,10 +68,19 @@ void collision(){
 					playerPosY += playerSpeed;
 				}
 		
-				// Add merchant menu trigger here
-				bShowMerchMenu = TRUE;
-				//showMerchMenu();
-				//VDP_drawText("Merchant", 10, 10);
+			
+				//check joy button a press
+				if(JOY_readJoypad(JOY_1) & BUTTON_A){
+
+					//if(bShowMerchMenu == FALSE){
+						bShowMerchMenu = TRUE;
+						bPlayerCanMove = FALSE;
+						showMerchMenu();
+						SPR_setVisibility(merchant, HIDDEN);
+					//}
+
+				}
+				
 			} else {
 				bShowMerchMenu = FALSE;
 				merchantInteraction = FALSE;

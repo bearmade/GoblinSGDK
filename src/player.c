@@ -35,7 +35,7 @@ void displayPlayer(){
 }
 void joyEvent(u16 joy, u16 changed, u16 state){
 
-	if((changed & state & BUTTON_START)){
+	if((changed & state & BUTTON_A)){
 		showTitleScreen = FALSE;
 		if(bBattleOngoing){
 		//delayVBlank(120);
@@ -93,18 +93,23 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 			}
 		}
 		}
-		else if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving){
-			//bIsMoving = FALSE;
-			bPlayerCanMove = FALSE;
-			showStats();
-		}		
+		// else if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving){
+		// 	//bIsMoving = FALSE;
+		// 	bPlayerCanMove = FALSE;
+		// 	showStats();
+		// }		
 	}
-			if(changed & state & BUTTON_B){
+			if(changed & state & BUTTON_C){
 				if(bShowMerchMenu){
 					bShowMerchMenu = FALSE;
 					showMerchMenu();
 					bPlayerCanMove = TRUE;
 					SPR_setVisibility(merchant, VISIBLE);
+					for( int i = 0; i < 24; i++){
+						VDP_clearTextLine(i);
+					}
+					
+
 					displayRoom();
 				
 			}else{
@@ -115,19 +120,26 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 			 VDP_drawTextBG(BG_B, "     ", 10, 10);
 			 displayRoom();
 		}}}
-		if(changed & state & BUTTON_A){
-			if(bShowMerchMenu){
-				bPlayerCanMove = FALSE;
-				showMerchMenu();
-				//hide merchant
-				SPR_setVisibility(merchant, HIDDEN);
-			}
-		}
+		// if(changed & state & BUTTON_A){
+		// 	if(bShowMerchMenu){
+		// 		bPlayerCanMove = FALSE;
+		// 		showMerchMenu();
+		// 		//hide merchant
+		// 		SPR_setVisibility(merchant, HIDDEN);
+		// 	}
+		// }
 	if((changed & state & BUTTON_DOWN)){
 		selection = !selection;
 	}
 	if((changed & state & BUTTON_UP)){
 		selection = !selection;
+	}
+	if ((changed & state & BUTTON_START)){
+		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving){
+			//bIsMoving = FALSE;
+			bPlayerCanMove = FALSE;
+			showStats();
+		}	
 	}
 }
 
@@ -183,6 +195,8 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 		bIsMoving = FALSE;
 	}
 	}
+
+		
 }
 
 void showStats(){
@@ -233,13 +247,13 @@ drawBox(11, 0, 21, 15);
 
 		VDP_drawTextBG(BG_A, "Skull:", 12, 16);
 		sprintf(skullAmount, "%d", skulls);
-		VDP_drawTextBG(BG_A, skullAmount, 19, 16);
+		VDP_drawTextBG(BG_A, skullAmount, 18, 16);
 		VDP_drawTextBG(BG_A, "Meat:", 12, 18);
 		sprintf(meatAmount, "%d", meat);
-		VDP_drawTextBG(BG_A, meatAmount, 19, 18);
+		VDP_drawTextBG(BG_A, meatAmount, 18, 18);
 		VDP_drawTextBG(BG_A, "Bone:", 12, 20);
 		sprintf(bonesAmount, "%d", bones);
-		VDP_drawTextBG(BG_A, bonesAmount, 19, 20);
+		VDP_drawTextBG(BG_A, bonesAmount, 18, 20);
 		// VDP_drawTextBG(BG_B, "Skin:", 12, 22);
 		// sprintf(skinAmount, "%d", skin);
 		// VDP_drawTextBG(BG_B, skinAmount, 20, 22);
@@ -294,110 +308,7 @@ drawBox(11, 0, 21, 15);
 	}
 }
 
-void showMerchMenu(){
-	u16 randomItemForSale = random() % 8;
-	u16 randomItemPrice = random() % 8;
-	u16 itemPrice = 0;
-	char itemPriceString[4];
 
-	if(bShowMerchMenu){
-		//hide player sprite		
-		SPR_setVisibility(player, HIDDEN);
-		//clear screen
-		VDP_clearTileMap(BG_B, ind, 0, TRUE);
-		//load font tiles
-		VDP_loadFontData(tileset_Font.tiles, 96, CPU);
-		//set font palette
-		PAL_setPalette(PAL0, palette_Font.data, DMA);
-		//show merchant menu
-		VDP_drawTextBG(BG_B, "Merchant", 4, 2);
-		VDP_drawTextBG(BG_B, "Purchase", 4, 4);
-		//randomItemForSale = 0;
-		switch (randomItemForSale) {
-			case 0:
-				VDP_drawTextBG(BG_B, "Skull", 4, 6);
-				itemPrice = skull_base + (random() % skull_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 1:
-				VDP_drawTextBG(BG_B, "Meat", 4, 6);
-				itemPrice = meat_base + (random() % meat_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 2:
-				VDP_drawTextBG(BG_B, "Bones", 4, 6);
-				itemPrice = bones_base + (random() % bones_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 3:
-				VDP_drawTextBG(BG_B, "DEF UP", 4, 6);
-				itemPrice = player_defense * (50 + random() % 50);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);	
-				break;
-			case 4:
-				VDP_drawTextBG(BG_B, "Eyes", 4, 6);
-				itemPrice = eyes_base + (random() % eyes_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 5:
-				VDP_drawTextBG(BG_B, "Fangs", 4, 6);
-				itemPrice = fang_base + (random() % fang_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case 6:
-				VDP_drawTextBG(BG_B, "Horn", 4, 6);
-				itemPrice = horn_base + (random() % horn_base);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-			case  7:
-				VDP_drawTextBG(BG_B, "ATK UP", 4, 6);
-				itemPrice = player_attack * (50 + random() % 50);
-				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_B, itemPriceString, 12, 6);
-				VDP_drawTextBG(BG_B, " Gold?", 15, 6);
-				break;
-
-
-		}
-
-	}
-	else{
-		// When closing menu, set new random merchant position
-		merchWorldX = random() % 8;
-		merchWorldY = random() % 8;
-		while(WORLD_LAYOUT[merchWorldY][merchWorldX] != 1) {
-			// Keep trying until we find a valid room
-			merchWorldX = random() % 8;
-			merchWorldY = random() % 8;
-		}
-		//show player sprite
-		SPR_setVisibility(player, VISIBLE);
-		//redraw screen
-		VDP_loadTileSet(tileset1.tileset, 1, DMA);
-		PAL_setPalette(PAL1, tileset1.palette->data, DMA);
-		PAL_setPalette(PAL0, fg2.palette->data, DMA);
-		//clear all battle messages
-		VDP_drawTextBG(BG_B, "      ", 4, 2);
-		VDP_drawTextBG(BG_B, "      ", 4, 4);
-		VDP_drawTextBG(BG_B, "      ", 8, 4);
-		VDP_drawTextBG(BG_B, "      ", 4, 6);
-		displayRoom();
-	}
-}
 
 void displayMiniMap( int x, int y){
 	//display mini map using font tiles

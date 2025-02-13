@@ -19,4 +19,5 @@ out/src/collision.o: src/collision.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
  /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/player.h \
  src/../inc/camera.h src/../inc/collision.h src/../inc/makemap.h \
- src/../inc/gamemanager.h
+ src/../inc/gamemanager.h src/../inc/inventory.h src/../inc/battle.h \
+ src/../inc/globals.h

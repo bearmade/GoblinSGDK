@@ -43,7 +43,7 @@ s16 player_hp;
 s16 player_hp_max;
 s16 player_attack;
 s16 player_defense;
-u16 player_gold;
+extern u16 player_gold;
 s16 player_level;
 u16 player_exp;
 u16 player_exp_needed;

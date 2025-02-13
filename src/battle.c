@@ -149,12 +149,12 @@ void displayBattle(){
 	VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 	//set font palette
 	PAL_setPalette(PAL0, palette_Font.data, DMA);
-	drawBox(5, 0, 24, 3);
-	VDP_drawTextBG( BG_A, "A Wild Goblin Appears!", 6, 1);
+	drawBox(4, 1, 24, 3);
+	VDP_drawTextBG( BG_A, "A Wild Goblin Appears!", 5, 2);
 	delayFrames(360);
 	bBattleMessageDone = TRUE;
 
-	VDP_drawTextBG( BG_A, "                      ", 6, 1);
+	VDP_drawTextBG( BG_A, "                      ", 5, 2);
 	//draw text on window plane
 	nameGenerator();
 	VDP_drawTextBG(BG_A, Name, 5, 4);
@@ -560,6 +560,11 @@ void drawBox(u16 x, u16 y, u16 width, u16 height) {
 			if (j == 0 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1467), x+i, y);
 			if (j == height-1 && i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1467), x, y+j);
 			if (j == height-1 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 1, 1467), x+i, y+j);
+			//add drop shadow to bottom and right using "^"
+			if (j == height-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);
+			if (i == width-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);
+
+			
 		}
 	}
 }

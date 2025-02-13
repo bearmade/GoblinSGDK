@@ -3,8 +3,15 @@
 
 void addItemm(u16 item, u16 quantity);
 void removeItem(u16 item, u16 quantity);
-void buyItem(u16 item, u16 quantity);
-void sellItem(u16 item, u16 quantity);
+void buyItem(u16 item, u16 quantity, u16 itemPrice);
+void sellItem(u16 item, u16 quantity, u16 itemPrice);
+void showMerchMenu();
+void handleMerchantMenuInput();
+void resetMerchantPosition();
+
+extern u16 itemPrice;
+static u16 menuSelection;
+static u16 randomItemForSale;
 
 
 u16 inventory[4][4]; 
@@ -24,6 +31,7 @@ u16 horn;
 u16 horn_base;
 u16 tail;
 u16 tail_base;
+
 
 char skullName[5];
 char meatName[5];
