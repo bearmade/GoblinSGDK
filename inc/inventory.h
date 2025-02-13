@@ -8,10 +8,14 @@ void sellItem(u16 item, u16 quantity, u16 itemPrice);
 void showMerchMenu();
 void handleMerchantMenuInput();
 void resetMerchantPosition();
+void resetMerchantInteractions();
 
 extern u16 itemPrice;
 static u16 menuSelection;
 static u16 randomItemForSale;
+// Add at the top with other globals
+static u16 merchantInteractions;
+static u16 MAX_MERCHANT_INTERACTIONS;
 
 
 u16 inventory[4][4]; 

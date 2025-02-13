@@ -27,7 +27,7 @@ void displayTitle(){
         VDP_drawTextBG(BG_A, " ", 10, ((selection == 0 ? 1 : 0)*2 + 24));
         VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
 
-        if(value & BUTTON_START) {
+        if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
             // Your existing START button logic
             if(selection == 0) {
                 worldSeed = random();

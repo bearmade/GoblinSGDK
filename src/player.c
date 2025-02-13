@@ -135,7 +135,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		selection = !selection;
 	}
 	if ((changed & state & BUTTON_START)){
-		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving){
+		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving && !showTitleScreen){
 			//bIsMoving = FALSE;
 			bPlayerCanMove = FALSE;
 			showStats();

@@ -19,6 +19,9 @@
 u16 itemPrice = 0;
 static u16 menuSelection = 0;
 static u16 randomItemForSale = 0;
+// Add at the top with other globals
+static u16 merchantInteractions = 0;
+static u16 MAX_MERCHANT_INTERACTIONS = 6;
 
 u16 inventory[4][4] =
 {
@@ -59,7 +62,7 @@ void addItem(u16 item, u16 quantity){
         bones += quantity;
         break;
         case 3:
-        skin += quantity;
+        horn += quantity;
         break;
         case 4:
         eyes += quantity;
@@ -67,12 +70,7 @@ void addItem(u16 item, u16 quantity){
         case 5:
         fang += quantity;
         break;
-        case 6:
-        horn += quantity;
-        break;
-        case 7:
-        tail += quantity;
-        break;
+
     }
     
 
@@ -205,13 +203,16 @@ void buyItem(u16 item, u16 quantity, u16 itemPrice) {
 void showMerchMenu() {
 	randomItemForSale = random() % 10;
 	u16 randomItemPrice = random() % 8;
+   
 	// //u16 itemPrice = 0;
      //player_gold += 10000;
 	char itemPriceString[5];
 	 // 0 = Buy, 1 = Sell
 
 	if(bShowMerchMenu) {
-        
+        //display number of merchant interactions
+
+
 		SPR_setVisibility(player, HIDDEN);
 		VDP_clearTileMap(BG_B, ind, 0, TRUE);
         //VDP_clearTileMap(BG_A, ind, 0, TRUE);
@@ -317,11 +318,68 @@ void showMerchMenu() {
 
 		// Handle input for menu selection
 			void handleMerchantMenuInput() {
+                char merchantInteractionsString[5];
+                sprintf(merchantInteractionsString, "%d", merchantInteractions);
+                drawBox(20, 1, 7, 3);
+                VDP_drawTextBG(BG_A, merchantInteractionsString, 21, 2);
+                VDP_drawTextBG(BG_A, "/", 23, 2);
+                char maxMerchInteractionsString[5];
+                sprintf(maxMerchInteractionsString, "%d", MAX_MERCHANT_INTERACTIONS);
+                VDP_drawTextBG(BG_A, maxMerchInteractionsString, 24, 2);
+                //VDP_drawTextBG(BG_A, "5", 25, 2);
                 VDP_drawTextBG(BG_A, (menuSelection == 0 ? "~ Buy" : "  Buy"), 4, 4);
 		        VDP_drawTextBG(BG_A, (menuSelection == 1 ? "~ Sell" : "  Sell"), 4, 5);
                 char goldDisplay[16];
                 sprintf(goldDisplay, "Gold: %d", player_gold);
                 VDP_drawTextBG(BG_A, goldDisplay, 14, 10);
+                                drawBox(11, 15, 21, 7);
+
+                VDP_drawTextBG(BG_A, "Skull:", 12, 16);
+                sprintf(skullAmount, "%d ", skulls);
+                VDP_drawTextBG(BG_A, skullAmount, 18, 16);
+                VDP_drawTextBG(BG_A, "Meat:", 12, 18);
+                sprintf(meatAmount, "%d ", meat);
+                VDP_drawTextBG(BG_A, meatAmount, 18, 18);
+                VDP_drawTextBG(BG_A, "Bone:", 12, 20);
+                sprintf(bonesAmount, "%d ", bones);
+                VDP_drawTextBG(BG_A, bonesAmount, 18, 20);
+                // VDP_drawTextBG(BG_B, "Skin:", 12, 22);
+                // sprintf(skinAmount, "%d", skin);
+                // VDP_drawTextBG(BG_B, skinAmount, 20, 22);
+                VDP_drawTextBG(BG_A, "Eye:", 21, 16);
+                sprintf(eyesAmount, "%d ", eyes);
+                VDP_drawTextBG(BG_A, eyesAmount, 27, 16);
+                VDP_drawTextBG(BG_A, "Fang:", 21, 18);
+                sprintf(fangAmount, "%d ", fang);
+                VDP_drawTextBG(BG_A, fangAmount, 27, 18);
+                VDP_drawTextBG(BG_A, "Horn:", 21, 20);
+                sprintf(hornAmount, "%d ", horn);
+                VDP_drawTextBG(BG_A, hornAmount, 27, 20);
+
+                drawBox(0, 22, 32, 6);
+                VDP_drawTextBG(BG_A, "A:Confirm  B:Next  C:Leave", 3, 24);
+                
+                
+                if(JOY_readJoypad(JOY_1) & BUTTON_B) {
+                    merchantInteractions++;
+                    if(merchantInteractions >= MAX_MERCHANT_INTERACTIONS + 1) {
+                        bShowMerchMenu = FALSE;
+                        merchantInteractions = 0;
+                        showMerchMenu();
+					    bPlayerCanMove = TRUE;
+					    SPR_setVisibility(merchant, VISIBLE);
+					    for( int i = 0; i < 24; i++){
+						    VDP_clearTextLine(i);
+					    }
+                        displayRoom();
+                    } else {
+                        // Refresh merchant inventory
+                        randomItemForSale = random() % 10;
+                        showMerchMenu();
+                    }
+                    waitMs(200);
+                }
+
 				if(JOY_readJoypad(JOY_1) & BUTTON_UP) {
 					if (menuSelection > 0) {
 						menuSelection -= 1;
@@ -336,7 +394,7 @@ void showMerchMenu() {
 					}
 				}
 	
-				if(JOY_readJoypad(JOY_1) & BUTTON_B) {
+				if(JOY_readJoypad(JOY_1) & BUTTON_A) {
 					if(menuSelection == 0) {
 						buyItem(randomItemForSale, 1, itemPrice);
                         sprintf(goldDisplay, "Gold: %d", player_gold);
@@ -356,36 +414,22 @@ void showMerchMenu() {
 
              
                 
-                drawBox(11, 15, 21, 7);
 
-                VDP_drawTextBG(BG_A, "Skull:", 12, 16);
-                sprintf(skullAmount, "%d", skulls);
-                VDP_drawTextBG(BG_A, skullAmount, 19, 16);
-                VDP_drawTextBG(BG_A, "Meat:", 12, 18);
-                sprintf(meatAmount, "%d", meat);
-                VDP_drawTextBG(BG_A, meatAmount, 19, 18);
-                VDP_drawTextBG(BG_A, "Bone:", 12, 20);
-                sprintf(bonesAmount, "%d", bones);
-                VDP_drawTextBG(BG_A, bonesAmount, 19, 20);
-                // VDP_drawTextBG(BG_B, "Skin:", 12, 22);
-                // sprintf(skinAmount, "%d", skin);
-                // VDP_drawTextBG(BG_B, skinAmount, 20, 22);
-                VDP_drawTextBG(BG_A, "Eye:", 21, 16);
-                sprintf(eyesAmount, "%d", eyes);
-                VDP_drawTextBG(BG_A, eyesAmount, 27, 16);
-                VDP_drawTextBG(BG_A, "Fang:", 21, 18);
-                sprintf(fangAmount, "%d", fang);
-                VDP_drawTextBG(BG_A, fangAmount, 27, 18);
-                VDP_drawTextBG(BG_A, "Horn:", 21, 20);
-                sprintf(hornAmount, "%d", horn);
-                VDP_drawTextBG(BG_A, hornAmount, 27, 20);
 			}
 
 void resetMerchantPosition() {
+    //MAX_MERCHANT_INTERACTIONS = (random() % 10) + 5;
+    VDP_clearTextLine(24);
     merchWorldX = random() % 8;
     merchWorldY = random() % 8;
     while(WORLD_LAYOUT[merchWorldY][merchWorldX] != 1) {
         merchWorldX = random() % 8;
         merchWorldY = random() % 8;
     }
+}
+
+//function to reset merchant interactions
+void resetMerchantInteractions() {
+    MAX_MERCHANT_INTERACTIONS = (random() % 10) + 5;
+    merchantInteractions = 0;
 }

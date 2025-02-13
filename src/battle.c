@@ -443,7 +443,7 @@ void battleMessage(){
 }
 void goblinAttack(){
 
-	s16 damage = ((random() % 10)*player_level) + goblin_attack;
+	s16 damage = ((random() % 5)*player_level) + goblin_attack;
 	damage  = (damage - (player_defense));
 	if(damage < 0){
 		damage = 0;

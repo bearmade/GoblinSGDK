@@ -72,18 +72,19 @@ void collision(){
 				//check joy button a press
 				if(JOY_readJoypad(JOY_1) & BUTTON_A){
 
-					//if(bShowMerchMenu == FALSE){
+					if(bShowMerchMenu == FALSE){
 						bShowMerchMenu = TRUE;
 						bPlayerCanMove = FALSE;
 						showMerchMenu();
 						SPR_setVisibility(merchant, HIDDEN);
-					//}
+					}
 
 				}
 				
 			} else {
 				bShowMerchMenu = FALSE;
 				merchantInteraction = FALSE;
+				resetMerchantInteractions();
 			}
 	if(player_move_left){
 		playerPosX -= playerSpeed;
