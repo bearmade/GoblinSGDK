@@ -146,10 +146,10 @@ void buyItem(u16 item, u16 quantity, u16 itemPrice) {
         }
         
         // Display success message
-        VDP_drawTextBG(BG_A, "  Purchased    ", 4, 7);
+        VDP_drawTextBG(BG_A, "   Purchased   ", 3, 7);
     } else {
         // Display insufficient funds message
-        VDP_drawTextBG(BG_A, "Not enough gold", 4, 7);
+        VDP_drawTextBG(BG_A, "Not enough gold", 3, 7);
     }
 }void sellItem(u16 item, u16 quantity, u16 itemPrice) {
     u16 sellPrice = 0;
