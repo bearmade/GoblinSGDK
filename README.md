@@ -59,6 +59,7 @@ and fans of the classic RPGs of the early 90s.
 
 <img src="res/face2.png" width=40% height=40%>
 <br><br>
+<img  src="chara_gifs/row_0.gif" width=10% height=10%>
 <img  src="chara_gifs/row_1.gif" width=10% height=10%>
 <img  src="chara_gifs/row_2.gif" width=10% height=10%>
 <img  src="chara_gifs/row_3.gif" width=10% height=10%>
