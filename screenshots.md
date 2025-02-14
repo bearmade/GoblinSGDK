@@ -13,3 +13,7 @@
 <br>
 
 ![screenshot4](./screenshots/menu.png)
+
+<br>
+
+![screenshot5](./screenshots/merchScreen.png)
