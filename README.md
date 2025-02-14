@@ -57,7 +57,8 @@ and fans of the classic RPGs of the early 90s.
 -----
 <h1 align = center>
 
-<img  src="chara_gifs/row_0.gif" width=10% height=10%>
+<img src="res/face2.png" width=40% height=40%>
+<br><br>
 <img  src="chara_gifs/row_1.gif" width=10% height=10%>
 <img  src="chara_gifs/row_2.gif" width=10% height=10%>
 <img  src="chara_gifs/row_3.gif" width=10% height=10%>
@@ -82,8 +83,27 @@ and fans of the classic RPGs of the early 90s.
 
 The game will be a procedurally generated top-down exploration game with turn-based combat. 
 The Player will be able to walk around a procedurally generated map, fighting random 
-battles with goblins, and collecting their remains to sell for gold to merchants.
+battles with goblins, and collecting their remains to sell for gold to the traveling merchant.
 The Player will then be able to upgrade their character with the gold they collect.
+
+
+----
+<h5 align = center>
+
+-- The Merchant -- 
+
+</h5>
+
+-----
+<h1 align = center>
+
+<img src="res/face3.png" width=40% height=40%>
+<br><br>
+<img  src="merchant_gifs/row_0.gif" width=10% height=10%>
+<img  src="merchant_gifs/row_1.gif" width=10% height=10%>
+<img  src="merchant_gifs/row_2.gif" width=10% height=10%>
+<img  src="merchant_gifs/row_3.gif" width=10% height=10%>
+<br>
 
 ----
 
