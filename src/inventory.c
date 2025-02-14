@@ -146,10 +146,10 @@ void buyItem(u16 item, u16 quantity, u16 itemPrice) {
         }
         
         // Display success message
-        VDP_drawTextBG(BG_A, "Purchased!", 1, 8);
+        VDP_drawTextBG(BG_A, "  Purchased    ", 4, 7);
     } else {
         // Display insufficient funds message
-        VDP_drawTextBG(BG_A, "Not enough gold!", 1, 8);
+        VDP_drawTextBG(BG_A, "Not enough gold", 4, 7);
     }
 }void sellItem(u16 item, u16 quantity, u16 itemPrice) {
     u16 sellPrice = 0;
@@ -233,78 +233,81 @@ void showMerchMenu() {
 		//VDP_drawTextBG(BG_A, "Merchant", 4, 2);
         drawBox(0, 0, 21, 11);
 
+        VDP_drawTextBG(BG_A, "I have wares, ", 1, 1);
+        VDP_drawTextBG(BG_A, "if you have coin", 2, 3);
+
 
         
 		switch (randomItemForSale) {
 			case 0:
-				VDP_drawTextBG(BG_A, "Skull", 2, 3);
+				VDP_drawTextBG(BG_A, "Skull", 2, 5);
 				itemPrice = skull_base + (random() % skull_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case 1:
-				VDP_drawTextBG(BG_A, "Meat", 2, 3);
+				VDP_drawTextBG(BG_A, "Meat", 2, 5);
 				itemPrice = meat_base + (random() % meat_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 11, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case 2:
-				VDP_drawTextBG(BG_A, "Bones", 2, 3);
+				VDP_drawTextBG(BG_A, "Bones", 2, 5);
 				itemPrice = bones_base + (random() % bones_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 11, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case 3:
-				VDP_drawTextBG(BG_A, "DEF UP", 2, 3);
+				VDP_drawTextBG(BG_A, "DEF UP", 2, 5);
 				itemPrice = player_defense * (10 + random() % 10);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);	
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);	
 				break;
 			case 4:
-				VDP_drawTextBG(BG_A, "Eyes", 2, 3);
+				VDP_drawTextBG(BG_A, "Eyes", 2, 5);
 				itemPrice = eyes_base + (random() % eyes_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case 5:
-				VDP_drawTextBG(BG_A, "Fangs", 2, 3);
+				VDP_drawTextBG(BG_A, "Fangs", 2, 5);
 				itemPrice = fang_base + (random() % fang_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case 6:
-				VDP_drawTextBG(BG_A, "Horn", 2, 3);
+				VDP_drawTextBG(BG_A, "Horn", 2, 5);
 				itemPrice = horn_base + (random() % horn_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
 			case  7:
-				VDP_drawTextBG(BG_A, "ATK UP", 2, 3);
+				VDP_drawTextBG(BG_A, "ATK UP", 2, 5);
 				itemPrice = player_attack * (10 + random() % 10);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+				VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 5);
 				break;
             case 8:
-                VDP_drawTextBG(BG_A, "Health", 2, 3);
+                VDP_drawTextBG(BG_A, "Health", 2, 5);
                 itemPrice = (player_hp_max - player_hp) * 2;
                 sprintf(itemPriceString, "%d", itemPrice);
-                VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-                VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+                VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+                VDP_drawTextBG(BG_A, " Gold?", 13, 5);
                 break;
             case 9:
-                VDP_drawTextBG(BG_A, "HP UP", 2, 3);
+                VDP_drawTextBG(BG_A, "HP UP", 2, 5);
                 itemPrice = (player_hp_max) * 2;
                 sprintf(itemPriceString, "%d", itemPrice);
-                VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
-                VDP_drawTextBG(BG_A, " Gold?", 13, 3);
+                VDP_drawTextBG(BG_A, itemPriceString, 9, 5);
+                VDP_drawTextBG(BG_A, " Gold?", 13, 5);
                 break;
 		}
 	}
@@ -339,8 +342,8 @@ void showMerchMenu() {
                 sprintf(maxMerchInteractionsString, "%d", MAX_MERCHANT_INTERACTIONS);
                 VDP_drawTextBG(BG_A, maxMerchInteractionsString, 28, 2);
                 //VDP_drawTextBG(BG_A, "5", 25, 2);
-                VDP_drawTextBG(BG_A, (menuSelection == 0 ? "~ Buy" : "  Buy"), 11, 7);
-		        VDP_drawTextBG(BG_A, (menuSelection == 1 ? "~ Sell" : "  Sell"), 11, 8);
+                VDP_drawTextBG(BG_A, (menuSelection == 0 ? "~ Buy" : "  Buy"), 13, 12);
+		        VDP_drawTextBG(BG_A, (menuSelection == 1 ? "~ Sell" : "  Sell"), 13, 13);
                 char goldDisplay[16];
                 sprintf(goldDisplay, "Gold: %d", player_gold);
                 VDP_drawTextBG(BG_A, goldDisplay, 1, 9);
@@ -359,13 +362,13 @@ void showMerchMenu() {
                 // VDP_drawTextBG(BG_B, "Skin:", 12, 22);
                 // sprintf(skinAmount, "%d", skin);
                 // VDP_drawTextBG(BG_B, skinAmount, 20, 22);
-                VDP_drawTextBG(BG_A, "Eye:", 21, 16);
+                VDP_drawTextBG(BG_A, "Eye:", 22, 16);
                 sprintf(eyesAmount, "%d ", eyes);
                 VDP_drawTextBG(BG_A, eyesAmount, 27, 16);
-                VDP_drawTextBG(BG_A, "Fang:", 21, 18);
+                VDP_drawTextBG(BG_A, "Fang:", 22, 18);
                 sprintf(fangAmount, "%d ", fang);
                 VDP_drawTextBG(BG_A, fangAmount, 27, 18);
-                VDP_drawTextBG(BG_A, "Horn:", 21, 20);
+                VDP_drawTextBG(BG_A, "Horn:", 22, 20);
                 sprintf(hornAmount, "%d ", horn);
                 VDP_drawTextBG(BG_A, hornAmount, 27, 20);
 
