@@ -71,6 +71,7 @@ int main()
 		camera();
         if(bShowMerchMenu){
             bIsMoving = FALSE;
+            
             handleMerchantMenuInput();
         }
 

@@ -146,10 +146,10 @@ void buyItem(u16 item, u16 quantity, u16 itemPrice) {
         }
         
         // Display success message
-        VDP_drawTextBG(BG_A, "Purchase successful!", 4, 8);
+        VDP_drawTextBG(BG_A, "Purchased!", 1, 8);
     } else {
         // Display insufficient funds message
-        VDP_drawTextBG(BG_A, "Not enough gold!", 4, 8);
+        VDP_drawTextBG(BG_A, "Not enough gold!", 1, 8);
     }
 }void sellItem(u16 item, u16 quantity, u16 itemPrice) {
     u16 sellPrice = 0;
@@ -203,7 +203,7 @@ void buyItem(u16 item, u16 quantity, u16 itemPrice) {
 void showMerchMenu() {
 	randomItemForSale = random() % 10;
 	u16 randomItemPrice = random() % 8;
-   
+ 
 	// //u16 itemPrice = 0;
      //player_gold += 10000;
 	char itemPriceString[5];
@@ -218,83 +218,93 @@ void showMerchMenu() {
         //VDP_clearTileMap(BG_A, ind, 0, TRUE);
 		VDP_loadFontData(tileset_Font.tiles, 96, CPU);
 		PAL_setPalette(PAL0, palette_Font.data, DMA);
+           // draw merchant face
+    drawBox(0, 11, 11, 11);
+    PAL_setPalette(PAL2, face.palette->data, DMA);
+	VDP_drawImageEx(BG_B, &face, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 1, 12, FALSE, TRUE);
+    
+    drawBox(21, 4, 11, 11);
+    
+    PAL_setPalette(PAL3, merchFace.palette->data, DMA);
+	VDP_drawImageEx(BG_B, &merchFace, TILE_ATTR_FULL(PAL3, FALSE, FALSE, FALSE, 256), 22, 5, FALSE, TRUE);
+   
 		
 		// Draw menu options
-		VDP_drawTextBG(BG_A, "Merchant", 4, 2);
-        drawBox(0, 0, 26, 12);
+		//VDP_drawTextBG(BG_A, "Merchant", 4, 2);
+        drawBox(0, 0, 21, 11);
 
 
         
 		switch (randomItemForSale) {
 			case 0:
-				VDP_drawTextBG(BG_A, "Skull", 4, 7);
+				VDP_drawTextBG(BG_A, "Skull", 2, 3);
 				itemPrice = skull_base + (random() % skull_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
 				break;
 			case 1:
-				VDP_drawTextBG(BG_A, "Meat", 4, 7);
+				VDP_drawTextBG(BG_A, "Meat", 2, 3);
 				itemPrice = meat_base + (random() % meat_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 11, 3);
 				break;
 			case 2:
-				VDP_drawTextBG(BG_A, "Bones", 4, 7);
+				VDP_drawTextBG(BG_A, "Bones", 2, 3);
 				itemPrice = bones_base + (random() % bones_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 11, 3);
 				break;
 			case 3:
-				VDP_drawTextBG(BG_A, "DEF UP", 4, 7);
+				VDP_drawTextBG(BG_A, "DEF UP", 2, 3);
 				itemPrice = player_defense * (10 + random() % 10);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);	
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);	
 				break;
 			case 4:
-				VDP_drawTextBG(BG_A, "Eyes", 4, 7);
+				VDP_drawTextBG(BG_A, "Eyes", 2, 3);
 				itemPrice = eyes_base + (random() % eyes_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
 				break;
 			case 5:
-				VDP_drawTextBG(BG_A, "Fangs", 4, 7);
+				VDP_drawTextBG(BG_A, "Fangs", 2, 3);
 				itemPrice = fang_base + (random() % fang_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
 				break;
 			case 6:
-				VDP_drawTextBG(BG_A, "Horn", 4, 7);
+				VDP_drawTextBG(BG_A, "Horn", 2, 3);
 				itemPrice = horn_base + (random() % horn_base);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
 				break;
 			case  7:
-				VDP_drawTextBG(BG_A, "ATK UP", 4, 7);
+				VDP_drawTextBG(BG_A, "ATK UP", 2, 3);
 				itemPrice = player_attack * (10 + random() % 10);
 				sprintf(itemPriceString, "%d", itemPrice);
-				VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-				VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+				VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+				VDP_drawTextBG(BG_A, " Gold?", 13, 3);
 				break;
             case 8:
-                VDP_drawTextBG(BG_A, "Health", 4, 7);
+                VDP_drawTextBG(BG_A, "Health", 2, 3);
                 itemPrice = (player_hp_max - player_hp) * 2;
                 sprintf(itemPriceString, "%d", itemPrice);
-                VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-                VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+                VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+                VDP_drawTextBG(BG_A, " Gold?", 13, 3);
                 break;
             case 9:
-                VDP_drawTextBG(BG_A, "HP UP", 4, 7);
+                VDP_drawTextBG(BG_A, "HP UP", 2, 3);
                 itemPrice = (player_hp_max) * 2;
                 sprintf(itemPriceString, "%d", itemPrice);
-                VDP_drawTextBG(BG_A, itemPriceString, 12, 7);
-                VDP_drawTextBG(BG_A, " Gold?", 15, 7);
+                VDP_drawTextBG(BG_A, itemPriceString, 10, 3);
+                VDP_drawTextBG(BG_A, " Gold?", 13, 3);
                 break;
 		}
 	}
@@ -302,6 +312,8 @@ void showMerchMenu() {
 		// When closing menu, set new random merchant position
 		resetMerchantPosition();
 		//show player sprite
+        PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+        PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
 		SPR_setVisibility(player, VISIBLE);
 		//redraw screen
 		VDP_loadTileSet(tileset1.tileset, 1, DMA);
@@ -320,19 +332,20 @@ void showMerchMenu() {
 			void handleMerchantMenuInput() {
                 char merchantInteractionsString[5];
                 sprintf(merchantInteractionsString, "%d", merchantInteractions);
-                drawBox(20, 1, 7, 3);
-                VDP_drawTextBG(BG_A, merchantInteractionsString, 21, 2);
-                VDP_drawTextBG(BG_A, "/", 23, 2);
+                drawBox(21, 0, 11, 4);
+                VDP_drawTextBG(BG_A, merchantInteractionsString, 25, 2);
+                VDP_drawTextBG(BG_A, "/", 27, 2);
                 char maxMerchInteractionsString[5];
                 sprintf(maxMerchInteractionsString, "%d", MAX_MERCHANT_INTERACTIONS);
-                VDP_drawTextBG(BG_A, maxMerchInteractionsString, 24, 2);
+                VDP_drawTextBG(BG_A, maxMerchInteractionsString, 28, 2);
                 //VDP_drawTextBG(BG_A, "5", 25, 2);
-                VDP_drawTextBG(BG_A, (menuSelection == 0 ? "~ Buy" : "  Buy"), 4, 4);
-		        VDP_drawTextBG(BG_A, (menuSelection == 1 ? "~ Sell" : "  Sell"), 4, 5);
+                VDP_drawTextBG(BG_A, (menuSelection == 0 ? "~ Buy" : "  Buy"), 11, 7);
+		        VDP_drawTextBG(BG_A, (menuSelection == 1 ? "~ Sell" : "  Sell"), 11, 8);
                 char goldDisplay[16];
                 sprintf(goldDisplay, "Gold: %d", player_gold);
-                VDP_drawTextBG(BG_A, goldDisplay, 14, 10);
-                                drawBox(11, 15, 21, 7);
+                VDP_drawTextBG(BG_A, goldDisplay, 1, 9);
+                drawBox(11, 15, 21, 7);
+                drawBox(11, 11, 10, 4);
 
                 VDP_drawTextBG(BG_A, "Skull:", 12, 16);
                 sprintf(skullAmount, "%d ", skulls);
@@ -398,15 +411,15 @@ void showMerchMenu() {
 					if(menuSelection == 0) {
 						buyItem(randomItemForSale, 1, itemPrice);
                         sprintf(goldDisplay, "Gold: %d", player_gold);
-                        VDP_drawTextBG(BG_A, "            ", 14, 10);
-                        VDP_drawTextBG(BG_A, goldDisplay, 14, 10);
+                        VDP_drawTextBG(BG_A, "            ", 1, 9);
+                        VDP_drawTextBG(BG_A, goldDisplay, 1, 9);
                         SYS_doVBlankProcess();
                         waitMs(200);
 					} else {
 						sellItem(randomItemForSale, 1, itemPrice);
                         sprintf(goldDisplay, "Gold: %d", player_gold);
-                        VDP_drawTextBG(BG_A, "            ", 14, 10);
-                        VDP_drawTextBG(BG_A, goldDisplay, 14, 10);                        
+                        VDP_drawTextBG(BG_A, "            ", 1, 9);
+                        VDP_drawTextBG(BG_A, goldDisplay, 1, 9);                        
                         SYS_doVBlankProcess();
                         waitMs(200);
 					}

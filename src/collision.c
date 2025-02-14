@@ -73,6 +73,7 @@ void collision(){
 				if(JOY_readJoypad(JOY_1) & BUTTON_A){
 
 					if(bShowMerchMenu == FALSE){
+						waitMs(1000);
 						bShowMerchMenu = TRUE;
 						bPlayerCanMove = FALSE;
 						showMerchMenu();
