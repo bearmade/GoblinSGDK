@@ -30,6 +30,8 @@
 | Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase3.png) |
 | Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop1.png) |
 | Battle Back 2 | Tileset | Stable Diffusion | ![alt](./res/backdrop2.png) |
+| Player Portrait | Tileset | Stable Diffusion | ![alt](./res/face2.png) |
+| Merchant Portrait | Tileset | Stable Diffusion | ![alt](./res/face3.png) |
 | Title Theme | VGM | Hunter Singleton |  |
 | Battle Theme | VGM | Hunter Singleton |  |
 | World Theme | VGM | Hunter Singleton |  |
