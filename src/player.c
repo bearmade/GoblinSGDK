@@ -65,7 +65,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 					endBattle();
 				}
 				else{
-				    VDP_drawTextBG(BG_A, "You failed to Run", 3, 2);
+				    VDP_drawTextBG(BG_A, "You failed to run from", 3, 2);
 					delayFrames(120);
 					goblinAttack();
 					sprintf(pHP, "%d", player_hp);

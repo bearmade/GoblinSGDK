@@ -403,7 +403,7 @@ void attack(){
 	VDP_drawTextBG( BG_A, "-" , 23, 20);
 	VDP_drawTextBG(BG_A, damageMessage, 24, 20);
 	waitMs(2000);
-	
+
 	sprintf(gHP, "%d", goblin_hp);
 
 	// for(int i = 0; i < 120; i++){

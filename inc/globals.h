@@ -9,6 +9,8 @@ void delayFrames(u16 frames) ;
 void delayFramesWithSound(u16 frames) ;
 void delayMilliseconds(u16 milliseconds);
 void vblankCallback();
+
+
 u16 ind;
 bool is_start_pressed;
 u16 random_number;
@@ -22,5 +24,6 @@ bool bInsideHouse;
 const u16 TURN_DELAY;
 u32 worldSeed;
 bool bBattleMessageDone;
+
 
 #endif
