@@ -46,7 +46,16 @@
 <br><br>
 
 - Organize code
+
+<br>
+
 - Squash bugs
+    - Known bugs/Issues
+        - [ ] screen transitions
+        - [ ] battle music stops playing when player attacks
+        
+<br>
+
 - Polish
     - [ ] redo/upscale player sprite
         - [ ] rework collision coords to match new sprite
@@ -56,8 +65,4 @@
     - [ ] add cloud/fog sprites?
 
 
- <br> 
 
-- Known bugs/Issues
-    - [ ] screen transitions
-    - [ ] battle music stops playing when player attacks
