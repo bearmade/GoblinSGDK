@@ -16,7 +16,7 @@
     - [x]  player inventory
     - [x]  stats screen
     - [x]  merchant screen
-    - [ ]  buy/sell mechanic
+    - [x]  buy/sell mechanic
     
 
 - Battle system
@@ -31,7 +31,8 @@
     - [x] add battle backgrounds
     - [x] battle messages
     
-    
+
+
 - Player's house
     - [ ] rest
     - [x] sram save/load
@@ -49,5 +50,5 @@
  <br> 
 
 - Known bugs/Issues
-    - [ ] map transitions
+    - [ ] screen transitions
     - [ ] battle music stops playing when player attacks
