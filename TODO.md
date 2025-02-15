@@ -36,6 +36,7 @@
 - Player's house
     - [ ] rest
     - [x] sram save/load
+    - [ ] add save/load menu
     
 - Mini map
     - [x] basic functionality
@@ -51,7 +52,8 @@
     - [ ] redo/upscale merchant sprite
     - [ ] redo music
     - [ ] add sound test menu
-    - [ ] 
+    - [ ] add cloud/fog sprites?
+
 
  <br> 
 
