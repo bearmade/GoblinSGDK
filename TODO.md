@@ -49,6 +49,7 @@
 - Squash bugs
 - Polish
     - [ ] redo/upscale player sprite
+        - [ ] rework collision coords to match new sprite
     - [ ] redo/upscale merchant sprite
     - [ ] redo music
     - [ ] add sound test menu
