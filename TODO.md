@@ -47,6 +47,12 @@
 - Organize code
 - Squash bugs
 - Polish
+    - [ ] redo/upscale player sprite
+    - [ ] redo/upscale merchant sprite
+    - [ ] redo music
+    - [ ] add sound test menu
+    - [ ] 
+
  <br> 
 
 - Known bugs/Issues
