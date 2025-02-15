@@ -82,9 +82,10 @@ and fans of the classic RPGs of the early 90s.
 
 ----
 
-Goblin is a 2D rogue-like turn-based RPG game for the Sega Genesis created with SGDK, 
-Sega Genesis Development Kit. It is targeted towards retro-gaming enthusiasts
-and fans of the classic RPGs of the early 90s.
+The game is a procedurally generated top-down exploration game with turn-based combat. 
+The Player can walk around a procedurally generated map, fighting random 
+battles with goblins, and collecting their remains to sell for gold to the traveling merchant.
+The Player can then upgrade their character with the gold they collect.
 
 
 ----
@@ -145,7 +146,6 @@ https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 
 The game features streamlined mechanics including simple 
 top-down movement and menu-driven turn-based combat.
-
 
 ----
 
