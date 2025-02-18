@@ -1,7 +1,7 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-void addItemm(u16 item, u16 quantity);
+void addItem(u16 item, u16 quantity);
 void removeItem(u16 item, u16 quantity);
 void buyItem(u16 item, u16 quantity, u16 itemPrice);
 void sellItem(u16 item, u16 quantity, u16 itemPrice);
