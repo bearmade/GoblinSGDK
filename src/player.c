@@ -196,6 +196,13 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 	}
 	}
 
+	if(value & BUTTON_B){
+		canFight = FALSE;
+	}
+	else{
+		canFight = TRUE;
+	}
+
 		
 }
 

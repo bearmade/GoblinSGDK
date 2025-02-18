@@ -1,11 +1,11 @@
 out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/backdrop2.png \
 /home/bear/GoblinSGDK/res/tiles2.png \
-/home/bear/GoblinSGDK/res/merchant.png \
+/home/bear/GoblinSGDK/res/merchant2.png \
 /home/bear/GoblinSGDK/res/goglinTitle2.png \
 /home/bear/GoblinSGDK/res/swoosh.wav \
-/home/bear/GoblinSGDK/res/heroSega.png \
 /home/bear/GoblinSGDK/res/face2.png \
+/home/bear/GoblinSGDK/res/heroSega3.png \
 /home/bear/GoblinSGDK/res/ikag.vgm \
 /home/bear/GoblinSGDK/res/ikagTitle.vgm \
 /home/bear/GoblinSGDK/res/fanfare.vgm \

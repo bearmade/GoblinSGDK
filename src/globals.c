@@ -13,6 +13,7 @@ bool bShowMenu = FALSE;
 bool bInsideHouse = FALSE;
 u32 worldSeed;
 bool bBattleMessageDone = FALSE;
+bool canFight = TRUE;
 
 void delayVBlank(u16 vblanks) {
     delayCounter = vblanks;

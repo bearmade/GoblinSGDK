@@ -40,7 +40,6 @@ int main()
     
 
 
-
     VDP_loadTileSet(tileset2.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset2.palette->data, DMA);
     
@@ -76,7 +75,7 @@ int main()
         }
 
 
-        if(bIsMoving == TRUE){
+        if(bIsMoving == TRUE && canFight == TRUE){
             randomEncounter();
         }
         if(bBattleStarted == TRUE){

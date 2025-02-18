@@ -19,8 +19,8 @@ IMAGE titleLetters "goblinTitleLetters2.png" BEST ALL
 IMAGE face "face2.png" NONE ALL
 IMAGE merchFace "face3.png" NONE ALL
 PALETTE  mytitle "goglinTitle2.png"
-SPRITE  our_sprite "heroSega.png" 2 2 FAST 10
-SPRITE  merchantSprite "merchant.png" 2 2 FAST 10
+SPRITE  our_sprite "heroSega3.png" 4 4 FAST 8
+SPRITE  merchantSprite "merchant2.png" 4 4 FAST 12
 SPRITE  goblinSprite "goblins.png" 6 6 NONE 0
 
 

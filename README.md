@@ -1,6 +1,5 @@
 
 
-
 <h1 align = center>
 
  ✨ Goblin ✨
@@ -58,17 +57,8 @@ and fans of the classic RPGs of the early 90s.
 <h1 align = center>
 
 <img src="res/face2.png" width=40% height=40%>
-<br><br>
-<img  src="chara_gifs/row_0.gif" width=10% height=10%>
-<img  src="chara_gifs/row_1.gif" width=10% height=10%>
-<img  src="chara_gifs/row_2.gif" width=10% height=10%>
-<img  src="chara_gifs/row_3.gif" width=10% height=10%>
-<br>
-<img  src="chara_gifs/row_4.gif" width=10% height=10%>
-<img  src="chara_gifs/row_5.gif" width=10% height=10%>
-<img  src="chara_gifs/row_6.gif" width=10% height=10%>
-<img  src="chara_gifs/row_7.gif" width=10% height=10%>
 
+<img  src="chara2_gifs/row_0.gif" width=20% height=20%>
 
 
 </h1>
@@ -99,11 +89,8 @@ The Player can then upgrade their character with the gold they collect.
 <h1 align = center>
 
 <img src="res/face3.png" width=40% height=40%>
-<br><br>
-<img  src="merchant_gifs/row_0.gif" width=10% height=10%>
-<img  src="merchant_gifs/row_1.gif" width=10% height=10%>
-<img  src="merchant_gifs/row_2.gif" width=10% height=10%>
-<img  src="merchant_gifs/row_3.gif" width=10% height=10%>
+<img  src="merchant2_gifs/row_0.gif" width=20% height=20%>
+
 <br>
 
 ----

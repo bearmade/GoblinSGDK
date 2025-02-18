@@ -9,6 +9,10 @@
 #include "../inc/battle.h"
 #include "../inc/globals.h"
 
+// Add offset values to shrink collision box
+#define MERCHANT_COL_OFFSET_X 14  
+#define MERCHANT_COL_OFFSET_Y 12  
+
 
 
 
@@ -44,10 +48,10 @@ void collision(){
 			// Box collision detection
     
 
-			if (playerX < merchantX + MERCHANT_WIDTH &&
-				playerX + PLAYER_WIDTH > merchantX &&
-				playerY < merchantY + MERCHANT_HEIGHT &&
-				playerY + PLAYER_HEIGHT > merchantY &&
+			if (playerX < (merchantX + MERCHANT_COL_OFFSET_X) + (MERCHANT_WIDTH - MERCHANT_COL_OFFSET_X*2) &&
+				playerX + PLAYER_WIDTH > merchantX + MERCHANT_COL_OFFSET_X &&
+				playerY < (merchantY + MERCHANT_COL_OFFSET_Y) + (MERCHANT_HEIGHT - MERCHANT_COL_OFFSET_Y*2) &&
+				playerY + PLAYER_HEIGHT > merchantY + MERCHANT_COL_OFFSET_Y &&
 				currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
 		
 				// Set interaction flag

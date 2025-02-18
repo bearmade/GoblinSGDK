@@ -46,7 +46,7 @@
 <br><br>
 
 - Organize code
-
+ 
 <br>
 
 - Squash bugs
@@ -57,13 +57,12 @@
 <br>
 
 - Polish
-    - [ ] redo/upscale player sprite
-        - [ ] rework collision coords to match new sprite
-    - [ ] redo/upscale merchant sprite
+    - [x] redo/upscale player sprite
+        - [x] rework collision coords to match new sprite
+    - [x] redo/upscale merchant sprite
     - [ ] redo music
     - [ ] add sound test menu
     - [ ] add cloud/fog sprites?
-    - [ ] rework tileset 
 
 
 
