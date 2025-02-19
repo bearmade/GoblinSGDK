@@ -444,7 +444,7 @@ void attack(){
 }
 
 void battleMessage(){
-
+		VDP_drawTextBG(BG_A, "                        ", 3, 2);
 		char message[40];
 		int randIndex = random() % 13; // We have 13 messages in the array
 		strncpy(message, attack_message[randIndex], 20);
@@ -461,13 +461,17 @@ void goblinAttack(){
 	if(damage < 0){
 		damage = 0;
 	}
+	//if(isAnimating){
+		
 
+	
 	player_hp -= damage;
+	
 
 	
 	//VDP_drawTextBG(BG_A, "                        ", 3, 2);
 	VDP_drawTextBG(BG_A, "         ", 19, 12);
-	VDP_drawTextBG(BG_A, "         ", 23, 20);
+	
 	VDP_drawTextBG(BG_A, "attacks!", 19, 5);
 
 
@@ -491,7 +495,7 @@ void goblinAttack(){
 	
 	//delayFrames(120);
 	//turn = !turn;
-
+	//}
 }
 
 void levelUp(){
@@ -600,6 +604,8 @@ void updateBattleAnimation() {
             battleAnimationTimer = 0;
 			if(bBattleOngoing){
 				SPR_setVisibility(goblin_sprite, VISIBLE);
+				VDP_drawTextBG(BG_A, "         ", 23, 20);
+				VDP_drawTextBG(BG_A, "         ", 19, 5);
 			}
 			else{
 
@@ -607,7 +613,7 @@ void updateBattleAnimation() {
 
 				SPR_setVisibility(goblin_sprite, HIDDEN);
 			}
-            VDP_drawTextBG(BG_A, "         ", 23, 20);
+            //VDP_drawTextBG(BG_A, "         ", 23, 20);
             turn = !turn;
         }
     }
