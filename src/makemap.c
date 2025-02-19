@@ -739,6 +739,7 @@ void displayRoom(){
                 else {
                     create32by16TileIndexed(randSet(0,0,1,1), 1,0,0,1,98);
 
+                    
                 }
                 }
                 else if (result == 0){
