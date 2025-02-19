@@ -9,6 +9,7 @@
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
 #include "../inc/inventory.h"
+#include <maths.h>
 
 Sprite* player;
 Sprite* merchant;
@@ -25,6 +26,7 @@ int attack_timer = 0;
 int attack_duration = 24;
 fix32 tempPlayerPosX;
 fix32 tempPlayerPosY;
+static fix16 warblePhase = 0;
 
 void displayPlayer(){
 
@@ -34,6 +36,9 @@ void displayPlayer(){
 
 }
 void joyEvent(u16 joy, u16 changed, u16 state){
+	if ((changed & state & BUTTON_B)){
+		//screenWarble();
+	}
 
 	if((changed & state & BUTTON_A)){
 		showTitleScreen = FALSE;
@@ -81,9 +86,11 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 			}
 			else{
 				
-				if(turn){
+				if(turn ){
 					//XGM_startPlayPCM(SFX_SWOOSH, 15, SOUND_PCM_CH2);
+					
 					attack();
+					
 					
 				}
 				else{
@@ -198,6 +205,12 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 
 	if(value & BUTTON_B){
 		canFight = FALSE;
+		//screenWarble();
+		
+
+
+
+
 	}
 	else{
 		canFight = TRUE;
@@ -337,6 +350,21 @@ void displayMiniMap( int x, int y){
 	}
 }
 
+// function to create a screen warble effect using line scrolling
 
 
+void screenWarble() {
+    s16 offset[224];
 
+    // Create sine wave offset for each scanline using the warblePhase variable for an animation effect
+    for (int i = 0; i < 224; i++) {
+        offset[i] = fix16ToInt(FIX16(.04) * sinFix16(warblePhase + FIX16(i * 3)));
+    }
+    
+    // Apply horizontal scrolling offset to each line
+    VDP_setHorizontalScrollLine(BG_A, 0, offset, 224, DMA);
+    VDP_setHorizontalScrollLine(BG_B, 0, offset, 224, DMA);
+
+    // Increment warblePhase to animate the warble effect over time
+    warblePhase += FIX16(.4);
+}

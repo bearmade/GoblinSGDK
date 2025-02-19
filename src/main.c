@@ -67,6 +67,12 @@ int main()
       handleInput();
         collision();
 
+        // if (isAnimating) {
+        //     SPR_update();
+        //     updateBattleAnimation(); 
+        // }
+
+
 		camera();
         if(bShowMerchMenu){
             bIsMoving = FALSE;
@@ -96,6 +102,8 @@ int main()
     }
     if (bBattleOngoing == TRUE){
         SPR_setVisibility(player, HIDDEN);
+        SPR_update();
+        updateBattleAnimation(); 
     }
     else{
         SPR_setVisibility(player, VISIBLE);

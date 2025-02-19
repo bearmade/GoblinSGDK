@@ -15,6 +15,7 @@ void goblinAttack();
 void levelUp();
 void itemDrop();
 void drawBox(u16 x, u16 y, u16 width, u16 height);
+void updateBattleAnimation();
 
 Sprite* goblin_sprite;
 char Name[19];
@@ -50,7 +51,8 @@ u16 player_exp_needed;
 u16 goblinsKilled;
 u16 goblinType;
 u16 goblinOffset;
-
+extern bool isAnimating;
+extern u16 battleAnimationTimer;
 
 //goblin stats
 s16 goblin_hp;
@@ -59,6 +61,7 @@ s16 goblin_defense;
 u16 goldDrop;
 u16 experience_gained;
 int randChance;
+
 
 #define SFX_SWOOSH 64
 #define goblin_sprite1 0

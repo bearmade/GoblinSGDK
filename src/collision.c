@@ -109,7 +109,7 @@ void collision(){
 			playerPosX = intToFix32(blocked_coord);
 		}
 		if((tile_type_coll_topleft == EXIT_TILE)||(tile_type_coll_bottomleft == EXIT_TILE)){
-			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
 			//  SPR_setVisibility(player, HIDDEN);
@@ -142,7 +142,7 @@ void collision(){
 			playerPosX -= FIX32(0.1);
 		}
 		if((tile_type_coll_topright == EXIT_TILE)||(tile_type_coll_bottomright == EXIT_TILE)){
-			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
 			//  SPR_setVisibility(player, HIDDEN);
@@ -174,7 +174,7 @@ void collision(){
 			playerPosY = intToFix32(blocked_coord);
 		}
 		if((tile_type_coll_topright == EXIT_TILE)||(tile_type_coll_topleft == EXIT_TILE)){
-			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
 			//  SPR_setVisibility(player, HIDDEN);
@@ -208,7 +208,7 @@ void collision(){
 			playerPosY -= FIX32(0.1);
 		}
 		if((tile_type_coll_bottomright == EXIT_TILE)||(tile_type_coll_bottomleft == EXIT_TILE)){
-			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
 			// 	 SPR_setVisibility(player, HIDDEN);

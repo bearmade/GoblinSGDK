@@ -8,6 +8,7 @@ void joyEvent(u16 joy, u16 changed, u16 state);
 void handleInput();
 void showStats();
 void displayMiniMap(int x, int y);
+void screenWarble();
 
 Sprite* player;
 Sprite* merchant;
@@ -27,6 +28,7 @@ bool bIsMoving;
 
 fix32 tempPlayerPosX;
 fix32 tempPlayerPosY;
+static fix16 warblePhase;
 
 
 

@@ -66,62 +66,68 @@ char pDefense[5];
 char pAttack[5];
 char expChar[5];
 char goblinsKilledChar[5];
+bool isAnimating = FALSE;
+u16 battleAnimationTimer = 0;
+
 
 //#define SFX_SWOOSH 64
 
 void initBattle(){
+			turn = TRUE;
+			bPlayerCanMove = FALSE;
+			bBattleStarted = TRUE;
+			// Reset movement state
+			player_move_left = FALSE;
+			player_move_right = FALSE;
+			player_move_up = FALSE;
+			player_move_down = FALSE;
+			bIsMoving = FALSE;
+    
+			// Reset battle animation state
+			isAnimating = FALSE;
+			battleAnimationTimer = 0;
 
-	bPlayerCanMove = FALSE;
-	bBattleStarted = TRUE;
- // Reset all movement states
-    player_move_left = FALSE;
-    player_move_right = FALSE;
-    player_move_up = FALSE;
-    player_move_down = FALSE;
-    bIsMoving = FALSE;
-	goblin_hp = (player_level * 10)+ random() % 25;
-	goblin_attack = (player_level * 2)+ (random() % 10);
-	goblin_defense = (player_level * 2)+ random() % 10;
-	goldDrop = (goblin_attack + goblin_defense)+ random() % 15;
-	goblinType = random() % 7;
-	PAL_setPalette(PAL1, goblinSprite.palette->data, DMA);
-	goblin_sprite = SPR_addSprite(&goblinSprite, 160, 120, TILE_ATTR(PAL1, FALSE, FALSE, FALSE));
-	switch (goblinType){
-		case 0:
-		goblinOffset = 0;
-		SPR_setAnim(goblin_sprite, goblin_sprite1);
-		break;
-		case 1:
-		goblinOffset = 37;
-		SPR_setAnim(goblin_sprite, goblin_sprite2);
-		break;
-		case 2:
-		goblinOffset = 37*2;
-		SPR_setAnim(goblin_sprite, goblin_sprite3);
-		break;
-		case 3:
-		goblinOffset = 37*3;
-		SPR_setAnim(goblin_sprite, goblin_sprite4);
-		break;
-		case 4:
-		goblinOffset = 37*4;
-		SPR_setAnim(goblin_sprite, 	goblin_sprite5);
-		break;
-		case 5:
-		goblinOffset = 37*5;
-		SPR_setAnim(goblin_sprite, 	goblin_sprite6);
-		break;
-		case 6:
-		goblinOffset = 37*6;
-		SPR_setAnim(goblin_sprite, goblin_sprite7);
-		break;
-
-		}
-
-
-
+			// Calculate new goblin stats
+			goblin_hp = (player_level * 10) + random() % 25;
+			goblin_attack = (player_level * 2) + (random() % 10);
+			goblin_defense = (player_level * 2) + random() % 10;
+			goldDrop = (goblin_attack + goblin_defense) + random() % 15;
+			goblinType = random() % 7;
+    
+			PAL_setPalette(PAL1, goblinSprite.palette->data, DMA);
+			goblin_sprite = SPR_addSprite(&goblinSprite, 160, 120, TILE_ATTR(PAL1, FALSE, FALSE, FALSE));
+			// Establish goblin animation according to type...
+			switch (goblinType){
+	case 0:
+	goblinOffset = 0;
+	SPR_setAnim(goblin_sprite, goblin_sprite1);
+	break;
+	case 1:
+	goblinOffset = 37;
+	SPR_setAnim(goblin_sprite, goblin_sprite2);
+	break;
+	case 2:
+	goblinOffset = 37*2;
+	SPR_setAnim(goblin_sprite, goblin_sprite3);
+	break;
+	case 3:
+	goblinOffset = 37*3;
+	SPR_setAnim(goblin_sprite, goblin_sprite4);
+	break;
+	case 4:
+	goblinOffset = 37*4;
+	SPR_setAnim(goblin_sprite, 	goblin_sprite5);
+	break;
+	case 5:
+	goblinOffset = 37*5;
+	SPR_setAnim(goblin_sprite, 	goblin_sprite6);
+	break;
+	case 6:
+	goblinOffset = 37*6;
+	SPR_setAnim(goblin_sprite, goblin_sprite7);
+	break;
+			}
 }
-
 void randomEncounter(){
 	randChance = random() % 1000;
 	if(randChance <= 5 && !isTransitioning){
@@ -191,6 +197,7 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 	}
 	while(bBattleOngoing){
 		SPR_update();
+		updateBattleAnimation();
 	
 		VDP_drawText(".Attack.", 22, 24);
 		VDP_drawTextBG(BG_A, ".Run.", 22, 26);
@@ -263,6 +270,7 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 		}
 	
 		if(goblin_hp <= 0){
+
 			bBattleMessageDone = FALSE;
 			goblinsKilled++;
 			player_gold += goldDrop;
@@ -338,35 +346,37 @@ void nameGenerator(){
 
 
  }
- void endBattle() {
-    bBattleOngoing = FALSE;
-    bPlayerCanMove = TRUE;
-	SPR_setVisibility(goblin_sprite, HIDDEN);
-
-    VDP_clearPlane(BG_B, TRUE);
-	VDP_clearPlane(BG_A, TRUE);
-	VDP_loadTileSet(tileset1.tileset, 1, DMA);
-    PAL_setPalette(PAL1, tileset1.palette->data, DMA);
-	PAL_setPalette(PAL0, fg2.palette->data, DMA);
-	PAL_setPalette(PAL3,palette_Font.data, DMA);
-	// clear all battle messages
-	VDP_drawTextBG( BG_A, "                 ", 3, 10);
-	VDP_drawTextBG( BG_A, "                 ", 5, 4);
-	VDP_drawTextBG( BG_A, "                 ", 3, 2);
-	VDP_drawTextBG( BG_A, "                 ", 7, 2);
-	VDP_drawTextBG( BG_A, "                 ", 14, 6);
-	VDP_drawTextBG( BG_A, "                 ", 2, 24);
-	VDP_drawTextBG( BG_A, "                 ", 2, 26);
-	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
-	SYS_doVBlankProcess();
-	XGM_stopPlay();
-	XGM_startPlay(world_vgm);
-PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
-	SPR_setVisibility(player, VISIBLE);
-	displayRoom();
-    
+	void endBattle() {
+		bBattleOngoing = FALSE;
+		bPlayerCanMove = TRUE;
+		// Release the goblin sprite so we can create a fresh one next battle.
+		if(goblin_sprite != NULL) {
+				SPR_releaseSprite(goblin_sprite);
+				goblin_sprite = NULL;
+		}
+	
+		VDP_clearPlane(BG_B, TRUE);
+		VDP_clearPlane(BG_A, TRUE);
+		VDP_loadTileSet(tileset1.tileset, 1, DMA);
+		PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+		PAL_setPalette(PAL0, fg2.palette->data, DMA);
+		PAL_setPalette(PAL3,palette_Font.data, DMA);
+		// clear all battle messages
+		VDP_drawTextBG( BG_A, "                 ", 3, 10);
+		VDP_drawTextBG( BG_A, "                 ", 5, 4);
+		VDP_drawTextBG( BG_A, "                 ", 3, 2);
+		VDP_drawTextBG( BG_A, "                 ", 7, 2);
+		VDP_drawTextBG( BG_A, "                 ", 14, 6);
+		VDP_drawTextBG( BG_A, "                 ", 2, 24);
+		VDP_drawTextBG( BG_A, "                 ", 2, 26);
+		PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+		SYS_doVBlankProcess();
+		XGM_stopPlay();
+		XGM_startPlay(world_vgm);
+		PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+		SPR_setVisibility(player, VISIBLE);
+		displayRoom();
 }
-
 void attack(){
 	
 
@@ -402,8 +412,10 @@ void attack(){
 	VDP_drawTextBG(BG_A, "         ", 23, 19);
 	VDP_drawTextBG( BG_A, "-" , 23, 20);
 	VDP_drawTextBG(BG_A, damageMessage, 24, 20);
-	waitMs(2000);
-
+	//waitMs(2000);
+	isAnimating = TRUE;
+	
+	updateBattleAnimation();
 	sprintf(gHP, "%d", goblin_hp);
 
 	// for(int i = 0; i < 120; i++){
@@ -419,7 +431,7 @@ void attack(){
 	
 	
 	
-	if(goblin_hp > 0){
+	if(goblin_hp > 0 ){
 	goblinAttack();
 	turn = !turn;
 
@@ -442,6 +454,7 @@ void battleMessage(){
 	
 }
 void goblinAttack(){
+	
 
 	s16 damage = ((random() % 5)*player_level) + goblin_attack;
 	damage  = (damage - (player_defense));
@@ -452,7 +465,7 @@ void goblinAttack(){
 	player_hp -= damage;
 
 	
-	VDP_drawTextBG(BG_A, "                        ", 3, 2);
+	//VDP_drawTextBG(BG_A, "                        ", 3, 2);
 	VDP_drawTextBG(BG_A, "         ", 19, 12);
 	VDP_drawTextBG(BG_A, "         ", 23, 20);
 	VDP_drawTextBG(BG_A, "attacks!", 19, 5);
@@ -477,7 +490,7 @@ void goblinAttack(){
 	}
 	
 	//delayFrames(120);
-	turn = !turn;
+	//turn = !turn;
 
 }
 
@@ -567,4 +580,35 @@ void drawBox(u16 x, u16 y, u16 width, u16 height) {
 			
 		}
 	}
+}
+
+
+void updateBattleAnimation() {
+    if (isAnimating) {
+        battleAnimationTimer++;
+        
+        // Flash every 5 frames
+        if (battleAnimationTimer & 4) {
+            SPR_setVisibility(goblin_sprite, HIDDEN);
+        } else {
+            SPR_setVisibility(goblin_sprite, VISIBLE);
+        }
+        
+        // End after 60 frames (1 second)
+        if (battleAnimationTimer >= 60) {
+            isAnimating = FALSE;
+            battleAnimationTimer = 0;
+			if(bBattleOngoing){
+				SPR_setVisibility(goblin_sprite, VISIBLE);
+			}
+			else{
+
+
+
+				SPR_setVisibility(goblin_sprite, HIDDEN);
+			}
+            VDP_drawTextBG(BG_A, "         ", 23, 20);
+            turn = !turn;
+        }
+    }
 }

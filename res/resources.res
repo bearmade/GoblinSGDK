@@ -13,8 +13,8 @@ IMAGE fg1 "croakusTitleSEGA.png" BEST ALL
 IMAGE fg2 "croakusTitleSEGA.png" BEST ALL
 IMAGE title "goglinTitle2.png" NONE ALL
 IMAGE titleBase "goblinTitleBase3.png" NONE ALL 
-IMAGE battleBack "backdrop1.png" NONE ALL 
-IMAGE battleBack2 "backdrop2.png" NONE ALL 
+IMAGE battleBack "backdrop4.png" NONE ALL 
+IMAGE battleBack2 "backdrop3.png" NONE ALL 
 IMAGE titleLetters "goblinTitleLetters2.png" BEST ALL
 IMAGE face "face2.png" NONE ALL
 IMAGE merchFace "face3.png" NONE ALL
