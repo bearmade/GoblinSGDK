@@ -25,7 +25,7 @@
 | Goblin 5 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_4.gif) |
 | Goblin 6 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_5.gif) |
 | Goblin 7 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_6.gif) |
-| World Tileset | Tileset | Hunter Singleton | ![alt](./res/tilesSEGA2.png) |
+| World Tileset | Tileset | Hyptosis (Edited for Genesis by Hunter Singleton)| ![alt](./res/tilesSEGA2.png) |
 | Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters2.png) |
 | Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase3.png) |
 | Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop1.png) |
@@ -50,4 +50,9 @@ https://opengameart.org/content/10-basic-rpg-enemies-the-goblin-supplement
 FF Font
 
 https://www.dafont.com/final-fantasy.font
+
+<br>
+World tiles
+
+https://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
 
