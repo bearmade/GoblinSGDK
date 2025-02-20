@@ -10,6 +10,7 @@
     - [x]  Main world music
     - [x]  Battle music
     - [x]  Victory fanfare
+    - [ ] cave music
     
 - Inventory system
     - [x]  create seperate header and c / organize relevant code
@@ -31,12 +32,19 @@
     - [x] add battle backgrounds
     - [x] battle messages
     
-
+- Caves
+    - [ ] add entrances on the world map
+    - [ ] cave generation
+        
 
 - Player's house
+    - [ ] add house screen and menu
+        - [ ] graphics
+        - [ ] functionality
     - [ ] rest
     - [x] sram save/load
     - [ ] add save/load menu
+
     
 - Mini map
     - [x] basic functionality
@@ -52,17 +60,19 @@
 - Squash bugs
     - Known bugs/Issues
         - [ ] screen transitions
-        - [ ] battle music stops playing when player attacks
+        - [x] battle music stops playing when player attacks
         
 <br>
 
-- Polish
+-  ✨ Polish / Stretch goals ✨
     - [x] redo/upscale player sprite
         - [x] rework collision coords to match new sprite
     - [x] redo/upscale merchant sprite
     - [ ] redo music
     - [ ] add sound test menu
     - [ ] add cloud/fog sprites?
+    - [ ] add 3 seperate save slots
+    - [ ] add player name input
 
 
 
