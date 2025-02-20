@@ -27,6 +27,8 @@ int attack_duration = 24;
 fix32 tempPlayerPosX;
 fix32 tempPlayerPosY;
 static fix16 warblePhase = 0;
+bool bSaveMenuActive = FALSE;
+int selectedSaveSlot = 0;
 
 void displayPlayer(){
 
@@ -40,7 +42,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		//screenWarble();
 	}
 
-	if((changed & state & BUTTON_A)){
+	if((changed & state & BUTTON_A) && !isAnimating){
 		showTitleScreen = FALSE;
 		if(bBattleOngoing){
 		//delayVBlank(120);
@@ -106,27 +108,109 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		// 	showStats();
 		// }		
 	}
-			if(changed & state & BUTTON_C){
-				if(bShowMerchMenu){
-					bShowMerchMenu = FALSE;
-					showMerchMenu();
-					bPlayerCanMove = TRUE;
+    if(changed & state & BUTTON_C){
+        if(bShowMerchMenu){
+            bShowMerchMenu = FALSE;
+            showMerchMenu();
+            bPlayerCanMove = TRUE;
+            SPR_setVisibility(merchant, VISIBLE);
+            for( int i = 0; i < 24; i++){
+                    VDP_clearTextLine(i);
+            }
+            displayRoom();
+        } else {
+            // If the save menu is already active then confirming with BUTTON_C closes it,
+            // Otherwise open the save menu.
+            if(bSaveMenuActive){
+                // Save using the chosen slot
+                bSaveMenuActive = FALSE;
+				bShowMenu = FALSE;
+				SPR_setVisibility(player, VISIBLE);
+				if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
 					SPR_setVisibility(merchant, VISIBLE);
-					for( int i = 0; i < 24; i++){
-						VDP_clearTextLine(i);
-					}
-					
+				} else {
+					SPR_setVisibility(merchant, HIDDEN);
+				}
+				//redraw screen
+				VDP_clearPlane(BG_B, TRUE);
+				VDP_clearPlane(BG_A, TRUE);
+				VDP_loadTileSet(tileset1.tileset, 1, DMA);
+				PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+				PAL_setPalette(PAL0, fg2.palette->data, DMA);
+				PAL_setPalette(PAL3,palette_Font.data, DMA);
+				PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+				SYS_doVBlankProcess();
+				PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+				bPlayerCanMove = TRUE;
+                // Redraw the room after save
+                displayRoom();
+            } else if(!bBattleOngoing && !showTitleScreen && !bShowMerchMenu && !bPlayerCanMove && !bInsideHouse){
+                // Open the save menu
+                bSaveMenuActive = TRUE;
+                showSaveMenu();
+            }
+        }
+    }
 
-					displayRoom();
-				
-			}else{
-				if(!bBattleOngoing){
-			 sramSave();
-			 VDP_drawTextBG(BG_B, "Saved", 10, 10);
-			 delayFrames(120);
-			 VDP_drawTextBG(BG_B, "     ", 10, 10);
-			 displayRoom();
-		}}}
+    // When the save menu is active, capture navigation input
+    if(bSaveMenuActive){
+        if(changed & state & BUTTON_UP){
+            selectedSaveSlot = (selectedSaveSlot - 1 + 3) % 3;
+            showSaveMenu();
+        }
+        if(changed & state & BUTTON_DOWN){
+            selectedSaveSlot = (selectedSaveSlot + 1) % 3;
+            showSaveMenu();
+        }
+        // Optionally, you can use BUTTON_A for selection confirmation:
+        if(changed & state & BUTTON_A){
+            sramSave(selectedSaveSlot);
+            VDP_drawTextBG(BG_A, "Saved", 24, 24 + selectedSaveSlot);
+            delayFrames(120);
+            VDP_drawTextBG(BG_B, "     ", 10, 10);
+            bSaveMenuActive = FALSE;
+			bShowMenu = FALSE;
+
+					// Show the player sprite	   
+        SPR_setVisibility(player, VISIBLE);
+	if (currentWorldX == merchWorldX && currentWorldY == merchWorldY) {
+		SPR_setVisibility(merchant, VISIBLE);
+	} else {
+		SPR_setVisibility(merchant, HIDDEN);
+	}
+	//redraw screen
+	VDP_clearPlane(BG_B, TRUE);
+	VDP_clearPlane(BG_A, TRUE);
+	VDP_loadTileSet(tileset1.tileset, 1, DMA);
+    PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+	PAL_setPalette(PAL0, fg2.palette->data, DMA);
+	PAL_setPalette(PAL3,palette_Font.data, DMA);
+	PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+	// clear all battle messages
+	VDP_drawTextBG(BG_B, "      ", 4, 2);
+	VDP_drawTextBG(BG_B, "      ", 4, 4);
+	VDP_drawTextBG(BG_B, "      ", 8, 4);
+	VDP_drawTextBG(BG_B, "      ", 4, 6);
+	VDP_drawTextBG(BG_B, "      ", 8, 6);
+	VDP_drawTextBG(BG_B, "      ", 4, 8);
+	VDP_drawTextBG(BG_B, "      ", 8, 8);
+	VDP_drawTextBG(BG_B, "      ", 4, 10);
+	VDP_drawTextBG(BG_B, "      ", 8, 10);
+	VDP_drawTextBG(BG_B, "      ", 4, 12);
+	VDP_drawTextBG(BG_B, "      ", 8, 12);
+	SYS_doVBlankProcess();
+	PAL_setPalette(PAL3, merchantSprite.palette->data, DMA);
+	bPlayerCanMove = TRUE;
+	
+	
+            displayRoom();
+        }
+    }
+		
+		
+		
+		
+		
 		// if(changed & state & BUTTON_A){
 		// 	if(bShowMerchMenu){
 		// 		bPlayerCanMove = FALSE;
@@ -142,7 +226,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		selection = !selection;
 	}
 	if ((changed & state & BUTTON_START)){
-		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving && !showTitleScreen){
+		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving && !showTitleScreen && !bInsideHouse){
 			//bIsMoving = FALSE;
 			bPlayerCanMove = FALSE;
 			showStats();
@@ -290,6 +374,10 @@ drawBox(11, 0, 21, 15);
 		// sprintf(tailAmount, "%d", tail);
 		// VDP_drawTextBG(BG_B, tailAmount, 29, 22);
 		drawBox(0, 22, 32, 6);
+		VDP_drawTextBG(BG_A, player_name, 1, 23);
+		VDP_drawTextBG(BG_A, "C to Save", 1, 25);
+		
+		showSaveMenu();
 
 
 	}
@@ -367,4 +455,20 @@ void screenWarble() {
 
     // Increment warblePhase to animate the warble effect over time
     warblePhase += FIX16(.4);
+}
+
+void showSaveMenu(){
+	// Draw a box for the save menu
+	if (bSaveMenuActive) {
+		drawBox(13, 22, 19, 6);
+	
+		VDP_drawTextBG(BG_A, "A to Select", 1, 25);
+	// Title
+	VDP_drawTextBG(BG_A, "Select Save Slot", 15, 23);
+
+	// Display slot options with an arrow indicating the current selection
+	VDP_drawTextBG(BG_A, (selectedSaveSlot == 0 ? "~ Slot 1" : "  Slot 1"), 15, 24);
+	VDP_drawTextBG(BG_A, (selectedSaveSlot == 1 ? "~ Slot 2" : "  Slot 2"), 15, 25);
+	VDP_drawTextBG(BG_A, (selectedSaveSlot == 2 ? "~ Slot 3" : "  Slot 3"), 15, 26);
+	}
 }

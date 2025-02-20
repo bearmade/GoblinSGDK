@@ -112,9 +112,12 @@ void collision(){
 			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
-			//  SPR_setVisibility(player, HIDDEN);
-			 sramSave();
-			 
+			// SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
+
+			
+			showPlayerHouse();
+			 //player_hp = player_hp_max;
 			//playerPosX = FIX32(100);
 			//playerPosY = FIX32(100);
 			//makeMap();
@@ -145,8 +148,10 @@ void collision(){
 			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
-			//  SPR_setVisibility(player, HIDDEN);
-			sramSave();
+			//SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
+			showPlayerHouse();
+			//player_hp = player_hp_max;
 		}
 
 	}
@@ -177,8 +182,11 @@ void collision(){
 			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
-			//  SPR_setVisibility(player, HIDDEN);
-			 sramSave();
+			// SPR_setVisibility(player, HIDDEN);
+			showPlayerHouse();
+
+			 //player_hp = player_hp_max;
+			//sramSave(0);
 		}
 
 	}
@@ -212,7 +220,13 @@ void collision(){
 			// VDP_clearPlane(BG_A, TRUE);
 			// VDP_clearPlane(BG_B, TRUE);
 			// 	 SPR_setVisibility(player, HIDDEN);
-			 sramSave();
+			//VDP_clearPlane(BG_A, TRUE);
+			//VDP_clearPlane(BG_B, TRUE);
+			//SPR_setVisibility(player, HIDDEN);
+			// check for key press
+			showPlayerHouse();
+			// player_hp = player_hp_max;
+			//sramSave(0);
 		}
 	}
 

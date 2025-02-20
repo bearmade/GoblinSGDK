@@ -1,18 +1,21 @@
-### To do checklist
+## To do checklist
+
+-----
 
 - [x]  Title screen
     - [x]  functionality
     - [x]  graphics
 - [ ]  Game over screen
 
-- Music and SFX
+- #### Music and SFX
+
     - [x]  Title music
     - [x]  Main world music
     - [x]  Battle music
     - [x]  Victory fanfare
     - [ ] cave music
     
-- Inventory system
+- #### Inventory system
     - [x]  create seperate header and c / organize relevant code
     - [x]  player inventory
     - [x]  stats screen
@@ -20,7 +23,7 @@
     - [x]  buy/sell mechanic
     
 
-- Battle system
+- #### Battle system
     - [x]  create seperate header and c / organize relevant code
     - [x] gold drop
     - [x] item drop
@@ -32,12 +35,12 @@
     - [x] add battle backgrounds
     - [x] battle messages
     
-- Caves
+- #### Caves
     - [ ] add entrances on the world map
     - [ ] cave generation
         
 
-- Player's house
+- #### Player's house
     - [ ] add house screen and menu
         - [ ] graphics
         - [ ] functionality
@@ -46,7 +49,7 @@
     - [ ] add save/load menu
 
     
-- Mini map
+- #### Mini map
     - [x] basic functionality
     - [x] graphics
 
@@ -54,9 +57,6 @@
 <br><br>
 
 - Organize code
- 
-<br>
-
 - Squash bugs
     - Known bugs/Issues
         - [ ] screen transitions
@@ -64,15 +64,15 @@
         
 <br>
 
--  ✨ Polish / Stretch goals ✨
+- #### ✨ Polish / Stretch goals ✨
     - [x] redo/upscale player sprite
         - [x] rework collision coords to match new sprite
     - [x] redo/upscale merchant sprite
     - [ ] redo music
     - [ ] add sound test menu
     - [ ] add cloud/fog sprites?
-    - [ ] add 3 seperate save slots
-    - [ ] add player name input
+    - [x] add 3 seperate save slots
+    - [x] add player name input
 
 
 

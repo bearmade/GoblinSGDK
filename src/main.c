@@ -13,6 +13,7 @@
 #include "../inc/battle.h"
 #include "../inc/inventory.h"
 
+u32 lastTime = 0;
 
 int main()
 {
@@ -64,6 +65,12 @@ int main()
 //    VDP_drawTextBG(BG_B, numString, 10, 12);
 //     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
 
+u32 currentTime = getTick();
+u32 elapsed = currentTime - lastTime;
+lastTime = currentTime;
+
+updatePlayerHouseCooldown(elapsed);
+
       handleInput();
         collision();
 
@@ -79,9 +86,15 @@ int main()
             
             handleMerchantMenuInput();
         }
+        if(bInsideHouse){
+            bIsMoving = FALSE;
+            canFight = FALSE;
+            bPlayerCanMove = FALSE;
+            SPR_setVisibility(player, HIDDEN);
+        }
 
 
-        if(bIsMoving == TRUE && canFight == TRUE){
+        if(bIsMoving == TRUE && canFight == TRUE){ //&& (!currentWorldX == 3 && !currentWorldY == 3)){
             randomEncounter();
         }
         if(bBattleStarted == TRUE){

@@ -14,7 +14,7 @@ void vblankCallback();
 u16 ind;
 bool is_start_pressed;
 u16 random_number;
-bool bPlayerCanMove;
+extern bool bPlayerCanMove;
 bool bBattleStarted;
 bool bBattleOngoing;
 u16 delayCounter;
@@ -24,7 +24,7 @@ bool bInsideHouse;
 const u16 TURN_DELAY;
 u32 worldSeed;
 bool bBattleMessageDone;
-bool canFight;
+extern bool canFight;
 
 
 #endif

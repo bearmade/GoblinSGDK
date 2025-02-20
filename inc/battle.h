@@ -40,14 +40,14 @@ char expChar[5];
 char goblinsKilledChar[5];
 
 //player stats
-s16 player_hp;
-s16 player_hp_max;
-s16 player_attack;
-s16 player_defense;
+extern s16 player_hp;
+extern s16 player_hp_max;
+extern s16 player_attack;
+extern s16 player_defense;
 extern u16 player_gold;
-s16 player_level;
-u16 player_exp;
-u16 player_exp_needed;
+extern s16 player_level;
+extern u16 player_exp;
+extern u16 player_exp_needed;
 u16 goblinsKilled;
 u16 goblinType;
 u16 goblinOffset;

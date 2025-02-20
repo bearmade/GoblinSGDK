@@ -9,6 +9,7 @@ void handleInput();
 void showStats();
 void displayMiniMap(int x, int y);
 void screenWarble();
+void showSaveMenu();
 
 Sprite* player;
 Sprite* merchant;
@@ -23,7 +24,9 @@ bool player_move_up;
 bool player_move_down;
 int attack_timer;
 int attack_duration;
-bool bIsMoving;
+extern bool bIsMoving;
+bool bSaveMenuActive;
+int selectedSaveSlot;
 
 
 fix32 tempPlayerPosX;

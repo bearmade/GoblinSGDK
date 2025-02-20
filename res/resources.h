@@ -18,6 +18,7 @@ extern const Palette our_palette;
 extern const Image bg1;
 extern const Image fg1;
 extern const Image fg2;
+extern const Image house;
 extern const Image title;
 extern const Image titleBase;
 extern const Image battleBack;

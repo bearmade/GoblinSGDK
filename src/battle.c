@@ -211,7 +211,7 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 		drawBox(2, 1, 26, 6);
 		drawBox(9, 7, 10, 7);
 		//show player stats
-		VDP_drawTextBG( BG_A, "Player", 2, 24);
+		VDP_drawTextBG( BG_A, player_name, 2, 24);
 		VDP_drawTextBG( BG_A, "HP:", 2, 26);
 		sprintf(pHP, "%d", player_hp);
 		VDP_drawTextBG( BG_A, pHP, 8, 26);
