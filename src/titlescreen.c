@@ -192,13 +192,13 @@ void playerNameInput(){
         if(value & BUTTON_LEFT) {
             if(currentLetter > 0) { 
                 currentLetter--; 
-                waitMs(100);
+                waitMs(200);
             }
         }
         if(value & BUTTON_RIGHT) {
             if(currentLetter < 9) { 
                 currentLetter++; 
-                waitMs(100);
+                waitMs(200);
             }
         }
         
@@ -207,13 +207,13 @@ void playerNameInput(){
             // Increment the index, wrapping around
             allowed_index[currentLetter] = (allowed_index[currentLetter] + 1) % num_allowed;
             player_name[currentLetter] = allowed_chars[allowed_index[currentLetter]];
-            waitMs(100);
+            waitMs(200);
         }
         if(value & BUTTON_DOWN) {
             // Decrement the index with wrap-around
             allowed_index[currentLetter] = (allowed_index[currentLetter] - 1 + num_allowed) % num_allowed;
             player_name[currentLetter] = allowed_chars[allowed_index[currentLetter]];
-            waitMs(100);
+            waitMs(200);
         }
         
         // Redraw the current player name.
@@ -273,4 +273,14 @@ void cheatCode(){
 
         player_gold = 9999;
     }
+    if(strcmp(player_name, "GIMMEDCASH") == 0){
+
+        player_gold = 10000;
+    }
+    if(strcmp(player_name, "MACHOMAN  ") == 0){
+
+        player_attack = 100;
+        player_defense = 100;
+    }
 }
+

@@ -130,7 +130,7 @@ void initBattle(){
 }
 void randomEncounter(){
 	randChance = random() % 1000;
-	if(randChance <= 5 && !isTransitioning){
+	if(randChance <= 2 && !isTransitioning){
 		XGM_stopPlay();
         XGM_startPlay(battle_vgm);
 		initBattle();

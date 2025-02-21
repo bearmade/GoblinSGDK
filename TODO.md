@@ -36,17 +36,17 @@
     - [x] battle messages
     
 - #### Caves
-    - [ ] add entrances on the world map
+    - [x] add entrances on the world map
     - [ ] cave generation
         
 
 - #### Player's house
-    - [ ] add house screen and menu
-        - [ ] graphics
-        - [ ] functionality
-    - [ ] rest
+    - [x] add house screen and menu
+        - [x] graphics
+        - [x] functionality
+    - [x] rest
     - [x] sram save/load
-    - [ ] add save/load menu
+    - [x] add save/load menu
 
     
 - #### Mini map
@@ -73,6 +73,5 @@
     - [ ] add cloud/fog sprites?
     - [x] add 3 seperate save slots
     - [x] add player name input
-
-
+    - [x] add cheat code system
 

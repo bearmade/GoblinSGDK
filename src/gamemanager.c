@@ -104,17 +104,17 @@ void showPlayerHouse(){
 	SPR_update();
 	VDP_clearPlane(BG_A, TRUE);
 	VDP_clearPlane(BG_B, TRUE);
-	PAL_setPalette(PAL0, house.palette->data, DMA);
-    VDP_drawImageEx(BG_B, &house, TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+	PAL_setPalette(PAL1, house.palette->data, DMA);
+    VDP_drawImageEx(BG_B, &house, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
 
 
 	VDP_loadFontData(tileset_Font.tiles, 96, CPU);
-	PAL_setPalette(PAL1, palette_Font.data, DMA);
+	PAL_setPalette(PAL0, palette_Font.data, DMA);
 
-	drawBox(9, 4, 20, 12);
+	drawBox(9, 2, 20, 14);
 
-
-	VDP_drawTextBG(BG_A, "Player House", 10, 5);
+	VDP_drawTextBG(BG_A, player_name, 13, 5);
+	VDP_drawTextBG(BG_A, "The House of ", 10, 3);
 	VDP_drawTextBG(BG_A, "Press DOWN to Exit", 10, 7);
 	VDP_drawTextBG(BG_A, "Hold A to Rest", 10, 8);
 	//VDP_drawTextBG(BG_A, "Press C to Save", 15, 9);

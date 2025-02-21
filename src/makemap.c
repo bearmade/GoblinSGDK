@@ -11,6 +11,10 @@
 
 u8 LEVEL_TILES[14][16] = {{0}};
 u8 WORLD_TILES[9][9][14][16] = {{{{0}}}};
+
+u16 caveEntranceRow = 0;
+u16 caveEntranceCol = 0;
+
 //u8 WORLD_TILES2[8][8][14][16] = {{{{0}}}};
 u8 WORLD_LAYOUT[9][9] = {{0}};
 u8 WORLD_LAYOUT_CA[112][128] = {{0}};
@@ -901,7 +905,33 @@ void displayRoom(){
                             create16by16TileIndexed(randSet(0,0,1,1),1,0,1,1,13);                          
                             break;
                     }                     
-            }      
+            } 
+
+                               //left
+            // Example cave drawing: if a cave marker is detected, draw an 8x7 cave using tiles starting from index 124.
+            // (You might choose a different condition; here we check for a special cave tile value, e.g. 15.)
+            if (LEVEL_COL2[mapIndex] == 15) {
+                // Choose an offset inside the room where the cave should appear.
+                // (For example, cave tiles will be drawn starting at bg tile coordinate (4,4) in the room.)
+                u16 caveOffsetX = caveEntranceCol;
+                u16 caveOffsetY = caveEntranceRow;
+                u16 tileIndexStart = 124;
+                for (u16 cy = 0; cy < 7; cy++) {
+                    for (u16 cx = 0; cx < 8; cx++) {
+                        // Calculate the tile to draw from the cave tileset.
+                        u16 caveTile = tileIndexStart + cx + (cy * 8);
+                        // Draw the cave tile at the proper BG tile coordinate.
+                        // (xx and yy here are the current drawing offsets for this room)
+                        VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, caveTile),
+                                         caveOffsetX + cx, caveOffsetY + cy);
+                    
+                }
+            }
+
+
+
+
+            }     
 
         }
     }
@@ -1038,3 +1068,48 @@ void matchRoomEdges(u16 roomY, u16 roomX) {
     }
 }
 
+void spawnCaveEntrances() {
+    u16 spawned = 0;
+    // Loop until five cave entrances have been spawned.
+    while (spawned < 5) {
+        // Select a random room from the 9x9 world.
+        u16 rRoomY = random() % 9;
+        u16 rRoomX = random() % 9;
+        
+        // Skip room (3,3)
+        if (rRoomY == 3 && rRoomX == 3) {
+            continue;
+        }
+        // mark room as a cave room
+        
+        
+        // Check if a cave entrance has already been placed in this room.
+        // (Using the center of the room as a reference; the center tiles are at row 6-7 and col 7-8 for a 14x16 room.)
+        if (WORLD_LAYOUT[rRoomY][rRoomX] == 20) {
+            continue;
+        }
+        
+        // Pick a random cave entrance within a safe zone (rows 3 to 9, cols 3 to 9)
+        u16 caveRow = 3 + (random() % 7); // random value 3-9
+        u16 caveCol = 3 + (random() % 7); // random value 3-9
+
+        caveEntranceRow = caveRow;
+        caveEntranceCol = caveCol;
+
+        // Clear a 3x3 area around the chosen cave entrance
+        for (u16 j = caveRow - 3; j <= caveRow + 3; j++) {
+            for (u16 i = caveCol - 3; i <= caveCol + 3; i++) {
+                // Make sure we don't exceed our safe zone boundaries
+                //if (j >= 3 && j <= 9 && i >= 3 && i <= 9) {
+                    WORLD_TILES[rRoomY][rRoomX][j][i] = 0;
+                //}
+            }
+        }
+        // Place the cave entrance tile at the chosen location
+        WORLD_TILES[rRoomY][rRoomX][caveRow-3][caveCol] = 15;
+
+        WORLD_LAYOUT[rRoomY][rRoomX] = 20;
+        spawned++;
+
+    }
+}

@@ -288,7 +288,10 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 	}
 
 	if(value & BUTTON_B){
-		canFight = FALSE;
+		if(strcmp(player_name, "UCANTSEEME") == 0){
+			canFight = FALSE;
+		}
+		//canFight = FALSE;
 		//screenWarble();
 		
 
@@ -422,17 +425,24 @@ void displayMiniMap( int x, int y){
 	//display mini map using font tiles
 	for(int i = 0; i < 9; i++){
 		for(int j = 0; j < 9; j++){
+	VDP_drawTextBG(BG_B, "#", x + j, y + i);
+
+		}}
+	for(int i = 0; i < 9; i++){
+		for(int j = 0; j < 9; j++){
 			if ( i == 3 && j == 3){
-				VDP_drawTextBG(BG_B, "$", x + j, y + i);
+				VDP_drawTextBG(BG_A, "$", x + j, y + i);
 			}
-			else if (i  == currentWorldY && j == currentWorldX){
+			if (i  == currentWorldY && j == currentWorldX){
 				VDP_drawTextBG(BG_B, "%", x + j, y + i);
 			}
-			else if (i == merchWorldY && j == merchWorldX){
-				VDP_drawTextBG(BG_B, "&", x + j, y + i);
+			if (i == merchWorldY && j == merchWorldX){
+				VDP_drawTextBG(BG_A, "&", x + j, y + i);
 			}
-			else{
-				VDP_drawTextBG(BG_B, "#", x + j, y + i);
+		
+		
+			if (WORLD_LAYOUT[i][j] == 20){
+				VDP_drawTextBG(BG_A, "!", x + j, y + i);
 			}
 		}
 	}

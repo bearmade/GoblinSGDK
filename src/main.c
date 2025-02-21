@@ -49,6 +49,7 @@ int main()
     SYS_setVIntCallback(vblankCallback);
     //char numString[2];
     makeMap();
+    spawnCaveEntrances();
     PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	bigMapCA();
 	SPR_init();

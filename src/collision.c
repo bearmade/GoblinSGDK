@@ -124,6 +124,14 @@ void collision(){
 			//roomCount++;
 
 		}
+		if ((tile_type_coll_topleft == CAVE_ENTRANCE_TILE)||(tile_type_coll_bottomleft == CAVE_ENTRANCE_TILE)){
+			VDP_clearPlane(BG_A, TRUE);
+			VDP_clearPlane(BG_B, TRUE);
+			SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
+
+		}
+		
 	}
 	else if(player_move_right){
 		playerPosX += playerSpeed;
@@ -153,8 +161,14 @@ void collision(){
 			showPlayerHouse();
 			//player_hp = player_hp_max;
 		}
+		if((tile_type_coll_topright == CAVE_ENTRANCE_TILE)||(tile_type_coll_bottomright == CAVE_ENTRANCE_TILE)){
+			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			VDP_clearPlane(BG_A, TRUE);
+			VDP_clearPlane(BG_B, TRUE);
+			SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
 
-	}
+	}}
 	if (player_move_up){
 		playerPosY -= playerSpeed;
 		player_coll_coord_up = fix32ToInt(playerPosY) + PLAYER_COL_UP;
@@ -187,6 +201,13 @@ void collision(){
 
 			 //player_hp = player_hp_max;
 			//sramSave(0);
+		}
+		if((tile_type_coll_topright == CAVE_ENTRANCE_TILE)||(tile_type_coll_topleft == CAVE_ENTRANCE_TILE)){
+			VDP_clearPlane(BG_A, TRUE);
+			VDP_clearPlane(BG_B, TRUE);
+			SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
+
 		}
 
 	}
@@ -227,6 +248,13 @@ void collision(){
 			showPlayerHouse();
 			// player_hp = player_hp_max;
 			//sramSave(0);
+		}
+		if((tile_type_coll_bottomright == CAVE_ENTRANCE_TILE)||(tile_type_coll_bottomleft == CAVE_ENTRANCE_TILE)){
+			VDP_clearPlane(BG_A, TRUE);
+			VDP_clearPlane(BG_B, TRUE);
+			SPR_setVisibility(player, HIDDEN);
+			//sramSave(0);
+
 		}
 	}
 

@@ -38,6 +38,11 @@ void makeMap();
 void showMerchant();
 void matchRoomEdges(u16 roomY, u16 roomX);
 void findMerchantPosition();
+void spawnCaveEntrances();
+
+extern u16 caveEntranceRow;
+extern u16 caveEntranceCol;
+
 extern u8 LEVEL_TILES[14][16];
 extern u8 WORLD_TILES[9][9][14][16];
 //extern u8 WORLD_TILES2[8][8][14][16];

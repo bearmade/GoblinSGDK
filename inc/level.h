@@ -8,6 +8,7 @@ void displayLevel();
 #define SOLID_TILE 1
 #define BLOCKER_TILE 12
 #define EXIT_TILE 9
+#define CAVE_ENTRANCE_TILE 15
 #define MAP_WIDTH 256
 #define MAP_HEIGHT 224
 
