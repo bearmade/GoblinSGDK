@@ -236,6 +236,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 
 void handleInput(){
 	u16 value = JOY_readJoypad( JOY_1);
+	
 
 if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 

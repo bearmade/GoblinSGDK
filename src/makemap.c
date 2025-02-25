@@ -913,8 +913,8 @@ void displayRoom(){
             if (LEVEL_COL2[mapIndex] == 15) {
                 // Choose an offset inside the room where the cave should appear.
                 // (For example, cave tiles will be drawn starting at bg tile coordinate (4,4) in the room.)
-                u16 caveOffsetX = caveEntranceCol;
-                u16 caveOffsetY = caveEntranceRow;
+                u16 caveOffsetX = caveEntranceCol + 1;
+                u16 caveOffsetY = caveEntranceRow - 2;
                 u16 tileIndexStart = 124;
                 for (u16 cy = 0; cy < 7; cy++) {
                     for (u16 cx = 0; cx < 8; cx++) {
@@ -931,13 +931,19 @@ void displayRoom(){
 
 
 
-            }     
+            }    
+            if (LEVEL_COL2[mapIndex] == 16) {
+            
+             VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 180), xx, yy);
+            VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 181), xx + 1, yy);
+            VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 183), xx + 1, yy + 1);
+            VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 182), xx, yy + 1);
 
-        }
     }
     
 
 }
+    }}
 void makeMap(){
 
     
@@ -1112,4 +1118,24 @@ void spawnCaveEntrances() {
         spawned++;
 
     }
+}
+
+
+
+void drawMap() {
+    // Clear previous map tiles
+    VDP_clearPlane(BG_A, TRUE);
+    VDP_clearPlane(BG_B, TRUE);
+    
+    // Draw the map tiles
+    for (u16 y = 0; y < mh; y++) {
+        for (u16 x = 0; x < mw; x++) {
+            u16 tileValue = LEVEL_TILES[y][x];
+            // Assuming you have a tileset loaded and the indices correspond to your map tiles
+            VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 0, 0, 0, tileValue), x, y);
+        }
+    }
+    
+    // Update the screen
+    //SYS_doVBlankProcess();
 }

@@ -3,13 +3,13 @@
 
 #include <genesis.h>
 
-#define DUNGEON_HEIGHT 32
-#define DUNGEON_WIDTH  40
-
-void generateDungeon(u16 mapHeight, u16 mapWidth, u16 steps, u16 dungeonLayout[][mapWidth]);
-void setupDungeon(void);
-void drawDungeonMap(u16 mapHeight, u16 mapWidth, u16 dungeonLayout[][mapWidth]);
-
-u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+// Cave generation and handling functions
+void generateCaveLevel(u16 level);
+void enterCave(u16 level);
+void exitCave();
+void updateCaves();
+bool isInCave();
+bool isOnCaveEntrance();
+bool isOnCaveExit();
 
 #endif 

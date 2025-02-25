@@ -58,7 +58,7 @@ waitMs(2000);
 
     bShowMenu = FALSE;
 
-    u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+    //u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
     while(1)
     {
 //         freemem = MEM_getFree();
@@ -66,7 +66,7 @@ waitMs(2000);
 //    sprintf(numString, "%d", freemem);
 //    VDP_drawTextBG(BG_B, numString, 10, 12);
 //     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
-
+updateCaves();
 u32 currentTime = getTick();
 u32 elapsed = currentTime - lastTime;
 lastTime = currentTime;

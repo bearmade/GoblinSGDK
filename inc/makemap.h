@@ -5,6 +5,8 @@
 
 
 
+void drawMap();
+
 u16 countNeighbors(u16 type, u16 y, u16 x);
 u16 countNeighborsEX(u16 type, u16 y, u16 x);
 u16 countNeighborsBigMap(u16 type, u16 y, u16 x);
