@@ -12,6 +12,7 @@
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
 #include "../inc/inventory.h"
+#include "../inc/dungeonGenerator.h"
 
 u32 lastTime = 0;
 
@@ -27,8 +28,8 @@ int main()
 //    sprintf(numString, "%d", freemem);
 //    VDP_drawTextBG(BG_B, numString, 10, 12);
 //     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
-// waitMs(2000);
-    //MAX_MERCHANT_INTERACTIONS = (random() % 10) + 5;
+waitMs(2000);
+    MAX_MERCHANT_INTERACTIONS = (random() % 10) + 5;
 
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL1,palette_Font.data, DMA);
@@ -57,7 +58,7 @@ int main()
 
     bShowMenu = FALSE;
 
-
+    u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
     while(1)
     {
 //         freemem = MEM_getFree();

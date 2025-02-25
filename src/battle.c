@@ -487,7 +487,19 @@ void goblinAttack(){
 		VDP_drawTextBG(BG_A, "You died!", 2, 24);
 		VDP_drawTextBG(BG_A, "Game Over", 2, 26);
 		delayFrames(300);
-		
+		//show gameOverScreen
+		VDP_clearTileMap(BG_B, ind, 1, TRUE);
+		VDP_clearTileMap(BG_A, ind, 1, TRUE);
+		SPR_setVisibility(goblin_sprite, HIDDEN);
+		//clear all lines of text
+		for(int i = 0; i < 28; i++){
+			VDP_clearTextLine(i);
+		}
+
+		PAL_setPalette(PAL2, gameOverScreen.palette->data, DMA);
+		VDP_drawImageEx(BG_B, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+		delayFrames(600);
+
 		SYS_hardReset();
 
 		

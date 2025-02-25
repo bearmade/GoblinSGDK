@@ -20,4 +20,5 @@ out/src/main.o: src/main.c /home/bear/SGDK/inc/genesis.h \
  res/resources.h src/../inc/level.h src/../inc/debuginfo.h \
  src/../inc/player.h src/../inc/camera.h src/../inc/collision.h \
  src/../inc/globals.h src/../inc/titlescreen.h src/../inc/makemap.h \
- src/../inc/gamemanager.h src/../inc/battle.h src/../inc/inventory.h
+ src/../inc/gamemanager.h src/../inc/battle.h src/../inc/inventory.h \
+ src/../inc/dungeonGenerator.h

@@ -8,10 +8,14 @@
 #include "../inc/inventory.h"
 #include "../inc/battle.h"
 #include "../inc/globals.h"
-
+#include "../inc/dungeonGenerator.h"
 // Add offset values to shrink collision box
 #define MERCHANT_COL_OFFSET_X 14  
 #define MERCHANT_COL_OFFSET_Y 12  
+
+
+
+
 
 
 
@@ -42,8 +46,8 @@ void collision(){
 
 	s16 playerX = fix32ToInt(playerPosX);
 	s16 playerY = fix32ToInt(playerPosY);
-	s16 merchantX = fix32ToInt(merchantPosX); // You'll need these position variables
-	s16 merchantY = fix32ToInt(merchantPosY); // for your merchant sprite
+	s16 merchantX = fix32ToInt(merchantPosX); 
+	s16 merchantY = fix32ToInt(merchantPosY); 
 	bool merchantInteraction ;
 			// Box collision detection
     
@@ -129,6 +133,9 @@ void collision(){
 			VDP_clearPlane(BG_B, TRUE);
 			SPR_setVisibility(player, HIDDEN);
 			//sramSave(0);
+			setupDungeon();
+			drawDungeonMap(DUNGEON_HEIGHT, DUNGEON_WIDTH, myDungeon);
+	
 
 		}
 		
@@ -162,12 +169,14 @@ void collision(){
 			//player_hp = player_hp_max;
 		}
 		if((tile_type_coll_topright == CAVE_ENTRANCE_TILE)||(tile_type_coll_bottomright == CAVE_ENTRANCE_TILE)){
-			//VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
+			VDP_clearTileMapRect(BG_B, (fix32ToInt(playerPosX) >> 3),(fix32ToInt(playerPosY) >> 3),2,2);
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 			SPR_setVisibility(player, HIDDEN);
 			//sramSave(0);
-
+			setupDungeon();
+			drawDungeonMap(DUNGEON_HEIGHT, DUNGEON_WIDTH, myDungeon);
+	
 	}}
 	if (player_move_up){
 		playerPosY -= playerSpeed;
@@ -206,6 +215,9 @@ void collision(){
 			VDP_clearPlane(BG_A, TRUE);
 			VDP_clearPlane(BG_B, TRUE);
 			SPR_setVisibility(player, HIDDEN);
+			setupDungeon();
+			drawDungeonMap(DUNGEON_HEIGHT, DUNGEON_WIDTH, myDungeon);
+			
 			//sramSave(0);
 
 		}
@@ -254,6 +266,9 @@ void collision(){
 			VDP_clearPlane(BG_B, TRUE);
 			SPR_setVisibility(player, HIDDEN);
 			//sramSave(0);
+			setupDungeon();
+			drawDungeonMap(DUNGEON_HEIGHT, DUNGEON_WIDTH,	 myDungeon);
+
 
 		}
 	}

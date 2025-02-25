@@ -1,4 +1,4 @@
-out/src/collision.o: src/collision.c src/../inc/debuginfo.h \
+out/src/dungeonGenerator.o: src/dungeonGenerator.c src/../inc/player.h \
  /home/bear/SGDK/inc/genesis.h /home/bear/SGDK/inc/types.h \
  /home/bear/SGDK/inc/config.h /home/bear/SGDK/inc/asm.h \
  /home/bear/SGDK/inc/sys.h /home/bear/SGDK/inc/sram.h \
@@ -17,7 +17,5 @@ out/src/collision.o: src/collision.c src/../inc/debuginfo.h \
  /home/bear/SGDK/inc/z80_ctrl.h /home/bear/SGDK/inc/ym2612.h \
  /home/bear/SGDK/inc/psg.h /home/bear/SGDK/inc/joy.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
- /home/bear/SGDK/inc/task_cst.h src/../inc/level.h src/../inc/player.h \
- src/../inc/camera.h src/../inc/collision.h src/../inc/makemap.h \
- src/../inc/gamemanager.h src/../inc/inventory.h src/../inc/battle.h \
- src/../inc/globals.h src/../inc/dungeonGenerator.h
+ /home/bear/SGDK/inc/task_cst.h src/../inc/dungeonGenerator.h \
+ src/../inc/makemap.h src/../inc/level.h

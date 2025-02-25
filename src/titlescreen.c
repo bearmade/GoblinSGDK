@@ -34,14 +34,14 @@ void displayTitle(){
     VDP_drawTextBG(BG_A, " Load Game", 11, 26);
     
     while(1) {
-        // Only handle cursor and input logic here
+       
         u16 value = JOY_readJoypad(JOY_1);
         
         VDP_drawTextBG(BG_A, " ", 10, ((selection == 0 ? 1 : 0)*2 + 24));
         VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
 
         if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
-            // Your existing START button logic
+            
             if(selection == 0) {
                 playerNameInput();
                 worldSeed = random();
@@ -123,16 +123,38 @@ void displayLoadMenu(){
         }
 
         if((value & BUTTON_START) || (value & BUTTON_B) || 
-           (value & BUTTON_A) || (value & BUTTON_C)){
-            // if(loadSelection == 0) {
-            //     sramLoad(0);
-            // } else if(loadSelection == 1) {
-            //     sramLoad(1);
-            // } else if(loadSelection == 2) {
-            //     sramLoad(2);
-            // }
-            sramLoad(loadSelection);
-            setRandomSeed(worldSeed);
+           (value & BUTTON_A)){
+            if(loadSelection == 0) {
+                if(player_name1 == ' '){
+                    playerNameInput();
+                }
+                else{
+                    sramLoad(loadSelection);
+                    setRandomSeed(worldSeed);
+
+                }
+            } else if(loadSelection == 1) {
+                if(player_name2 == ' '){
+                    playerNameInput();
+                }
+                else{
+                    sramLoad(loadSelection);
+                    setRandomSeed(worldSeed);
+
+                }
+               
+            } else if(loadSelection == 2) {
+                if(player_name3 == ' '){
+                    playerNameInput();
+                }
+                else{
+                    sramLoad(loadSelection);
+                    setRandomSeed(worldSeed);
+
+                }
+               
+            }
+
             showTitleScreen = FALSE;
             bPlayerCanMove = TRUE;
             bShowMenu = FALSE;
@@ -142,6 +164,12 @@ void displayLoadMenu(){
             XGM_stopPlay();
             XGM_startPlay(world_vgm);
             break;
+        }
+        if (value & BUTTON_C){
+           // go back to title screen
+           showTitleScreen = TRUE;
+           bPlayerCanMove = FALSE;
+           bShowMenu = TRUE;
         }
 
         SYS_doVBlankProcess();
@@ -236,7 +264,7 @@ void playerNameInput(){
         SYS_doVBlankProcess();
     }
     
-    // Here you could copy player_name into a global variable if needed.
+ 
     
     showTitleScreen = FALSE;
     bPlayerCanMove = TRUE;
@@ -282,5 +310,11 @@ void cheatCode(){
         player_attack = 100;
         player_defense = 100;
     }
+    if(strcmp(player_name, "IWANTDEATH") == 0){
+        player_hp = 1;
+        
+    }
+
 }
+
 

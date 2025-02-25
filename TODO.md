@@ -5,7 +5,7 @@
 - [x]  Title screen
     - [x]  functionality
     - [x]  graphics
-- [ ]  Game over screen
+- [x]  Game over screen
 
 - #### Music and SFX
 
@@ -13,6 +13,7 @@
     - [x]  Main world music
     - [x]  Battle music
     - [x]  Victory fanfare
+    - [ ]  Game over music
     - [ ] cave music
     
 - #### Inventory system

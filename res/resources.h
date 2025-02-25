@@ -20,6 +20,7 @@ extern const Image fg1;
 extern const Image fg2;
 extern const Image house;
 extern const Image title;
+extern const Image gameOverScreen;
 extern const Image titleBase;
 extern const Image battleBack;
 extern const Image battleBack2;
