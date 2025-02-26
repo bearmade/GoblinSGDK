@@ -125,34 +125,53 @@ void displayLoadMenu(){
         if((value & BUTTON_START) || (value & BUTTON_B) || 
            (value & BUTTON_A)){
             if(loadSelection == 0) {
-                if(player_name1 == ' '){
-                    playerNameInput();
+                // Check if name is empty or only contains spaces/null bytes
+                bool isEmpty = TRUE;
+                for(int i = 0; i < 10; i++) {
+                    if(player_name1[i] != ' ' && player_name1[i] != '\0') {
+                        isEmpty = FALSE;
+                        break;
+                    }
                 }
-                else{
+                
+                if(isEmpty) {
+                    playerNameInput();
+                } else {
                     sramLoad(loadSelection);
                     setRandomSeed(worldSeed);
-
                 }
             } else if(loadSelection == 1) {
-                if(player_name2 == ' '){
-                    playerNameInput();
+                // Check if name is empty or only contains spaces/null bytes
+                bool isEmpty = TRUE;
+                for(int i = 0; i < 10; i++) {
+                    if(player_name2[i] != ' ' && player_name2[i] != '\0') {
+                        isEmpty = FALSE;
+                        break;
+                    }
                 }
-                else{
+                
+                if(isEmpty) {
+                    playerNameInput();
+                } else {
                     sramLoad(loadSelection);
                     setRandomSeed(worldSeed);
-
                 }
-               
             } else if(loadSelection == 2) {
-                if(player_name3 == ' '){
-                    playerNameInput();
+                // Check if name is empty or only contains spaces/null bytes
+                bool isEmpty = TRUE;
+                for(int i = 0; i < 10; i++) {
+                    if(player_name3[i] != ' ' && player_name3[i] != '\0') {
+                        isEmpty = FALSE;
+                        break;
+                    }
                 }
-                else{
+                
+                if(isEmpty) {
+                    playerNameInput();
+                } else {
                     sramLoad(loadSelection);
                     setRandomSeed(worldSeed);
-
                 }
-               
             }
 
             showTitleScreen = FALSE;
@@ -170,6 +189,7 @@ void displayLoadMenu(){
            showTitleScreen = TRUE;
            bPlayerCanMove = FALSE;
            bShowMenu = TRUE;
+           break;  // Added break to exit this loop when user presses C
         }
 
         SYS_doVBlankProcess();
@@ -279,15 +299,25 @@ void playerNameInput(){
 
 void all3playerNames(){
     SRAM_enable();
-    for(u8 i = 0; i < sizeof(player_name1); i++){
+    
+    // Read player_name1
+    for(u8 i = 0; i < sizeof(player_name1) - 1; i++){
         player_name1[i] = SRAM_readByte(38 + i);
     }
-    for(u8 i = 0; i < sizeof(player_name2); i++){
+    player_name1[10] = '\0';  // Ensure null-termination
+    
+    // Read player_name2
+    for(u8 i = 0; i < sizeof(player_name2) - 1; i++){
         player_name2[i] = SRAM_readByte(68 + 38 + i);
     }
-    for(u8 i = 0; i < sizeof(player_name3); i++){
+    player_name2[10] = '\0';  // Ensure null-termination
+    
+    // Read player_name3
+    for(u8 i = 0; i < sizeof(player_name3) - 1; i++){
         player_name3[i] = SRAM_readByte(136 + 38 + i);
     }
+    player_name3[10] = '\0';  // Ensure null-termination
+    
     SRAM_disable();
 }
 
