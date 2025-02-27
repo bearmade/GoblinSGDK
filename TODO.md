@@ -73,7 +73,7 @@
         - [x] rework collision coords to match new sprite
     - [x] redo/upscale merchant sprite
     - [ ] redo music
-    - [ ] add sound test menu
+    - [x] add sound test menu
     - [ ] add cloud/fog sprites?
     - [x] add 3 seperate save slots
     - [x] add player name input
