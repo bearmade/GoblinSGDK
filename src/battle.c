@@ -498,6 +498,9 @@ void goblinAttack(){
 
 		PAL_setPalette(PAL2, gameOverScreen.palette->data, DMA);
 		VDP_drawImageEx(BG_B, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+		SPR_setVisibility(goblin_sprite, HIDDEN);
+		SPR_releaseSprite(goblin_sprite);
+		SPR_update();
 		delayFrames(600);
 
 		SYS_hardReset();

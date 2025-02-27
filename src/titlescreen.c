@@ -277,6 +277,16 @@ void playerNameInput(){
         
         // Confirm input with START or A button
         if(value & BUTTON_START || value & BUTTON_A) {
+            // Add check for SOUNDTEST name
+            if(strcmp(player_name, "HEARMEOUT ") == 0){
+                // Show sound test menu
+                displaySoundTestMenu();
+                // After returning from sound test menu, go back to title
+                showTitleScreen = TRUE;
+                displayTitle();
+                return;
+            }
+            
             cheatCode();
             break;
         }
@@ -296,7 +306,6 @@ void playerNameInput(){
     XGM_stopPlay();
     XGM_startPlay(world_vgm);
 }
-
 void all3playerNames(){
     SRAM_enable();
     
@@ -348,3 +357,100 @@ void cheatCode(){
 }
 
 
+
+
+
+
+
+void displaySoundTestMenu() {
+    // List of songs to test
+    const char* songNames[] = {
+        "Title Theme",
+        "World Music",
+        "Battle Music",
+        "Victory Fanfare"
+    };
+    
+    // Corresponding VGM resources
+    const void* songResources[] = {
+        title_vgm,
+        world_vgm,
+        battle_vgm,
+        victory_vgm
+    };
+    
+    const int songCount = 4;
+    int selection = 0;
+    int lastSelection = -1;
+    bool playing = FALSE;
+    
+    // Clear screens
+    VDP_clearPlane(BG_A, TRUE);
+    VDP_clearPlane(BG_B, TRUE);
+    
+    // Set up background
+    PAL_setPalette(PAL1, titleBase.palette->data, DMA);
+    VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+    
+    // Draw sound test menu
+    PAL_setPalette(PAL0, palette_Font.data, DMA);
+    drawBox(6, 10, 20, 18);
+    VDP_drawTextBG(BG_A, "SOUND TEST", 10, 11);
+    VDP_drawTextBG(BG_A, "----------", 10, 12);
+    
+    // Draw initial list
+    for(int i = 0; i < songCount; i++) {
+        VDP_drawTextBG(BG_A, songNames[i], 10, 14 + i);
+    }
+    
+    // Draw instructions
+    VDP_drawTextBG(BG_A, "A: Play  C: Exit", 9, 19);
+    
+    while(1) {
+        u16 value = JOY_readJoypad(JOY_1);
+        
+        // Handle up/down navigation
+        if(value & BUTTON_UP) {
+            if(selection > 0) {
+                selection--;
+                waitMs(200);
+            }
+        }
+        if(value & BUTTON_DOWN) {
+            if(selection < songCount - 1) {
+                selection++;
+                waitMs(200);
+            }
+        }
+        
+        // Update selection marker if needed
+        if(selection != lastSelection) {
+            // Clear old selection
+            if(lastSelection >= 0) {
+                VDP_drawTextBG(BG_A, "  ", 8, 14 + lastSelection);
+            }
+            
+            // Draw new selection
+            VDP_drawTextBG(BG_A, "->", 8, 14 + selection);
+            lastSelection = selection;
+        }
+        
+        // Play selected music
+        if((value & BUTTON_A) || (value & BUTTON_B) || (value & BUTTON_START)) {
+            XGM_stopPlay();
+            XGM_startPlay(songResources[selection]);
+            playing = TRUE;
+            waitMs(200);
+        }
+        
+        // Return to title screen
+        if(value & BUTTON_C) {
+            XGM_stopPlay();
+            showTitleScreen = TRUE;
+            displayTitle();
+            break;
+        }
+        
+        SYS_doVBlankProcess();
+    }
+}

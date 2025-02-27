@@ -13,7 +13,7 @@ u16 countNeighborsBigMap(u16 type, u16 y, u16 x);
 u16 randSet(u16 a, u16 b, u16 c, u16 d);
 void initMap(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);
 void makeRocks(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type);
-void makeWall(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side);
+void makeWall(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side, u8 type);
 void makeGrass(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);
 void makeExit(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);
 void makePlayerSpawn(u16 yy, u16 xx, u16 mapheight, u16 mapwidth);

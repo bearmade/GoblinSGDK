@@ -5,7 +5,7 @@
 - [x]  Title screen
     - [x]  functionality
     - [x]  graphics
-- [x]  Game over screen
+- [x]  Game over screen	SPR_destroySprite(goblin_sprite);
 
 - #### Music and SFX
 
@@ -39,6 +39,9 @@
 - #### Caves
     - [x] add entrances on the world map
     - [ ] cave generation
+    - [ ] cave tileset
+    - [ ] treasure
+    
         
 
 - #### Player's house

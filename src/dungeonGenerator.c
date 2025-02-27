@@ -206,6 +206,13 @@ void generateCaveLevel(u16 level) {
     // Add cave exit
     placeCaveExit(mapheight, mapwidth);
     
+    // Ensure there's a valid path from player to exit
+    ensurePathToExit(mapheight, mapwidth);
+    makeWall(yy, xx, mapheight, mapwidth, 0, 1);
+    makeWall(yy, xx, mapheight, mapwidth, 1, 1);
+    makeWall(yy, xx, mapheight, mapwidth, 2, 1);
+    makeWall(yy, xx, mapheight, mapwidth, 3, 1);
+    //ruleTile(mapheight, mapwidth, 1);
     // Convert map arrays
     convertMapArrays();
 }
@@ -362,4 +369,93 @@ void updateCaves() {
 // Return whether player is in a cave
 bool isInCave() {
     return inCave;
+}
+
+// Ensure there's a valid path from player to exit
+void ensurePathToExit(u16 mapheight, u16 mapwidth) {
+    // Find player position (starting point)
+    u16 playerY = 0, playerX = 0;
+    // Find exit position (destination)
+    u16 exitY = 0, exitX = 0;
+    
+    // Locate player and exit positions in the map
+    for (u16 y = 0; y < mapheight; y++) {
+        for (u16 x = 0; x < mapwidth; x++) {
+            if (LEVEL_TILES[y][x] == 10) { // Player tile
+                playerY = y;
+                playerX = x;
+            } else if (LEVEL_TILES[y][x] == 16) { // Exit tile
+                exitY = y;
+                exitX = x;
+            }
+        }
+    }
+    
+    // Simple path creation using a direct approach
+    u16 currentY = playerY;
+    u16 currentX = playerX;
+    
+    // Create a direct path in X direction first
+    while (currentX != exitX) {
+        if (currentX < exitX) {
+            currentX++;
+        } else {
+            currentX--;
+        }
+        // Clear any walls in the path
+        if (LEVEL_TILES[currentY][currentX] == 1) {
+            LEVEL_TILES[currentY][currentX] = 0;
+        }
+    }
+    
+    // Then create a direct path in Y direction
+    while (currentY != exitY) {
+        if (currentY < exitY) {
+            currentY++;
+        } else {
+            currentY--;
+        }
+        // Clear any walls in the path
+        if (LEVEL_TILES[currentY][currentX] == 1) {
+            LEVEL_TILES[currentY][currentX] = 0;
+        }
+    }
+    
+    // Ensure the path is at least 2 tiles wide for better navigation
+    for (u16 y = 0; y < mapheight; y++) {
+        for (u16 x = 0; x < mapwidth; x++) {
+            if (LEVEL_TILES[y][x] == 0) { // If this is a path tile
+                // Check adjacent tiles and clear walls if necessary
+                for (s16 dy = -1; dy <= 1; dy++) {
+                    for (s16 dx = -1; dx <= 1; dx++) {
+                        // Only check orthogonal adjacency (not diagonals)
+                        if ((dy == 0 || dx == 0) && !(dy == 0 && dx == 0)) {
+                            if (y+dy >= 0 && y+dy < mapheight && x+dx >= 0 && x+dx < mapwidth) {
+                                // Randomly clear some adjacent walls for a more natural path
+                                if (LEVEL_TILES[y+dy][x+dx] == 1 && random() % 100 < 40) {
+                                    LEVEL_TILES[y+dy][x+dx] = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void ruleTile(u16 mapheight, u16 mapwidth, u8 type){
+    for( u16 y = 0; y < mapheight; y++) {
+        for( u16 x = 0; x < mapwidth; x++) {
+            if(LEVEL_TILES[y][x] == type){
+                if(LEVEL_TILES[y-1][x] == type){
+                    LEVEL_TILES[y][x] = 17;
+                }
+
+            }
+        }
+    }
+
+
+
 }

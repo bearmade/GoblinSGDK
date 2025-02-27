@@ -139,53 +139,53 @@ void makeRocks(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 			}
 		}}
 }
-void makeWall(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side){
+void makeWall(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 side, u8 type){
     for (yy = 0; yy < mapheight; yy++) { 
         for (xx = 0; xx < mapwidth; xx++) { 
-			if(side == 0){
+            if(side == 0){
                 if (xx == 0) {
-                LEVEL_TILES[yy][xx] = 8;
-                
-            }
+                    LEVEL_TILES[yy][xx] = type;
+                }
                 if ((xx == 1)) {
-                if((random() % 100)>=65){
-				LEVEL_TILES[yy][xx] = 8;
-			}
-            }   
+                    if((random() % 100)>=65){
+                        LEVEL_TILES[yy][xx] = type;
+                    }
+                }   
             }
-            if(side == 1){
+            else if(side == 1){
                 if (yy == 0) {
-                LEVEL_TILES[yy][xx] = 8;
-            }
+                    LEVEL_TILES[yy][xx] = type;
+                }
                 if ((yy == 1)) {
-                if((random() % 100)>=65){
-				LEVEL_TILES[yy][xx] = 8;
-			}
+                    if((random() % 100)>=65){
+                        LEVEL_TILES[yy][xx] = type;
+                    }
+                }
             }
-            }
-            if(side == 2){
+            else if(side == 2){
                 if (xx == mapwidth-1) {
-                LEVEL_TILES[yy][xx] = 8;
-            }
+                    LEVEL_TILES[yy][xx] = type;
+                }
                 if ((xx == mapwidth-2)) {
-                if((random() % 100)>=65){
-				LEVEL_TILES[yy][xx] = 8;
-			}
+                    if((random() % 100)>=65){
+                        LEVEL_TILES[yy][xx] = type;
+                    }
+                }
             }
-            }
-            if(side == 3){
+            else if(side == 3){
                 if (yy == mapheight-1) {
-                LEVEL_TILES[yy][xx] = 8;
-            }
+                    LEVEL_TILES[yy][xx] = type;
+                }
                 if ((yy == mapheight-2)) {
-                if((random() % 100)>=65){
-				LEVEL_TILES[yy][xx] = 8;
-			}
-            }
+                    if((random() % 100)>=65){
+                        LEVEL_TILES[yy][xx] = type;
+                    }
+                }
             }
         }
     }
 }
+
 void makeGrass(u16 yy, u16 xx, u16 mapheight, u16 mapwidth){
     for (yy = 0; yy < mapheight; yy++) { 
         for (xx = 0; xx < mapwidth; xx++) { 
@@ -365,35 +365,35 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 
     switch(type) {
         case 1:
-            makeWall(yy, xx, mapheight, mapwidth, 0);
-            makeWall(yy, xx, mapheight, mapwidth, 1);
+            makeWall(yy, xx, mapheight, mapwidth, 0, 8);
+            makeWall(yy, xx, mapheight, mapwidth, 1, 8);
             break;
         case 2:
-            makeWall(yy, xx, mapheight, mapwidth, 1);
+            makeWall(yy, xx, mapheight, mapwidth, 1, 8);
             break;
         case 3:
-            makeWall(yy, xx, mapheight, mapwidth, 1);
-            makeWall(yy, xx, mapheight, mapwidth, 2);
+            makeWall(yy, xx, mapheight, mapwidth, 1, 8);
+            makeWall(yy, xx, mapheight, mapwidth, 2, 8);
             break;
         case 4:
-            makeWall(yy, xx, mapheight, mapwidth, 0);
+            makeWall(yy, xx, mapheight, mapwidth, 0, 8);
             break;
         case 5:
             makeExit(yy, xx, mapheight, mapwidth);
             break;
         case 6:
-            makeWall(yy, xx, mapheight, mapwidth, 2);
+            makeWall(yy, xx, mapheight, mapwidth, 2, 8);
             break;
         case 7:
-            makeWall(yy, xx, mapheight, mapwidth, 0);
-            makeWall(yy, xx, mapheight, mapwidth, 3);
+            makeWall(yy, xx, mapheight, mapwidth, 0, 8);
+            makeWall(yy, xx, mapheight, mapwidth, 3, 8);
             break;
         case 8:
-            makeWall(yy, xx, mapheight, mapwidth, 3);
+            makeWall(yy, xx, mapheight, mapwidth, 3, 8);
             break;
         case 9:
-            makeWall(yy, xx, mapheight, mapwidth, 3);
-            makeWall(yy, xx, mapheight, mapwidth, 2);
+            makeWall(yy, xx, mapheight, mapwidth, 3, 8);
+            makeWall(yy, xx, mapheight, mapwidth, 2, 8);
             break;
         case 10:
             //merchantChance = 1; 
@@ -712,12 +712,19 @@ void displayRoom(){
             if (LEVEL_COL2[mapIndex] == 0) {
 				create16by16TileRand(FALSE, 10,10,12,12);
             }
-
+            //lone stone
             if (LEVEL_COL2[mapIndex] == 1) {
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 1), xx, yy);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, TRUE, 1), xx + 1, yy);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, TRUE, TRUE, 1), xx + 1, yy + 1);
                 VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, TRUE, FALSE, 1), xx, yy + 1);
+            }
+            //cross stone
+            if(LEVEL_COL2[mapIndex] == 17){
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, FALSE, 3), xx, yy);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 1, FALSE, TRUE, 3), xx + 1, yy);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, TRUE, TRUE, 3), xx + 1, yy + 1);
+                VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, TRUE, FALSE, 3), xx, yy + 1);
             }
            
             if (LEVEL_COL2[mapIndex] == 5) {
