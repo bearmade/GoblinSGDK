@@ -1,7 +1,7 @@
 ## To do checklist
 
 -----
-
+- [x] Add Sega logo
 - [x]  Title screen
     - [x]  functionality
     - [x]  graphics

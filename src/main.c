@@ -14,10 +14,29 @@
 #include "../inc/inventory.h"
 #include "../inc/dungeonGenerator.h"
 
+#define SFX_SEGA 65
+
+
 u32 lastTime = 0;
+
+void showSegaLogo(){
+    PAL_setPalette(PAL2, segaLogo.palette->data, DMA);
+    VDP_drawImageEx(BG_B, &segaLogo, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, 0), 0, 0, FALSE, TRUE);
+    //waitMs(1000);
+    XGM_setPCM(SFX_SEGA, sfx_sega, sizeof(sfx_sega));
+    XGM_startPlayPCM(SFX_SEGA, 15, SOUND_PCM_CH2);
+    SYS_doVBlankProcess();
+    delayFrames(300);
+}
 
 int main()
 {
+
+    VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
+	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
+    //show sega logo 
+    showSegaLogo();
+
 
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
@@ -34,8 +53,7 @@ waitMs(2000);
     VDP_loadFontData(tileset_Font.tiles, 96, CPU);
     PAL_setPalette(PAL1,palette_Font.data, DMA);
 
-	VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
-	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
+
     JOY_setEventHandler(joyEvent);
     bShowMenu = FALSE;
 	displayTitle();

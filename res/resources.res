@@ -29,5 +29,9 @@ SPRITE  goblinSprite "goblins.png" 6 6 NONE 0
 XGM world_vgm "ikag.vgm"
 XGM title_vgm "ikagTitle.vgm"
 XGM battle_vgm "iKilledAGoblinBattle.vgm"
+XGM world2_vgm "iKilledAGoblinWorld.vgm"
 XGM victory_vgm "fanfare.vgm"
-WAV sfx_swoosh "swoosh.wav" XGM
+WAV sfx_sega "sega.wav" XGM
+
+
+IMAGE segaLogo    "SEGA_Outline.png" NONE ALL

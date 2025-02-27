@@ -1,0 +1,40 @@
+  ____  ___  ____  _     ___ _   _ 
+ / ___|/ _ \| __ )| |   |_ _| \ | |
+| |  _| | | |  _ \| |    | ||  \| |
+| |_| | |_| | |_) | |___ | || |\  |
+ \____|\___/|____/|_____|___|_| \_|
+
+
+CHEATS:
+
+To activate cheats in Goblin SGDK, enter these specific names when creating your character:
+
+1. "HELP ME   " - God Mode
+   - HP and Max HP set to 9999
+   - Attack and Defense set to 99
+   - Gold set to 9999
+
+2. "GIMMEDCASH" - Wealth Cheat
+   - Instantly receive 10,000 gold
+
+3. "MACHOMAN  " - Strength Cheat
+   - Attack and Defense both set to 100
+
+4. "IWANTDEATH" - DEATH Mode
+   - Sets your HP to just 1
+   - For players seeking death
+
+5. "HEARMEOUT " - Sound Test
+   - Access hidden sound test menu
+
+6. "UCANTSEEME " - Invisibility Cheat
+   - Hold B to become immune to random encounters
+   - Useful for exploring the game world
+
+7. "JOHN CENA " - John Cena Mode
+   - Same as UCANTSEEME + MACHOMAN 
+   - For fans of wrestling
+
+Note: All cheat names must be exactly 10 characters long with proper spacing as shown above.
+
+                        

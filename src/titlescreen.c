@@ -365,10 +365,11 @@ void cheatCode(){
 void displaySoundTestMenu() {
     // List of songs to test
     const char* songNames[] = {
-        "Title Theme",
-        "World Music",
-        "Battle Music",
-        "Victory Fanfare"
+        "Initial Fantasy",
+        "I Killed a Goblin",
+        "Goblin Emergence",
+        "Death of a Goblin",
+        "Goblin's Ghost"
     };
     
     // Corresponding VGM resources
@@ -376,10 +377,11 @@ void displaySoundTestMenu() {
         title_vgm,
         world_vgm,
         battle_vgm,
-        victory_vgm
+        victory_vgm,
+        world2_vgm
     };
     
-    const int songCount = 4;
+    const int songCount = 5;
     int selection = 0;
     int lastSelection = -1;
     bool playing = FALSE;
@@ -395,16 +397,16 @@ void displaySoundTestMenu() {
     // Draw sound test menu
     PAL_setPalette(PAL0, palette_Font.data, DMA);
     drawBox(6, 10, 20, 18);
-    VDP_drawTextBG(BG_A, "SOUND TEST", 10, 11);
-    VDP_drawTextBG(BG_A, "----------", 10, 12);
+    VDP_drawTextBG(BG_A, "SOUND TEST", 11, 11);
+    VDP_drawTextBG(BG_A, "----------", 11, 12);
     
     // Draw initial list
     for(int i = 0; i < songCount; i++) {
-        VDP_drawTextBG(BG_A, songNames[i], 10, 14 + i);
+        VDP_drawTextBG(BG_A, songNames[i], 8, 14 + i);
     }
     
     // Draw instructions
-    VDP_drawTextBG(BG_A, "A: Play  C: Exit", 9, 19);
+    VDP_drawTextBG(BG_A, "A: Play  C: Exit", 8, 25);
     
     while(1) {
         u16 value = JOY_readJoypad(JOY_1);
@@ -427,11 +429,11 @@ void displaySoundTestMenu() {
         if(selection != lastSelection) {
             // Clear old selection
             if(lastSelection >= 0) {
-                VDP_drawTextBG(BG_A, "  ", 8, 14 + lastSelection);
+                VDP_drawTextBG(BG_A, "  ", 6, 14 + lastSelection);
             }
             
             // Draw new selection
-            VDP_drawTextBG(BG_A, "->", 8, 14 + selection);
+            VDP_drawTextBG(BG_A, "~", 6, 14 + selection);
             lastSelection = selection;
         }
         
@@ -445,6 +447,7 @@ void displaySoundTestMenu() {
         
         // Return to title screen
         if(value & BUTTON_C) {
+            SYS_hardReset();
             XGM_stopPlay();
             showTitleScreen = TRUE;
             displayTitle();
