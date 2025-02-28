@@ -8,7 +8,7 @@
 
 <br>
 
-![screenshot3](./screenshots/battle1.png)
+![screenshot3](./screenshots/battle2.png)
 
 <br>
 
@@ -17,3 +17,19 @@
 <br>
 
 ![screenshot5](./screenshots/merchScreen.png)
+
+<br> 
+
+![screenshot6](./screenshots/battle3.png)
+
+<br>
+
+![screenshot7](./screenshots/battle4.png)
+
+<br>
+
+![screenshot8](./screenshots/gameOver.png)
+
+
+
+<br>

@@ -9,7 +9,7 @@
 
 
 // Keep track of current location (world or cave)
-static bool inCave = FALSE;
+bool inCave = FALSE;
 // Store current cave level
 static u16 caveLevel = 1;
 // Save world position when entering cave for use when exiting

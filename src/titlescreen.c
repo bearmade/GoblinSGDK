@@ -22,6 +22,17 @@ void all3playerNames();
 void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
+
+    //show the text "bear made games presesnts"
+    //drawBox(1, 1, 30, 3);
+    VDP_clearPlane(BG_A, TRUE);
+    VDP_clearPlane(BG_B, TRUE);
+    VDP_drawTextBG(BG_A, "BEARMADE PRESENTS", 8, 10);
+    delayFrames(400);
+    VDP_drawTextBG(BG_A, "                    ", 8, 10);
+
+
+
     PAL_setPalette(PAL1, titleBase.palette->data, DMA);
     VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
     PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
@@ -352,6 +363,10 @@ void cheatCode(){
     if(strcmp(player_name, "IWANTDEATH") == 0){
         player_hp = 1;
         
+    }
+    if(strcmp(player_name, "JOHN CENA ") == 0){
+        player_attack = 100;
+        player_defense = 100;
     }
 
 }

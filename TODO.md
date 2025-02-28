@@ -5,7 +5,7 @@
 - [x]  Title screen
     - [x]  functionality
     - [x]  graphics
-- [x]  Game over screen	SPR_destroySprite(goblin_sprite);
+- [x]  Game over screen	
 
 - #### Music and SFX
 
@@ -25,7 +25,7 @@
     
 
 - #### Battle system
-    - [x]  create seperate header and c / organize relevant code
+    - [x] create seperate header and c / organize relevant code
     - [x] gold drop
     - [x] item drop
     - [x] game over
@@ -38,7 +38,7 @@
     
 - #### Caves
     - [x] add entrances on the world map
-    - [ ] cave generation
+    - [x] cave generation
     - [ ] cave tileset
     - [ ] treasure
     

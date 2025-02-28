@@ -27,9 +27,11 @@
 | Goblin 7 | Sprite | Stephen Challener (Redshrike) |  ![alt](./goblins/row_6.gif) |
 | World Tileset | Tileset | Hyptosis (Edited for Genesis by Hunter Singleton)| ![alt](./res/tilesSEGA2.png) |
 | Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters2.png) |
-| Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase3.png) |
-| Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop1.png) |
-| Battle Back 2 | Tileset | Stable Diffusion | ![alt](./res/backdrop2.png) |
+| Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase2.png) |
+| Game Over Screen | Tileset | Stable Diffusion | ![alt](./res/gameover.png) |
+| Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop6.png) |
+| Battle Back 2 | Tileset | Stable Diffusion | ![alt](./res/backdrop7.png) |
+| Cave Battle Back | Tileset | Stable Diffusion | ![alt](./res/cave2.png) |
 | Player Portrait | Tileset | Stable Diffusion | ![alt](./res/face2.png) |
 | Merchant Portrait | Tileset | Stable Diffusion | ![alt](./res/face3.png) |
 | Title Theme | VGM | Hunter Singleton |  |

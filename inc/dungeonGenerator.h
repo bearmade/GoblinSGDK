@@ -13,5 +13,6 @@ bool isOnCaveEntrance();
 bool isOnCaveExit();
 void ensurePathToExit(u16 mapheight, u16 mapwidth);
 void ruleTile(u16 mapheight, u16 mapwidth, u8 type);
+extern bool inCave;
 
 #endif 

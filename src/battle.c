@@ -9,6 +9,7 @@
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
 #include "../inc/inventory.h"
+#include "../inc/dungeonGenerator.h"
 
 Sprite* goblin_sprite;
 int randChance = 0;
@@ -175,19 +176,29 @@ void displayBattle(){
 	
 VDP_loadTileSet(goblin.tileset, 1026, DMA);
     PAL_setPalette(PAL1, goblin.palette->data, DMA);
-	u16 randoBackdrop = random() % 2;
-	switch (randoBackdrop){
-		case 0:
-		
-		PAL_setPalette(PAL2, battleBack.palette->data, DMA);
-		VDP_drawImageEx(BG_B, &battleBack, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-		break;
-		case 1:
-		
-		PAL_setPalette(PAL2, battleBack2.palette->data, DMA);
-		VDP_drawImageEx(BG_B, &battleBack2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-		break;
+
+	if(inCave){
+		PAL_setPalette(PAL2, battleBackCave.palette->data, DMA);
+		VDP_drawImageEx(BG_B, &battleBackCave, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+	}else{
+		u16 randoBackdrop = random() % 2;
+		switch (randoBackdrop){
+			case 0:
+			
+			PAL_setPalette(PAL2, battleBack.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBack, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 1:
+			
+			PAL_setPalette(PAL2, battleBack2.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBack2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+		}
+
 	}
+
+
+
 	// PAL_setPalette(PAL2, battleBack.palette->data, DMA);
 	//     VDP_drawImageEx(BG_A, &battleBack, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
 

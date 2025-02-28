@@ -25,6 +25,7 @@ extern const Image gameOverScreen;
 extern const Image titleBase;
 extern const Image battleBack;
 extern const Image battleBack2;
+extern const Image battleBackCave;
 extern const Image titleLetters;
 extern const Image face;
 extern const Image merchFace;
