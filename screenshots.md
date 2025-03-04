@@ -30,6 +30,8 @@
 
 ![screenshot8](./screenshots/gameOver.png)
 
+<br>
 
+![screenshot9](./screenshots/cave.png)
 
 <br>

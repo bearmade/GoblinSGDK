@@ -31,6 +31,7 @@ extern const Image face;
 extern const Image merchFace;
 extern const Palette mytitle;
 extern const SpriteDefinition our_sprite;
+extern const SpriteDefinition treasure_box;
 extern const SpriteDefinition merchantSprite;
 extern const SpriteDefinition goblinSprite;
 extern const Image segaLogo;

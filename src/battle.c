@@ -27,10 +27,24 @@ char attack_message[13][20] = {
 	"run up on and tickle",
 	"kick the shins of   ",
 	"bust a move on      ",
-	"act like a bear 	 ",
+	"act like a fool 	 ",
 	"offend the goblin   "
 
 };
+
+char goblin_attack_message[10][20] = {
+	"throws a frog at you",
+	"catapults a rat     ",
+	"does goblin stuff   ",
+	"actively smells bad ",
+	"smells ferociously  ",
+	"tries to be sneaky  ",
+	"belittles you       ",
+	"slams your character",
+	"throws tiny stones  ",
+	"aggressively stinks "
+};
+
 char damageMessage[8];
 
 //player stats
@@ -394,7 +408,7 @@ void attack(){
 	//VDP_clearTileMapRect(BG_B, 1, 21, 15, 2);
 	
 	battleMessage();
-	VDP_drawTextBG(BG_A, "        ", 19, 5);
+	VDP_drawTextBG(BG_A, "                    ", 7, 5);
 	VDP_drawTextBG(BG_A, "             ", 2, 22);
 	VDP_drawTextBG(BG_A, "             ", 4, 21);
 	//VDP_drawTextBG(BG_B, "       ", 3, 22);
@@ -483,8 +497,12 @@ void goblinAttack(){
 	//VDP_drawTextBG(BG_A, "                        ", 3, 2);
 	VDP_drawTextBG(BG_A, "         ", 19, 12);
 	
-	VDP_drawTextBG(BG_A, "attacks!", 19, 5);
-
+	//VDP_drawTextBG(BG_A, "attacks!", 19, 5);
+	//display random goblin attack message
+	char message[40];
+	int randIndex = random() % 10;
+	strncpy(message, goblin_attack_message[randIndex], 20);
+	VDP_drawTextBG(BG_A, message, 7, 5);
 
 	sprintf(damageMessage, "%d", damage);
 	drawBox(1, 20, 15, 3);
@@ -631,7 +649,7 @@ void updateBattleAnimation() {
 			if(bBattleOngoing){
 				SPR_setVisibility(goblin_sprite, VISIBLE);
 				VDP_drawTextBG(BG_A, "         ", 23, 20);
-				VDP_drawTextBG(BG_A, "         ", 19, 5);
+				VDP_drawTextBG(BG_A, "                    ", 7, 5);
 			}
 			else{
 

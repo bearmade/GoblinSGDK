@@ -19,4 +19,5 @@ out/src/dungeonGenerator.o: src/dungeonGenerator.c src/../inc/player.h \
  /home/bear/SGDK/inc/timer.h /home/bear/SGDK/inc/task.h \
  /home/bear/SGDK/inc/task_cst.h src/../inc/dungeonGenerator.h \
  src/../inc/makemap.h src/../inc/level.h src/../inc/globals.h \
- src/../inc/camera.h src/../inc/collision.h
+ src/../inc/camera.h src/../inc/collision.h src/../inc/battle.h \
+ res/resources.h

@@ -5,6 +5,7 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/ikag.vgm \
 /home/bear/GoblinSGDK/res/fanfare.vgm \
 /home/bear/GoblinSGDK/res/boxTiles.png \
+/home/bear/GoblinSGDK/res/croakusTitleSEGA2.png \
 /home/bear/GoblinSGDK/res/tileset_1.png \
 /home/bear/GoblinSGDK/res/face3.png \
 /home/bear/GoblinSGDK/res/goblins.png \
@@ -15,6 +16,7 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/face2.png \
 /home/bear/GoblinSGDK/res/heroSega3.png \
 /home/bear/GoblinSGDK/res/ikagTitle.vgm \
+/home/bear/GoblinSGDK/res/treasure.png \
 /home/bear/GoblinSGDK/res/cave2.png \
 /home/bear/GoblinSGDK/res/layer_1.png \
 /home/bear/GoblinSGDK/res/iKilledAGoblinWorld.vgm \

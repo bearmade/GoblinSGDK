@@ -5,9 +5,26 @@
 #include "../inc/globals.h"
 #include "../inc/camera.h"
 #include "../inc/collision.h"
+#include "../inc/battle.h"
+#include <resources.h>
 #include <genesis.h>
 
 
+#define MAX_TREASURES 10
+typedef struct {
+    u16 x;
+    u16 y;
+    Sprite* sprite;
+    bool collected;
+    Sprite* popup;        
+    u16 popupTimer; 
+} Treasure;
+
+Treasure treasures[MAX_TREASURES];
+u8 treasureCount = 0;
+
+
+//Sprite* treasure_sprite;
 // Keep track of current location (world or cave)
 bool inCave = FALSE;
 // Store current cave level
@@ -133,7 +150,7 @@ void placeCaveExit(u16 mapheight, u16 mapwidth) {
             if (LEVEL_TILES[posY-1][posX] == 0 && LEVEL_TILES[posY+1][posX] == 0 &&
                 LEVEL_TILES[posY][posX-1] == 0 && LEVEL_TILES[posY][posX+1] == 0) {
                 
-                // Place exit ladder (using tile 9)
+                
                 LEVEL_TILES[posY][posX] = 16;
                 
                 // Place a bit of open space around exit
@@ -165,58 +182,194 @@ void placeCaveExit(u16 mapheight, u16 mapwidth) {
         }
     }
 }
-
 // Generate cave dungeon level
 void generateCaveLevel(u16 level) {
     u16 mapheight = 14;
     u16 mapwidth = 16;
     
-    // Set RNG seed based on world seed and cave level for deterministic generation
-    //setRandomSeed(worldSeed + caveLevel);
-    
-    // Initialize cave map
+    // Fill the entire map with walls initially
     for (u16 y = 0; y < mapheight; y++) {
         for (u16 x = 0; x < mapwidth; x++) {
-            LEVEL_TILES[y][x] = 0;
+            LEVEL_TILES[y][x] = 1; // Wall tile
         }
     }
     
-    // Generate cave layout
-    makeCaveWalls(0, 0, mapheight, mapwidth);
+    // Use recursive backtracking to generate a maze
+    generateMaze(1, 1, mapheight-2, mapwidth-2);
     
-    // Add player spawn point
-    u16 startY = mapheight / 2;
-    u16 startX = mapwidth / 2;
+    // Place player at the start (top-left area)
+    u16 startY = 1;
+    u16 startX = 1;
+    LEVEL_TILES[startY][startX] = 10; // Player tile
     
-    // Make sure player spawn is clear
-    for (s16 dy = -2; dy <= 2; dy++) {
-        for (s16 dx = -2; dx <= 2; dx++) {
-            if (startY+dy >= 0 && startY+dy < mapheight && startX+dx >= 0 && startX+dx < mapwidth) {
-                LEVEL_TILES[startY+dy][startX+dx] = 0;
+    // Place exit at the opposite end (bottom-right area)
+    u16 exitY = mapheight - 2;
+    u16 exitX = mapwidth - 2;
+    LEVEL_TILES[exitY][exitX] = 16; // Exit tile
+    
+    // Add some random features for variety
+    enhanceMaze(mapheight, mapwidth);
+    
+    
+    // Ensure path is clear
+    ensureClearPath(startX, startY, exitX, exitY);
+    
+    // Ensure border walls on all four sides
+    for (u16 y = 0; y < mapheight; y++) {
+        LEVEL_TILES[y][0] = 1;
+        LEVEL_TILES[y][mapwidth-1] = 1;
+    }
+    
+    for (u16 x = 0; x < mapwidth; x++) {
+        LEVEL_TILES[0][x] = 1;
+        LEVEL_TILES[mapheight-1][x] = 1;
+    }
+    
+    // Convert map arrays
+    convertMapArrays();
+
+
+}// Recursive backtracking maze generation algorithm
+void generateMaze(u16 startX, u16 startY, u16 maxY, u16 maxX) {
+    // Direction arrays (up, right, down, left)
+    s16 dx[4] = {0, 2, 0, -2};
+    s16 dy[4] = {-2, 0, 2, 0};
+    
+    // Create a list of directions and shuffle it
+    u16 directions[4] = {0, 1, 2, 3};
+    
+    // Simple Fisher-Yates shuffle
+    for (u16 i = 3; i > 0; i--) {
+        u16 j = random() % (i + 1);
+        u16 temp = directions[i];
+        directions[i] = directions[j];
+        directions[j] = temp;
+    }
+    
+    // Set current cell as passage
+    LEVEL_TILES[startY][startX] = 0;
+    
+    // Try each direction in random order
+    for (u16 i = 0; i < 4; i++) {
+        u16 dir = directions[i];
+        u16 ny = startY + dy[dir];
+        u16 nx = startX + dx[dir];
+        
+        // Check if the cell is valid and unvisited
+        if (ny >= 1 && ny <= maxY && nx >= 1 && nx <= maxX && LEVEL_TILES[ny][nx] == 1) {
+            // Carve a passage by setting intermediate cell and destination cell to empty
+            LEVEL_TILES[startY + dy[dir]/2][startX + dx[dir]/2] = 0;
+            LEVEL_TILES[ny][nx] = 0;
+            
+            // Recursively visit the next cell
+            generateMaze(nx, ny, maxY, maxX);
+        }
+    }
+}
+
+// Ensure there's a clear path from start to exit
+void ensureClearPath(u16 startX, u16 startY, u16 exitX, u16 exitY) {
+    // Make sure the starting area is clear
+    for (s16 dy = -1; dy <= 1; dy++) {
+        for (s16 dx = -1; dx <= 1; dx++) {
+            if (startY+dy >= 0 && startY+dy < 14 && 
+                startX+dx >= 0 && startX+dx < 16) {
+                if (LEVEL_TILES[startY+dy][startX+dx] == 1) {
+                    LEVEL_TILES[startY+dy][startX+dx] = 0;
+                }
             }
         }
     }
     
-    // Place player (using tile 10)
-    LEVEL_TILES[startY][startX] = 10;
+    // Make sure the exit area is clear
+    for (s16 dy = -1; dy <= 1; dy++) {
+        for (s16 dx = -1; dx <= 1; dx++) {
+            if (exitY+dy >= 0 && exitY+dy < 14 && 
+                exitX+dx >= 0 && exitX+dx < 16) {
+                if (LEVEL_TILES[exitY+dy][exitX+dx] == 1) {
+                    LEVEL_TILES[exitY+dy][exitX+dx] = 0;
+                }
+            }
+        }
+    }
     
-    // Add cave features
-    placeCaveFeatures(mapheight, mapwidth);
-    
-    // Add cave exit
-    placeCaveExit(mapheight, mapwidth);
-    
-    // Ensure there's a valid path from player to exit
-    ensurePathToExit(mapheight, mapwidth);
-    makeWall(yy, xx, mapheight, mapwidth, 0, 1);
-    makeWall(yy, xx, mapheight, mapwidth, 1, 1);
-    makeWall(yy, xx, mapheight, mapwidth, 2, 1);
-    makeWall(yy, xx, mapheight, mapwidth, 3, 1);
-    //ruleTile(mapheight, mapwidth, 1);
-    // Convert map arrays
-    convertMapArrays();
+
 }
 
+// Add some random treasure rooms and features to the maze
+void enhanceMaze(u16 mapheight, u16 mapwidth) {
+    u16 numRooms = 2 + (random() % 3); // 2-4 rooms
+    
+    for (u16 i = 0; i < numRooms; i++) {
+        // Try to find a wall that's surrounded by other walls
+        u16 attempts = 0;
+        while (attempts < 20) {
+            u16 roomY = 2 + (random() % (mapheight - 4));
+            u16 roomX = 2 + (random() % (mapwidth - 4));
+            
+            if (LEVEL_TILES[roomY][roomX] == 1) {
+                // Create a small room (3x3)
+                for (s16 dy = -1; dy <= 1; dy++) {
+                    for (s16 dx = -1; dx <= 1; dx++) {
+                        LEVEL_TILES[roomY+dy][roomX+dx] = 0;
+                    }
+                }
+                
+               
+if (random() % 100 < 50 && treasureCount < MAX_TREASURES) {
+    LEVEL_TILES[roomY][roomX] = 0;
+
+    PAL_setPalette(PAL3, treasure_box.palette->data, DMA);
+    
+    treasures[treasureCount].x = roomX;
+    treasures[treasureCount].y = roomY;
+    treasures[treasureCount].sprite = SPR_addSprite(&treasure_box, 
+        roomX * 16 + 8, roomY * 16 + 8, 
+        TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
+    treasures[treasureCount].collected = FALSE;
+    
+    SPR_setAnim(treasures[treasureCount].sprite, 0);
+    treasureCount++;
+}
+
+                
+                // Ensure at least one connection to the maze
+                bool connected = FALSE;
+                u16 connDir = random() % 4;
+                for (u16 j = 0; j < 4 && !connected; j++) {
+                    u16 dir = (connDir + j) % 4;
+                    s16 checkY = roomY;
+                    s16 checkX = roomX;
+                    
+                    switch(dir) {
+                        case 0: checkY -= 2; break; // Up
+                        case 1: checkX += 2; break; // Right
+                        case 2: checkY += 2; break; // Down
+                        case 3: checkX -= 2; break; // Left
+                    }
+                    
+                    // If we found a path, connect to it
+                    if (checkY >= 0 && checkY < mapheight && 
+                        checkX >= 0 && checkX < mapwidth &&
+                        LEVEL_TILES[checkY][checkX] == 0) {
+                        
+                        // Connect by removing the wall between
+                        switch(dir) {
+                            case 0: LEVEL_TILES[roomY-1][roomX] = 0; break;
+                            case 1: LEVEL_TILES[roomY][roomX+1] = 0; break;
+                            case 2: LEVEL_TILES[roomY+1][roomX] = 0; break;
+                            case 3: LEVEL_TILES[roomY][roomX-1] = 0; break;
+                        }
+                        connected = TRUE;
+                    }
+                }
+                
+                break;
+            }
+            attempts++;
+        }
+    }
+}
 // Save current world state before entering cave
 void backupWorldState() {
     for (u16 y = 0; y < 14; y++) {
@@ -251,6 +404,7 @@ void restoreWorldState() {
 
 // Enter a cave at a specified level
 void enterCave(u16 level) {
+    PAL_setPalette(PAL0, fg1.palette->data, DMA);
     if (!inCave) {
         // Backup the current world state
         backupWorldState();
@@ -261,10 +415,13 @@ void enterCave(u16 level) {
         
         // Generate cave level
         generateCaveLevel(caveLevel);
+
+
+       
         
         // Set player position to the cleared spawn point
-        playerPosX = FIX32(8 + (mapwidth / 2) * 16);  // Center X (in pixels)
-        playerPosY = FIX32(8 + (mapheight / 2) * 16); // Center Y (in pixels)
+        playerPosX = FIX32(16);  // Center X (in pixels)
+        playerPosY = FIX32(16); // Center Y (in pixels)
         
         VDP_clearPlane(BG_A, TRUE);
         VDP_clearPlane(BG_B, TRUE);
@@ -274,14 +431,20 @@ void enterCave(u16 level) {
         waitMs(100);
         SYS_doVBlankProcess();
         
-        // Clear screen warble effect if it was active
-        // VDP_setHorizontalScrollLine(BG_A, 0, NULL, 224, DMA);
-        // VDP_setHorizontalScrollLine(BG_B, 0, NULL, 224, DMA);
     }
 }
 // Exit the current cave back to the world
 void exitCave() {
     if (inCave) {
+        // Clean up all treasure sprites
+        for (u8 i = 0; i < treasureCount; i++) {
+            if (treasures[i].sprite) {
+                SPR_releaseSprite(treasures[i].sprite);
+                treasures[i].sprite = NULL;
+            }
+        }
+        treasureCount = 0;
+        
         // Restore the world state
         restoreWorldState();
         
@@ -301,6 +464,7 @@ void exitCave() {
         SPR_update();
         
         // Display the restored world
+        PAL_setPalette(PAL0, fg2.palette->data, DMA);
         displayRoom();
         waitMs(1000);
     }
@@ -349,6 +513,29 @@ bool isOnCaveExit() {
 
 // Update cave system (check for cave entrance/exit)
 void updateCaves() {
+    if (inCave) {
+        checkTreasureCollisions();
+        
+        // Update treasure popups
+        for (u8 i = 0; i < treasureCount; i++) {
+            if (treasures[i].collected && treasures[i].popupTimer > 0) {
+                treasures[i].popupTimer--;
+                
+                // When timer ends, clear the popup
+                if (treasures[i].popupTimer == 0) {
+                    // Clear the popup text area
+                    VDP_clearTextAreaBG(BG_A, 
+                                      treasures[i].x * 2 - 3, 
+                                      treasures[i].y * 2 - 2, 
+                                      10, 3);
+
+                    //redraw room
+                    PAL_setPalette(PAL0, fg1.palette->data, DMA);
+                    displayRoom();
+                }
+            }
+        }
+    }
     if (!inCave && isOnCaveEntrance()) {
         // Player is standing on a cave entrance
         //if (JOY_readJoypad(JOY_1) ) {
@@ -458,4 +645,53 @@ void ruleTile(u16 mapheight, u16 mapwidth, u8 type){
 
 
 
+}
+void checkTreasureCollisions() {
+    if (!inCave) return;
+    
+    // Get player position in tile coordinates
+    u16 playerTileX = (fix32ToInt(playerPosX) + 8) >> 4;
+    u16 playerTileY = (fix32ToInt(playerPosY) + 8) >> 4;
+    
+    for (u8 i = 0; i < treasureCount; i++) {
+        if (!treasures[i].collected && 
+            playerTileX == treasures[i].x && 
+            playerTileY == treasures[i].y) {
+            
+            // Player collided with treasure, change animation
+            SPR_setAnim(treasures[i].sprite, 1);
+            treasures[i].collected = TRUE;
+            
+            // Generate random gold amount (between 10 and 50)
+            u16 goldAmount = 10 + (random() % 41);
+            
+            // Add gold to player
+            player_gold += goldAmount;
+            
+            // Show popup text
+            showTreasurePopup(treasures[i].x, treasures[i].y, goldAmount);
+            
+
+        }
+    }
+}
+
+void showTreasurePopup(u16 x, u16 y, u16 goldAmount) {
+    char goldText[10];
+    
+    // Format text with gold amount
+    sprintf(goldText, "+%d Gold", goldAmount);
+    PAL_setPalette(PAL0, palette_Font.data, DMA);
+    // Draw a small box for the message
+    //drawBox(x * 16 - 16, y * 16 - 16, 10, 3);
+    
+    // Draw the text
+    VDP_drawText( goldText, x * 2 - 1, y * 2 - 1);
+    
+    for (u8 i = 0; i < treasureCount; i++) {
+        if (treasures[i].x == x && treasures[i].y == y) {
+            treasures[i].popupTimer = 90; // 1.5 seconds at 60 fps
+            break;
+        }
+    }
 }

@@ -1138,7 +1138,7 @@ void drawMap() {
     for (u16 y = 0; y < mh; y++) {
         for (u16 x = 0; x < mw; x++) {
             u16 tileValue = LEVEL_TILES[y][x];
-            // Assuming you have a tileset loaded and the indices correspond to your map tiles
+            
             VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 0, 0, 0, tileValue), x, y);
         }
     }

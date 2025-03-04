@@ -23,8 +23,7 @@ void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
 
-    //show the text "bear made games presesnts"
-    //drawBox(1, 1, 30, 3);
+
     VDP_clearPlane(BG_A, TRUE);
     VDP_clearPlane(BG_B, TRUE);
     VDP_drawTextBG(BG_A, "BEARMADE PRESENTS", 8, 10);

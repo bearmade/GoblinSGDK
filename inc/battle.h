@@ -22,6 +22,7 @@ char Name[19];
 bool selection;
 char pointer[1];
 char attack_message[13][20];
+char goblin_attack_message[10][20] ;
 bool turn;
 char damageMessage[8];
 

@@ -9,6 +9,7 @@
 #include "../inc/gamemanager.h"
 #include "../inc/battle.h"
 #include "../inc/inventory.h"
+#include "../inc/dungeonGenerator.h"
 #include <maths.h>
 
 Sprite* player;
@@ -235,6 +236,9 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 }
 
 void handleInput(){
+	if (!bPlayerCanMove) {
+        return;
+    }
 	u16 value = JOY_readJoypad( JOY_1);
 	
 
@@ -398,7 +402,11 @@ drawBox(11, 0, 21, 15);
 	VDP_clearPlane(BG_A, TRUE);
 	VDP_loadTileSet(tileset1.tileset, 1, DMA);
     PAL_setPalette(PAL1, tileset1.palette->data, DMA);
-	PAL_setPalette(PAL0, fg2.palette->data, DMA);
+	if (inCave){
+		PAL_setPalette(PAL0, fg1.palette->data, DMA);
+	} else {
+		PAL_setPalette(PAL0, fg2.palette->data, DMA);
+	}
 	PAL_setPalette(PAL3,palette_Font.data, DMA);
 	PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
 	// clear all battle messages
