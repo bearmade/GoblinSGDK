@@ -75,7 +75,7 @@ int main()
     VDP_setScreenWidth256();//256 pixels / 8 = 32 tiles    
 	VDP_setScreenHeight224();//224 pixels / 8 = 28 tiles
     //show sega logo 
-    //showSegaLogo();
+    showSegaLogo();
 
 
     bPlayerCanMove = TRUE;
