@@ -68,6 +68,7 @@ void showSegaLogo() {
     
     // Wait for the specified time
     delayFrames(240); 
+    PAL_fadeOut(0, 63, 60, 1);
 }
 int main()
 {
@@ -96,6 +97,7 @@ waitMs(2000);
 
     JOY_setEventHandler(joyEvent);
     bShowMenu = FALSE;
+    
 	displayTitle();
     
 
@@ -107,8 +109,11 @@ waitMs(2000);
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
     //char numString[2];
+
     makeMap();
     spawnCaveEntrances();
+
+
     PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	bigMapCA();
 	SPR_init();
@@ -172,6 +177,12 @@ updatePlayerHouseCooldown(elapsed);
          
         }
       
+    }
+    if (inCave){
+        VDP_setHilightShadow(0);
+    }
+    else{
+        VDP_setHilightShadow(1);
     }
     if (bBattleOngoing == TRUE){
         SPR_setVisibility(player, HIDDEN);

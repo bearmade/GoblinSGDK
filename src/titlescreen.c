@@ -22,27 +22,43 @@ void all3playerNames();
 void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
+    //PAL_fadeAll(0, 63,   60, 1);
+    
 
 
     VDP_clearPlane(BG_A, TRUE);
     VDP_clearPlane(BG_B, TRUE);
     VDP_drawTextBG(BG_A, "BEARMADE PRESENTS", 8, 10);
-    delayFrames(400);
+    PAL_fadeIn(0, 63,  palette_Font.data, 60, 1);
+    delayFrames(340);
+   
     VDP_drawTextBG(BG_A, "                    ", 8, 10);
+    PAL_setPalette(PAL1, black_palette, DMA);
+    PAL_setPalette(PAL3, black_palette, DMA);
+    
 
-
-
-    PAL_setPalette(PAL1, titleBase.palette->data, DMA);
+    
+    //PAL_setPalette(PAL1, titleBase.palette->data, DMA);
     VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-    PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
+    //PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
     VDP_drawImageEx(BG_A, &titleLetters, TILE_ATTR_FULL(PAL3, FALSE, FALSE, FALSE, 1024), 0, 0, FALSE, TRUE);
     
     // Draw menu once before the loop
     PAL_setPalette(PAL0, palette_Font.data, DMA);
+
+    // First fade in just the base
+    PAL_fadeIn(16, 32, titleBase.palette->data, 60, 0);  // Changed to 1 to wait for completion
+
+    // Wait for a short delay before fading in the letters
+    delayFrames(30);  // Optional delay between fades
+
+    // Then fade in the title letters
+    PAL_fadeIn(48, 63, titleLetters.palette->data, 60, 1);  // Changed to 1 to wait for completion
+    delayFrames(60);
     drawBox(9, 23, 14, 5);
     VDP_drawTextBG(BG_A, " New Game", 11, 24);
     VDP_drawTextBG(BG_A, " Load Game", 11, 26);
-    
+    delayFrames(30);
     while(1) {
        
         u16 value = JOY_readJoypad(JOY_1);

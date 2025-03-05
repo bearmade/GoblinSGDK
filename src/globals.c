@@ -14,6 +14,12 @@ bool bInsideHouse = FALSE;
 u32 worldSeed;
 bool bBattleMessageDone = FALSE;
 bool canFight = TRUE;
+const u16 black_palette[16] = {
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000
+};
 
 void delayVBlank(u16 vblanks) {
     delayCounter = vblanks;

@@ -10,7 +10,7 @@ void delayFramesWithSound(u16 frames) ;
 void delayMilliseconds(u16 milliseconds);
 void vblankCallback();
 
-
+const u16 black_palette[16];
 u16 ind;
 bool is_start_pressed;
 u16 random_number;
