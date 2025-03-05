@@ -955,7 +955,8 @@ void makeMap(){
 
     
     VDP_loadTileSet(tileset1.tileset, 1, DMA);
-    PAL_setPalette(PAL1, tileset1.palette->data, DMA);
+    //PAL_fadeIn(16, 32, tileset1.palette->data, 600, 0);
+    //PAL_setPalette(PAL1, tileset1.palette->data, DMA);
     
     makeWorldMap();
     

@@ -33,7 +33,8 @@ int selectedSaveSlot = 0;
 
 void displayPlayer(){
 
-	PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+	//PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
+	//PAL_fadeIn(32, 47,  our_sprite.palette->data, 120, 0 );
 	player = SPR_addSprite(&our_sprite, fix32ToInt(playerPosX), fix32ToInt(playerPosY), TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
 
 

@@ -103,7 +103,7 @@ waitMs(2000);
 
 
     VDP_loadTileSet(tileset2.tileset, 1, DMA);
-    PAL_setPalette(PAL1, tileset2.palette->data, DMA);
+    PAL_setPalette(PAL1, black_palette, DMA);
     
 
     delayCounter = 0;
@@ -114,13 +114,20 @@ waitMs(2000);
     spawnCaveEntrances();
 
 
-    PAL_setPalette(PAL0, fg2.palette->data, DMA);
-	bigMapCA();
+    //PAL_setPalette(PAL0, fg2.palette->data, DMA);
+	
+    bigMapCA();
 	SPR_init();
-	displayPlayer();
+
+	
 
     bShowMenu = FALSE;
-
+    displayPlayer();
+    PAL_fadeIn(32, 47,  our_sprite.palette->data, 60, 0);
+    delayFrames(60);
+    SPR_update();
+    PAL_fadeIn(0, 15, fg2.palette->data, 60, 0);
+    PAL_fadeIn(16, 31, tileset1.palette->data, 60, 0);
     //u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
     while(1)
     {
