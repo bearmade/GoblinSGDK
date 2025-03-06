@@ -13,8 +13,8 @@
     - [x]  Main world music
     - [x]  Battle music
     - [x]  Victory fanfare
-    - [ ]  Game over music
-    - [ ] cave music
+    - [x]  Game over music
+    - [x] cave music
     
 - #### Inventory system
     - [x]  create seperate header and c / organize relevant code
@@ -40,7 +40,7 @@
     - [x] add entrances on the world map
     - [x] cave generation
     - [ ] cave tileset
-    - [ ] treasure
+    - [x] treasure
     
         
 
@@ -65,6 +65,7 @@
     - Known bugs/Issues
         - [ ] screen transitions
         - [x] battle music stops playing when player attacks
+        - [ ] game over music doesn't play
         
 <br>
 
@@ -72,7 +73,7 @@
     - [x] redo/upscale player sprite
         - [x] rework collision coords to match new sprite
     - [x] redo/upscale merchant sprite
-    - [ ] redo music
+    - [ ] ~~redo music~~ 
     - [x] add sound test menu
     - [ ] add cloud/fog sprites?
     - [x] add 3 seperate save slots

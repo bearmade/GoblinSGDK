@@ -3,6 +3,7 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/backdrop7.png \
 /home/bear/GoblinSGDK/res/merchant2.png \
 /home/bear/GoblinSGDK/res/ikag.vgm \
+/home/bear/GoblinSGDK/res/caveSong.vgm \
 /home/bear/GoblinSGDK/res/fanfare.vgm \
 /home/bear/GoblinSGDK/res/boxTiles.png \
 /home/bear/GoblinSGDK/res/croakusTitleSEGA2.png \
@@ -13,6 +14,7 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/goblinTitleBase2.png \
 /home/bear/GoblinSGDK/res/sega.wav \
 /home/bear/GoblinSGDK/res/goglinTitle2.png \
+/home/bear/GoblinSGDK/res/gameOver.vgm \
 /home/bear/GoblinSGDK/res/face2.png \
 /home/bear/GoblinSGDK/res/heroSega3.png \
 /home/bear/GoblinSGDK/res/ikagTitle.vgm \

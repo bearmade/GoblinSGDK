@@ -399,7 +399,10 @@ void displaySoundTestMenu() {
         "I Killed a Goblin",
         "Goblin Emergence",
         "Death of a Goblin",
-        "Goblin's Ghost"
+        "Goblin's Ghost",
+        "Goblin Nest",
+        "Victor Goblin"
+
     };
     
     // Corresponding VGM resources
@@ -408,10 +411,12 @@ void displaySoundTestMenu() {
         world_vgm,
         battle_vgm,
         victory_vgm,
-        world2_vgm
+        world2_vgm,
+        cave_vgm,
+        gameOver_vgm
     };
     
-    const int songCount = 5;
+    const int songCount = 7;
     int selection = 0;
     int lastSelection = -1;
     bool playing = FALSE;

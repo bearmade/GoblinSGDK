@@ -228,7 +228,7 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		selection = !selection;
 	}
 	if ((changed & state & BUTTON_START)){
-		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving && !showTitleScreen && !bInsideHouse){
+		if(!bBattleOngoing && !bBattleMessageDone && !bIsMoving && !showTitleScreen && !bInsideHouse &&!bPlayerDead){
 			//bIsMoving = FALSE;
 			bPlayerCanMove = FALSE;
 			showStats();

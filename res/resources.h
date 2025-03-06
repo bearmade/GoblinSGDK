@@ -7,6 +7,8 @@ extern const u8 title_vgm[12032];
 extern const u8 battle_vgm[11520];
 extern const u8 world2_vgm[13056];
 extern const u8 victory_vgm[1792];
+extern const u8 cave_vgm[15360];
+extern const u8 gameOver_vgm[14080];
 extern const TileSet tileset_Font;
 extern const Palette palette_Font;
 extern const Image tileset1;

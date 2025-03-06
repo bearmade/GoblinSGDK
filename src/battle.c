@@ -14,6 +14,7 @@
 Sprite* goblin_sprite;
 int randChance = 0;
 bool turn = FALSE;
+bool bPlayerDead = FALSE;
 
 char attack_message[13][20] = {
 	"throw your shoe at  ",
@@ -400,6 +401,14 @@ void nameGenerator(){
 		XGM_startPlay(world_vgm);
 		PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
 		SPR_setVisibility(player, VISIBLE);
+		if(inCave){
+			SYS_doVBlankProcess();
+			XGM_stopPlay();
+			XGM_startPlay(cave_vgm);
+
+			PAL_setPalette(PAL0, fg1.palette->data, DMA);
+		}
+
 		displayRoom();
 }
 void attack(){
@@ -478,68 +487,41 @@ void battleMessage(){
 	
 	
 }
-void goblinAttack(){
-	
+void goblinAttack() {
+    s16 damage = ((random() % 5) * player_level) + goblin_attack;
+    damage = (damage - player_defense);
+    if (damage < 0) {
+        damage = 0;
+    }
 
-	s16 damage = ((random() % 5)*player_level) + goblin_attack;
-	damage  = (damage - (player_defense));
-	if(damage < 0){
-		damage = 0;
-	}
-	//if(isAnimating){
-		
+    player_hp -= damage;
 
-	
-	player_hp -= damage;
-	
+    VDP_drawTextBG(BG_A, "         ", 19, 12);
+    char message[40];
+    int randIndex = random() % 10;
+    strncpy(message, goblin_attack_message[randIndex], 20);
+    VDP_drawTextBG(BG_A, message, 7, 5);
 
-	
-	//VDP_drawTextBG(BG_A, "                        ", 3, 2);
-	VDP_drawTextBG(BG_A, "         ", 19, 12);
-	
-	//VDP_drawTextBG(BG_A, "attacks!", 19, 5);
-	//display random goblin attack message
-	char message[40];
-	int randIndex = random() % 10;
-	strncpy(message, goblin_attack_message[randIndex], 20);
-	VDP_drawTextBG(BG_A, message, 7, 5);
+    sprintf(damageMessage, "%d", damage);
+    drawBox(1, 20, 15, 3);
+    VDP_drawTextBG(BG_A, damageMessage, 4, 21);
+    VDP_drawTextBG(BG_A, "damage!", 7, 21);
+    VDP_drawTextBG(BG_A, "        ", 8, 26);
+    sprintf(pHP, "%d", player_hp);
+    VDP_drawTextBG(BG_A, pHP, 8, 26);
 
-	sprintf(damageMessage, "%d", damage);
-	drawBox(1, 20, 15, 3);
-	VDP_drawTextBG(BG_A, damageMessage, 4, 21);
-	VDP_drawTextBG(BG_A, "damage!", 7, 21);
-		VDP_drawTextBG( BG_A, "        ", 8, 26);
-		sprintf(pHP, "%d", player_hp);
-	VDP_drawTextBG( BG_A, pHP, 8, 26);
 	if(player_hp <= 0){
-		player_hp = 0;
-		VDP_drawTextBG(BG_A, "You died!", 2, 24);
-		VDP_drawTextBG(BG_A, "Game Over", 2, 26);
-		delayFrames(300);
-		//show gameOverScreen
-		VDP_clearTileMap(BG_B, ind, 1, TRUE);
-		VDP_clearTileMap(BG_A, ind, 1, TRUE);
-		SPR_setVisibility(goblin_sprite, HIDDEN);
-		//clear all lines of text
-		for(int i = 0; i < 28; i++){
-			VDP_clearTextLine(i);
+		if (!bPlayerDead){
+
+			player_hp = 0;
+			SPR_setVisibility(goblin_sprite, HIDDEN);
+			SPR_releaseSprite(goblin_sprite);
+			SPR_update();
+			bPlayerDead = TRUE;
+			gameOver();
 		}
-
-		PAL_setPalette(PAL2, gameOverScreen.palette->data, DMA);
-		VDP_drawImageEx(BG_B, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-		SPR_setVisibility(goblin_sprite, HIDDEN);
-		SPR_releaseSprite(goblin_sprite);
-		SPR_update();
-		delayFrames(600);
-
-		SYS_hardReset();
-
-		
 	}
-	
-	//delayFrames(120);
-	//turn = !turn;
-	//}
+
 }
 
 void levelUp(){
@@ -641,6 +623,7 @@ void updateBattleAnimation() {
         } else {
             SPR_setVisibility(goblin_sprite, VISIBLE);
         }
+		screenWarble();
         
         // End after 60 frames (1 second)
         if (battleAnimationTimer >= 60) {
@@ -660,5 +643,44 @@ void updateBattleAnimation() {
             //VDP_drawTextBG(BG_A, "         ", 23, 20);
             turn = !turn;
         }
+    }
+}
+
+void gameOver(){
+    if (bPlayerDead) {
+
+      
+		//waitMs(1000);
+
+        VDP_drawTextBG(BG_A, "You died!", 2, 24);
+        VDP_drawTextBG(BG_A, "Game Over", 2, 26);
+	
+        //VDP_clearTileMap(BG_B, ind, 1, FALSE);
+        //VDP_clearTileMap(BG_A, ind, 1, FALSE);
+        //SPR_setVisibility(goblin_sprite, HIDDEN);
+        VDP_clearPlane(BG_B, FALSE);
+        VDP_clearPlane(BG_A, FALSE);
+        PAL_setPalette(PAL2, gameOverScreen.palette->data, CPU);
+        VDP_drawImageEx(BG_B, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, FALSE);
+        //VDP_drawImageEx(BG_A, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, FALSE);
+
+        drawBox(9, 23, 13, 3);
+        VDP_drawTextBG(BG_A, "Press Start", 10, 24);
+		//waitMs(1000);
+		// Start game over music
+		SYS_doVBlankProcess();
+		XGM_stopPlay();
+		XGM_startPlay(gameOver_vgm);
+
+        while (1) {
+            u16 value = JOY_readJoypad(JOY_1);
+            if (value & BUTTON_START) {
+				
+                break;
+            }
+            SYS_doVBlankProcess();
+        }
+
+        SYS_hardReset();
     }
 }

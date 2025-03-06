@@ -426,6 +426,8 @@ void enterCave(u16 level) {
         VDP_clearPlane(BG_A, TRUE);
         VDP_clearPlane(BG_B, TRUE);
         
+        //play cave song
+        XGM_startPlay(cave_vgm);
         // Display the cave
         displayRoom();
         waitMs(100);
@@ -462,7 +464,7 @@ void exitCave() {
         //set player facing dir to down
         playerDir = 0;
         SPR_update();
-        
+        XGM_startPlay(world_vgm);
         // Display the restored world
         PAL_setPalette(PAL0, fg2.palette->data, DMA);
         displayRoom();

@@ -16,6 +16,7 @@ void levelUp();
 void itemDrop();
 void drawBox(u16 x, u16 y, u16 width, u16 height);
 void updateBattleAnimation();
+void gameOver();
 
 Sprite* goblin_sprite;
 char Name[19];
@@ -25,7 +26,7 @@ char attack_message[13][20];
 char goblin_attack_message[10][20] ;
 bool turn;
 char damageMessage[8];
-
+bool bPlayerDead ;
 char gHP[5];
 char gATK[5];
 char pHP[5];

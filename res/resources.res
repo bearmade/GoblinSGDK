@@ -33,6 +33,8 @@ XGM title_vgm "ikagTitle.vgm"
 XGM battle_vgm "iKilledAGoblinBattle.vgm"
 XGM world2_vgm "iKilledAGoblinWorld.vgm"
 XGM victory_vgm "fanfare.vgm"
+XGM cave_vgm "caveSong.vgm"
+XGM gameOver_vgm "gameOver.vgm"
 WAV sfx_sega "sega.wav" XGM
 
 

@@ -187,6 +187,7 @@ updatePlayerHouseCooldown(elapsed);
     }
     if (inCave){
         VDP_setHilightShadow(0);
+        PAL_setPalette(PAL0, fg1.palette->data, DMA);
     }
     else{
         VDP_setHilightShadow(1);
@@ -199,6 +200,9 @@ updatePlayerHouseCooldown(elapsed);
     else{
         SPR_setVisibility(player, VISIBLE);
     }
+
+
+
     return (0);
 }
 
