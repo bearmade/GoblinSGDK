@@ -17,6 +17,7 @@ void itemDrop();
 void drawBox(u16 x, u16 y, u16 width, u16 height);
 void updateBattleAnimation();
 void gameOver();
+void checkGameOverInput(); 
 
 Sprite* goblin_sprite;
 char Name[19];
@@ -55,6 +56,8 @@ u16 goblinType;
 u16 goblinOffset;
 extern bool isAnimating;
 extern u16 battleAnimationTimer;
+extern bool bGameOverScreen;
+extern bool bAwaitingRestartInput;
 
 //goblin stats
 s16 goblin_hp;

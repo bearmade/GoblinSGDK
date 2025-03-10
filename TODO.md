@@ -65,7 +65,7 @@
     - Known bugs/Issues
         - [ ] screen transitions
         - [x] battle music stops playing when player attacks
-        - [ ] game over music doesn't play
+        - [x] game over music doesn't play
         
 <br>
 

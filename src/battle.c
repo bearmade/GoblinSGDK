@@ -84,6 +84,10 @@ char expChar[5];
 char goblinsKilledChar[5];
 bool isAnimating = FALSE;
 u16 battleAnimationTimer = 0;
+bool bGameOverScreen = FALSE;
+bool bAwaitingRestartInput = FALSE;
+
+
 
 
 //#define SFX_SWOOSH 64
@@ -518,6 +522,7 @@ void goblinAttack() {
 			SPR_releaseSprite(goblin_sprite);
 			SPR_update();
 			bPlayerDead = TRUE;
+			bBattleOngoing = FALSE; 
 			gameOver();
 		}
 	}
@@ -623,7 +628,7 @@ void updateBattleAnimation() {
         } else {
             SPR_setVisibility(goblin_sprite, VISIBLE);
         }
-		screenWarble();
+		//screenWarble();
         
         // End after 60 frames (1 second)
         if (battleAnimationTimer >= 60) {
@@ -647,40 +652,35 @@ void updateBattleAnimation() {
 }
 
 void gameOver(){
-    if (bPlayerDead) {
-
-      
-		//waitMs(1000);
-
+    if (bPlayerDead && !bGameOverScreen) {
         VDP_drawTextBG(BG_A, "You died!", 2, 24);
         VDP_drawTextBG(BG_A, "Game Over", 2, 26);
-	
-        //VDP_clearTileMap(BG_B, ind, 1, FALSE);
-        //VDP_clearTileMap(BG_A, ind, 1, FALSE);
-        //SPR_setVisibility(goblin_sprite, HIDDEN);
+        
         VDP_clearPlane(BG_B, FALSE);
         VDP_clearPlane(BG_A, FALSE);
         PAL_setPalette(PAL2, gameOverScreen.palette->data, CPU);
         VDP_drawImageEx(BG_B, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, FALSE);
-        //VDP_drawImageEx(BG_A, &gameOverScreen, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, FALSE);
-
+        
         drawBox(9, 23, 13, 3);
         VDP_drawTextBG(BG_A, "Press Start", 10, 24);
-		//waitMs(1000);
-		// Start game over music
-		SYS_doVBlankProcess();
-		XGM_stopPlay();
-		XGM_startPlay(gameOver_vgm);
+        
+        SYS_doVBlankProcess();
+        XGM_stopPlay();
+        XGM_startPlay(gameOver_vgm);
 
-        while (1) {
-            u16 value = JOY_readJoypad(JOY_1);
-            if (value & BUTTON_START) {
-				
-                break;
-            }
-            SYS_doVBlankProcess();
+        bGameOverScreen = TRUE;
+        bAwaitingRestartInput = TRUE;
+    }
+}
+
+
+
+void checkGameOverInput() {
+    if (bAwaitingRestartInput) {
+        u16 value = JOY_readJoypad(JOY_1);
+        if (value & BUTTON_START) {
+            bAwaitingRestartInput = FALSE;
+            SYS_hardReset();
         }
-
-        SYS_hardReset();
     }
 }

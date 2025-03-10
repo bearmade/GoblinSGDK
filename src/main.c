@@ -150,6 +150,7 @@ updatePlayerHouseCooldown(elapsed);
         //     SPR_update();
         //     updateBattleAnimation(); 
         // }
+        checkGameOverInput();
 
 
 		camera();
