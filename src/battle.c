@@ -197,10 +197,28 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
     PAL_setPalette(PAL1, goblin.palette->data, DMA);
 
 	if(inCave){
-		PAL_setPalette(PAL2, battleBackCave.palette->data, DMA);
-		VDP_drawImageEx(BG_B, &battleBackCave, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+		u16 randoBackdrop = random() % 4;
+		switch(randoBackdrop){
+			case 0:
+			PAL_setPalette(PAL2, battleBackCave.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBackCave, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 1:
+			PAL_setPalette(PAL2, battleBackCave2.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBackCave2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 2:
+			PAL_setPalette(PAL2, battleBackCave3.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBackCave3, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 3:
+			PAL_setPalette(PAL2, battleBackCave4.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBackCave4, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+		}
+
 	}else{
-		u16 randoBackdrop = random() % 2;
+		u16 randoBackdrop = random() % 5;
 		switch (randoBackdrop){
 			case 0:
 			
@@ -211,6 +229,21 @@ VDP_loadTileSet(goblin.tileset, 1026, DMA);
 			
 			PAL_setPalette(PAL2, battleBack2.palette->data, DMA);
 			VDP_drawImageEx(BG_B, &battleBack2, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 2:
+			
+			PAL_setPalette(PAL2, battleBack3.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBack3, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 3:
+			
+			PAL_setPalette(PAL2, battleBack4.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBack4, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+			break;
+			case 4:
+			
+			PAL_setPalette(PAL2, battleBack5.palette->data, DMA);
+			VDP_drawImageEx(BG_B, &battleBack5, TILE_ATTR_FULL(PAL2, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
 			break;
 		}
 

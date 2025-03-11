@@ -1,17 +1,21 @@
 out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/tiles2.png \
-/home/bear/GoblinSGDK/res/backdrop7.png \
 /home/bear/GoblinSGDK/res/merchant2.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Light_2.png \
 /home/bear/GoblinSGDK/res/ikag.vgm \
 /home/bear/GoblinSGDK/res/caveSong.vgm \
+/home/bear/GoblinSGDK/res/Battle_Back_Dark_1.png \
 /home/bear/GoblinSGDK/res/fanfare.vgm \
 /home/bear/GoblinSGDK/res/boxTiles.png \
 /home/bear/GoblinSGDK/res/croakusTitleSEGA2.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Light_3.png \
 /home/bear/GoblinSGDK/res/tileset_1.png \
 /home/bear/GoblinSGDK/res/face3.png \
 /home/bear/GoblinSGDK/res/goblins.png \
 /home/bear/GoblinSGDK/res/goblinTitleLetters2.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Dark_2.png \
 /home/bear/GoblinSGDK/res/goblinTitleBase2.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Cave_3.png \
 /home/bear/GoblinSGDK/res/sega.wav \
 /home/bear/GoblinSGDK/res/goglinTitle2.png \
 /home/bear/GoblinSGDK/res/gameOver.vgm \
@@ -19,8 +23,9 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/heroSega3.png \
 /home/bear/GoblinSGDK/res/ikagTitle.vgm \
 /home/bear/GoblinSGDK/res/treasure.png \
-/home/bear/GoblinSGDK/res/cave2.png \
 /home/bear/GoblinSGDK/res/layer_1.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Cave_2.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Cave_4.png \
 /home/bear/GoblinSGDK/res/iKilledAGoblinWorld.vgm \
 /home/bear/GoblinSGDK/res/insideHouse.png \
 /home/bear/GoblinSGDK/res/tilesSEGA2.png \
@@ -28,6 +33,7 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/goblin1.png \
 /home/bear/GoblinSGDK/res/croakusTitleSEGA.png \
 /home/bear/GoblinSGDK/res/gameover.png \
-/home/bear/GoblinSGDK/res/backdrop6.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Light_1.png \
+/home/bear/GoblinSGDK/res/Battle_Back_Cave_1.png \
 /home/bear/GoblinSGDK/res/Font.png \
 /home/bear/GoblinSGDK/res/iKilledAGoblinBattle.vgm

@@ -15,9 +15,19 @@ IMAGE house "insideHouse.png" NONE ALL
 IMAGE title "goglinTitle2.png" NONE ALL
 IMAGE gameOverScreen "gameover.png" NONE ALL
 IMAGE titleBase "goblinTitleBase2.png" NONE ALL 
-IMAGE battleBack "backdrop6.png" NONE ALL 
-IMAGE battleBack2 "backdrop7.png" NONE ALL
-IMAGE battleBackCave "cave2.png" NONE ALL
+
+IMAGE battleBack "Battle_Back_Light_1.png" NONE ALL 
+IMAGE battleBack2 "Battle_Back_Light_2.png" NONE ALL
+IMAGE battleBack3 "Battle_Back_Light_3.png" NONE ALL
+
+IMAGE battleBack4 "Battle_Back_Dark_1.png" NONE ALL
+IMAGE battleBack5 "Battle_Back_Dark_2.png" NONE ALL
+
+IMAGE battleBackCave "Battle_Back_Cave_1.png" NONE ALL
+IMAGE battleBackCave2 "Battle_Back_Cave_2.png" NONE ALL
+IMAGE battleBackCave3 "Battle_Back_Cave_3.png" NONE ALL
+IMAGE battleBackCave4 "Battle_Back_Cave_4.png" NONE ALL
+
 IMAGE titleLetters "goblinTitleLetters2.png" BEST ALL
 IMAGE face "face2.png" NONE ALL
 IMAGE merchFace "face3.png" NONE ALL

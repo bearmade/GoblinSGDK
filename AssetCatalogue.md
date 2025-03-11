@@ -29,9 +29,15 @@
 | Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters2.png) |
 | Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase2.png) |
 | Game Over Screen | Tileset | Stable Diffusion | ![alt](./res/gameover.png) |
-| Battle Back 1 | Tileset | Stable Diffusion | ![alt](./res/backdrop6.png) |
-| Battle Back 2 | Tileset | Stable Diffusion | ![alt](./res/backdrop7.png) |
-| Cave Battle Back | Tileset | Stable Diffusion | ![alt](./res/cave2.png) |
+| Battle Back 1 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_1.png) |
+| Battle Back 2 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_2.png) |
+| Battle Back 3 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_3.png) |
+| Battle Back 4 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Dark_1.png) |
+| Battle Back 5 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Dark_2.png) |
+| Battle Back Cave 1| Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Cave_1.png) |
+| Battle Back Cave 2| Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Cave_2.png) |
+| Battle Back Cave 3 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Cave_3.png) |
+| Battle Back Cave 4 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Cave_4.png) |
 | Player Portrait | Tileset | Stable Diffusion | ![alt](./res/face2.png) |
 | Merchant Portrait | Tileset | Stable Diffusion | ![alt](./res/face3.png) |
 | Title Theme | VGM | Hunter Singleton |  |
