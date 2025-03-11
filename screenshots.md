@@ -1,6 +1,6 @@
 
 
-![screenshot1](./screenshots/goblinTitle.png)
+![screenshot1](./screenshots/goblinTitle2.png)
 
 <br>
 

@@ -14,7 +14,6 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/goblins.png \
 /home/bear/GoblinSGDK/res/goblinTitleLetters2.png \
 /home/bear/GoblinSGDK/res/Battle_Back_Dark_2.png \
-/home/bear/GoblinSGDK/res/goblinTitleBase2.png \
 /home/bear/GoblinSGDK/res/Battle_Back_Cave_3.png \
 /home/bear/GoblinSGDK/res/sega.wav \
 /home/bear/GoblinSGDK/res/goglinTitle2.png \
@@ -35,5 +34,6 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/Battle_Back_Light_1.png \
 /home/bear/GoblinSGDK/res/Battle_Back_Cave_1.png \
 /home/bear/GoblinSGDK/res/Font.png \
+/home/bear/GoblinSGDK/res/goblinTitleBase4.png \
 /home/bear/GoblinSGDK/res/iKilledAGoblinBattle.vgm \
 /home/bear/GoblinSGDK/res/gameover2.png
