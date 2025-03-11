@@ -28,7 +28,7 @@
 | World Tileset | Tileset | Hyptosis (Edited for Genesis by Hunter Singleton)| ![alt](./res/tilesSEGA2.png) |
 | Goblin Title | Tileset | Hunter Singleton | ![alt](./res/goblinTitleLetters2.png) |
 | Goblin Title Bckground | Tileset | Stable Diffusion | ![alt](./res/goblinTitleBase2.png) |
-| Game Over Screen | Tileset | Stable Diffusion | ![alt](./res/gameover.png) |
+| Game Over Screen | Tileset | Hunter Singleton | ![alt](./res/gameover2.png) |
 | Battle Back 1 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_1.png) |
 | Battle Back 2 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_2.png) |
 | Battle Back 3 | Tileset | Hunter Singleton| ![alt](./res/Battle_Back_Light_3.png) |
@@ -44,6 +44,8 @@
 | Battle Theme | VGM | Hunter Singleton |  |
 | World Theme | VGM | Hunter Singleton |  |
 | Victory Fanfare | VGM | Hunter Singleton |  |
+| Game Over Theme | VGM | Hunter Singleton | |
+| Cave Theme | VGM | Hunter Singleton | |
 | Title Font | Font | Juan Pablo Reyes Altamirano |  |
 
 

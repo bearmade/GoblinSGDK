@@ -32,8 +32,8 @@ out/res/resources.o: res/resources.res \
 /home/bear/GoblinSGDK/res/SEGA_Outline.png \
 /home/bear/GoblinSGDK/res/goblin1.png \
 /home/bear/GoblinSGDK/res/croakusTitleSEGA.png \
-/home/bear/GoblinSGDK/res/gameover.png \
 /home/bear/GoblinSGDK/res/Battle_Back_Light_1.png \
 /home/bear/GoblinSGDK/res/Battle_Back_Cave_1.png \
 /home/bear/GoblinSGDK/res/Font.png \
-/home/bear/GoblinSGDK/res/iKilledAGoblinBattle.vgm
+/home/bear/GoblinSGDK/res/iKilledAGoblinBattle.vgm \
+/home/bear/GoblinSGDK/res/gameover2.png
