@@ -13,6 +13,7 @@ void displaySoundTestMenu();
 char player_name1[11];
 char player_name2[11];
 char player_name3[11];
+int hoffset;
 int loadSelection;
 
 bool showTitleScreen;

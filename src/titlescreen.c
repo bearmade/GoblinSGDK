@@ -14,25 +14,29 @@ char player_name1[11];
 char player_name2[11];
 char player_name3[11];
 int loadSelection = 0;
+int hoffset = 0;
 
 void displayLoadMenu();
 void playerNameInput();
 void all3playerNames();
+void drawBoxScroll(u16 x, u16 y, u16 width, u16 height);
 
 void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
     //PAL_fadeAll(0, 63,   60, 1);
     
+    
 
 
     VDP_clearPlane(BG_A, TRUE);
     VDP_clearPlane(BG_B, TRUE);
-    VDP_drawTextBG(BG_A, "BEARMADE PRESENTS", 8, 10);
+    drawBoxScroll(7, 9, 19, 3);
+    VDP_drawTextBG(BG_A, "BEARMADE>PRESENTS", 8, 10);
     PAL_fadeIn(0, 63,  palette_Font.data, 60, 1);
     delayFrames(340);
    
-    VDP_drawTextBG(BG_A, "                    ", 8, 10);
+    VDP_drawTextBG(BG_A, ">>>>>>>>>>>>>>>>>", 8, 10);
     PAL_setPalette(PAL1, black_palette, DMA);
     PAL_setPalette(PAL3, black_palette, DMA);
     
@@ -55,15 +59,21 @@ void displayTitle(){
     // Then fade in the title letters
     PAL_fadeIn(48, 63, titleLetters.palette->data, 60, 1);  // Changed to 1 to wait for completion
     delayFrames(60);
-    drawBox(9, 23, 14, 5);
-    VDP_drawTextBG(BG_A, " New Game", 11, 24);
-    VDP_drawTextBG(BG_A, " Load Game", 11, 26);
+    drawBoxScroll(9, 23, 14, 5);
+    VDP_drawTextBG(BG_A, ">New>Game", 11, 24);
+    VDP_drawTextBG(BG_A, ">Load>Game", 11, 26);
     delayFrames(30);
     while(1) {
+        hoffset--;
+        // if(hoffset > 160) {
+        //     hoffset = 0;
+        // }
+        
+        VDP_setHorizontalScroll(BG_B, hoffset);
        
         u16 value = JOY_readJoypad(JOY_1);
         
-        VDP_drawTextBG(BG_A, " ", 10, ((selection == 0 ? 1 : 0)*2 + 24));
+        VDP_drawTextBG(BG_A, ">", 10, ((selection == 0 ? 1 : 0)*2 + 24));
         VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
 
         if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
@@ -106,14 +116,14 @@ void displayLoadMenu(){
     waitMs(1000);
     // Draw menu once before the loop (shifted up by 3)
     PAL_setPalette(PAL0, palette_Font.data, DMA);
-    drawBox(3, 20, 24, 8);
+    drawBoxScroll(3, 20, 24, 8);
     all3playerNames();
     // draw each player name after slot number
-    VDP_drawTextBG(BG_A, " Slot 1", 5, 21);
+    VDP_drawTextBG(BG_A, ">Slot>(", 5, 21);
     VDP_drawTextBG(BG_A, player_name1, 13, 21);
-    VDP_drawTextBG(BG_A, " Slot 2", 5, 23);
+    VDP_drawTextBG(BG_A, ">Slot>)", 5, 23);
     VDP_drawTextBG(BG_A, player_name2, 13, 23);
-    VDP_drawTextBG(BG_A, " Slot 3", 5, 25);
+    VDP_drawTextBG(BG_A, ">Slot>*", 5, 25);
     VDP_drawTextBG(BG_A, player_name3, 13, 25);    
     // Before entering the input loop, initialize lastSelection to the default selection.
     int lastSelection = loadSelection;
@@ -122,6 +132,9 @@ void displayLoadMenu(){
     VDP_drawTextBG(BG_A, "~", 4, (loadSelection * 2) + 21);
 
     while(1) {
+        hoffset--;
+        VDP_setHorizontalScroll(BG_B, hoffset);
+
         u16 value = JOY_readJoypad(JOY_1);
         
         // Handle up/down input
@@ -142,7 +155,7 @@ void displayLoadMenu(){
         
         if (loadSelection != lastSelection) {
             // Clear old selection marker.
-            VDP_drawTextBG(BG_A, " ", 4, (lastSelection * 2) + 21);
+            VDP_drawTextBG(BG_A, ">", 4, (lastSelection * 2) + 21);
             // Draw new selection marker.
             VDP_drawTextBG(BG_A, "~", 4, (loadSelection * 2) + 21);
             lastSelection = loadSelection;
@@ -170,7 +183,7 @@ void displayLoadMenu(){
                 // Check if name is empty or only contains spaces/null bytes
                 bool isEmpty = TRUE;
                 for(int i = 0; i < 10; i++) {
-                    if(player_name2[i] != ' ' && player_name2[i] != '\0') {
+                    if(player_name2[i] != '>' && player_name2[i] != '\0') {
                         isEmpty = FALSE;
                         break;
                     }
@@ -227,7 +240,7 @@ void playerNameInput(){
     waitMs(1000);
     
     // Allowed characters: include a space, uppercase and lowercase letters.
-    const char allowed_chars[] = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    const char allowed_chars[] = ">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     const int num_allowed = sizeof(allowed_chars) - 1; // exclude null terminator
     
     // Set up the name input prompt and default name.
@@ -251,15 +264,17 @@ void playerNameInput(){
     VDP_clearTextLine(28);
     // Draw the prompt and an editing box.
     PAL_setPalette(PAL0, palette_Font.data, DMA);
-    drawBox(9, 23, 14, 5);
-    VDP_drawTextBG(BG_A, "Enter Name", 11, 24);
-    VDP_drawTextBG(BG_A, player_name, 11, 26);
+    drawBoxScroll(9, 22, 14, 6);
+    VDP_drawTextBG(BG_A, "Enter>Name", 11, 23);
+    VDP_drawTextBG(BG_A, player_name, 11, 25);
     // Create a marker string with spaces and mark the current letter.
-    char marker[11] = "          ";
+    char marker[11] = ">>>>>>>>>>";
     marker[currentLetter] = '.';
-    VDP_drawTextBG(BG_A, marker, 11, 27);
+    VDP_drawTextBG(BG_A, marker, 11, 26);
     
     while(1) {
+        hoffset--;
+        VDP_setHorizontalScroll(BG_B, hoffset);
         u16 value = JOY_readJoypad(JOY_1);
         
         // Allow moving the selection left/right.
@@ -291,20 +306,20 @@ void playerNameInput(){
         }
         
         // Redraw the current player name.
-        VDP_drawTextBG(BG_A, "          ", 11, 26); // clear the previous text
-        VDP_drawTextBG(BG_A, player_name, 11, 26);
+        VDP_drawTextBG(BG_A, ">>>>>>>>>>", 11, 25); // clear the previous text
+        VDP_drawTextBG(BG_A, player_name, 11, 25);
         
         // Update the marker below the current letter.
         for(int i = 0; i < 10; i++){
-            marker[i] = ' ';
+            marker[i] = '>';
         }
         marker[currentLetter] = '.';
-        VDP_drawTextBG(BG_A, marker, 11, 27);
+        VDP_drawTextBG(BG_A, marker, 11, 26);
         
         // Confirm input with START or A button
         if(value & BUTTON_START || value & BUTTON_A) {
             // Add check for SOUNDTEST name
-            if(strcmp(player_name, "HEARMEOUT ") == 0){
+            if(strcmp(player_name, "HEARMEOUT>") == 0){
                 // Show sound test menu
                 displaySoundTestMenu();
                 // After returning from sound test menu, go back to title
@@ -357,7 +372,7 @@ void all3playerNames(){
 }
 
 void cheatCode(){
-    if(strcmp(player_name, "HELP ME   ") == 0){
+    if(strcmp(player_name, "HELP>ME>>>") == 0){
         player_hp = 9999;
         player_hp_max = 9999;
         player_level = 1;
@@ -370,7 +385,7 @@ void cheatCode(){
 
         player_gold = 10000;
     }
-    if(strcmp(player_name, "MACHOMAN  ") == 0){
+    if(strcmp(player_name, "MACHOMAN>>") == 0){
 
         player_attack = 100;
         player_defense = 100;
@@ -379,7 +394,7 @@ void cheatCode(){
         player_hp = 1;
         
     }
-    if(strcmp(player_name, "JOHN CENA ") == 0){
+    if(strcmp(player_name, "JOHN>CENA>") == 0){
         player_attack = 100;
         player_defense = 100;
     }
@@ -395,13 +410,13 @@ void cheatCode(){
 void displaySoundTestMenu() {
     // List of songs to test
     const char* songNames[] = {
-        "Initial Fantasy",
-        "I Killed a Goblin",
-        "Goblin Emergence",
-        "Death of a Goblin",
-        "Goblin's Ghost",
-        "Goblin Nest",
-        "Victor Goblin"
+        "Initial>Fantasy",
+        "I>Killed>a>Goblin",
+        "Goblin>Emergence",
+        "Death>of>a>Goblin",
+        "Goblin's>Ghost",
+        "Goblin>Nest",
+        "Victor>Goblin"
 
     };
     
@@ -431,9 +446,9 @@ void displaySoundTestMenu() {
     
     // Draw sound test menu
     PAL_setPalette(PAL0, palette_Font.data, DMA);
-    drawBox(6, 10, 20, 18);
-    VDP_drawTextBG(BG_A, "SOUND TEST", 11, 11);
-    VDP_drawTextBG(BG_A, "----------", 11, 12);
+    drawBoxScroll(5, 10, 22, 17);
+    VDP_drawTextBG(BG_A, "SOUND>TEST", 11, 11);
+    VDP_drawTextBG(BG_A, "..........", 11, 12);
     
     // Draw initial list
     for(int i = 0; i < songCount; i++) {
@@ -441,9 +456,11 @@ void displaySoundTestMenu() {
     }
     
     // Draw instructions
-    VDP_drawTextBG(BG_A, "A: Play  C: Exit", 8, 25);
+    VDP_drawTextBG(BG_A, "A:>Play>>C:>Exit", 8, 24);
     
     while(1) {
+        hoffset--;
+        VDP_setHorizontalScroll(BG_B, hoffset);
         u16 value = JOY_readJoypad(JOY_1);
         
         // Handle up/down navigation
@@ -464,7 +481,7 @@ void displaySoundTestMenu() {
         if(selection != lastSelection) {
             // Clear old selection
             if(lastSelection >= 0) {
-                VDP_drawTextBG(BG_A, "  ", 6, 14 + lastSelection);
+                VDP_drawTextBG(BG_A, ">>", 6, 14 + lastSelection);
             }
             
             // Draw new selection
@@ -491,4 +508,35 @@ void displaySoundTestMenu() {
         
         SYS_doVBlankProcess();
     }
+}
+void drawBoxScroll(u16 x, u16 y, u16 width, u16 height) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			// Fill center
+			VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1470), x+i, y+j);
+			
+			// Top edge
+			if (j == 0) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1468), x+i, y);
+			
+			// Bottom edge - vertically flipped
+			if (j == height-1) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1468), x+i, y+j);
+			
+			// Left edge
+			if (i == 0) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1469), x, y+j);
+			
+			// Right edge - horizontally flipped
+			if (i == width-1) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1469), x+i, y+j);
+			
+			// Corners
+			if (j == 0 && i == 0) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1467), x, y);
+			if (j == 0 && i == width-1) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1467), x+i, y);
+			if (j == height-1 && i == 0) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1467), x, y+j);
+			if (j == height-1 && i == width-1) VDP_setTileMapXY(3, TILE_ATTR_FULL(PAL0, 1, 1, 1, 1467), x+i, y+j);
+			//add drop shadow to bottom and right using "^"
+			if (j == height-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);
+			if (i == width-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);
+
+			
+		}
+	}
 }

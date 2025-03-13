@@ -35,8 +35,8 @@ void showSegaLogo() {
     VDP_setHorizontalScrollLine(BG_B, 0, scrollOffsets, 224, DMA);
     
     // Play the Sega sound
-    XGM_setPCM(SFX_SEGA, sfx_sega, sizeof(sfx_sega));
-    XGM_startPlayPCM(SFX_SEGA, 15, SOUND_PCM_CH2);
+    //XGM_setPCM(SFX_SEGA, sfx_sega, sizeof(sfx_sega));
+    //XGM_startPlayPCM(SFX_SEGA, 15, SOUND_PCM_CH2);
     
     // Cascade effect: gradually move each line into place
     for (int frame = 0; frame < 120; frame++) { // 120 frames for the animation

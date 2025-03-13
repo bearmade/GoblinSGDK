@@ -622,25 +622,25 @@ void drawBox(u16 x, u16 y, u16 width, u16 height) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			// Fill center
-			VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1470), x+i, y+j);
+			VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1470), x+i, y+j);
 			
 			// Top edge
-			if (j == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1468), x+i, y);
+			if (j == 0) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1468), x+i, y);
 			
 			// Bottom edge - vertically flipped
-			if (j == height-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1468), x+i, y+j);
+			if (j == height-1) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1468), x+i, y+j);
 			
 			// Left edge
-			if (i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1469), x, y+j);
+			if (i == 0) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1469), x, y+j);
 			
 			// Right edge - horizontally flipped
-			if (i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1469), x+i, y+j);
+			if (i == width-1) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1469), x+i, y+j);
 			
 			// Corners
-			if (j == 0 && i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1467), x, y);
-			if (j == 0 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1467), x+i, y);
-			if (j == height-1 && i == 0) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1467), x, y+j);
-			if (j == height-1 && i == width-1) VDP_setTileMapXY(BG_B, TILE_ATTR_FULL(PAL0, 1, 1, 1, 1467), x+i, y+j);
+			if (j == 0 && i == 0) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 0, 1467), x, y);
+			if (j == 0 && i == width-1) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 0, 1, 1467), x+i, y);
+			if (j == height-1 && i == 0) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 1, 0, 1467), x, y+j);
+			if (j == height-1 && i == width-1) VDP_setTileMapXY(1, TILE_ATTR_FULL(PAL0, 1, 1, 1, 1467), x+i, y+j);
 			//add drop shadow to bottom and right using "^"
 			if (j == height-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);
 			if (i == width-1) VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, 0, 0, 0, 1502), x+i+1, y+j+1);

@@ -14,7 +14,8 @@ IMAGE fg2 "croakusTitleSEGA.png" BEST ALL
 IMAGE house "insideHouse.png" NONE ALL
 IMAGE title "goglinTitle2.png" NONE ALL
 IMAGE gameOverScreen "gameover2.png" NONE ALL
-IMAGE titleBase "goblinTitleBase4.png" NONE ALL 
+IMAGE titleBase "TITLEbase.png" NONE ALL 
+
 
 IMAGE battleBack "Battle_Back_Light_1.png" NONE ALL 
 IMAGE battleBack2 "Battle_Back_Light_2.png" NONE ALL
@@ -28,7 +29,7 @@ IMAGE battleBackCave2 "Battle_Back_Cave_2.png" NONE ALL
 IMAGE battleBackCave3 "Battle_Back_Cave_3.png" NONE ALL
 IMAGE battleBackCave4 "Battle_Back_Cave_4.png" NONE ALL
 
-IMAGE titleLetters "goblinTitleLetters2.png" BEST ALL
+IMAGE titleLetters "goblinTitleLetters3.png" BEST ALL
 IMAGE face "face2.png" NONE ALL
 IMAGE merchFace "face3.png" NONE ALL
 PALETTE  mytitle "goglinTitle2.png"
