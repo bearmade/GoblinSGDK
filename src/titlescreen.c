@@ -21,6 +21,16 @@ void playerNameInput();
 void all3playerNames();
 void drawBoxScroll(u16 x, u16 y, u16 width, u16 height);
 
+void delayWithScrolling(u16 frames) {
+    u16 frameCount = 0;
+    while(frameCount < frames) {
+        hoffset--;
+        VDP_setHorizontalScroll(BG_B, hoffset);
+        SYS_doVBlankProcess();
+        frameCount++;
+    }
+}
+
 void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
@@ -113,7 +123,8 @@ void displayLoadMenu(){
     VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
     PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
     VDP_drawImageEx(BG_A, &titleLetters, TILE_ATTR_FULL(PAL3, FALSE, FALSE, FALSE, 1024), 0, 0, FALSE, TRUE);
-    waitMs(1000);
+    //waitMs(1000);
+    delayWithScrolling(10);
     // Draw menu once before the loop (shifted up by 3)
     PAL_setPalette(PAL0, palette_Font.data, DMA);
     drawBoxScroll(3, 20, 24, 8);
@@ -141,14 +152,16 @@ void displayLoadMenu(){
         if(value & BUTTON_UP) {
             if(loadSelection > 0) {
                 loadSelection--;
-                waitMs(100);
+                //waitMs(100);
+                delayWithScrolling(10);
                 SYS_doVBlankProcess(); // simple debouncing
             }
         }
         if(value & BUTTON_DOWN) {
             if(loadSelection < 2) {
                 loadSelection++;
-                waitMs(100);
+                //waitMs(100);
+                delayWithScrolling(10);
                 SYS_doVBlankProcess();
             }
         }
@@ -237,8 +250,8 @@ void displayLoadMenu(){
 
 void playerNameInput(){
     // disable player movement while editing name
-    waitMs(1000);
-    
+    //waitMs(1000);
+    delayWithScrolling(10);
     // Allowed characters: include a space, uppercase and lowercase letters.
     const char allowed_chars[] = ">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     const int num_allowed = sizeof(allowed_chars) - 1; // exclude null terminator
@@ -281,13 +294,15 @@ void playerNameInput(){
         if(value & BUTTON_LEFT) {
             if(currentLetter > 0) { 
                 currentLetter--; 
-                waitMs(200);
+                //waitMs(200);
+                delayWithScrolling(10);
             }
         }
         if(value & BUTTON_RIGHT) {
             if(currentLetter < 9) { 
                 currentLetter++; 
-                waitMs(200);
+                //waitMs(200);
+                delayWithScrolling(10);
             }
         }
         
@@ -296,13 +311,15 @@ void playerNameInput(){
             // Increment the index, wrapping around
             allowed_index[currentLetter] = (allowed_index[currentLetter] + 1) % num_allowed;
             player_name[currentLetter] = allowed_chars[allowed_index[currentLetter]];
-            waitMs(200);
+            //waitMs(200);
+            delayWithScrolling(10);
         }
         if(value & BUTTON_DOWN) {
             // Decrement the index with wrap-around
             allowed_index[currentLetter] = (allowed_index[currentLetter] - 1 + num_allowed) % num_allowed;
             player_name[currentLetter] = allowed_chars[allowed_index[currentLetter]];
-            waitMs(200);
+            //waitMs(200);
+            delayWithScrolling(10);
         }
         
         // Redraw the current player name.
@@ -467,13 +484,15 @@ void displaySoundTestMenu() {
         if(value & BUTTON_UP) {
             if(selection > 0) {
                 selection--;
-                waitMs(200);
+                //waitMs(200);
+                delayWithScrolling(10);
             }
         }
         if(value & BUTTON_DOWN) {
             if(selection < songCount - 1) {
                 selection++;
-                waitMs(200);
+                //waitMs(200);
+                delayWithScrolling(10);
             }
         }
         
@@ -494,7 +513,8 @@ void displaySoundTestMenu() {
             XGM_stopPlay();
             XGM_startPlay(songResources[selection]);
             playing = TRUE;
-            waitMs(200);
+            //waitMs(200);
+            delayWithScrolling(10);
         }
         
         // Return to title screen
