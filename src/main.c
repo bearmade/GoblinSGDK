@@ -78,7 +78,7 @@ int main()
     //show sega logo 
     showSegaLogo();
 
-
+    bMenuVisible = FALSE;
     bPlayerCanMove = TRUE;
     bShowMenu = FALSE;
     char numString[10];
@@ -95,7 +95,7 @@ waitMs(2000);
     PAL_setPalette(PAL1,palette_Font.data, DMA);
 
 
-    JOY_setEventHandler(joyEvent);
+    //JOY_setEventHandler(joyEvent);
     bShowMenu = FALSE;
     
 	displayTitle();

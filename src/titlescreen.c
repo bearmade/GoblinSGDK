@@ -10,6 +10,7 @@
 
 
 bool showTitleScreen = TRUE;
+bool bMenuVisible = FALSE;
 char player_name1[11];
 char player_name2[11];
 char player_name3[11];
@@ -73,6 +74,8 @@ void displayTitle(){
     VDP_drawTextBG(BG_A, ">New>Game", 11, 24);
     VDP_drawTextBG(BG_A, ">Load>Game", 11, 26);
     delayFrames(30);
+    bMenuVisible = TRUE;
+    JOY_setEventHandler(joyEvent);
     while(1) {
         hoffset--;
         // if(hoffset > 160) {
@@ -85,6 +88,10 @@ void displayTitle(){
         
         VDP_drawTextBG(BG_A, ">", 10, ((selection == 0 ? 1 : 0)*2 + 24));
         VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
+if (bMenuVisible)
+{
+    
+
 
         if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
             
@@ -114,6 +121,7 @@ void displayTitle(){
 
         SYS_doVBlankProcess();
     }
+}
 }
 
 //show load menu
