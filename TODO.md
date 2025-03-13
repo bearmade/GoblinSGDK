@@ -79,4 +79,5 @@
     - [x] add 3 seperate save slots
     - [x] add player name input
     - [x] add cheat code system
+    - [ ] add bits of a wisdom to the merch menu
 

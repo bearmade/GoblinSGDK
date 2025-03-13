@@ -32,6 +32,8 @@ u16 inventory[4][4] =
 
 };
 
+
+
 u16 skulls = 0;
 u16 skull_base = 30;
 u16 meat = 0;
