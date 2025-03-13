@@ -31,6 +31,14 @@ static fix16 warblePhase = 0;
 bool bSaveMenuActive = FALSE;
 int selectedSaveSlot = 0;
 
+void delayframes(u16 frames) {
+    u16 frameCount = 0;
+    while(frameCount < frames) {
+        SYS_doVBlankProcess();
+        frameCount++;
+    }
+}
+
 void displayPlayer(){
 
 	//PAL_setPalette(PAL2, our_sprite.palette->data, DMA);
@@ -50,12 +58,15 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 		//delayVBlank(120);
 		if(bBattleMessageDone){
 			if(selection == 1){
+				isAnimating = TRUE;
 				int rand = random() % 100;
 				char droppedGold[5];
 				if(rand > 40){
 					drawBox(1, 1, 29, 3);
 					VDP_drawTextBG(BG_A, "You run like a scared child", 2, 2);
-					delayFrames(120); 
+					//delayframes(120);
+					updateBattleAnimation();
+					 
 					if (player_gold >= 10){
 						rand = random() % 10;
 						player_gold -= rand;
@@ -64,23 +75,28 @@ void joyEvent(u16 joy, u16 changed, u16 state){
 						sprintf(droppedGold, "%d", rand);
 						VDP_drawTextBG(BG_A, droppedGold, 15, 16);
 						VDP_drawTextBG(BG_A, " gold", 17, 16);
-						delayFrames(120);
+						updateBattleAnimation();
+						delayframes(120);
 						VDP_drawTextBG(BG_A, "                    ", 2, 16);
 
 					}
-
+							
+					
+				
 					bBattleOngoing = FALSE;
 					bBattleMessageDone = FALSE;
 					endBattle();
+				
 				}
 				else{
 				    VDP_drawTextBG(BG_A, "You failed to run from", 3, 2);
-					delayFrames(120);
+					//delayframes(120);
+					updateBattleAnimation();
 					goblinAttack();
 					sprintf(pHP, "%d", player_hp);
 					VDP_drawTextBG(BG_A, "    ", 8, 26);  // Clear old HP
 					VDP_drawTextBG(BG_A, pHP, 8, 26);      // Draw new HP
-					delayFrames(120);
+					//delayFrames(120);
 					VDP_drawTextBG(BG_A, "        ", 20, 6);
 					VDP_drawTextBG(BG_A, "             ", 2, 22);
 					turn = !turn;
@@ -479,7 +495,7 @@ void screenWarble() {
 
 void showSaveMenu(){
 	// Draw a box for the save menu
-	if (bSaveMenuActive) {
+	if (bSaveMenuActive && !bGameOverScreen) {
 		drawBox(13, 22, 19, 6);
 	
 		VDP_drawTextBG(BG_A, "A to Select", 1, 25);

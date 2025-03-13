@@ -9,6 +9,7 @@ void playerNameInput();
 void all3playerNames();
 void cheatCode();
 void displaySoundTestMenu();
+void delayWithScrolling(u16 frames);
 
 char player_name1[11];
 char player_name2[11];

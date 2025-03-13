@@ -22,15 +22,7 @@ void playerNameInput();
 void all3playerNames();
 void drawBoxScroll(u16 x, u16 y, u16 width, u16 height);
 
-void delayWithScrolling(u16 frames) {
-    u16 frameCount = 0;
-    while(frameCount < frames) {
-        hoffset--;
-        VDP_setHorizontalScroll(BG_B, hoffset);
-        SYS_doVBlankProcess();
-        frameCount++;
-    }
-}
+
 
 void displayTitle(){
      bShowMenu = FALSE;
@@ -567,4 +559,13 @@ void drawBoxScroll(u16 x, u16 y, u16 width, u16 height) {
 			
 		}
 	}
+}
+void delayWithScrolling(u16 frames) {
+    u16 frameCount = 0;
+    while(frameCount < frames) {
+        hoffset--;
+        VDP_setHorizontalScroll(BG_B, hoffset);
+        SYS_doVBlankProcess();
+        frameCount++;
+    }
 }

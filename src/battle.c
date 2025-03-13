@@ -11,6 +11,8 @@
 #include "../inc/inventory.h"
 #include "../inc/dungeonGenerator.h"
 
+
+
 Sprite* goblin_sprite;
 int randChance = 0;
 bool turn = FALSE;
@@ -711,7 +713,7 @@ void gameOver(){
 void checkGameOverInput() {
     if (bAwaitingRestartInput) {
         u16 value = JOY_readJoypad(JOY_1);
-        if (value & BUTTON_START) {
+        if ((value & BUTTON_START)||(value & BUTTON_A)||(value & BUTTON_B)||(value & BUTTON_C)) {
             bAwaitingRestartInput = FALSE;
             SYS_hardReset();
         }
