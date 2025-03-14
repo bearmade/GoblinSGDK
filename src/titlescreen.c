@@ -27,11 +27,7 @@ void drawBoxScroll(u16 x, u16 y, u16 width, u16 height);
 void displayTitle(){
      bShowMenu = FALSE;
     XGM_startPlay(title_vgm);
-    //PAL_fadeAll(0, 63,   60, 1);
     
-    
-
-
     VDP_clearPlane(BG_A, TRUE);
     VDP_clearPlane(BG_B, TRUE);
     drawBoxScroll(7, 9, 19, 3);
@@ -43,79 +39,114 @@ void displayTitle(){
     PAL_setPalette(PAL1, black_palette, DMA);
     PAL_setPalette(PAL3, black_palette, DMA);
     
-
-    
-    //PAL_setPalette(PAL1, titleBase.palette->data, DMA);
     VDP_drawImageEx(BG_B, &titleBase, TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-    //PAL_setPalette(PAL3, titleLetters.palette->data, DMA);
     VDP_drawImageEx(BG_A, &titleLetters, TILE_ATTR_FULL(PAL3, FALSE, FALSE, FALSE, 1024), 0, 0, FALSE, TRUE);
     
-    // Draw menu once before the loop
     PAL_setPalette(PAL0, palette_Font.data, DMA);
 
-    // First fade in just the base
-    PAL_fadeIn(16, 32, titleBase.palette->data, 60, 0);  // Changed to 1 to wait for completion
-
-    // Wait for a short delay before fading in the letters
-    delayFrames(30);  // Optional delay between fades
-
-    // Then fade in the title letters
-    PAL_fadeIn(48, 63, titleLetters.palette->data, 60, 1);  // Changed to 1 to wait for completion
+    PAL_fadeIn(16, 32, titleBase.palette->data, 60, 0);
+    delayFrames(30);
+    PAL_fadeIn(48, 63, titleLetters.palette->data, 60, 1);
     delayFrames(60);
-    drawBoxScroll(9, 23, 14, 5);
-    VDP_drawTextBG(BG_A, ">New>Game", 11, 24);
-    VDP_drawTextBG(BG_A, ">Load>Game", 11, 26);
+    
+    // Check if all save slots are empty
+    all3playerNames();
+    
+    bool allSlotsEmpty = TRUE;
+    
+    // Check player_name1
+    bool isEmpty1 = TRUE;
+    for(int i = 0; i < 10; i++) {
+        if(player_name1[i] != '>' && player_name1[i] != '\0' && player_name1[i] != ' ') {
+            isEmpty1 = FALSE;
+            allSlotsEmpty = FALSE;
+            break;
+        }
+    }
+    
+    // Check player_name2 only if slot 1 is empty
+    if(allSlotsEmpty) {
+        bool isEmpty2 = TRUE;
+        for(int i = 0; i < 10; i++) {
+            if(player_name2[i] != '>' && player_name2[i] != '\0' && player_name2[i] != ' ') {
+                isEmpty2 = FALSE;
+                allSlotsEmpty = FALSE;
+                break;
+            }
+        }
+    }
+    
+    // Check player_name3 only if slots 1 and 2 are empty
+    if(allSlotsEmpty) {
+        bool isEmpty3 = TRUE;
+        for(int i = 0; i < 10; i++) {
+            if(player_name3[i] != '>' && player_name3[i] != '\0' && player_name3[i] != ' ') {
+                isEmpty3 = FALSE;
+                allSlotsEmpty = FALSE;
+                break;
+            }
+        }
+    }
+    
+    // Draw menu based on save slot status
+    if(allSlotsEmpty) {
+        // Only show New Game option
+        drawBoxScroll(9, 23, 14, 3);
+        VDP_drawTextBG(BG_A, ">New>Game", 11, 24);
+    } else {
+        // Show both options
+        drawBoxScroll(9, 23, 14, 5);
+        VDP_drawTextBG(BG_A, ">New>Game", 11, 24);
+        VDP_drawTextBG(BG_A, ">Load>Game", 11, 26);
+    }
+    
     delayFrames(30);
     bMenuVisible = TRUE;
     JOY_setEventHandler(joyEvent);
     while(1) {
         hoffset--;
-        // if(hoffset > 160) {
-        //     hoffset = 0;
-        // }
-        
         VDP_setHorizontalScroll(BG_B, hoffset);
        
         u16 value = JOY_readJoypad(JOY_1);
         
-        VDP_drawTextBG(BG_A, ">", 10, ((selection == 0 ? 1 : 0)*2 + 24));
-        VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
-if (bMenuVisible)
-{
-    
-
-
-        if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
-            
-            if(selection == 0) {
-                playerNameInput();
-                worldSeed = random();
-                setRandomSeed(worldSeed);
-                cheatCode();
-            } else {
-                //sramLoad(0);
-                //setRandomSeed(worldSeed);
-                displayLoadMenu();
-            }
-            showTitleScreen = FALSE;
-            bPlayerCanMove = TRUE;
-            bShowMenu = FALSE;
+        if(allSlotsEmpty) {
+            // Only one option, so selection is always 0
+            selection = 0;
+            VDP_drawTextBG(BG_A, "~", 10, 24);
+        } else {
+            VDP_drawTextBG(BG_A, ">", 10, ((selection == 0 ? 1 : 0)*2 + 24));
+            VDP_drawTextBG(BG_A, "~", 10, ((selection*2) + 24));
         }
+        
+        if (bMenuVisible) {
+            if((value & BUTTON_START) || (value & BUTTON_B) || (value & BUTTON_A) || (value & BUTTON_C)){
+                
+                if(selection == 0) {
+                    playerNameInput();
+                    worldSeed = random();
+                    setRandomSeed(worldSeed);
+                    cheatCode();
+                } else if(!allSlotsEmpty) {
+                    displayLoadMenu();
+                }
+                showTitleScreen = FALSE;
+                bPlayerCanMove = TRUE;
+                bShowMenu = FALSE;
+            }
 
-        if(showTitleScreen == FALSE) {
-             bShowMenu = FALSE;
-            VDP_clearTileMap(BG_B, ind, 0, TRUE);
-            VDP_clearTileMap(BG_A, ind, 0, TRUE);
-            XGM_stopPlay();
-            XGM_startPlay(world_vgm);
-            break;
+            if(showTitleScreen == FALSE) {
+                bShowMenu = FALSE;
+                VDP_clearTileMap(BG_B, ind, 0, TRUE);
+                VDP_clearTileMap(BG_A, ind, 0, TRUE);
+                XGM_stopPlay();
+                XGM_startPlay(world_vgm);
+                break;
+            }
         }
 
         SYS_doVBlankProcess();
     }
 }
-}
-
 //show load menu
 
 void displayLoadMenu(){
