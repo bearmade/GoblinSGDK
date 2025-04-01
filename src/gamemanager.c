@@ -12,7 +12,7 @@
 #include "../inc/inventory.h"
 #include <string.h>
 
-#define SAVE_SLOT_SIZE 68  // Reserve 40 bytes per slot; adjust as needed
+#define SAVE_SLOT_SIZE 68  
 #define PLAYER_HOUSE_COOLDOWN_MS 500
 
 u16 roomCount = 0;

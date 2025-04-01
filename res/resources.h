@@ -1,7 +1,7 @@
 #ifndef _RES_RESOURCES_H_
 #define _RES_RESOURCES_H_
 
-extern const u8 sfx_sega[26624];
+extern const u8 sfx_sega[26880];
 extern const u8 world_vgm[27648];
 extern const u8 title_vgm[12032];
 extern const u8 battle_vgm[11520];

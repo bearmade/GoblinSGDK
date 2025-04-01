@@ -10,6 +10,7 @@ void all3playerNames();
 void cheatCode();
 void displaySoundTestMenu();
 void delayWithScrolling(u16 frames);
+void showSegaLogo();
 
 char player_name1[11];
 char player_name2[11];
