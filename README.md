@@ -23,7 +23,7 @@
 
 ----
 
-![https://bearmade.itch.io/goblin](https://bearmade.itch.io/goblin) 
+[Play the game on Itch.io](https://bearmade.itch.io/goblin) 
 
 ----
 
