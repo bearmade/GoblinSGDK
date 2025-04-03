@@ -23,7 +23,11 @@
 
 ----
 
+<h2 align = center>
+
 [Play the game on Itch.io](https://bearmade.itch.io/goblin) 
+
+</h2>
 
 ----
 
