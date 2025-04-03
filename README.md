@@ -23,6 +23,8 @@
 
 ----
 
+<iframe frameborder="0" src="https://itch.io/embed/3445028?bg_color=554141&amp;fg_color=ffffff&amp;link_color=f40707&amp;border_color=6f6b6b" width="552" height="167"><a href="https://bearmade.itch.io/goblin">Goblin by bearmade</a></iframe>
+
 #### [- Asset Catalog](AssetCatalogue.md)
 
 
@@ -74,7 +76,7 @@ and fans of the classic RPGs of the early 90s.
 
 The game is a procedurally generated top-down exploration game with turn-based combat. 
 The Player can walk around a procedurally generated map, fighting random 
-battles with goblins, and collecting their remains to sell for gold to the traveling merchant.
+battles with goblins, and collect their remains to sell for gold to the traveling merchant.
 The Player can then upgrade their character with the gold they collect.
 
 
