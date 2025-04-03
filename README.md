@@ -25,8 +25,11 @@
 
 <h2 align = center>
 
-[Play the game on Itch.io](https://bearmade.itch.io/goblin) 
+[Download from Itch.io](https://bearmade.itch.io/goblin)
 
+<br>
+
+[or get latest release here](https://github.com/bearmade/GoblinSGDK/releases/tag/v1.2)
 </h2>
 
 ----
