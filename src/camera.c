@@ -16,9 +16,9 @@ if (isTransitioning) {
 			if (fix32ToInt(transitionOffset) >= HORIZONTAL_RESOLUTION) {
 				VDP_clearPlane(BG_A, TRUE);
 				VDP_clearPlane(BG_B, TRUE);
-				updateCurrentRoom();
-				convertMapArrays();
-				displayRoom();
+				//  updateCurrentRoom();
+				//  convertMapArrays();
+				// displayRoom();
 				finishTransition();
 			}
 			VDP_setHorizontalScroll(BG_A, -fix32ToInt(transitionOffset));
@@ -30,9 +30,9 @@ if (isTransitioning) {
 			if (fix32ToInt(transitionOffset) <= -HORIZONTAL_RESOLUTION) {
 				VDP_clearPlane(BG_A, TRUE);
 				VDP_clearPlane(BG_B, TRUE);
-				updateCurrentRoom();
-				convertMapArrays();
-				displayRoom();
+				// updateCurrentRoom();
+				// convertMapArrays();
+				//displayRoom();
 				finishTransition();
 			}
 			VDP_setHorizontalScroll(BG_A, -fix32ToInt(transitionOffset));
@@ -44,9 +44,9 @@ if (isTransitioning) {
 			if (fix32ToInt(transitionOffset) >= VERTICAL_RESOLUTION) {
 				VDP_clearPlane(BG_A, TRUE);
 				VDP_clearPlane(BG_B, TRUE);
-				updateCurrentRoom();
-				convertMapArrays();
-				displayRoom();
+				// updateCurrentRoom();
+				// convertMapArrays();
+				// displayRoom();
 				finishTransition();
 			}
 			VDP_setVerticalScroll(BG_A, fix32ToInt(transitionOffset));
@@ -59,9 +59,9 @@ if (isTransitioning) {
 			if (fix32ToInt(transitionOffset) <= -VERTICAL_RESOLUTION) {
 				VDP_clearPlane(BG_A, TRUE);
 				VDP_clearPlane(BG_B, TRUE);
-				updateCurrentRoom();
-				convertMapArrays();
-				displayRoom();
+				// updateCurrentRoom();
+				// convertMapArrays();
+				// displayRoom();
 				finishTransition();
 			}
 
@@ -158,12 +158,12 @@ void startTransition(int direction) {
 	SPR_setVisibility(player, HIDDEN);
 	SPR_setVisibility(merchant, HIDDEN);
 	isTransitioning = TRUE;
-	    // Clear and pre-load next room at start of transition
-    //VDP_clearPlane(BG_A, TRUE);
-    //VDP_clearPlane(BG_B, TRUE);
+	    //Clear and pre-load next room at start of transition
+    VDP_clearPlane(BG_A, TRUE);
+    VDP_clearPlane(BG_B, TRUE);
 	
-    updateCurrentRoom();
-	//showMerchant();
+   updateCurrentRoom();
+
     convertMapArrays();
     displayRoom();
 	
@@ -176,6 +176,10 @@ void startTransition(int direction) {
 void finishTransition() {
 	SPR_setVisibility(player, VISIBLE);
 	//SPR_setVisibility(merchant, VISIBLE);
+	//updateCurrentRoom();
+	////showMerchant();
+    //convertMapArrays();
+    
 	
     isTransitioning = FALSE;
     transitionOffset = FIX32(0);
@@ -183,5 +187,6 @@ void finishTransition() {
     VDP_setHorizontalScroll(BG_B, 0);
     VDP_setVerticalScroll(BG_A, 0);
     VDP_setVerticalScroll(BG_B, 0);
+	displayRoom();
 	showMerchant();
 }

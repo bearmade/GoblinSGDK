@@ -310,7 +310,7 @@ if(bPlayerCanMove && !bShowMenu && !bInsideHouse){
 	}
 
 	if(value & BUTTON_B){
-		if((strcmp(player_name, "UCANTSEEME") == 0) || (strcmp(player_name, "JOHN CENA ") == 0)){
+		if((strcmp(player_name, "UCANTSEEME") == 0) || (strcmp(player_name, "JOHN>CENA>") == 0)){
 			canFight = FALSE;
 		}
 		//canFight = FALSE;
