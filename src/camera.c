@@ -16,8 +16,7 @@ if (isTransitioning) {
 			if (fix32ToInt(transitionOffset) >= HORIZONTAL_RESOLUTION) {
 				VDP_clearPlane(BG_A, TRUE);
 				VDP_clearPlane(BG_B, TRUE);
-				//  updateCurrentRoom();
-				//  convertMapArrays();
+
 				// displayRoom();
 				finishTransition();
 			}
