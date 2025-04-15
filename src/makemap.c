@@ -15,7 +15,6 @@ u8 WORLD_TILES[9][9][14][16] = {{{{0}}}};
 u16 caveEntranceRow = 0;
 u16 caveEntranceCol = 0;
 
-//u8 WORLD_TILES2[8][8][14][16] = {{{{0}}}};
 u8 WORLD_LAYOUT[9][9] = {{0}};
 u8 WORLD_LAYOUT_CA[112][128] = {{0}};
 u16 roomY = 0;
@@ -350,7 +349,6 @@ void makeDoorways(){
         }    
     }       
 }
-// function to check for edge blocks
 void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
 
     initMap(yy, xx, mapheight, mapwidth);
@@ -396,9 +394,7 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
             makeWall(yy, xx, mapheight, mapwidth, 2, 8);
             break;
         case 10:
-            //merchantChance = 1; 
             makeGrass(yy, xx, mapheight, mapwidth);
-           // findMerchantPosition();
                        
             break;
         case 11:
@@ -407,7 +403,6 @@ void makeRoom(u16 yy, u16 xx, u16 mapheight, u16 mapwidth, u16 type){
            
             break;
     }
-    // Add doorways based on adjacent rooms
     makeDoorway(yy, xx, mapheight, mapwidth, 0); // Check left
     makeDoorway(yy, xx, mapheight, mapwidth, 1); // Check top
     makeDoorway(yy, xx, mapheight, mapwidth, 2); // Check right
@@ -542,7 +537,6 @@ void makeWorldMap(){
                 makeRoom(0, 0, 14, 16, 10);
                 merchWorldY = randRoomY - 1; 
                 merchWorldX = randRoomX;
-                //findMerchantPosition();
 
             }
             else{
@@ -914,21 +908,13 @@ void displayRoom(){
                     }                     
             } 
 
-                               //left
-            // Example cave drawing: if a cave marker is detected, draw an 8x7 cave using tiles starting from index 124.
-            // (You might choose a different condition; here we check for a special cave tile value, e.g. 15.)
             if (LEVEL_COL2[mapIndex] == 15) {
-                // Choose an offset inside the room where the cave should appear.
-                // (For example, cave tiles will be drawn starting at bg tile coordinate (4,4) in the room.)
                 u16 caveOffsetX = caveEntranceCol + 1;
                 u16 caveOffsetY = caveEntranceRow - 2;
                 u16 tileIndexStart = 124;
                 for (u16 cy = 0; cy < 7; cy++) {
                     for (u16 cx = 0; cx < 8; cx++) {
-                        // Calculate the tile to draw from the cave tileset.
                         u16 caveTile = tileIndexStart + cx + (cy * 8);
-                        // Draw the cave tile at the proper BG tile coordinate.
-                        // (xx and yy here are the current drawing offsets for this room)
                         VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, caveTile),
                                          caveOffsetX + cx, caveOffsetY + cy);
                     
@@ -955,8 +941,6 @@ void makeMap(){
 
     
     VDP_loadTileSet(tileset1.tileset, 1, DMA);
-    //PAL_fadeIn(16, 32, tileset1.palette->data, 600, 0);
-    //PAL_setPalette(PAL1, tileset1.palette->data, DMA);
     
     makeWorldMap();
     
@@ -1050,17 +1034,13 @@ void showMerchant(){
 		SPR_setVisibility(merchant, HIDDEN);
 	}
         
-        //SPR_setVisibility(merchant, HIDDEN);
 
 }
 
 void matchRoomEdges(u16 roomY, u16 roomX) {
-    // Match left edge with right edge of previous room
     if (roomX > 0) {
         for (u16 y = 0; y < 14; y++) {
-            // Copy last column of previous room to first column of current room
             WORLD_TILES[roomY][roomX][y][0] = WORLD_TILES[roomY][roomX-1][y][15];
-            // Ensure walkable path
             if (WORLD_TILES[roomY][roomX][y][0] == 1) { // If wall
                 WORLD_TILES[roomY][roomX][y][0] = 0;    // Make walkable
                 WORLD_TILES[roomY][roomX-1][y][15] = 0; // Make previous tile walkable
@@ -1068,12 +1048,9 @@ void matchRoomEdges(u16 roomY, u16 roomX) {
         }
     }
 
-    // Match top edge with bottom edge of room above
     if (roomY > 0) {
         for (u16 x = 0; x < 16; x++) {
-            // Copy bottom row of room above to top row of current room
             WORLD_TILES[roomY][roomX][0][x] = WORLD_TILES[roomY-1][roomX][13][x];
-            // Ensure walkable path
             if (WORLD_TILES[roomY][roomX][0][x] == 1) { // If wall
                 WORLD_TILES[roomY][roomX][0][x] = 0;    // Make walkable
                 WORLD_TILES[roomY-1][roomX][13][x] = 0; // Make previous tile walkable

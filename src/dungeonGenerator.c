@@ -136,6 +136,7 @@ void placeCaveFeatures(u16 mapheight, u16 mapwidth) {
     }
 }
 
+
 // Place entrance/exit for the cave
 void placeCaveExit(u16 mapheight, u16 mapwidth) {
     bool exitPlaced = FALSE;

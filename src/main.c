@@ -46,7 +46,6 @@ int main()
     PAL_setPalette(PAL1,palette_Font.data, DMA);
 
 
-    //JOY_setEventHandler(joyEvent);
     bShowMenu = FALSE;
     
 	displayTitle();
@@ -59,13 +58,11 @@ int main()
 
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
-    //char numString[2];
 
     makeMap();
-    spawnCaveEntrances();
+    //spawnCaveEntrances();
 
 
-    //PAL_setPalette(PAL0, fg2.palette->data, DMA);
 	
     bigMapCA();
 	SPR_init();
@@ -79,7 +76,6 @@ int main()
     SPR_update();
     PAL_fadeIn(0, 15, fg2.palette->data, 60, 0);
     PAL_fadeIn(16, 31, tileset1.palette->data, 60, 0);
-    //u16 myDungeon[DUNGEON_HEIGHT][DUNGEON_WIDTH];
     while(1)
     {
 //         freemem = MEM_getFree();
@@ -97,10 +93,6 @@ updatePlayerHouseCooldown(elapsed);
       handleInput();
         collision();
 
-        // if (isAnimating) {
-        //     SPR_update();
-        //     updateBattleAnimation(); 
-        // }
         checkGameOverInput();
 
 
@@ -128,8 +120,6 @@ updatePlayerHouseCooldown(elapsed);
         }
         else if(bBattleStarted == FALSE){
             if (bBattleOngoing == FALSE){
-                //XGM_stopPlay();
-                //XGM_startPlay(world_vgm);
             		SPR_update();
                     SYS_doVBlankProcess();
             }

@@ -12,5 +12,27 @@
     "camera.h": "c",
     "dungeongenerator.h": "c"
 },
-"C_Cpp.errorSquiggles": "disabled"
+"C_Cpp.errorSquiggles": "disabled",
+"workbench.colorCustomizations": {
+    "terminal.background": "#000000",
+    "terminal.foreground": "#D0D0D0",
+    "terminalCursor.background": "#D0D0D0",
+    "terminalCursor.foreground": "#D0D0D0",
+    "terminal.ansiBlack": "#000000",
+    "terminal.ansiBlue": "#0066FF",
+    "terminal.ansiBrightBlack": "#808080",
+    "terminal.ansiBrightBlue": "#0066FF",
+    "terminal.ansiBrightCyan": "#00FFFF",
+    "terminal.ansiBrightGreen": "#33FF00",
+    "terminal.ansiBrightMagenta": "#CC00FF",
+    "terminal.ansiBrightRed": "#FF0000",
+    "terminal.ansiBrightWhite": "#FFFFFF",
+    "terminal.ansiBrightYellow": "#FF0099",
+    "terminal.ansiCyan": "#00FFFF",
+    "terminal.ansiGreen": "#33FF00",
+    "terminal.ansiMagenta": "#CC00FF",
+    "terminal.ansiRed": "#FF0000",
+    "terminal.ansiWhite": "#D0D0D0",
+    "terminal.ansiYellow": "#FF0099"
+}
 }
