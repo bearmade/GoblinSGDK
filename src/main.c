@@ -157,8 +157,3 @@ updatePlayerHouseCooldown(elapsed);
 
     return (0);
 }
-
-
-
-
-
