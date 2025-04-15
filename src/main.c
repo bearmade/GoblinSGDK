@@ -46,6 +46,7 @@ int main()
     PAL_setPalette(PAL1,palette_Font.data, DMA);
 
 
+    //JOY_setEventHandler(joyEvent);
     bShowMenu = FALSE;
     
 	displayTitle();
@@ -58,17 +59,10 @@ int main()
 
     delayCounter = 0;
     SYS_setVIntCallback(vblankCallback);
-
     makeMap();
     //spawnCaveEntrances();
-
-
-	
     bigMapCA();
 	SPR_init();
-
-	
-
     bShowMenu = FALSE;
     displayPlayer();
     PAL_fadeIn(32, 47,  our_sprite.palette->data, 60, 0);
@@ -83,12 +77,12 @@ int main()
 //    sprintf(numString, "%d", freemem);
 //    VDP_drawTextBG(BG_B, numString, 10, 12);
 //     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
-updateCaves();
-u32 currentTime = getTick();
-u32 elapsed = currentTime - lastTime;
-lastTime = currentTime;
+    updateCaves();
+    u32 currentTime = getTick();
+    u32 elapsed = currentTime - lastTime;
+    lastTime = currentTime;
 
-updatePlayerHouseCooldown(elapsed);
+    updatePlayerHouseCooldown(elapsed);
 
       handleInput();
         collision();
@@ -120,6 +114,8 @@ updatePlayerHouseCooldown(elapsed);
         }
         else if(bBattleStarted == FALSE){
             if (bBattleOngoing == FALSE){
+                //XGM_stopPlay();
+                //XGM_startPlay(world_vgm);
             		SPR_update();
                     SYS_doVBlankProcess();
             }
