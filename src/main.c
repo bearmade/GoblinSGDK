@@ -85,55 +85,48 @@ int main()
 //         VDP_drawTextBG(BG_B, "Free Mem: ", 10, 10);
 //    sprintf(numString, "%d", freemem);
 //    VDP_drawTextBG(BG_B, numString, 10, 12);
-//     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
-updateCaves();
-u32 currentTime = getTick();
-u32 elapsed = currentTime - lastTime;
-lastTime = currentTime;
+    //     VDP_drawTextBG(BG_B, "Bytes", 10, 14);
+    updateCaves();
+    u32 currentTime = getTick();
+    u32 elapsed = currentTime - lastTime;
+    lastTime = currentTime;
 
-updatePlayerHouseCooldown(elapsed);
+    updatePlayerHouseCooldown(elapsed);
 
-      handleInput();
-        collision();
+    handleInput();
+    collision();
 
-        // if (isAnimating) {
-        //     SPR_update();
-        //     updateBattleAnimation(); 
-        // }
-        checkGameOverInput();
+    checkGameOverInput();
 
 
-		camera();
-        if(bShowMerchMenu){
-            bIsMoving = FALSE;
-            
-            handleMerchantMenuInput();
-        }
-        if(bInsideHouse){
-            bIsMoving = FALSE;
-            canFight = FALSE;
-            bPlayerCanMove = FALSE;
-            SPR_setVisibility(player, HIDDEN);
-        }
+    camera();
+    if(bShowMerchMenu){
+        bIsMoving = FALSE;
+        handleMerchantMenuInput();
+    }
+    if(bInsideHouse){
+        bIsMoving = FALSE;
+        canFight = FALSE;
+        bPlayerCanMove = FALSE;
+        SPR_setVisibility(player, HIDDEN);
+    }
 
 
-        if(bIsMoving == TRUE && canFight == TRUE){ //&& (!currentWorldX == 3 && !currentWorldY == 3)){
-            randomEncounter();
-        }
-        if(bBattleStarted == TRUE){
+    if(bIsMoving == TRUE && canFight == TRUE){ //&& (!currentWorldX == 3 && !currentWorldY == 3)){
+        randomEncounter();
+    }
+    if(bBattleStarted == TRUE){
 
-            displayBattle();
+        displayBattle();
+        SYS_doVBlankProcess();
+    }
+    else if(bBattleStarted == FALSE){
+        if (bBattleOngoing == FALSE){
+            SPR_update();
             SYS_doVBlankProcess();
         }
-        else if(bBattleStarted == FALSE){
-            if (bBattleOngoing == FALSE){
-                //XGM_stopPlay();
-                //XGM_startPlay(world_vgm);
-            		SPR_update();
-                    SYS_doVBlankProcess();
-            }
-         
-        }
+        
+    }
       
     }
     if (inCave){
